@@ -4436,7 +4436,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7069505009806590407, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
       propertyPath: speed
-      value: 13
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7069505009806590407, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
+      propertyPath: maxSpeed
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7069505009806590407, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
       propertyPath: jumpSpeed
