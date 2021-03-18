@@ -1,12 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private int speed;
+    [SerializeField] 
+    private float speed;
+
+    [SerializeField] 
+    private float jumpSpeed;
+
+    private bool isGrounded = true;
+    
     private Rigidbody2D _rigidbody2D;
 
     private void Awake()
@@ -14,21 +22,19 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Movement();
     }
 
     private void Movement()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            _rigidbody2D.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
-        }
+        var inputDirection = Input.GetAxisRaw("Horizontal");
+        
+        _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed), ForceMode2D.Impulse);
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            _rigidbody2D.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
-        }
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+            _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+        
     }
 }
