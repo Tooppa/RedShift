@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     {
         var inputDirection = Input.GetAxisRaw("Horizontal");
         
-        _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed), ForceMode2D.Impulse);
+        _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
             _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
