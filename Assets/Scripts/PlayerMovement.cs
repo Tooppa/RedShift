@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform _groundCheck;
     private Rigidbody2D _rigidbody2D;
     private bool _isGrounded = false;
-    private const float GroundedRadius = .3f;
+    private const float GroundedRadius = .05f;
 
     private void Awake()
     {
@@ -29,18 +29,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void CheckIsGrounded()
     {
-        var wasGrounded = _isGrounded;
         _isGrounded = false;
-
         var colliders = Physics2D.OverlapCircleAll(_groundCheck.position, GroundedRadius, whatIsGround);
-        foreach (var t in colliders)
-        {
-            if (t.gameObject != gameObject)
-            {
-                if (!wasGrounded)
-                    _isGrounded = true;
-            }
-        }
+        _isGrounded = colliders.Length > 0;
     }
 
 
@@ -50,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         
         _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
 
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
             _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
         
     }
