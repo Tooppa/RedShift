@@ -39,6 +39,9 @@ public class PlayerMovement : MonoBehaviour
     private void Movement()
     {
         var inputDirection = Input.GetAxisRaw("Horizontal");
+
+        if(inputDirection != 0)
+            transform.localScale = new Vector3(inputDirection, 1, 1);
         
         if(Mathf.Abs(_rigidbody2D.velocity.x) < maxSpeed)
             _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
