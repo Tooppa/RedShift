@@ -21,12 +21,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement()
     {
-        if (Input.GetKeyDown("D"))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             _rigidbody2D.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
         }
 
-        if (Input.GetKeyDown("A"))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             _rigidbody2D.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
         }
