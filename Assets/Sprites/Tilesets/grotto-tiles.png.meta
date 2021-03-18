@@ -1,0 +1,1176 @@
+fileFormatVersion: 2
+guid: a46d971ae01934916af79f05ddb6d087
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: grotto-tiles_0
+  - first:
+      213: 21300002
+    second: grotto-tiles_1
+  - first:
+      213: 21300004
+    second: grotto-tiles_2
+  - first:
+      213: 21300006
+    second: grotto-tiles_3
+  - first:
+      213: 21300008
+    second: grotto-tiles_4
+  - first:
+      213: 21300010
+    second: grotto-tiles_5
+  - first:
+      213: 21300012
+    second: grotto-tiles_6
+  - first:
+      213: 21300014
+    second: grotto-tiles_7
+  - first:
+      213: 21300016
+    second: grotto-tiles_8
+  - first:
+      213: 21300018
+    second: grotto-tiles_9
+  - first:
+      213: 21300020
+    second: grotto-tiles_10
+  - first:
+      213: 21300022
+    second: grotto-tiles_11
+  - first:
+      213: 21300024
+    second: grotto-tiles_12
+  - first:
+      213: 21300026
+    second: grotto-tiles_13
+  - first:
+      213: 21300028
+    second: grotto-tiles_14
+  - first:
+      213: 21300030
+    second: grotto-tiles_15
+  - first:
+      213: 21300032
+    second: grotto-tiles_16
+  - first:
+      213: 21300034
+    second: grotto-tiles_17
+  - first:
+      213: 21300036
+    second: grotto-tiles_18
+  - first:
+      213: 21300038
+    second: grotto-tiles_19
+  - first:
+      213: 21300040
+    second: grotto-tiles_20
+  - first:
+      213: 21300042
+    second: grotto-tiles_21
+  - first:
+      213: 21300044
+    second: grotto-tiles_22
+  - first:
+      213: 21300046
+    second: grotto-tiles_23
+  - first:
+      213: 21300048
+    second: grotto-tiles_24
+  - first:
+      213: 21300050
+    second: grotto-tiles_25
+  - first:
+      213: 21300052
+    second: grotto-tiles_26
+  - first:
+      213: 21300054
+    second: grotto-tiles_27
+  - first:
+      213: 21300056
+    second: grotto-tiles_28
+  - first:
+      213: 21300058
+    second: grotto-tiles_29
+  - first:
+      213: 21300060
+    second: grotto-tiles_30
+  - first:
+      213: 21300062
+    second: grotto-tiles_31
+  - first:
+      213: 21300064
+    second: grotto-tiles_32
+  - first:
+      213: 21300066
+    second: grotto-tiles_33
+  - first:
+      213: 21300068
+    second: grotto-tiles_34
+  - first:
+      213: 21300070
+    second: grotto-tiles_35
+  - first:
+      213: 21300072
+    second: grotto-tiles_36
+  - first:
+      213: 21300074
+    second: grotto-tiles_37
+  - first:
+      213: 21300076
+    second: grotto-tiles_38
+  - first:
+      213: 21300078
+    second: grotto-tiles_39
+  - first:
+      213: -1938983685843235553
+    second: grotto-tiles_0
+  - first:
+      213: -5047821017535773866
+    second: grotto-tiles_1
+  - first:
+      213: 7594943256702672488
+    second: grotto-tiles_2
+  - first:
+      213: 5033622404042405372
+    second: grotto-tiles_3
+  - first:
+      213: 4262394995800979402
+    second: grotto-tiles_4
+  - first:
+      213: 1620830427481625381
+    second: grotto-tiles_5
+  - first:
+      213: -7265398630960008060
+    second: grotto-tiles_6
+  - first:
+      213: -8621256237884765360
+    second: grotto-tiles_7
+  - first:
+      213: 1637065400476674164
+    second: grotto-tiles_8
+  - first:
+      213: -6159951353842653236
+    second: grotto-tiles_9
+  - first:
+      213: 3214162438049491656
+    second: grotto-tiles_10
+  - first:
+      213: 1606123578018822206
+    second: grotto-tiles_11
+  - first:
+      213: -5460567045176954440
+    second: grotto-tiles_12
+  - first:
+      213: 7110569815757198128
+    second: grotto-tiles_13
+  - first:
+      213: 4856175254941811608
+    second: grotto-tiles_14
+  - first:
+      213: -1602566708309110904
+    second: grotto-tiles_15
+  - first:
+      213: 1535070557554028183
+    second: grotto-tiles_16
+  - first:
+      213: 1951207139518054467
+    second: grotto-tiles_17
+  - first:
+      213: 7176394345904146773
+    second: grotto-tiles_18
+  - first:
+      213: 3738209614939487839
+    second: grotto-tiles_19
+  - first:
+      213: -8677867332030229395
+    second: grotto-tiles_20
+  - first:
+      213: -1317644068056609628
+    second: grotto-tiles_21
+  - first:
+      213: 3760836209461646659
+    second: grotto-tiles_22
+  - first:
+      213: 841234898810224831
+    second: grotto-tiles_23
+  - first:
+      213: -1864349233316499515
+    second: grotto-tiles_24
+  - first:
+      213: -7929226640607328705
+    second: grotto-tiles_25
+  - first:
+      213: 3018879273549319232
+    second: grotto-tiles_26
+  - first:
+      213: 8312418882615917167
+    second: grotto-tiles_27
+  - first:
+      213: 6557469353180506874
+    second: grotto-tiles_28
+  - first:
+      213: 94323875684692897
+    second: grotto-tiles_29
+  - first:
+      213: 7848559467546769200
+    second: grotto-tiles_30
+  - first:
+      213: -923949860680294062
+    second: grotto-tiles_31
+  - first:
+      213: 2934334087710054567
+    second: grotto-tiles_32
+  - first:
+      213: 5783825022501840431
+    second: grotto-tiles_33
+  - first:
+      213: 6634825897834641103
+    second: grotto-tiles_34
+  - first:
+      213: -7833064030037681765
+    second: grotto-tiles_35
+  - first:
+      213: 2580306385975606998
+    second: grotto-tiles_36
+  - first:
+      213: -2052779952237156511
+    second: grotto-tiles_37
+  - first:
+      213: -1830504364089669180
+    second: grotto-tiles_38
+  - first:
+      213: 2780745480120492771
+    second: grotto-tiles_39
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 16
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: grotto-tiles_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1d49046c985715e0800000000000000
+      internalID: -1938983685843235553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6538700778982f9b0800000000000000
+      internalID: -5047821017535773866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86ed209f6a8a66960800000000000000
+      internalID: 7594943256702672488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf5356e38e40bd540800000000000000
+      internalID: 5033622404042405372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac7be116aa1172b30800000000000000
+      internalID: 4262394995800979402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 523df2fafa85e7610800000000000000
+      internalID: 1620830427481625381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 484f40a507e1c2b90800000000000000
+      internalID: -7265398630960008060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05b024701252b5880800000000000000
+      internalID: -8621256237884765360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 478ae75ee4608b610800000000000000
+      internalID: 1637065400476674164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_9
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc7a58861e4738aa0800000000000000
+      internalID: -6159951353842653236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cae75245bffa9c20800000000000000
+      internalID: 3214162438049491656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e38f03572e81a4610800000000000000
+      internalID: 1606123578018822206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b1f508243b2834b0800000000000000
+      internalID: -5460567045176954440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_13
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03392d2f291dda260800000000000000
+      internalID: 7110569815757198128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_14
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89349dd4aa9946340800000000000000
+      internalID: 4856175254941811608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_15
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88f4e5ec11a82c9e0800000000000000
+      internalID: -1602566708309110904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79e2b28f98aad4510800000000000000
+      internalID: 1535070557554028183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_17
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3400e223e84141b10800000000000000
+      internalID: 1951207139518054467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_18
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5590dbba2aca79360800000000000000
+      internalID: 7176394345904146773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_19
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5efa62c6d9c0e330800000000000000
+      internalID: 3738209614939487839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_20
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d641f5a83a5029780800000000000000
+      internalID: -8677867332030229395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_21
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4acc51783b9c6bde0800000000000000
+      internalID: -1317644068056609628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_22
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34553635b9c213430800000000000000
+      internalID: 3760836209461646659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_23
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb0ce34feaaacab00800000000000000
+      internalID: 841234898810224831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cfe5e200408026e0800000000000000
+      internalID: -1864349233316499515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_25
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f364907916ab5f190800000000000000
+      internalID: -7929226640607328705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_26
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04c42bf54b635e920800000000000000
+      internalID: 3018879273549319232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_27
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6a3292cee4ab5370800000000000000
+      internalID: 8312418882615917167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_28
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afaa5dd32afc00b50800000000000000
+      internalID: 6557469353180506874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_29
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a33600b01b1f4100800000000000000
+      internalID: 94323875684692897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_30
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03777a5904fabec60800000000000000
+      internalID: 7848559467546769200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_31
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25121eb3f787d23f0800000000000000
+      internalID: -923949860680294062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a817465e49d8b820800000000000000
+      internalID: 2934334087710054567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_33
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f26ec35c636444050800000000000000
+      internalID: 5783825022501840431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_34
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc6fef25003a31c50800000000000000
+      internalID: 6634825897834641103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_35
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b99d6ba14cd5b4390800000000000000
+      internalID: -7833064030037681765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_36
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6de7fbbacf61fc320800000000000000
+      internalID: 2580306385975606998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_37
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1676cd0728f0383e0800000000000000
+      internalID: -2052779952237156511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_38
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c902a2bafdb896e0800000000000000
+      internalID: -1830504364089669180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grotto-tiles_39
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e2ea59f741379620800000000000000
+      internalID: 2780745480120492771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: d5c9389aca2515f4facee53700f37fa7
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
