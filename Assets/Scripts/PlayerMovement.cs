@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
@@ -44,19 +46,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement()
     {
-        if (Input.GetKey(KeyCode.D))
-        {
-            _rigidbody2D.AddForce(Vector2.right);
-        }
+        var inputDirection = Input.GetAxisRaw("Horizontal");
         
-        if (Input.GetKeyDown(KeyCode.W) && _isGrounded)
-        {
-            _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
-        }
+        _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            _rigidbody2D.AddForce(Vector2.left);
-        }
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+            _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+        
     }
 }
