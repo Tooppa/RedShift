@@ -11,8 +11,11 @@ public class PlayerMovement : MonoBehaviour
     private float speed;
 
     [SerializeField] 
+    private float maxSpeed;
+    
+    [SerializeField] 
     private float jumpSpeed;
-
+    
     private bool isGrounded = true;
     
     private Rigidbody2D _rigidbody2D;
@@ -31,7 +34,8 @@ public class PlayerMovement : MonoBehaviour
     {
         var inputDirection = Input.GetAxisRaw("Horizontal");
         
-        _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
+        if(Mathf.Abs(_rigidbody2D.velocity.x) < maxSpeed)
+            _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
             _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
