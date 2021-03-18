@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private float maxSpeed;
     private Transform _groundCheck;
     private Rigidbody2D _rigidbody2D;
     private bool _isGrounded = false;
@@ -39,7 +40,8 @@ public class PlayerMovement : MonoBehaviour
     {
         var inputDirection = Input.GetAxisRaw("Horizontal");
         
-        _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
+        if(Mathf.Abs(_rigidbody2D.velocity.x) < maxSpeed)
+            _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
 
         if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
             _rigidbody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
