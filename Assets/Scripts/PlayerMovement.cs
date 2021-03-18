@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Movement();
     }
+    
 
     private void Movement()
     {
