@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1911178921}
-  m_PathPosition: 1.3833688
+  m_PathPosition: 1.3894013
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0.2, z: 0}
   m_XDamping: 2
@@ -252,7 +252,10 @@ MonoBehaviour:
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
+    ModeOverride: 0
     LensShift: {x: 0, y: 0}
+    GateFit: 0
+    m_SensorSize: {x: 0.8298887, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -269,7 +272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104911314}
   m_LocalRotation: {x: -0.21530779, y: 0.039392896, z: 0.00869272, w: 0.9757127}
-  m_LocalPosition: {x: 0.72741055, y: 1.044029, z: -1.9764359}
+  m_LocalPosition: {x: 0.72715104, y: 1.0167068, z: -1.9764359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 41655090}
@@ -18872,7 +18875,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.72741055, y: 1.044029, z: -1.9764359}
+  m_LocalPosition: {x: 0.72715104, y: 1.0167068, z: -1.9764359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -28356,7 +28359,7 @@ MonoBehaviour:
     width: 0.2
   m_Looped: 1
   m_Waypoints:
-  - position: {x: -0.16252232, y: -0.47648418, z: -1}
+  - position: {x: -0.42827797, y: -0.30273616, z: -1}
     roll: 0
   - position: {x: -1.44, y: -0.75, z: -1}
     roll: 0
@@ -28376,7 +28379,7 @@ MonoBehaviour:
     roll: 0
   - position: {x: 0.6000018, y: -1.243882, z: -1}
     roll: 0
-  - position: {x: 0.3624153, y: -0.36343265, z: -1}
+  - position: {x: 0.3624153, y: -0.4708562, z: -1}
     roll: 0
 --- !u!4 &1911178922
 Transform:
