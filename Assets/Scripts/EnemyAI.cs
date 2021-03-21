@@ -7,8 +7,16 @@ public class EnemyAI : MonoBehaviour
 {
     public Transform target;
 
+    private Vector2 lastJumpLocation;
+
     public float speed = 200f;
+    public float jumpHeight = 4;
     public float nextWaypointDistance = 3f;
+
+    private bool isGrounded = false;
+    private readonly Vector2 _groundCheckOffset = new Vector2(0, -0.08f);
+    private const float GroundedRadius = .05f;
+    [SerializeField] private LayerMask whatIsGround;
 
     Path path;
     int currentWaypoint = 0;
@@ -25,12 +33,21 @@ public class EnemyAI : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         InvokeRepeating("UpdatePath", 0f, 0.5f);
-        
+        InvokeRepeating("SlimeHop", 0f, 2f);
+
     }
     void UpdatePath()
     {
         if (seeker.IsDone())
             seeker.StartPath(rb.position, target.position, OnPathComplete);
+    }
+
+    void SlimeHop()
+    {
+        lastJumpLocation = transform.position;
+        Vector2 force = (target.transform.position - transform.position).normalized * speed * Time.deltaTime;
+        rb.AddForce(force);
+        rb.AddForce(new Vector2(0, 1).normalized * jumpHeight, ForceMode2D.Impulse);
     }
 
     void OnPathComplete(Path p)
@@ -43,7 +60,7 @@ public class EnemyAI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (path == null)
             return;
@@ -61,7 +78,12 @@ public class EnemyAI : MonoBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
-        rb.AddForce(force);
+        //rb.AddForce(force);
+        
+        if(!isGrounded)
+        {
+            rb.AddForce(force);
+        }
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
@@ -78,5 +100,15 @@ public class EnemyAI : MonoBehaviour
         {
             enemyGFX.localScale = new Vector3(1f, 1f, 1f);
         }
+    }
+
+    private void Update()
+    {
+        CheckIsGrounded();
+    }
+
+    private void CheckIsGrounded()
+    {
+        isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
     }
 }
