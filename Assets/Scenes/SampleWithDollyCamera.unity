@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.35872743, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1911178921}
-  m_PathPosition: 1.154012
+  m_PathPosition: 0
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 2
@@ -255,7 +255,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 0.94962484, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -272,7 +272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104911314}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.73975515, y: 0.6725754, z: -1.976436}
+  m_LocalPosition: {x: 4.405998, y: 2.1012383, z: -1.9764359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 41655090}
@@ -19033,7 +19033,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.73975515, y: 0.6725754, z: -1.976436}
+  m_LocalPosition: {x: 4.5559983, y: 0.99000007, z: -1.9764359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -19209,7 +19209,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 0.94962484, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -19226,7 +19226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115634650}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.73392296, y: -1.2411888, z: -1.9764359}
+  m_LocalPosition: {x: 4.5559983, y: 0.99000007, z: -1.9764359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1864305453}
@@ -19281,7 +19281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1487877985
 Transform:
   m_ObjectHideFlags: 0
@@ -19312,7 +19312,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.004
+  m_Intensity: 1
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
@@ -28410,7 +28410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 990300917}
-  m_PathPosition: 2.3254
+  m_PathPosition: 0
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 2
@@ -28625,11 +28625,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5398604713114884179, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.725
+      value: 4.57
       objectReference: {fileID: 0}
     - target: {fileID: 5398604713114884179, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.871
+      value: 6.04
       objectReference: {fileID: 0}
     - target: {fileID: 5398604713114884179, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
       propertyPath: m_LocalPosition.z
