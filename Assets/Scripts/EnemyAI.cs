@@ -45,9 +45,9 @@ public class EnemyAI : MonoBehaviour
     void SlimeHop()
     {
         lastJumpLocation = transform.position;
-        Vector2 force = (target.transform.position - transform.position).normalized * speed * Time.deltaTime;
+        Vector2 force = new Vector2(1, 0) * speed * Time.deltaTime;
         rb.AddForce(force);
-        rb.AddForce(new Vector2(0, 1).normalized * jumpHeight, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
     }
 
     void OnPathComplete(Path p)
