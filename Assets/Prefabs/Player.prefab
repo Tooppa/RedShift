@@ -167,12 +167,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5779ea97e1bc91c4e9fc7faf50519395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 300
-  jumpHeight: 180
+  speed: 1875
+  jumpHeight: 1125
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  maxSpeed: 2
+  maxSpeed: 12.5
 --- !u!1 &5398604713659043448
 GameObject:
   m_ObjectHideFlags: 0
