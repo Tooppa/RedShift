@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 6211809352930896247}
   - component: {fileID: 6211809352930896246}
   m_Layer: 0
-  m_Name: Slime 1
+  m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,9 +174,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0020349622, y: -0.001141727}
   serializedVersion: 2
-  m_Radius: 0.08
+  m_Radius: 0.49650627
 --- !u!95 &6211809352930896246
 Animator:
   serializedVersion: 3
