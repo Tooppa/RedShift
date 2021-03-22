@@ -5,10 +5,11 @@ using Pathfinding;
 
 public class EnemyAI : MonoBehaviour
 {
+
     public Transform target;
 
-    public float speed = 200f;
-    public float jumpHeight = 4;
+    public float speed;
+    public float jumpHeight;
     public float nextWaypointDistance = 3f;
 
 
@@ -34,7 +35,6 @@ public class EnemyAI : MonoBehaviour
         InvokeRepeating("UpdatePath", 0f, 0.5f);
         InvokeRepeating("SlimeHop", 0f, 2f);
 
-
     }
     void UpdatePath()
     {
@@ -46,12 +46,13 @@ public class EnemyAI : MonoBehaviour
     {
         //Vector2 force = new Vector2(1, 0) * speed * Time.deltaTime;
         //rb.AddForce(force);
-        rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+        if(isGrounded)
+            rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
     }
 
     void OnPathComplete(Path p)
     {
-        if(!p.error)
+        if (!p.error)
         {
             path = p;
             currentWaypoint = 0;
@@ -64,7 +65,7 @@ public class EnemyAI : MonoBehaviour
         if (path == null)
             return;
 
-        if(currentWaypoint >= path.vectorPath.Count)
+        if (currentWaypoint >= path.vectorPath.Count)
         {
             reachedEndOfPath = true;
             return;
@@ -76,15 +77,15 @@ public class EnemyAI : MonoBehaviour
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
-        
-        if(!isGrounded)
+
+        if (!isGrounded)
         {
             rb.AddForce(force);
         }
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
-        if(distance < nextWaypointDistance)
+        if (distance < nextWaypointDistance)
         {
             currentWaypoint++;
         }
@@ -102,10 +103,31 @@ public class EnemyAI : MonoBehaviour
     private void Update()
     {
         CheckIsGrounded();
+        PlayerHit();
+        //Vector2 currentPos = transform.position;
+        //if ((currentPos.x - origin.x) >= 1)
+        //{
+        //    target.position = origin;
+        //}
     }
 
     private void CheckIsGrounded()
     {
         isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
+    }
+
+    private void PlayerHit()
+    {
+        float distanceX = target.transform.position.x - transform.position.x;
+        float distanceY = target.transform.position.y - transform.position.y;
+        if (distanceX <= 0.1 && distanceX > -0.1 && distanceY <= 0.1 && distanceY > -0.1)
+        {
+            Debug.Log("Hit!");
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), target.GetComponent<Collider2D>());
     }
 }
