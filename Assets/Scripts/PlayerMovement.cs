@@ -14,10 +14,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float maxSpeed;
     private Rigidbody2D _rigidbody2D;
     
-    private readonly Vector2 _groundCheckOffset = new Vector2(0,-0.08f);
+    private readonly Vector2 _groundCheckOffset = new Vector2(0,-0.5f);
     private bool _isGrounded = false;
     private Animator _animator;
-    private const float GroundedRadius = .05f;
+    private const float GroundedRadius = 0.1f;
 
     private void Awake()
     {
