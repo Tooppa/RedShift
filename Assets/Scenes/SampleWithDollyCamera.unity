@@ -169,12 +169,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1911178921}
-  m_PathPosition: 1.1478572
+  m_PathPosition: 1.154012
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 2
+  m_YDamping: 2
+  m_ZDamping: 2
   m_CameraUp: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 0.899841, y: 1}
+    m_SensorSize: {x: 0.97773063, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -272,7 +272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104911314}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.73804617, y: 0.69113743, z: -1.9764359}
+  m_LocalPosition: {x: 0.73975515, y: 0.6725754, z: -1.976436}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 41655090}
@@ -18899,8 +18899,8 @@ MonoBehaviour:
   m_MinDuration: 0
   m_RandomizeChoice: 0
   m_DefaultBlend:
-    m_Style: 6
-    m_Time: 0.3
+    m_Style: 5
+    m_Time: 1
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -18946,14 +18946,14 @@ MonoBehaviour:
   m_MinimumDistanceFromTarget: 0.1
   m_AvoidObstacles: 0
   m_DistanceLimit: 0
-  m_MinimumOcclusionTime: 1
+  m_MinimumOcclusionTime: 0.5
   m_CameraRadius: 0.1
   m_Strategy: 2
   m_MaximumEffort: 4
   m_SmoothingTime: 0
   m_Damping: 0
   m_DampingWhenOccluded: 0
-  m_OptimalTargetDistance: 1.5
+  m_OptimalTargetDistance: 7
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -19033,7 +19033,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.73804617, y: 0.69113743, z: -1.9764359}
+  m_LocalPosition: {x: 0.73975515, y: 0.6725754, z: -1.976436}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -19141,7 +19141,7 @@ MonoBehaviour:
     width: 0.2
   m_Looped: 0
   m_Waypoints:
-  - position: {x: 0.21, y: 1.78, z: -1}
+  - position: {x: 0.4, y: 1.57, z: -1}
     roll: 0
   - position: {x: 0.4, y: -0.100000024, z: -1}
     roll: 0
@@ -19209,7 +19209,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.899841, y: 1}
+    m_SensorSize: {x: 0.97773063, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -19226,7 +19226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115634650}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.73245716, y: -1.2360342, z: -1.9764359}
+  m_LocalPosition: {x: 0.73392296, y: -1.2411888, z: -1.9764359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1864305453}
@@ -28864,12 +28864,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 990300917}
-  m_PathPosition: 2.3249798
+  m_PathPosition: 2.3254
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 2
+  m_YDamping: 2
+  m_ZDamping: 2
   m_CameraUp: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -29011,7 +29011,7 @@ MonoBehaviour:
     width: 0.2
   m_Looped: 0
   m_Waypoints:
-  - position: {x: 0.88, y: 0.24, z: -1}
+  - position: {x: 0.25, y: 0.51, z: -1}
     roll: 0
   - position: {x: -2.6008697, y: -0.82923126, z: -1}
     roll: 0
