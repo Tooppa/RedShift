@@ -7,11 +7,10 @@ public class EnemyAI : MonoBehaviour
 {
     public Transform target;
 
-    private Vector2 lastJumpLocation;
-
     public float speed = 200f;
     public float jumpHeight = 4;
     public float nextWaypointDistance = 3f;
+
 
     private bool isGrounded = false;
     private readonly Vector2 _groundCheckOffset = new Vector2(0, -0.08f);
@@ -35,6 +34,7 @@ public class EnemyAI : MonoBehaviour
         InvokeRepeating("UpdatePath", 0f, 0.5f);
         InvokeRepeating("SlimeHop", 0f, 2f);
 
+
     }
     void UpdatePath()
     {
@@ -44,9 +44,8 @@ public class EnemyAI : MonoBehaviour
 
     void SlimeHop()
     {
-        lastJumpLocation = transform.position;
-        Vector2 force = new Vector2(1, 0) * speed * Time.deltaTime;
-        rb.AddForce(force);
+        //Vector2 force = new Vector2(1, 0) * speed * Time.deltaTime;
+        //rb.AddForce(force);
         rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
     }
 
@@ -77,8 +76,6 @@ public class EnemyAI : MonoBehaviour
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
-
-        //rb.AddForce(force);
         
         if(!isGrounded)
         {
