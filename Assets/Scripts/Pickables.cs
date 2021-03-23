@@ -12,6 +12,7 @@ public class Pickables : MonoBehaviour
     private void Awake()
     {
         name = data.name;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = data.sprite;
     }
 }
