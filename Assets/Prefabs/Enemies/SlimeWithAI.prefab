@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 126842268725137192}
   - component: {fileID: 126842268725137175}
   m_Layer: 0
-  m_Name: Enemy (1) 1
+  m_Name: SlimeWithAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,11 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b27a319ad084349818262d9c924a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 10000
-  jumpHeight: 150
+  data: {fileID: 11400000, guid: 44d4d25fc9f64534c8d47bf03d896331, type: 2}
+  target: {fileID: 5398604713114884179, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
   nextWaypointDistance: 1
-  enemyRange: 15
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
