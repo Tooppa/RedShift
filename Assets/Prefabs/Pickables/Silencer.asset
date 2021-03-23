@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d92a397f4fbd14b87ff7f73f8e6976, type: 3}
   m_Name: Silencer
   m_EditorClassIdentifier: 
-  name: 
-  sprite: {fileID: 0}
+  name: Silencer
+  sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
