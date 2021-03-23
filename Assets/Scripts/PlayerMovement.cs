@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Cinemachine;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -16,9 +15,16 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     
     private readonly Vector2 _groundCheckOffset = new Vector2(0,-0.5f);
-    private bool _isGrounded = false;
+
+    public bool _isGrounded = false;
     private Animator _animator;
     private const float GroundedRadius = 0.1f;
+
+    
+    public bool jumping;
+    public float jumpTimeCounter;
+    public float jumpTime;
+
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -54,7 +60,24 @@ public class PlayerMovement : MonoBehaviour
             _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
 
         if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            _animator.SetTrigger("TakeOff");
+            jumping = true;
+            jumpTimeCounter = jumpTime;
             _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-        
+        }
+
+        if (_isGrounded)
+            _animator.SetBool("Jumping", false);
+        else
+            _animator.SetBool("Jumping", true);
+
+        if (Input.GetKey(KeyCode.Space) && jumping == true)
+        {
+            if (jumpTimeCounter > 0)
+                jumpTimeCounter += Time.deltaTime;
+            else
+                jumping = false;
+        }
     }
 }
