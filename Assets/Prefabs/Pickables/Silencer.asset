@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Silencer
   m_EditorClassIdentifier: 
   name: Silencer
-  sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  sprite: {fileID: 7223096808466233718, guid: 23f1d6b0bdbf8eb4daaeaf979e6f15f8, type: 3}
