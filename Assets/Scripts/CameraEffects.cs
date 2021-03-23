@@ -11,7 +11,7 @@ public class CameraEffects : MonoBehaviour
     // CameraEffects.Instance.ShakeCamera(5, .1f); ensimmäinen on intensiteetti ja toinen aika
     // 
     // change offsett toimii asettamalla x akselin arvon
-    // esim. CameraEffects.Instance.ChangeOffset(-2);
+    // esim. CameraEffects.Instance.ChangeOffset(0.4f ,-2);
     public static CameraEffects Instance { get; private set; }
     private CinemachineVirtualCamera _cam;
     private CinemachineFramingTransposer _transposer;
@@ -34,9 +34,9 @@ public class CameraEffects : MonoBehaviour
         perlin.m_AmplitudeGain = 0f;
     }
 
-    public void ChangeOffset(float x)
+    public void ChangeOffset(float timer, float x)
     {
-        StartCoroutine(Offset(0.3f, _transposer.m_TrackedObjectOffset.x, x));
+        StartCoroutine(Offset(timer, _transposer.m_TrackedObjectOffset.x, x));
     }
 
     private IEnumerator Offset(float timer, float start, float stop)

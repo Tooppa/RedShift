@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         if (inputDirection != 0)
         {
             transform.localScale = new Vector3(inputDirection, 1, 1);
-            CameraEffects.Instance.ChangeOffset(inputDirection * 2);
+            CameraEffects.Instance.ChangeOffset(.3f ,inputDirection * 2);
             _animator.SetBool("Walking", true);
         }
         else
