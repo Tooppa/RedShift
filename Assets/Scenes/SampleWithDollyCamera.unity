@@ -170,7 +170,7 @@ MonoBehaviour:
   m_HasRenderer: 0
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
-  m_SelfShadows: 0
+  m_SelfShadows: 1
   m_ApplyToSortingLayers: 00000000
   m_ShapePath:
   - {x: -21.000029, y: -9, z: 0}
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 1
-  m_ShadowIntensity: 0.52
+  m_ShadowIntensity: 0.2
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
@@ -420,7 +420,7 @@ MonoBehaviour:
   m_HasRenderer: 0
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
-  m_SelfShadows: 0
+  m_SelfShadows: 1
   m_ApplyToSortingLayers: 00000000
   m_ShapePath:
   - {x: -19.000029, y: 3, z: 0}
@@ -477,7 +477,7 @@ MonoBehaviour:
   m_HasRenderer: 0
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
-  m_SelfShadows: 0
+  m_SelfShadows: 1
   m_ApplyToSortingLayers: 00000000
   m_ShapePath:
   - {x: -11, y: -9.99997, z: 0}
@@ -19408,7 +19408,7 @@ MonoBehaviour:
   m_HasRenderer: 0
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
-  m_SelfShadows: 0
+  m_SelfShadows: 1
   m_ApplyToSortingLayers: 00000000
   m_ShapePath:
   - {x: 29.999971, y: -6, z: 0}
@@ -20129,7 +20129,7 @@ MonoBehaviour:
   m_HasRenderer: 0
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
-  m_SelfShadows: 0
+  m_SelfShadows: 1
   m_ApplyToSortingLayers: 00000000
   m_ShapePath:
   - {x: 34.999973, y: -12, z: 0}
@@ -29606,7 +29606,7 @@ MonoBehaviour:
   m_HasRenderer: 0
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
-  m_SelfShadows: 0
+  m_SelfShadows: 1
   m_ApplyToSortingLayers: 00000000
   m_ShapePath:
   - {x: 28.999971, y: -2, z: 0}
@@ -29967,6 +29967,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 12126944, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 12126944, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 12126944, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 12126947, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 12126947, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
+      propertyPath: m_ShadowIntensity
+      value: 0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 12126947, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
+      propertyPath: m_PointLightInnerAngle
+      value: 59
+      objectReference: {fileID: 0}
+    - target: {fileID: 12126947, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
+      propertyPath: m_PointLightOuterAngle
+      value: 88
+      objectReference: {fileID: 0}
     - target: {fileID: 12126947, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
       propertyPath: m_PointLightOuterRadius
       value: 12
