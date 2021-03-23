@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -18,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     private bool _isGrounded = false;
     private Animator _animator;
     private const float GroundedRadius = 0.1f;
-
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         if (inputDirection != 0)
         {
             transform.localScale = new Vector3(inputDirection, 1, 1);
+            CameraEffects.Instance.ChangeOffset(inputDirection * 2);
             _animator.SetBool("Walking", true);
         }
         else
