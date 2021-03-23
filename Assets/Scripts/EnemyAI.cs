@@ -11,6 +11,12 @@ public class EnemyAI : MonoBehaviour
     public float speed;
     public float jumpHeight;
     public float nextWaypointDistance = 3f;
+    public float enemyRange;
+
+    private Vector2 origin;
+
+    private bool isTargetInRange = false;
+    
 
 
     private bool isGrounded = false;
@@ -29,6 +35,7 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        origin = transform.position;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -46,7 +53,7 @@ public class EnemyAI : MonoBehaviour
     {
         //Vector2 force = new Vector2(1, 0) * speed * Time.deltaTime;
         //rb.AddForce(force);
-        if(isGrounded)
+        if(isTargetInRange && isGrounded)
             rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
     }
 
@@ -97,6 +104,13 @@ public class EnemyAI : MonoBehaviour
         else if (force.x <= -0.01f)
         {
             enemyGFX.localScale = new Vector3(1f, 1f, 1f);
+        }
+
+        isTargetInRange = true;
+        float distanceToPlayer = Vector2.Distance(transform.position, target.transform.position);
+        if(distanceToPlayer <= -enemyRange || distanceToPlayer >= enemyRange)
+        {
+            isTargetInRange = false;
         }
     }
 
