@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool _isGrounded = false;
     private Animator _animator;
-    private const float GroundedRadius = 0.1f;
+    private const float GroundedRadius = 0.3f;
 
     
     public bool jumping;
