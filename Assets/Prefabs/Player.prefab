@@ -303,11 +303,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3477308104087162420, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.184
       objectReference: {fileID: 0}
     - target: {fileID: 3477308104087162420, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.124
       objectReference: {fileID: 0}
     - target: {fileID: 3477308104087162420, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -315,7 +315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3477308104087162420, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3477308104087162420, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -327,7 +327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3477308104087162420, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3477308104087162420, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -339,11 +339,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3477308104087162420, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 3477308104087162421, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
       propertyPath: m_Name
       value: Flashlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477308104087162423, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
+      propertyPath: m_ShadowIntensity
+      value: 0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477308104087162423, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
+      propertyPath: m_PointLightInnerAngle
+      value: 59
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477308104087162423, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
+      propertyPath: m_PointLightOuterAngle
+      value: 88
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}

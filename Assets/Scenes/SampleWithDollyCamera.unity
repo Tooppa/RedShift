@@ -29967,38 +29967,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 12126944, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 12126944, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 12126944, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 12126947, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 12126947, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
-      propertyPath: m_ShadowIntensity
-      value: 0.99
-      objectReference: {fileID: 0}
-    - target: {fileID: 12126947, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
-      propertyPath: m_PointLightInnerAngle
-      value: 59
-      objectReference: {fileID: 0}
-    - target: {fileID: 12126947, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
-      propertyPath: m_PointLightOuterAngle
-      value: 88
-      objectReference: {fileID: 0}
-    - target: {fileID: 12126947, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 5398604713114884179, guid: f8f36cf9e32cbe5bbbae4c09be5b0a2e, type: 3}
       propertyPath: m_RootOrder
       value: 2
