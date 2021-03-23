@@ -20,11 +20,6 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     private const float GroundedRadius = 0.3f;
 
-    
-    public bool jumping;
-    public float jumpTimeCounter;
-    public float jumpTime;
-
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -62,22 +57,9 @@ public class PlayerMovement : MonoBehaviour
         if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             _animator.SetTrigger("TakeOff");
-            jumping = true;
-            jumpTimeCounter = jumpTime;
             _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
         }
 
-        if (_isGrounded)
-            _animator.SetBool("Jumping", false);
-        else
-            _animator.SetBool("Jumping", true);
-
-        if (Input.GetKey(KeyCode.Space) && jumping == true)
-        {
-            if (jumpTimeCounter > 0)
-                jumpTimeCounter += Time.deltaTime;
-            else
-                jumping = false;
-        }
+        _animator.SetBool("Jumping", !_isGrounded);
     }
 }
