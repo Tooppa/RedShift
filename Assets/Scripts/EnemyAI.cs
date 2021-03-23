@@ -10,7 +10,7 @@ public class EnemyAI : MonoBehaviour
 
     public float speed;
     public float jumpHeight;
-    public float nextWaypointDistance = 3f;
+    public float nextWaypointDistance = 1f;
     public float enemyRange;
 
     private Vector2 origin;
@@ -20,8 +20,8 @@ public class EnemyAI : MonoBehaviour
 
 
     private bool isGrounded = false;
-    private readonly Vector2 _groundCheckOffset = new Vector2(0, -0.08f);
-    private const float GroundedRadius = .05f;
+    private readonly Vector2 _groundCheckOffset = new Vector2(0, -0.5f);
+    private const float GroundedRadius = 0.4f;
     [SerializeField] private LayerMask whatIsGround;
 
     Path path;
@@ -134,7 +134,7 @@ public class EnemyAI : MonoBehaviour
     {
         float distanceX = target.transform.position.x - transform.position.x;
         float distanceY = target.transform.position.y - transform.position.y;
-        if (distanceX <= 0.1 && distanceX > -0.1 && distanceY <= 0.1 && distanceY > -0.1)
+        if (distanceX <= 0.8 && distanceX > -0.8 && distanceY <= 0.8 && distanceY > -0.8)
         {
             Debug.Log("Hit!");
         }
