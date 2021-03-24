@@ -16,8 +16,9 @@ public class Flashlight : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
             _light2D.enabled = !_light2D.enabled;
         
+        // FlashLight rotation temporarily (or permanently) disabled
         // Rotate the flashlight around the user's mouse
-        
+        /*
         var transformCache = transform;
         
         var flashlightToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transformCache.position;
@@ -27,6 +28,6 @@ public class Flashlight : MonoBehaviour
         
         // Rotate the flashlight by the specific angle
         transform.Rotate(Vector3.forward, angleFromFlashLightToMouse);
-        
+        */
     }
 }
