@@ -7,4 +7,6 @@ public class PickableObjects : ScriptableObject
 {
     public new string name;
     public Sprite sprite;
+    public string note;
+    public GameObject floatingText;
 }

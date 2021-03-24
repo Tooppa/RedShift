@@ -4,22 +4,36 @@ using UnityEngine;
 
 public class PlayerGun : MonoBehaviour
 {
-    private GameObject _player;
-    private GameObject _gun;
-    private GameObject _bullet;
-    private GameObject _flashlight;
+    //public Transform firePoint;
+    //public GameObject bullet;
+    //private GameObject _flashlight;
+    //private Vector2 _shootDirection;
 
-    private Vector2 _shootDirection;
+    private ParticleSystem gun;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        _shootDirection = Vector2.right;
+        gun = GetComponentInChildren<ParticleSystem>();
+        //_shootDirection = Vector2.right;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.R))
+            gun.Play();
+        else if (Input.GetKeyUp(KeyCode.R))
+            gun.Stop();
+
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    //var x = _shootDirection.x;
+        //    //var y = _shootDirection.y;
+        //    //_shootDirection = new Vector2(y, -x);
+        //}
     }
+
+    //void Shoot()
+    //{
+    //    Instantiate(bullet, firePoint.position, firePoint.rotation);
+    //}
 }
