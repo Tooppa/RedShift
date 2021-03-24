@@ -5,17 +5,16 @@ using UnityEngine;
 
 public class PlayerMechanics : MonoBehaviour
 {
-    private Dictionary<string, GameObject> _foundItems;
+    public Dictionary<string, GameObject> FoundItems;
     private void Awake()
     {
-        _foundItems = new Dictionary<string, GameObject>();
+        FoundItems = new Dictionary<string, GameObject>();
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Pickable")) return;
         var go= other.gameObject;
         go.SetActive(false);
-        _foundItems.Add(other.name, go);
+        FoundItems.Add(other.name, go);
     }
 }
