@@ -7,9 +7,9 @@ public class PlayerMechanics : MonoBehaviour
 {
     public bool foundItem = false;
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.collider.CompareTag("Pickable")) return;
+        if (!other.CompareTag("Pickable")) return;
         other.gameObject.SetActive(false);
         foundItem = true;
     }
