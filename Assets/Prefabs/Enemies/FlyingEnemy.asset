@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dadb3d51a7ec78242b731ba8a133a2e9, type: 3}
   m_Name: FlyingEnemy
   m_EditorClassIdentifier: 
-  speed: 50000
+  speed: 10000
   jumpHeight: 0
-  enemyRange: 10
+  enemyRange: 13
   attack: 0
   health: 0
+  knockbackForce: 1
+  knockbackRadius: 0
+  spawnRadius: 20
+  flyingEnemyBounciness: 1.4

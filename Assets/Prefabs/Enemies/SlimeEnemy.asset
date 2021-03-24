@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10000
   jumpHeight: 150
-  enemyRange: 15
+  enemyRange: 14
   attack: 2
   health: 3
+  knockbackForce: 6000
+  knockbackRadius: 1
+  spawnRadius: 20
+  flyingEnemyBounciness: 0
