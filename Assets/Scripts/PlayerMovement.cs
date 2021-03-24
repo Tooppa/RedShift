@@ -20,10 +20,13 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     private const float GroundedRadius = 0.3f;
 
+    private GameObject _gun;
+
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
+        _gun = transform.GetChild(0).gameObject;
     }
 
     private void Update()
@@ -43,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         if (inputDirection != 0)
         {
             transform.localScale = new Vector3(inputDirection, 1, 1);
+            _gun.transform.localScale = new Vector3(inputDirection, 1, 1);
             CameraEffects.Instance.ChangeOffset(.3f ,inputDirection * 2);
             _animator.SetBool("Walking", true);
         }
