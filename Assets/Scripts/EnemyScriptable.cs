@@ -10,4 +10,8 @@ public class EnemyScriptable : ScriptableObject
     public float enemyRange;
     public float attack;
     public float health;
+    public float knockbackForce;
+    public float knockbackRadius;
+    public float spawnRadius;
+    public float flyingEnemyBounciness;
 }

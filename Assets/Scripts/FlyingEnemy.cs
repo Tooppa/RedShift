@@ -3,29 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class JumpingSlimeAI : MonoBehaviour
+public class FlyingEnemy : MonoBehaviour
 {
     public EnemyScriptable data;
 
     public Transform target;
 
-    public Rigidbody2D playerRB;
-
     public float nextWaypointDistance = 1f;
 
     private Vector2 origin;
+
+    private float spawnRadius;
 
     private float speed;
     private float jumpHeight;
     private float enemyRange;
     private float knockbackForce;
-    private float knockbackRadius;
-    private float spawnRadius;
+    private float flyingEnemyBounciness;
 
     private bool isTargetInRange = false;
     private bool isGrounded = false;
     private readonly Vector2 _groundCheckOffset = new Vector2(0, -0.5f);
-    private const float GroundedRadius = 0.45f;
+    private const float GroundedRadius = 0.42f;
     [SerializeField] private LayerMask whatIsGround;
 
     Path path;
@@ -43,32 +42,22 @@ public class JumpingSlimeAI : MonoBehaviour
         jumpHeight = data.jumpHeight;
         enemyRange = data.enemyRange;
         knockbackForce = data.knockbackForce;
-        knockbackRadius = data.knockbackRadius;
         spawnRadius = data.spawnRadius;
+        flyingEnemyBounciness = data.flyingEnemyBounciness;
     }
     // Start is called before the first frame update
     void Start()
     {
-        playerRB = playerRB.GetComponent<Rigidbody2D>();
         origin = transform.position;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
         InvokeRepeating("UpdatePath", 0f, 0.5f);
-        InvokeRepeating("SlimeHop", 0f, 2f);
-
     }
     void UpdatePath()
     {
         if (seeker.IsDone())
             seeker.StartPath(rb.position, target.position, OnPathComplete);
-    }
-
-    //Function invoked every 2 seconds. Adds upwards force to the enemy.
-    void SlimeHop()
-    {
-        if(isTargetInRange && isGrounded)
-            rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
     }
 
     void OnPathComplete(Path p)
@@ -96,12 +85,6 @@ public class JumpingSlimeAI : MonoBehaviour
             reachedEndOfPath = false;
         }
 
-        float distanceToPlayer = Vector2.Distance(transform.position, target.transform.position);
-        if (!isTargetInRange && (distanceToPlayer <= -spawnRadius || distanceToPlayer >= spawnRadius))
-        {
-            transform.position = origin;
-        }
-
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
@@ -127,9 +110,15 @@ public class JumpingSlimeAI : MonoBehaviour
             enemyGFX.localScale = new Vector3(1f, 1f, 1f);
         }
 
+        float distanceToPlayer = Vector2.Distance(transform.position, target.transform.position);
+        if (!isTargetInRange && (distanceToPlayer <= -spawnRadius || distanceToPlayer >= spawnRadius))
+        {
+            transform.position = origin;
+        }
+
         //Checks if player is out of enemyObject's range. If out of range, enemy stops moving.
         isTargetInRange = true;
-        if(distanceToPlayer <= -enemyRange || distanceToPlayer >= enemyRange)
+        if (distanceToPlayer <= -enemyRange || distanceToPlayer >= enemyRange)
         {
             isTargetInRange = false;
             transform.position = Vector2.MoveTowards(transform.position, origin, 0.15f);
@@ -138,29 +127,26 @@ public class JumpingSlimeAI : MonoBehaviour
 
     private void Update()
     {
-        CheckIsGrounded();
         PlayerHit();
-    }
-
-    private void CheckIsGrounded()
-    {
-        isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
     }
 
     private void PlayerHit()
     {
         float distanceX = target.transform.position.x - transform.position.x;
         float distanceY = target.transform.position.y - transform.position.y;
-        if (distanceX <= knockbackRadius && distanceX > -knockbackRadius && distanceY <= knockbackRadius && distanceY > -knockbackRadius)
+        if (distanceX <= knockbackForce && distanceX > -knockbackForce && distanceY <= knockbackForce && distanceY > -knockbackForce)
         {
             Debug.Log("Hit!");
-            playerPushback();
         }
     }
 
-    void playerPushback()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector2 knockbackDirection = (target.transform.position - transform.position).normalized;
-        playerRB.AddForce(knockbackDirection * knockbackForce);
+        float bounciness = 0f;
+        if (collision.collider.CompareTag("Player"))
+        {
+            bounciness = flyingEnemyBounciness;
+        }
+        rb.velocity += collision.relativeVelocity * bounciness;
     }
 }
