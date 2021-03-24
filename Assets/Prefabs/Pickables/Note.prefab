@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1890388486740578882}
   - component: {fileID: 6307471457229346874}
   m_Layer: 0
-  m_Name: Pickable 1
-  m_TagString: Pickable
+  m_Name: Note
+  m_TagString: Note
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

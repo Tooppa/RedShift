@@ -13,10 +13,22 @@ public class PlayerMechanics : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Pickable")) return;
-        var go= other.gameObject;
-        go.SetActive(false);
-        FoundItems.Add(other.name, go);
-        canvas.AddNewImage(go.GetComponent<SpriteRenderer>().sprite);
+        if (other.CompareTag("Pickable"))
+        {
+            var go = other.gameObject;
+            go.SetActive(false);
+            FoundItems.Add(other.name, go);
+            canvas.AddNewImage(go.GetComponent<SpriteRenderer>().sprite);
+        }
+        else if (other.CompareTag("Note"))
+        {
+            other.gameObject.GetComponent<Pickables>().ShowInteract();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Note"))
+            other.gameObject.GetComponent<Pickables>().HideInteract();
     }
 }
