@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53d92a397f4fbd14b87ff7f73f8e6976, type: 3}
-  m_Name: Slime
+  m_Name: Dude
   m_EditorClassIdentifier: 
-  name: Slime
-  sprite: {fileID: 7223096808466233718, guid: 23f1d6b0bdbf8eb4daaeaf979e6f15f8, type: 3}
+  name: Dude
+  sprite: {fileID: 21300000, guid: 09bec318f523c457c935580523480d28, type: 3}
