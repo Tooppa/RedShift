@@ -11,7 +11,7 @@ public class Pickables : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private string _note;
     private bool _isNote;
-    
+    private GameObject _interact;
 
     private void Awake()
     {
@@ -25,11 +25,16 @@ public class Pickables : MonoBehaviour
 
     public void ShowInteract()
     {
-        Instantiate(data.floatingText, transform.position + Vector3.up, quaternion.identity, transform);
+        if (!_interact)
+        {
+            _interact = Instantiate(data.floatingText, transform.position + Vector3.up, quaternion.identity, transform);
+            return;
+        }
+        _interact.SetActive(true);
     }
 
     public void HideInteract()
     {
-        throw new NotImplementedException();
+        _interact.SetActive(false);
     }
 }
