@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Shapes2D;
 using UnityEngine;
 
 // TODO: Create shadow casters
@@ -25,7 +26,7 @@ public class DynamicDestruction : MonoBehaviour
             Transform child = transform.GetChild(i);
             
             // Only add the child if it has a polygon collider
-            if (child.TryGetComponent(out PolygonCollider2D collider)) 
+            if (child.TryGetComponent(out PolygonCollider2D _)) 
                 _pieces.Add(child);
         }
         
@@ -38,24 +39,20 @@ public class DynamicDestruction : MonoBehaviour
     {
         foreach (var piece in _pieces)
         {
-            var pieceColliderPoints = piece.GetComponent<PolygonCollider2D>().points;
-
             // Instantiate new piece without parenting. The new piece has exactly the same location as the original object
             var newPiece = Instantiate(brokenObjectPrefab, transform.position, transform.rotation);
         
-            // Set the just instantiated collider's sprite to match the original. This will be automatically masked by it's child
+            // Set the just instantiated collider's sprite to match the original
+            // This will be masked by the pre-defined piece's PolygonCollider2D
             newPiece.GetComponent<SpriteRenderer>().sprite = _sprite;
-        
-            // The new piece also has a child object that has the mask and the collider.
-            // Set it's position and rotation to match the pre-defined piece
-            var newPiecesChild = newPiece.transform.GetChild(0);
-            newPiecesChild.position = piece.position;
-            newPiecesChild.rotation = piece.rotation;
-        
-            // Collider points match the one found in the pre-defined piece
-            newPiecesChild.GetComponent<PolygonCollider2D>().points = pieceColliderPoints; 
+            
+            // Move the pre-defined piece to mask the new piece
+            piece.SetParent(newPiece.transform);
+            
+            // The new piece's collider will be defined by the pre-defined piece. Enable it
+            newPiece.transform.GetChild(0).GetComponent<PolygonCollider2D>().enabled = true;
+
         }
-        
 
     }
 }
