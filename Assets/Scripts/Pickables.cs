@@ -9,7 +9,7 @@ public class Pickables : MonoBehaviour
     public PickableObjects data;
     private new string name;
     private SpriteRenderer _spriteRenderer;
-    private string _note;
+    public string note;
     private bool _isNote;
     private GameObject _interact;
 
@@ -20,7 +20,7 @@ public class Pickables : MonoBehaviour
         _spriteRenderer.sprite = data.sprite;
         _isNote = data.note.Length > 0;
         if (!_isNote) return;
-        _note = data.note;
+        note = data.note;
     }
 
     public void ShowInteract()
