@@ -9,7 +9,7 @@ using UnityEngine;
 public class DynamicDestruction : MonoBehaviour
 {
     public GameObject brokenObjectPrefab;
-
+    
     private readonly List<Transform> _pieces = new List<Transform>(); // All children that have a PolygonCollider
     private Sprite _sprite;  // Used to give the same sprite to the broken pieces
 
@@ -31,11 +31,9 @@ public class DynamicDestruction : MonoBehaviour
         }
         
         _sprite = GetComponent<SpriteRenderer>().sprite;
-
-        BreakApart();
     }
     
-    private void BreakApart()
+    public void BreakApart()
     {
         foreach (var piece in _pieces)
         {
@@ -43,7 +41,7 @@ public class DynamicDestruction : MonoBehaviour
             var newPiece = Instantiate(brokenObjectPrefab, transform.position, transform.rotation);
         
             // Set the just instantiated collider's sprite to match the original
-            // This will be masked by the pre-defined piece's PolygonCollider2D
+            // This will be masked by the pre-defined piece's shape
             newPiece.GetComponent<SpriteRenderer>().sprite = _sprite;
             
             // Move the pre-defined piece to mask the new piece
@@ -54,5 +52,7 @@ public class DynamicDestruction : MonoBehaviour
 
         }
 
+        // Destroy the original object
+        Destroy(gameObject);
     }
 }
