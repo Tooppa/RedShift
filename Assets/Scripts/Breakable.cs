@@ -6,7 +6,7 @@ using UnityEngine;
 
 // TODO: Create shadow casters
 [RequireComponent(typeof(SpriteRenderer))]
-public class DynamicDestruction : MonoBehaviour
+public class Breakable : MonoBehaviour
 {
     public GameObject brokenObjectPrefab;
     
@@ -44,7 +44,7 @@ public class DynamicDestruction : MonoBehaviour
             // This will be masked by the pre-defined piece's shape
             newPiece.GetComponent<SpriteRenderer>().sprite = _sprite;
             
-            // Move the pre-defined piece to mask the new piece
+            // Assign the pre-defined piece to mask the new piece
             piece.SetParent(newPiece.transform);
             
             // The new piece's collider will be defined by the pre-defined piece. Enable it
