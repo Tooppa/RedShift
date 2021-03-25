@@ -9,8 +9,8 @@ public class Pickables : MonoBehaviour
     public PickableObjects data;
     private new string name;
     private SpriteRenderer _spriteRenderer;
-    public string note;
-    private bool _isNote;
+    private string _note;
+    public bool IsNote { private set; get; }
     private GameObject _interact;
 
     private void Awake()
@@ -18,9 +18,9 @@ public class Pickables : MonoBehaviour
         name = data.name;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = data.sprite;
-        _isNote = data.note.Length > 0;
-        if (!_isNote) return;
-        note = data.note;
+        IsNote = data.note.Length > 0;
+        if (!IsNote) return;
+        _note = data.note;
     }
 
     public void ShowInteract()
@@ -36,5 +36,10 @@ public class Pickables : MonoBehaviour
     public void HideInteract()
     {
         _interact.SetActive(false);
+    }
+
+    public string getNote()
+    {
+        return _note;
     }
 }
