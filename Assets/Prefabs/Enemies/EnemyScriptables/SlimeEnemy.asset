@@ -9,10 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce9efda84f9125546b937fb6ef27f07d, type: 3}
-  m_Name: Dude
+  m_Script: {fileID: 11500000, guid: dadb3d51a7ec78242b731ba8a133a2e9, type: 3}
+  m_Name: SlimeEnemy
   m_EditorClassIdentifier: 
-  name: Dude
-  sprite: {fileID: 21300000, guid: 514f4ed3a6d8c4cf588cb822148c473f, type: 3}
-  note: 
-  floatingText: {fileID: 0}
+  speed: 10000
+  jumpHeight: 150
+  enemyRange: 14
+  attack: 2
+  health: 3
+  knockbackForce: 6000
+  knockbackRadius: 1
+  spawnRadius: 20
+  flyingEnemyBounciness: 0
