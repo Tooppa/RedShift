@@ -32,9 +32,19 @@ public class CanvasManager : MonoBehaviour
             _hud.SetActive(!_hud.activeSelf);
     }
 
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
+
     public void ShowText(string note)
     {
         _noteScreen.SetActive(true);
         _noteScreen.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = note;
+        PauseGame();
     }
 }
