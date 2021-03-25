@@ -1,39 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGun : MonoBehaviour
+namespace Player
 {
-    //public Transform firePoint;
-    //public GameObject bullet;
-    //private GameObject _flashlight;
-    //private Vector2 _shootDirection;
-
-    private ParticleSystem gun;
-
-    private void Start()
+    public class PlayerGun : MonoBehaviour
     {
-        gun = GetComponentInChildren<ParticleSystem>();
-        //_shootDirection = Vector2.right;
-    }
+        //public Transform firePoint;
+        //public GameObject bullet;
+        //private GameObject _flashlight;
+        //private Vector2 _shootDirection;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-            gun.Play();
-        else if (Input.GetKeyUp(KeyCode.R))
-            gun.Stop();
+        private ParticleSystem gun;
 
-        //if (Input.GetKeyDown(KeyCode.G))
+        private void Start()
+        {
+            gun = GetComponentInChildren<ParticleSystem>();
+            //_shootDirection = Vector2.right;
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+                gun.Play();
+            else if (Input.GetKeyUp(KeyCode.R))
+                gun.Stop();
+
+            //if (Input.GetKeyDown(KeyCode.G))
+            //{
+            //    //var x = _shootDirection.x;
+            //    //var y = _shootDirection.y;
+            //    //_shootDirection = new Vector2(y, -x);
+            //}
+        }
+
+        //void Shoot()
         //{
-        //    //var x = _shootDirection.x;
-        //    //var y = _shootDirection.y;
-        //    //_shootDirection = new Vector2(y, -x);
+        //    Instantiate(bullet, firePoint.position, firePoint.rotation);
         //}
     }
-
-    //void Shoot()
-    //{
-    //    Instantiate(bullet, firePoint.position, firePoint.rotation);
-    //}
 }
