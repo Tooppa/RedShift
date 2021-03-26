@@ -31,6 +31,7 @@ namespace Player
             if (pickables.IsNote)
             {
                 pickables.ShowInteract();
+                _canvasManager.AddNewNote(go);
                 return;
             }
             go.SetActive(false);

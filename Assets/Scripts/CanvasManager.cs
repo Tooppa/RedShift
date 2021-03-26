@@ -11,6 +11,8 @@ public class CanvasManager : MonoBehaviour
     public GameObject screenImage;
     public GameObject hud;
     public GameObject noteScreen;
+    public GameObject noteImage;
+    public Transform storedNotesScreen;
     public Transform pickableScreen;
     public Slider healthSlider;
     public Slider fuelSlider;
@@ -59,5 +61,11 @@ public class CanvasManager : MonoBehaviour
         noteScreen.SetActive(true);
         noteScreen.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = note;
         PauseGame();
+    }
+
+    public void AddNewNote(GameObject go)
+    {
+        var obj = Instantiate(noteImage, storedNotesScreen);
+        obj.GetComponent<Image>().sprite = go.GetComponent<SpriteRenderer>().sprite;
     }
 }
