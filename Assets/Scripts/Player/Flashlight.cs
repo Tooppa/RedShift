@@ -6,16 +6,23 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class Flashlight : MonoBehaviour
 {
     private Light2D _light2D;
-    private float angle;
-    
-    private void Start() => _light2D = GetComponent<Light2D>();
+    private GameObject _gun;
+
+    private void Start()
+    {
+        _light2D = GetComponent<Light2D>();
+        _gun = GameObject.Find("Gun");
+    }
 
     // Update is called once per frame
     private void Update()
     {
         // Enable and disable the flashlight
         if (Input.GetKeyDown(KeyCode.F))
+        {
             _light2D.enabled = !_light2D.enabled;
+            _gun.SetActive(!_gun.activeSelf);
+        }
 
         var horizontalDirection = Input.GetAxisRaw("Horizontal");
         var verticalDirection = Input.GetAxisRaw("Vertical");
