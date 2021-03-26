@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class CanvasManager : MonoBehaviour
     public GameObject screenImage;
     public GameObject hud;
     public GameObject noteScreen;
+    public GameObject noteImage;
+    public Transform storedNotesScreen;
     public Transform pickableScreen;
     public Slider healthSlider;
     public Slider fuelSlider;
@@ -51,6 +54,7 @@ public class CanvasManager : MonoBehaviour
     }
     public void ResumeGame()
     {
+        if (hud.activeSelf)return;
         Time.timeScale = 1;
     }
 
@@ -59,5 +63,13 @@ public class CanvasManager : MonoBehaviour
         noteScreen.SetActive(true);
         noteScreen.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = note;
         PauseGame();
+    }
+
+    public void AddNewNote(GameObject go)
+    {
+        var obj = Instantiate(noteImage, storedNotesScreen);
+        obj.GetComponent<Image>().sprite = go.GetComponent<SpriteRenderer>().sprite;
+        var btn = obj.GetComponent<Button>();
+        btn.onClick.AddListener(() => { ShowText(go.GetComponent<Pickables>().data.note);});
     }
 }

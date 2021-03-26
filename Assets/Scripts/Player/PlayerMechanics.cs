@@ -39,9 +39,11 @@ namespace Player
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            var pickables = other.gameObject.GetComponent<Pickables>();
+            var go = other.gameObject;
+            var pickables = go.GetComponent<Pickables>();
             if (!pickables.IsNote || !Input.GetKey(KeyCode.E)) return;
             _canvasManager.ShowText(pickables.getNote());
+            _canvasManager.AddNewNote(go);
             other.gameObject.SetActive(false);
         }
 
