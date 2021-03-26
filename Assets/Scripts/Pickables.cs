@@ -11,6 +11,7 @@ public class Pickables : MonoBehaviour
     public bool IsNote { private set; get; }
     public bool HasFuel { private set; get; }
     private GameObject _interact;
+    public int fuel;
 
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class Pickables : MonoBehaviour
         _spriteRenderer.sprite = data.sprite;
         IsNote = data.note.Length > 0;
         HasFuel = data.fuel > 0;
+        fuel = data.fuel;
     }
 
     public void ShowInteract()
