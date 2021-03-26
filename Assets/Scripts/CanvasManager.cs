@@ -67,5 +67,11 @@ public class CanvasManager : MonoBehaviour
     {
         var obj = Instantiate(noteImage, storedNotesScreen);
         obj.GetComponent<Image>().sprite = go.GetComponent<SpriteRenderer>().sprite;
+        var btn = obj.GetComponent<Button>();
+        btn.onClick.AddListener(TaskOnClick);
+    }
+    void TaskOnClick()
+    {
+        Debug.Log ("You have clicked the button!");
     }
 }
