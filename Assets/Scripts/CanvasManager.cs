@@ -54,6 +54,7 @@ public class CanvasManager : MonoBehaviour
     }
     public void ResumeGame()
     {
+        if (hud.activeSelf)return;
         Time.timeScale = 1;
     }
 
