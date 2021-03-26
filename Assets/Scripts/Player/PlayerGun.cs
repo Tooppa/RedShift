@@ -13,8 +13,11 @@ namespace Player
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R) && _gun.gameObject.activeSelf)
+            {
+                CameraEffects.Instance.ShakeCamera(1.5f, .1f);
                 _gun.Play();
+            }
             else if (Input.GetKeyUp(KeyCode.R))
                 _gun.Stop();
         }
