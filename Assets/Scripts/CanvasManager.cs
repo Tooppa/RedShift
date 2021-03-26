@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
@@ -68,10 +69,6 @@ public class CanvasManager : MonoBehaviour
         var obj = Instantiate(noteImage, storedNotesScreen);
         obj.GetComponent<Image>().sprite = go.GetComponent<SpriteRenderer>().sprite;
         var btn = obj.GetComponent<Button>();
-        btn.onClick.AddListener(TaskOnClick);
-    }
-    void TaskOnClick()
-    {
-        Debug.Log ("You have clicked the button!");
+        btn.onClick.AddListener(() => { ShowText(go.GetComponent<Pickables>().data.note);});
     }
 }
