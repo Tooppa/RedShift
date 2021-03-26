@@ -7,7 +7,9 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class Breakable : MonoBehaviour
 {
     public GameObject brokenObjectPrefab;
-    
+
+    public bool generateSelfShadowsForPieces;
+
     private readonly List<Transform> _pieces = new List<Transform>(); // All children that have a PolygonCollider
     private Sprite _sprite;  // Used to give the same sprite to the broken pieces
 
@@ -29,8 +31,6 @@ public class Breakable : MonoBehaviour
         }
         
         _sprite = GetComponent<SpriteRenderer>().sprite;
-
-        BreakApart();
     }
     
     public void BreakApart()
@@ -65,6 +65,8 @@ public class Breakable : MonoBehaviour
             
             var shadowCaster2D = newPiecesChild.gameObject.AddComponent<ShadowCaster2D>();
 
+            shadowCaster2D.selfShadows = generateSelfShadowsForPieces;
+            
             shadowCaster2D.SetPath(pointsInPath3D.ToArray());
             shadowCaster2D.SetPathHash(Random.Range(int.MinValue, int.MaxValue)); // Hash set initiates internal recalculation
 

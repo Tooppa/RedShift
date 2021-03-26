@@ -31155,6 +31155,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box
       objectReference: {fileID: 0}
+    - target: {fileID: 9133323442522451822, guid: da70dbeaa91f90a4fbc9fcdaa7433379, type: 3}
+      propertyPath: generateSelfShadowsForPieces
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da70dbeaa91f90a4fbc9fcdaa7433379, type: 3}
 --- !u!1 &1928960440
