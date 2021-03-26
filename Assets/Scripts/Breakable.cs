@@ -8,6 +8,7 @@ public class Breakable : MonoBehaviour
 {
     public GameObject brokenObjectPrefab;
 
+    [Tooltip("Shadow casters are generated on the fly. Check this if self shadows should be included along with the default options.")]
     public bool generateSelfShadowsForPieces;
 
     private readonly List<Transform> _pieces = new List<Transform>(); // All children that have a PolygonCollider
@@ -33,6 +34,11 @@ public class Breakable : MonoBehaviour
         _sprite = GetComponent<SpriteRenderer>().sprite;
     }
     
+    /// <summary>
+    /// Breaks the object and creates the editor-defined pieces for it. When done with spawning the broken pieces,
+    /// the original object will be destroyed.
+    /// If there aren't any children with PolygonCollider2D's, nothing would be spawned but the object will still be destroyed.
+    /// </summary>
     public void BreakApart()
     {
         foreach (var piece in _pieces)
