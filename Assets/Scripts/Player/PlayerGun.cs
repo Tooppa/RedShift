@@ -4,19 +4,19 @@ namespace Player
 {
     public class PlayerGun : MonoBehaviour
     {
-        private ParticleSystem gun;
+        private ParticleSystem _gun;
 
         private void Start()
         {
-            gun = GetComponentInChildren<ParticleSystem>();
+            _gun = GetComponentInChildren<ParticleSystem>();
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.R))
-                gun.Play();
+                _gun.Play();
             else if (Input.GetKeyUp(KeyCode.R))
-                gun.Stop();
+                _gun.Stop();
         }
     }
 }
