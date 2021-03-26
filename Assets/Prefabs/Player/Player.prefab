@@ -1,5 +1,77 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1558892123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1558892124}
+  - component: {fileID: 1558892125}
+  m_Layer: 6
+  m_Name: GunLight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1558892124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558892123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5398604714081536174}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1558892125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558892123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0.99
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 16
+  m_PointLightOuterAngle: 32
+  m_PointLightInnerRadius: 0.2
+  m_PointLightOuterRadius: 12
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &1629517856
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1629517857}
   - component: {fileID: 1629517858}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player illumination
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +158,7 @@ GameObject:
   - component: {fileID: 5398604713114884188}
   - component: {fileID: 1351595938136843858}
   - component: {fileID: 5398604714198103676}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -189,7 +261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b14ddd0f67c34184485f8b3486feadf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
 --- !u!114 &5398604714198103676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +284,7 @@ GameObject:
   - component: {fileID: 5398604713659043449}
   - component: {fileID: 5398604713659043455}
   - component: {fileID: 5398604713659043454}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,6 +443,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flashlight
       objectReference: {fileID: 0}
+    - target: {fileID: 3477308104087162421, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3477308104087162423, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
       propertyPath: m_ShadowIntensity
       value: 0.99
@@ -402,9 +477,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun
       objectReference: {fileID: 0}
+    - target: {fileID: 8549304962318891440, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8549304962318891444, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
       propertyPath: cam
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549304962318891445, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
+      propertyPath: ShapeModule.arc.value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549304962318891445, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549304962318891445, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
+      propertyPath: ShapeModule.m_Rotation.z
+      value: 90.02427
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549304962318891445, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549304962318891445, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 63
       objectReference: {fileID: 0}
     - target: {fileID: 8549304962318891447, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
       propertyPath: m_RootOrder
@@ -412,7 +511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8549304962318891447, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.53
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8549304962318891447, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
       propertyPath: m_LocalPosition.y
