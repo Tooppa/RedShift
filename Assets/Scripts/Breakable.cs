@@ -1,10 +1,8 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Shapes2D;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
-// TODO: Create shadow casters
 [RequireComponent(typeof(SpriteRenderer))]
 public class Breakable : MonoBehaviour
 {
@@ -31,6 +29,8 @@ public class Breakable : MonoBehaviour
         }
         
         _sprite = GetComponent<SpriteRenderer>().sprite;
+
+        BreakApart();
     }
     
     public void BreakApart()
@@ -46,9 +46,27 @@ public class Breakable : MonoBehaviour
             
             // Assign the pre-defined piece to mask the new piece
             piece.SetParent(newPiece.transform);
+
+            var newPiecesChild = newPiece.transform.GetChild(0);
+            var polygonCollider2D = newPiecesChild.GetComponent<PolygonCollider2D>();
             
             // The new piece's collider will be defined by the pre-defined piece. Enable it
-            newPiece.transform.GetChild(0).GetComponent<PolygonCollider2D>().enabled = true;
+            polygonCollider2D.enabled = true;
+
+            var pointsInPath3D = new Vector3[polygonCollider2D.points.Length];
+            
+            // Shadow caster 2D has horrible support. Use extensions to define the shape
+            
+            // Convert Vector2[] to Vector3[]
+            for (int j = 0; j < polygonCollider2D.points.Length; ++j)
+            {
+                pointsInPath3D[j] = polygonCollider2D.points[j]; 
+            }
+            
+            var shadowCaster2D = newPiecesChild.gameObject.AddComponent<ShadowCaster2D>();
+
+            shadowCaster2D.SetPath(pointsInPath3D.ToArray());
+            shadowCaster2D.SetPathHash(Random.Range(int.MinValue, int.MaxValue)); // Hash set initiates internal recalculation
 
         }
 
