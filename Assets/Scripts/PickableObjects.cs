@@ -7,6 +7,8 @@ public class PickableObjects : ScriptableObject
 {
     public new string name;
     public Sprite sprite;
+    [TextArea(5,10)]
     public string note;
     public GameObject floatingText;
+    public int fuel = 0;
 }
