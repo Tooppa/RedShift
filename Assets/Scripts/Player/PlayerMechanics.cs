@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerMechanics : MonoBehaviour
 {
-    [SerializeField] private CanvasManager canvas;
     public Dictionary<string, GameObject> FoundItems;
 
     private void Awake()
@@ -27,14 +26,14 @@ public class PlayerMechanics : MonoBehaviour
         }
         go.SetActive(false);
         FoundItems.Add(other.name, go);
-        canvas.AddNewImage(go.GetComponent<SpriteRenderer>().sprite);
+        CanvasManager.Instance.AddNewImage(go.GetComponent<SpriteRenderer>().sprite);
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
         var pickables = other.gameObject.GetComponent<Pickables>();
         if (!pickables.IsNote || !Input.GetKey(KeyCode.E)) return;
-        canvas.ShowText(pickables.getNote());
+        CanvasManager.Instance.ShowText(pickables.getNote());
         other.gameObject.SetActive(false);
     }
 

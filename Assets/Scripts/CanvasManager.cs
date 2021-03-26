@@ -7,32 +7,45 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
-    [SerializeField]private GameObject screenImage;
-    private GameObject _hud;
-    private GameObject _noteScreen;
-    private GameObject _pickableScreen;
+    public static CanvasManager Instance { get; private set; }
+    public GameObject screenImage;
+    public GameObject hud;
+    public GameObject noteScreen;
+    public Transform pickableScreen;
+    public Slider healthSlider;
+    public Slider fuelSlider;
 
     private void Awake()
     {
-        _hud = transform.GetChild(0).gameObject;
-        _pickableScreen = _hud.transform.GetChild(0).gameObject;
-        _noteScreen =  transform.GetChild(1).gameObject;
-        _hud.SetActive(false);
+        Instance = this;
+    }
+    private void Update()
+    {
+        if (!Input.GetKeyDown(KeyCode.Tab)) return;
+        
+        hud.SetActive(!hud.activeSelf);
+        if(hud.activeSelf)
+            PauseGame();
+        else
+            ResumeGame();
+    }
+
+    public void SetHealth(int health)
+    {
+        healthSlider.value = health;
+    }
+    public void SetFuel(int fuel)
+    {
+        fuelSlider.value = fuel;
     }
 
     public void AddNewImage(Sprite sprite)
     {
-        var obj = Instantiate(screenImage, _pickableScreen.transform);
+        var obj = Instantiate(screenImage, pickableScreen);
         obj.GetComponent<Image>().sprite = sprite;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-            _hud.SetActive(!_hud.activeSelf);
-    }
-
-    public void PauseGame()
+    private void PauseGame()
     {
         Time.timeScale = 0;
     }
@@ -43,8 +56,8 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowText(string note)
     {
-        _noteScreen.SetActive(true);
-        _noteScreen.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = note;
+        noteScreen.SetActive(true);
+        noteScreen.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = note;
         PauseGame();
     }
 }
