@@ -24,8 +24,8 @@ namespace Player
 
             if (pickables.HasFuel)
             {
-                _fuel += pickables.data.fuel;
-                pickables.data.fuel = 0;
+                _fuel += pickables.fuel;
+                pickables.fuel = 0;
                 _canvasManager.SetFuel(_fuel);
             }
             if (pickables.IsNote)
