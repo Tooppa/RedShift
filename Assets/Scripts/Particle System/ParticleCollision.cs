@@ -26,9 +26,10 @@ public class ParticleCollision : MonoBehaviour
         ParticleSystem p = explosion.GetComponent<ParticleSystem>();
         var pmain = p.main;
 
-        //cam.GetComponent<CinemachineImpulseSource>().GenerateImpulse();
-
         if (other.GetComponent<Rigidbody2D>() != null)
             other.GetComponent<Rigidbody2D>().AddForceAtPosition(collisionEvents[0].intersection * 10 - transform.position, collisionEvents[0].intersection);
+
+        if (other.TryGetComponent(out Health health))
+            health.TakeDamage(100);
     }
 }
