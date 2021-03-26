@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Note
   sprite: {fileID: 7223096808466233718, guid: 23f1d6b0bdbf8eb4daaeaf979e6f15f8, type: 3}
-  note: Jotain.
+  note: "Hienoa osasit avata kirjeen. L\xF6ysit my\xF6s 3 kanisteria polttoainetta."
   floatingText: {fileID: 5894124435458801362, guid: 8bbc9053982ed644f9a61c4fe10d3ae4, type: 3}
+  fuel: 3
