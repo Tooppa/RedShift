@@ -23,7 +23,7 @@ namespace Player
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _animator = GetComponentInChildren<Animator>();
-            _gun = transform.GetChild(0).gameObject;
+            _gun = GameObject.Find("Gun");
         }
 
         private void Update()
