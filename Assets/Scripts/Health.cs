@@ -16,13 +16,7 @@ public class Health : MonoBehaviour
     
     // Start is called before the first frame update
     private void Start() => CurrentHealth = maxHealth;
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.G))
-            TakeDamage(50);
-    }
-
+    
     public void TakeDamage(float amount)
     {
         CurrentHealth -= amount;
