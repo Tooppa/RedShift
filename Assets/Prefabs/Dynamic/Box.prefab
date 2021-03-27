@@ -299,7 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d37fbc65d957a1d907a86b95bc9798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brokenObjectPrefab: {fileID: 6875917765783168265, guid: 55740ed3d6184d033b6c19af184731ef, type: 3}
   generateSelfShadowsForPieces: 1
 --- !u!114 &320727352161714070
 MonoBehaviour:
@@ -326,7 +325,7 @@ MonoBehaviour:
   - {x: -0.5, y: 0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 25298
+  m_InstanceId: 32704
 --- !u!114 &-7480218659672526322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,7 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  destroyWhenDead: 0
+  destroyWhenDead: 1
   onDie:
     m_PersistentCalls:
       m_Calls:
@@ -366,6 +365,22 @@ PrefabInstance:
     - target: {fileID: 1448722307863436743, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
       propertyPath: m_Name
       value: Piece (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751902491569374702, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
+      propertyPath: m_Mass
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751902491569374702, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751902491569374702, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751902491569374702, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4594019153374556700, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
       propertyPath: m_RootOrder
@@ -510,6 +525,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Piece
       objectReference: {fileID: 0}
+    - target: {fileID: 2751902491569374702, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751902491569374702, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751902491569374702, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4594019153374556700, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -620,6 +647,22 @@ PrefabInstance:
     - target: {fileID: 1448722307863436743, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
       propertyPath: m_Name
       value: Piece (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751902491569374702, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
+      propertyPath: m_Mass
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751902491569374702, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751902491569374702, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751902491569374702, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4594019153374556700, guid: c2c883601b3dbb2e6a5ef47c0998c60e, type: 3}
       propertyPath: m_RootOrder
