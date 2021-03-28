@@ -15,6 +15,9 @@ public class Breakable : MonoBehaviour
     private readonly List<Transform> _pieces = new List<Transform>(); // All children that have a PolygonCollider
 
     private Sprite _intactObjectSprite;
+
+    // Maximum value of render layers id's. Used to calculate a unique render layer on the fly for masking
+    private const int MAXRenderLayer = 32767; 
     
     private void Start()
     {
@@ -22,8 +25,8 @@ public class Breakable : MonoBehaviour
         {
             var child = transform.GetChild(i);
             
-            // Only add the child if it has a polygon collider
-            if (child.TryGetComponent(out PolygonCollider2D _)) 
+            // Only add the child if it has a polygon collider and a sprite mask
+            if (child.TryGetComponent(out PolygonCollider2D _) && child.TryGetComponent(out SpriteMask _)) 
                 _pieces.Add(child);
         }
 
@@ -52,6 +55,22 @@ public class Breakable : MonoBehaviour
             spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
             spriteRenderer.sprite = _intactObjectSprite;
             
+            /*
+             The piece actually has the whole original object as the sprite. It is just masked with the broken piece to 
+             achieve the illusion of being broken. However, the rendering layer has to be unique. Otherwise pieces 
+             with overlapping sprites could render each other.
+            */
+            
+            int uniqueRenderingLayer = Random.Range(0, MAXRenderLayer);
+            spriteRenderer.sortingOrder = uniqueRenderingLayer;
+            
+            var spriteMask = piece.gameObject.GetComponent<SpriteMask>();
+            spriteMask.isCustomRangeActive = true; // Custom range is used to render every piece independently
+            spriteMask.frontSortingOrder = uniqueRenderingLayer;
+            spriteMask.backSortingOrder = uniqueRenderingLayer - 1;
+            
+            // TODO: Move this to it's own script for generality
+            // Create shadows for new pieces.
             // Shadow caster 2D has horrible support. Use extensions to define the shape
             
             var pointsInPath3D = new Vector3[polygonCollider2D.points.Length];
