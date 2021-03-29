@@ -44,8 +44,24 @@ public class Flashlight : MonoBehaviour
         var horizontalDirection = Input.GetAxisRaw("Horizontal");
         var verticalDirection = Input.GetAxisRaw("Vertical");
 
+        // Flashlight up and down
+        if (verticalDirection != 0)
+        {
+            switch (verticalDirection)
+            {
+                case 1:
+                    transform.eulerAngles = new Vector3(0, 0, 0);
+                    _gun.transform.eulerAngles = new Vector3(0, 0, 0);
+                    break;
+                case -1:
+                    transform.eulerAngles = new Vector3(0, 0, 180);
+                    _gun.transform.eulerAngles = new Vector3(0, 0, 180);
+                    break;
+            }
+        }
+
         // Flashlight left and right
-        if (horizontalDirection != 0)
+        else if (horizontalDirection != 0)
         {
             switch (horizontalDirection)
             {
@@ -56,22 +72,6 @@ public class Flashlight : MonoBehaviour
                 case -1:
                     transform.eulerAngles = new Vector3(0, 0, 90);
                     _gun.transform.eulerAngles = new Vector3(0, 0, 90);
-                    break;
-            }
-        }
-
-        // Flashlight up and down
-        if (verticalDirection != 0)
-        {
-            switch(verticalDirection)
-            {
-                case 1:
-                    transform.eulerAngles = new Vector3(0, 0, 0);
-                    _gun.transform.eulerAngles = new Vector3(0, 0, 0);
-                    break;
-                case -1:
-                    transform.eulerAngles = new Vector3(0, 0, 180);
-                    _gun.transform.eulerAngles = new Vector3(0, 0, 180);
                     break;
             }
         }
