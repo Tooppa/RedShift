@@ -10,16 +10,16 @@ public class Flashlight : MonoBehaviour
     private GameObject _gun;
     private GameObject _audioController;
 
-    public float cooldownTime;
-    private bool inCooldown;
+    //public float cooldownTime;
+    //private bool inCooldown;
 
-    private IEnumerator Cooldown()
-    {
-        //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
-        inCooldown = true;
-        yield return new WaitForSeconds(cooldownTime);
-        inCooldown = false;
-    }
+    //private IEnumerator Cooldown()
+    //{
+    //    //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
+    //    inCooldown = true;
+    //    yield return new WaitForSeconds(cooldownTime);
+    //    inCooldown = false;
+    //}
 
     private void Start()
     {
@@ -32,13 +32,13 @@ public class Flashlight : MonoBehaviour
     private void Update()
     {
         // Enable and disable the flashlight
-        if (Input.GetKeyDown(KeyCode.F) && !inCooldown)
+        if (Input.GetKeyDown(KeyCode.F))
         {
             _light2D.enabled = !_light2D.enabled;
             _gun.SetActive(!_gun.activeSelf);
             _audioController.GetComponent<SFX>().PlayClick();
 
-            StartCoroutine(Cooldown());
+            //StartCoroutine(Cooldown());
         }
 
         var horizontalDirection = Input.GetAxisRaw("Horizontal");

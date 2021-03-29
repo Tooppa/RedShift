@@ -38,7 +38,7 @@ namespace Player
             CheckIsGrounded();
             Movement();
 
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKeyDown(KeyCode.G))
             {
                 _audioController.GetComponent<SFX>().PlayCalmAmbience();
             }

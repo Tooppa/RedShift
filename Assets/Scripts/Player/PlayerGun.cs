@@ -6,12 +6,15 @@ namespace Player
     {
         private ParticleSystem _gun;
 
+        private GameObject _audioController;
+
         public float cooldown;
         public float counter;
 
         private void Start()
         {
             _gun = GetComponentInChildren<ParticleSystem>();
+            _audioController = GameObject.Find("AudioController");
             counter = cooldown;
         }
 
@@ -22,6 +25,8 @@ namespace Player
                 CameraEffects.Instance.ShakeCamera(1.5f, .1f);
                 _gun.Play();
                 counter = 0;
+
+                _audioController.GetComponent<SFX>().PlayGunShot();
             }
             else
                 _gun.Stop();
