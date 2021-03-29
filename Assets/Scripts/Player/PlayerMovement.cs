@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Player
@@ -16,6 +17,7 @@ namespace Player
 
         private bool _isGrounded = false;
         private bool _hasRocketBoots = false;
+        private bool _rocketBootsCooldown = false;
         private Animator _animator;
         private const float GroundedRadius = 0.3f;
 
@@ -63,9 +65,9 @@ namespace Player
                 _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
             }
 
-            if (_hasRocketBoots && Input.GetKeyDown(KeyCode.LeftShift))
+            if (_hasRocketBoots && Input.GetKeyDown(KeyCode.LeftShift) && !_rocketBootsCooldown)
             {
-                _rigidbody2D.AddForce(Vector2.right  * (transform.localScale.x * rocketBootsSpeed), ForceMode2D.Impulse);
+                StartCoroutine(Dash());
             }
 
             _animator.SetBool("Jumping", !_isGrounded);
@@ -74,6 +76,24 @@ namespace Player
         public void EquipRocketBoots()
         {
             _hasRocketBoots = true;
+        }
+
+        private IEnumerator Dash(){
+            StartCoroutine(Cooldown(.6f));
+            _rigidbody2D.AddForce(Vector2.right  * (transform.localScale.x * rocketBootsSpeed), ForceMode2D.Impulse);
+            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0f);
+            _rigidbody2D.gravityScale = .1f;
+
+            yield return new WaitForSeconds(0.2f);
+            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x * 0.5f, 0f);
+            _rigidbody2D.gravityScale = 1;
+        }
+        private IEnumerator Cooldown(float cooldownTime)
+        {
+            //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
+            _rocketBootsCooldown = true;
+            yield return new WaitForSeconds(cooldownTime);
+            _rocketBootsCooldown = false;
         }
     }
 }
