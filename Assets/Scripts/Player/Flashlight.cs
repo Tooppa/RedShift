@@ -7,11 +7,13 @@ public class Flashlight : MonoBehaviour
 {
     private Light2D _light2D;
     private GameObject _gun;
+    private GameObject _audioController;
 
     private void Start()
     {
         _light2D = GetComponent<Light2D>();
         _gun = GameObject.Find("Gun");
+        _audioController = GameObject.Find("AudioController");
     }
 
     // Update is called once per frame
@@ -22,6 +24,7 @@ public class Flashlight : MonoBehaviour
         {
             _light2D.enabled = !_light2D.enabled;
             _gun.SetActive(!_gun.activeSelf);
+            _audioController.GetComponent<SFX>().PlayClick();
         }
 
         var horizontalDirection = Input.GetAxisRaw("Horizontal");
