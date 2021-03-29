@@ -7,7 +7,6 @@ TagManager:
   - Enemy
   - Pickable
   - Note
-  - HealthBar
   layers:
   - Default
   - TransparentFX
