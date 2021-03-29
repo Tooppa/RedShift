@@ -29,7 +29,6 @@ public class AutomaticShadowCaster2D : MonoBehaviour
             var shadowCaster2D = gameObject.AddComponent<ShadowCaster2D>();
 
             shadowCaster2D.selfShadows = generateSelfShadows;
-            
             shadowCaster2D.SetPath(pointsInPath3D.ToArray());
             shadowCaster2D.SetPathHash(Random.Range(int.MinValue, int.MaxValue)); // Hash set initiates internal recalculation of shadows
         }
@@ -45,17 +44,19 @@ public class AutomaticShadowCaster2D : MonoBehaviour
             {
                 compositeCollider2D.GetPath(i, pointsInPath);
 
-                GameObject newShadowCaster = new GameObject("ShadowCaster2D") {isStatic = true};
-                newShadowCaster.transform.SetParent(compositeCollider2D.transform, false);
-
+                var newGameObject = new GameObject("ShadowCaster2D") {isStatic = true};
+                newGameObject.transform.SetParent(compositeCollider2D.transform, false);
+                
                 for (int j = 0; j < pointsInPath.Count; ++j)
                 {
                     pointsInPath3D.Add(pointsInPath[j]);
                 }
 
-                ShadowCaster2D component = newShadowCaster.AddComponent<ShadowCaster2D>();
-                component.SetPath(pointsInPath3D.ToArray());
-                component.SetPathHash(Random.Range(int.MinValue,
+                var shadowCaster2D = newGameObject.gameObject.AddComponent<ShadowCaster2D>();
+                
+                shadowCaster2D.selfShadows = generateSelfShadows;
+                shadowCaster2D.SetPath(pointsInPath3D.ToArray());
+                shadowCaster2D.SetPathHash(Random.Range(int.MinValue,
                     int.MaxValue)); // The hashing function GetShapePathHash could be copied from the LightUtility class
 
                 pointsInPath.Clear();
