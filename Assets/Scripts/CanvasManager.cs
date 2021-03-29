@@ -76,6 +76,6 @@ public class CanvasManager : MonoBehaviour
         var obj = Instantiate(noteImage, storedNotesScreen);
         obj.GetComponent<Image>().sprite = go.GetComponent<SpriteRenderer>().sprite;
         var btn = obj.GetComponent<Button>();
-        btn.onClick.AddListener(() => { ShowText(go.GetComponent<Pickables>().data.note);});
+        btn.onClick.AddListener(() => { ShowText(go.GetComponent<Pickables>().getNote());});
     }
 }

@@ -248,7 +248,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   maxSpeed: 12.5
-  _isGrounded: 0
+  rocketBootsSpeed: 1000
 --- !u!114 &1351595938136843858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc8613b4ec273141aacf9ce2121b9db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
+  cooldown: 1
   counter: 0
 --- !u!1 &5398604713659043448
 GameObject:
