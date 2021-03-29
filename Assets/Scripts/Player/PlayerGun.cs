@@ -32,6 +32,7 @@ namespace Player
                 _gun.Stop();
 
             counter += Time.deltaTime;
+
         }
     }
 }

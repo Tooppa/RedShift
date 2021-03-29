@@ -10,26 +10,19 @@ public class ParticleCollision : MonoBehaviour
     public CinemachineVirtualCamera cam;
     public GameObject explosionPrefab;
 
-    private GameObject player;
-
-    private GameObject _audioController;
-
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
         _ps = GetComponent<ParticleSystem>();
         collisionEvents = new List<ParticleCollisionEvent>();
-        _audioController = GameObject.Find("AudioController");
     }
-
 
     private void OnParticleCollision(GameObject other)
     {
         int numCollisionEvents = _ps.GetCollisionEvents(other, collisionEvents);
 
         GameObject explosion = Instantiate(explosionPrefab, collisionEvents[0].intersection, Quaternion.identity);
-        //_audioController.GetComponent<SFX>().PlayProjectileCollisionExplosion();
+
 
         ParticleSystem p = explosion.GetComponent<ParticleSystem>();
         var pmain = p.main;
