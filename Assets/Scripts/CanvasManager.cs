@@ -22,6 +22,12 @@ public class CanvasManager : MonoBehaviour
     {
         Instance = this;
     }
+
+    private void Start()
+    {
+        gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
+    }
+
     private void Update()
     {
         if (!Input.GetKeyDown(KeyCode.Tab)) return;
