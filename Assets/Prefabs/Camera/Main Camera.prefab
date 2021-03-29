@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   click: {fileID: 4990152503915006140}
-  cooldownTime: 1
 --- !u!1 &4990152503243616455
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,7 +260,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f2096639e63d8264fbac5a70160acb9b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 0.45
   Loop: 0
