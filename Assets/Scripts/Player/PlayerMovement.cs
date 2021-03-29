@@ -63,5 +63,10 @@ namespace Player
 
             _animator.SetBool("Jumping", !_isGrounded);
         }
+
+        public void EquipRocketBoots()
+        {
+            // player can jump forward
+        }
     }
 }
