@@ -13,12 +13,23 @@ public class Flashlight : MonoBehaviour
     public float cooldownTime;
     private bool inCooldown;
 
+    private float flickerTimer;
+    private float flickerTime;
+
     private IEnumerator Cooldown()
     {
         //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
         inCooldown = true;
         yield return new WaitForSeconds(cooldownTime);
         inCooldown = false;
+    }
+
+    private IEnumerator Flicker()
+    {
+        //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
+        _light2D.enabled = false;
+        yield return new WaitForSeconds(cooldownTime);
+        _light2D.enabled = true;
     }
 
     private void Start()
@@ -74,6 +85,13 @@ public class Flashlight : MonoBehaviour
                     _gun.transform.eulerAngles = new Vector3(0, 0, 90);
                     break;
             }
+        }
+
+        if (_light2D.enabled)
+        {
+            if (flickerTimer >= flickerTime)
+                
+            flickerTimer += Time.deltaTime;
         }
 
         // FlashLight rotation temporarily (or permanently) disabled
