@@ -6,62 +6,74 @@ using UnityEngine.Experimental.Rendering.Universal;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Breakable : MonoBehaviour
 {
-    public GameObject brokenObjectPrefab;
-
-    [Tooltip("Shadow casters are generated on the fly. Check this if self shadows should be included along with the default options.")]
-    public bool generateSelfShadowsForPieces;
+    [Tooltip("Check this if this script should be responsible of destroying the original object after breaking.")]
+    [SerializeField] private bool destroyOriginalObject;
+    
+    [Tooltip("Pieces' Shadow casters are generated on the fly. Check this if self shadows should be included along with the default options.")]
+    [SerializeField] private bool generateSelfShadowsForPieces;
 
     private readonly List<Transform> _pieces = new List<Transform>(); // All children that have a PolygonCollider
-    private Sprite _sprite;  // Used to give the same sprite to the broken pieces
 
+    private Sprite _intactObjectSprite;
+
+    // Maximum value of render layers id's. Used to calculate a unique render layer on the fly for masking
+    private const int MAXRenderLayer = 32767; 
+    
     private void Start()
     {
-        if (brokenObjectPrefab == null) // Null references, null references everywhere
-        {
-            Debug.LogWarning("Broken Object prefab not found for " + gameObject.name);
-            Destroy(this);
-        }
-
         for (int i = 0; i < transform.childCount; ++i)
         {
-            Transform child = transform.GetChild(i);
+            var child = transform.GetChild(i);
             
-            // Only add the child if it has a polygon collider
-            if (child.TryGetComponent(out PolygonCollider2D _)) 
+            // Only add the child if it has a polygon collider and a sprite mask
+            if (child.TryGetComponent(out PolygonCollider2D _) && child.TryGetComponent(out SpriteMask _)) 
                 _pieces.Add(child);
         }
-        
-        _sprite = GetComponent<SpriteRenderer>().sprite;
+
+        _intactObjectSprite = GetComponent<SpriteRenderer>().sprite;
     }
     
     /// <summary>
-    /// Breaks the object and creates the editor-defined pieces for it. When done with spawning the broken pieces,
-    /// the original object will be destroyed.
-    /// If there aren't any children with PolygonCollider2D's, nothing would be spawned but the object will still be destroyed.
+    /// Breaks the object to pieces that are pre-defined as the children of the object.
+    /// The children will be detached from the parent so the original object can be safely destoyed.
     /// </summary>
     public void BreakApart()
     {
+        transform.DetachChildren(); // The original object can be safely removed
+
         foreach (var piece in _pieces)
         {
-            // Instantiate new piece without parenting. The new piece has exactly the same location as the original object
-            var newPiece = Instantiate(brokenObjectPrefab, transform.position, transform.rotation);
-        
-            // Set the just instantiated collider's sprite to match the original
-            // This will be masked by the pre-defined piece's shape
-            newPiece.GetComponent<SpriteRenderer>().sprite = _sprite;
-            
-            // Assign the pre-defined piece to mask the new piece
-            piece.SetParent(newPiece.transform);
-
-            var newPiecesChild = newPiece.transform.GetChild(0);
-            var polygonCollider2D = newPiecesChild.GetComponent<PolygonCollider2D>();
-            
-            // The new piece's collider will be defined by the pre-defined piece. Enable it
+            // Enable the collider of the new broken piece
+            var polygonCollider2D = piece.GetComponent<PolygonCollider2D>();
             polygonCollider2D.enabled = true;
 
-            var pointsInPath3D = new Vector3[polygonCollider2D.points.Length];
+            // Enable the rigidbody of the piece
+            piece.GetComponent<Rigidbody2D>().isKinematic = false;
             
+            // Create a new sprite renderer
+            var spriteRenderer = piece.gameObject.AddComponent<SpriteRenderer>();
+            spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+            spriteRenderer.sprite = _intactObjectSprite;
+            
+            /*
+             The piece actually has the whole original object as the sprite. It is just masked with the broken piece to 
+             achieve the illusion of being broken. However, the rendering layer has to be unique. Otherwise pieces 
+             with overlapping sprites could render each other.
+            */
+            
+            int uniqueRenderingLayer = Random.Range(0, MAXRenderLayer);
+            spriteRenderer.sortingOrder = uniqueRenderingLayer;
+            
+            var spriteMask = piece.gameObject.GetComponent<SpriteMask>();
+            spriteMask.isCustomRangeActive = true; // Custom range is used to render every piece independently
+            spriteMask.frontSortingOrder = uniqueRenderingLayer;
+            spriteMask.backSortingOrder = uniqueRenderingLayer - 1;
+            
+            // TODO: Move this to it's own script for generality
+            // Create shadows for new pieces.
             // Shadow caster 2D has horrible support. Use extensions to define the shape
+            
+            var pointsInPath3D = new Vector3[polygonCollider2D.points.Length];
             
             // Convert Vector2[] to Vector3[]
             for (int j = 0; j < polygonCollider2D.points.Length; ++j)
@@ -69,16 +81,16 @@ public class Breakable : MonoBehaviour
                 pointsInPath3D[j] = polygonCollider2D.points[j]; 
             }
             
-            var shadowCaster2D = newPiecesChild.gameObject.AddComponent<ShadowCaster2D>();
+            var shadowCaster2D = piece.gameObject.AddComponent<ShadowCaster2D>();
 
             shadowCaster2D.selfShadows = generateSelfShadowsForPieces;
             
             shadowCaster2D.SetPath(pointsInPath3D.ToArray());
             shadowCaster2D.SetPathHash(Random.Range(int.MinValue, int.MaxValue)); // Hash set initiates internal recalculation
-
+            
         }
-
-        // Destroy the original object
-        Destroy(gameObject);
+        
+        if(destroyOriginalObject)
+            Destroy(gameObject);
     }
 }
