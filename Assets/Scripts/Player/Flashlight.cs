@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -13,6 +12,9 @@ public class Flashlight : MonoBehaviour
     public float cooldownTime;
     private bool inCooldown;
 
+    private float flickerTimer;
+    private float flickerTime;
+
     private IEnumerator Cooldown()
     {
         //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
@@ -21,11 +23,25 @@ public class Flashlight : MonoBehaviour
         inCooldown = false;
     }
 
+    private IEnumerator Flicker()
+    {
+        //Turn the flashlight off, wait for the cooldown time to pass, then turn the flashlight back on
+        _light2D.enabled = false;
+        yield return new WaitForSeconds(.1f);
+        _light2D.enabled = true;
+        yield return new WaitForSeconds(.2f);
+        _light2D.enabled = false;
+        yield return new WaitForSeconds(Random.Range(0, 2));
+        _light2D.enabled = true;
+        flickerTimer = 0;
+    }
+
     private void Start()
     {
         _light2D = GetComponent<Light2D>();
         _gun = GameObject.Find("Gun");
         _audioController = GameObject.Find("AudioController");
+        flickerTime = 2;
     }
 
     // Update is called once per frame
@@ -74,6 +90,13 @@ public class Flashlight : MonoBehaviour
                     _gun.transform.eulerAngles = new Vector3(0, 0, 90);
                     break;
             }
+        }
+
+        if (_light2D.enabled)
+        {
+            if (flickerTimer >= flickerTime)
+                StartCoroutine(Flicker());
+            flickerTimer += Time.deltaTime;
         }
 
         // FlashLight rotation temporarily (or permanently) disabled
