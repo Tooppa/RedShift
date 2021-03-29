@@ -6,19 +6,25 @@ using UnityEngine;
 
 public class Pickables : MonoBehaviour
 {
-    public PickableObjects data;
+    [SerializeField]
+    private PickableObjects data;
     private SpriteRenderer _spriteRenderer;
     public bool IsNote { private set; get; }
     public bool HasFuel { private set; get; }
+    
+    public bool RocketBoots { private set; get; }
+    public string Note { private set; get; }
     private GameObject _interact;
-    public int fuel;
+    [HideInInspector]public int fuel;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = data.sprite;
         IsNote = data.note.Length > 0;
+        if (IsNote) Note = data.note;
         HasFuel = data.fuel > 0;
+        RocketBoots = data.rocketBoots;
         fuel = data.fuel;
     }
 

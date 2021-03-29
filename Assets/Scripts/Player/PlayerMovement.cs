@@ -9,11 +9,13 @@ namespace Player
         [SerializeField] private float jumpHeight;
         [SerializeField] private LayerMask whatIsGround;
         [SerializeField] private float maxSpeed;
+        [SerializeField] private float rocketBootsSpeed;
         private Rigidbody2D _rigidbody2D;
     
         private readonly Vector2 _groundCheckOffset = new Vector2(0,-0.5f);
 
-        public bool _isGrounded = false;
+        private bool _isGrounded = false;
+        private bool _hasRocketBoots = false;
         private Animator _animator;
         private const float GroundedRadius = 0.3f;
 
@@ -61,12 +63,17 @@ namespace Player
                 _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
             }
 
+            if (_hasRocketBoots && Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                _rigidbody2D.AddForce(Vector2.right  * (transform.localScale.x * rocketBootsSpeed), ForceMode2D.Impulse);
+            }
+
             _animator.SetBool("Jumping", !_isGrounded);
         }
 
         public void EquipRocketBoots()
         {
-            // player can jump forward
+            _hasRocketBoots = true;
         }
     }
 }
