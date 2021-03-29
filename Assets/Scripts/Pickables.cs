@@ -7,20 +7,19 @@ using UnityEngine;
 public class Pickables : MonoBehaviour
 {
     public PickableObjects data;
-    private new string name;
     private SpriteRenderer _spriteRenderer;
-    private string _note;
     public bool IsNote { private set; get; }
+    public bool HasFuel { private set; get; }
     private GameObject _interact;
+    public int fuel;
 
     private void Awake()
     {
-        name = data.name;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = data.sprite;
         IsNote = data.note.Length > 0;
-        if (!IsNote) return;
-        _note = data.note;
+        HasFuel = data.fuel > 0;
+        fuel = data.fuel;
     }
 
     public void ShowInteract()
@@ -40,6 +39,6 @@ public class Pickables : MonoBehaviour
 
     public string getNote()
     {
-        return _note;
+        return data.note;
     }
 }

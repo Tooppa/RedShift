@@ -1,47 +1,57 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMechanics : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private CanvasManager canvas;
-    public Dictionary<string, GameObject> FoundItems;
-
-    private void Awake()
+    public class PlayerMechanics : MonoBehaviour
     {
-        FoundItems = new Dictionary<string, GameObject>();
-    }
+        private int _fuel = 0;
+        private int _health = 10;
+        private CanvasManager _canvasManager;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (!other.CompareTag("Pickable")) return;
-
-        var go = other.gameObject;
-        var pickables = go.GetComponent<Pickables>();
-
-        if (pickables.IsNote)
+        private void Start()
         {
-            pickables.ShowInteract();
-            return;
+            _canvasManager = CanvasManager.Instance;
+            _canvasManager.SetFuel(_fuel);
+            _canvasManager.SetHealth(_health);
         }
-        go.SetActive(false);
-        FoundItems.Add(other.name, go);
-        canvas.AddNewImage(go.GetComponent<SpriteRenderer>().sprite);
-    }
 
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        var pickables = other.gameObject.GetComponent<Pickables>();
-        if (!pickables.IsNote || !Input.GetKey(KeyCode.E)) return;
-        canvas.ShowText(pickables.getNote());
-        other.gameObject.SetActive(false);
-    }
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!other.CompareTag("Pickable")) return;
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        var pickables = other.gameObject.GetComponent<Pickables>();
-        if (pickables.IsNote)
-            pickables.HideInteract();
+            var go = other.gameObject;
+            var pickables = go.GetComponent<Pickables>();
+
+            if (pickables.HasFuel)
+            {
+                _fuel += pickables.fuel;
+                pickables.fuel = 0;
+                _canvasManager.SetFuel(_fuel);
+            }
+            if (pickables.IsNote)
+            {
+                pickables.ShowInteract();
+                return;
+            }
+            go.SetActive(false);
+            _canvasManager.AddNewImage(go.GetComponent<SpriteRenderer>().sprite);
+        }
+
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            var go = other.gameObject;
+            var pickables = go.GetComponent<Pickables>();
+            if (!pickables.IsNote || !Input.GetKey(KeyCode.E)) return;
+            _canvasManager.ShowText(pickables.getNote());
+            _canvasManager.AddNewNote(go);
+            other.gameObject.SetActive(false);
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            var pickables = other.gameObject.GetComponent<Pickables>();
+            if (pickables.IsNote)
+                pickables.HideInteract();
+        }
     }
 }
