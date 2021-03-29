@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
@@ -8,6 +9,17 @@ public class Flashlight : MonoBehaviour
     private Light2D _light2D;
     private GameObject _gun;
     private GameObject _audioController;
+
+    public float cooldownTime;
+    private bool inCooldown;
+
+    private IEnumerator Cooldown()
+    {
+        //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
+        inCooldown = true;
+        yield return new WaitForSeconds(cooldownTime);
+        inCooldown = false;
+    }
 
     private void Start()
     {
@@ -20,11 +32,13 @@ public class Flashlight : MonoBehaviour
     private void Update()
     {
         // Enable and disable the flashlight
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && !inCooldown)
         {
             _light2D.enabled = !_light2D.enabled;
             _gun.SetActive(!_gun.activeSelf);
             _audioController.GetComponent<SFX>().PlayClick();
+
+            StartCoroutine(Cooldown());
         }
 
         var horizontalDirection = Input.GetAxisRaw("Horizontal");
