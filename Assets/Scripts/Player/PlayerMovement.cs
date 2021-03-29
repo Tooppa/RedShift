@@ -19,6 +19,8 @@ namespace Player
 
         private GameObject _gun;
 
+        private GameObject _audioController;
+
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -26,10 +28,20 @@ namespace Player
             _gun = GameObject.Find("Gun");
         }
 
+        private void Start()
+        {
+            _audioController = GameObject.Find("AudioController");
+        }
+
         private void Update()
         {
             CheckIsGrounded();
             Movement();
+
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                _audioController.GetComponent<SFX>().PlayCalmAmbience();
+            }
         }
         private void CheckIsGrounded()
         {
