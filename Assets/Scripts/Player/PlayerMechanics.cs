@@ -26,7 +26,19 @@ namespace Player
             var go = other.gameObject;
             var pickables = go.GetComponent<Pickables>();
             var sprite = go.GetComponent<SpriteRenderer>().sprite;
+            
+            if (pickables.IsNote)
+            {
+                pickables.ShowInteract();
+                return;
+            }
+            SpecialPickups(pickables, sprite);
+            go.SetActive(false);
+            _canvasManager.AddNewImage(sprite);
+        }
 
+        private void SpecialPickups(Pickables pickables, Sprite sprite)
+        {
             if (pickables.HasFuel)
             {
                 _fuel += pickables.fuel;
@@ -43,13 +55,6 @@ namespace Player
                 _playerGun.EquipGun();
                 _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
             }
-            if (pickables.IsNote)
-            {
-                pickables.ShowInteract();
-                return;
-            }
-            go.SetActive(false);
-            _canvasManager.AddNewImage(sprite);
         }
 
         private void OnTriggerStay2D(Collider2D other)
@@ -57,7 +62,9 @@ namespace Player
             var go = other.gameObject;
             var pickables = go.GetComponent<Pickables>();
             if (!pickables.IsNote || !Input.GetKey(KeyCode.E)) return;
+            var sprite = go.GetComponent<SpriteRenderer>().sprite;
             _canvasManager.ShowText(pickables.getNote());
+            SpecialPickups(pickables, sprite);
             _canvasManager.AddNewNote(go);
             other.gameObject.SetActive(false);
         }
