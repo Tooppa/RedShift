@@ -214,6 +214,8 @@ GameObject:
   - component: {fileID: 5398604713659043449}
   - component: {fileID: 5398604713659043455}
   - component: {fileID: 5398604713659043454}
+  - component: {fileID: 1649057767}
+  - component: {fileID: 1649057769}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -305,6 +307,65 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1649057767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5398604713659043448}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16f42a68bcb5ff47aee7ed2613a63e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalSeconds: 2
+  maxIntensity: 0.8
+--- !u!114 &1649057769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5398604713659043448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 0, g: 1, b: 0.83279514, a: 1}
+  m_Intensity: 1
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0.1
+  m_PointLightOuterRadius: 1
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.07054329, y: -0.213696, z: 0}
+  - {x: 0.010471344, y: -0.24965906, z: 0}
+  - {x: 0.09508133, y: -0.20551538, z: 0}
+  - {x: 0.1413536, y: -0.12286711, z: 0}
+  - {x: 0.09508324, y: -0.048068047, z: 0}
+  - {x: 0.018651962, y: 0.008014679, z: 0}
+  - {x: -0.058273315, y: -0.035798073, z: 0}
+  - {x: -0.099962234, y: -0.118777275, z: 0}
 --- !u!114 &62654656
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,17 +7,30 @@ public class PlayerLight : MonoBehaviour
 {
     private Light2D _light2D;
 
-    public float maxRange = 1;
-    public float minRange = .3f;
-    public float flickerSpeed = 1;
+    public float totalSeconds;     // The total of seconds the flash wil last
+    public float maxIntensity;     // The maximum intensity the flash will reach
+
+    public IEnumerator flash()
+    {
+        float waitTime = totalSeconds / 2;
+        // Get half of the seconds (One half to get brighter and one to get darker)
+        while (_light2D.intensity < maxIntensity)
+        {
+            _light2D.intensity += Time.deltaTime / waitTime;        // Increase intensity
+            yield return null;
+        }
+        while (_light2D.intensity > 0)
+        {
+            _light2D.intensity -= Time.deltaTime / waitTime;        //Decrease intensity
+            yield return null;
+        }
+        yield return null;
+        StartCoroutine(flash());
+    }
 
     private void Start()
     {
         _light2D = GetComponent<Light2D>();
-    }
-
-    private void Update()
-    {
-        _light2D.intensity = Mathf.Lerp(minRange, maxRange, Mathf.PingPong(Time.time, flickerSpeed));
+        StartCoroutine(flash());
     }
 }
