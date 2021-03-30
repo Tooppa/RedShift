@@ -19,4 +19,4 @@ MonoBehaviour:
   fuel: 0
   rocketBoots: 1
   gun: 0
-  statsForUpgrades: "Allows player to dash 4 blocks \nwith 0.6/s cooldown."
+  statsForUpgrades: "Allows player to \ndash 4 blocks with \n0.6/s cooldown."

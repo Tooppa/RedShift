@@ -13,7 +13,7 @@ namespace Player
         [SerializeField] private float rocketBootsSpeed;
         private Rigidbody2D _rigidbody2D;
     
-        private readonly Vector2 _groundCheckOffset = new Vector2(0,-0.22f);
+        private readonly Vector2 _groundCheckOffset = new Vector2(0,-0.5f);
 
         private bool _isGrounded = false;
         public bool HasRocketBoots { private set; get; }
@@ -46,7 +46,7 @@ namespace Player
         private void Update()
         {
             CheckIsGrounded();
-            Movement();
+            if(Time.timeScale == 1) Movement();
 
             if (Input.GetKeyDown(KeyCode.G) && !musicPlaying)
             {
