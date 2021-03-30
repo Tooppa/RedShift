@@ -68,26 +68,8 @@ public class Breakable : MonoBehaviour
             spriteMask.isCustomRangeActive = true; // Custom range is used to render every piece independently
             spriteMask.frontSortingOrder = uniqueRenderingLayer;
             spriteMask.backSortingOrder = uniqueRenderingLayer - 1;
-            
-            // TODO: Move this to it's own script for generality
-            // Create shadows for new pieces.
-            // Shadow caster 2D has horrible support. Use extensions to define the shape
-            
-            var pointsInPath3D = new Vector3[polygonCollider2D.points.Length];
-            
-            // Convert Vector2[] to Vector3[]
-            for (int j = 0; j < polygonCollider2D.points.Length; ++j)
-            {
-                pointsInPath3D[j] = polygonCollider2D.points[j]; 
-            }
-            
-            var shadowCaster2D = piece.gameObject.AddComponent<ShadowCaster2D>();
 
-            shadowCaster2D.selfShadows = generateSelfShadowsForPieces;
-            
-            shadowCaster2D.SetPath(pointsInPath3D.ToArray());
-            shadowCaster2D.SetPathHash(Random.Range(int.MinValue, int.MaxValue)); // Hash set initiates internal recalculation
-            
+            piece.gameObject.AddComponent<AutomaticShadowCaster2D>();
         }
         
         if(destroyOriginalObject)
