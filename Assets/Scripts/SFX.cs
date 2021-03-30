@@ -4,25 +4,37 @@ using UnityEngine;
 
 public class SFX : MonoBehaviour
 {
-    public AudioSource click;
-    public AudioSource gunShot;
-    public AudioSource gunExplosion;
+    public AudioSource playerFlashlight;
+    public AudioSource playerGunShot;
+    public AudioSource playerRunning;
+    public AudioSource playerJump;
+    public AudioSource playerLanding;
     public AudioSource wind;
     public AudioSource calmAmbience;
 
     public void PlayClick()
     {
-        click.Play();
+        playerFlashlight.Play();
     }
 
     public void PlayGunShot()
     {
-        gunShot.Play();
+        playerGunShot.Play();
     }
 
-    public void PlayProjectileCollisionExplosion()
+    public void PlayRunning()
     {
-        gunExplosion.Play();
+        playerRunning.Play();
+    }
+
+    public void PlayJump()
+    {
+        playerJump.Play();
+    }
+
+    public void PlayLanding()
+    {
+        playerLanding.Play();
     }
 
     public void PlayWind()
