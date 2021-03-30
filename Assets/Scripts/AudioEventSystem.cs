@@ -5,9 +5,12 @@ using UnityEngine;
 public class AudioEventSystem : MonoBehaviour
 {
     private GameObject _audioController;
+    private GameObject player;
 
+    private Collider2D windPitchChangerColl;
 
-    private bool isTriggered = false;
+    private bool upIsTriggered = false;
+    private bool downIsTriggered = false;
 
     public float startingPitch = 1;
     public float endingPitch = 0.35f;
@@ -16,6 +19,7 @@ public class AudioEventSystem : MonoBehaviour
     void Start()
     {
         _audioController = GameObject.Find("AudioController");
+        player = GameObject.Find("Player");
 
     }
 
@@ -23,25 +27,38 @@ public class AudioEventSystem : MonoBehaviour
     void Update()
     {
 
-        if (isTriggered && _audioController.GetComponent<SFX>().wind.pitch >= endingPitch)
+        if (downIsTriggered)
         {
             _audioController.GetComponent<SFX>().wind.pitch -= Time.deltaTime * startingPitch / timeToDecrease;
         }
-        if(_audioController.GetComponent<SFX>().wind.pitch == endingPitch)
+        if(_audioController.GetComponent<SFX>().wind.pitch <= endingPitch + 0.02)
         {
-            isTriggered = false;
+            downIsTriggered = false;
+            _audioController.GetComponent<SFX>().wind.pitch = 0.35f;
         }
 
-        //if (isTriggered && _audioController.GetComponent<SFX>().wind.pitch < startingPitch)
-        //{
-        //    _audioController.GetComponent<SFX>().wind.pitch += Time.deltaTime * startingPitch / timeToDecrease;
-        //}
+        if (upIsTriggered)
+        {
+            _audioController.GetComponent<SFX>().wind.pitch += Time.deltaTime * startingPitch / timeToDecrease;
+        }
+        if (_audioController.GetComponent<SFX>().wind.pitch >= startingPitch - 0.02)
+        {
+            upIsTriggered = false;
+            _audioController.GetComponent<SFX>().wind.pitch = 1;
+        }
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_audioController.GetComponent<SFX>().wind.pitch == startingPitch)
-            isTriggered = true;
+        if(other.gameObject == player && _audioController.GetComponent<SFX>().wind.pitch == startingPitch)
+        {
+            downIsTriggered = true;
+        }
+
+        if (other.gameObject == player && _audioController.GetComponent<SFX>().wind.pitch == endingPitch)
+        {
+            upIsTriggered = true;
+        }
     }
 
     //private void OnCollisionExit2D(Collision2D collision)
