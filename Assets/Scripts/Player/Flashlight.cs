@@ -54,6 +54,7 @@ public class Flashlight : MonoBehaviour
         {
             _audioController.GetComponent<SFX>().PlayClick();
             _light2D.enabled = !_light2D.enabled;
+            _light2D.intensity = _intensity;
             _gun.SetActive(!_gun.activeSelf);
 
             StartCoroutine(Cooldown());
