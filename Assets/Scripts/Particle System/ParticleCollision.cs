@@ -23,6 +23,7 @@ public class ParticleCollision : MonoBehaviour
 
         GameObject explosion = Instantiate(explosionPrefab, collisionEvents[0].intersection, Quaternion.identity);
 
+
         ParticleSystem p = explosion.GetComponent<ParticleSystem>();
         var pmain = p.main;
 
