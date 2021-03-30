@@ -2428,7 +2428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenImage: {fileID: 4421107011363407615, guid: 5584b1837da0d784584fbb3e831607de, type: 3}
   noteImage: {fileID: 2214906959635730534, guid: 4c4b920ed0adad747890179583e411c4, type: 3}
-  tooltip: {fileID: 4707423030120884465, guid: 1977d549c519ca945b08db9aab395828, type: 3}
+  tooltip: {fileID: 4665976295593855707, guid: ea3ed0936495d1549beeef3e38cf695c, type: 3}
   hud: {fileID: 8389815746921093069}
   noteScreen: {fileID: 8389815745677484111}
   storedNotesScreen: {fileID: 6148664460234112184}

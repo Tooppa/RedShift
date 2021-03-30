@@ -7,12 +7,16 @@ namespace Player
         private int _fuel = 0;
         private int _health = 10;
         private CanvasManager _canvasManager;
+        private PlayerMovement _playerMovement;
+        private PlayerGun _playerGun;
 
         private void Start()
         {
             _canvasManager = CanvasManager.Instance;
             _canvasManager.SetFuel(_fuel);
             _canvasManager.SetHealth(_health);
+            _playerMovement = gameObject.GetComponent<PlayerMovement>();
+            _playerGun = gameObject.GetComponent<PlayerGun>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -28,16 +32,14 @@ namespace Player
                 pickables.fuel = 0;
                 _canvasManager.SetFuel(_fuel);
             }
-
-            if (pickables.RocketBoots)
+            if (pickables.RocketBoots && !_playerMovement.HasRocketBoots)
             {
-                gameObject.GetComponent<PlayerMovement>().EquipRocketBoots();
+                _playerMovement.EquipRocketBoots();
                 _canvasManager.AddNewUpgrade(go.GetComponent<SpriteRenderer>().sprite);
             }
-
-            if (pickables.Gun)
+            if (pickables.Gun && !_playerGun.HasGun)
             {
-                gameObject.GetComponent<PlayerGun>().EquipGun();
+                _playerGun.EquipGun();
                 _canvasManager.AddNewUpgrade(go.GetComponent<SpriteRenderer>().sprite);
             }
             if (pickables.IsNote)

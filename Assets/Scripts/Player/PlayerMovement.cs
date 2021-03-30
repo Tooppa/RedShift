@@ -16,7 +16,7 @@ namespace Player
         private readonly Vector2 _groundCheckOffset = new Vector2(0,-0.5f);
 
         private bool _isGrounded = false;
-        private bool _hasRocketBoots = false;
+        public bool HasRocketBoots { private set; get; }
         private bool _rocketBootsCooldown = false;
         private Animator _animator;
         private const float GroundedRadius = 0.3f;
@@ -28,6 +28,7 @@ namespace Player
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _animator = GetComponentInChildren<Animator>();
             _gun = GameObject.Find("Gun");
+            HasRocketBoots = false;
         }
 
         private void Update()
@@ -65,7 +66,7 @@ namespace Player
                 _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
             }
 
-            if (_hasRocketBoots && Input.GetKeyDown(KeyCode.LeftShift) && !_rocketBootsCooldown)
+            if (HasRocketBoots && Input.GetKeyDown(KeyCode.LeftShift) && !_rocketBootsCooldown)
             {
                 StartCoroutine(Dash());
             }
@@ -75,7 +76,7 @@ namespace Player
 
         public void EquipRocketBoots()
         {
-            _hasRocketBoots = true;
+            HasRocketBoots = true;
         }
 
         private IEnumerator Dash(){

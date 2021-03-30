@@ -18,3 +18,4 @@ MonoBehaviour:
   floatingText: {fileID: 0}
   fuel: 0
   rocketBoots: 1
+  gun: 0
