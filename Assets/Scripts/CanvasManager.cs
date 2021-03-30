@@ -15,6 +15,7 @@ public class CanvasManager : MonoBehaviour
     public GameObject noteImage;
     public Transform storedNotesScreen;
     public Transform pickableScreen;
+    public Transform upgradeScreen;
     public Slider healthSlider;
     public Slider fuelSlider;
 
@@ -51,6 +52,11 @@ public class CanvasManager : MonoBehaviour
     public void AddNewImage(Sprite sprite)
     {
         var obj = Instantiate(screenImage, pickableScreen);
+        obj.GetComponent<Image>().sprite = sprite;
+    }
+    public void AddNewUpgrade(Sprite sprite)
+    {
+        var obj = Instantiate(screenImage, upgradeScreen);
         obj.GetComponent<Image>().sprite = sprite;
     }
 

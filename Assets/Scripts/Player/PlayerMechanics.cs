@@ -28,10 +28,18 @@ namespace Player
                 pickables.fuel = 0;
                 _canvasManager.SetFuel(_fuel);
             }
+
             if (pickables.RocketBoots)
+            {
                 gameObject.GetComponent<PlayerMovement>().EquipRocketBoots();
+                _canvasManager.AddNewUpgrade(go.GetComponent<SpriteRenderer>().sprite);
+            }
+
             if (pickables.Gun)
+            {
                 gameObject.GetComponent<PlayerGun>().EquipGun();
+                _canvasManager.AddNewUpgrade(go.GetComponent<SpriteRenderer>().sprite);
+            }
             if (pickables.IsNote)
             {
                 pickables.ShowInteract();
