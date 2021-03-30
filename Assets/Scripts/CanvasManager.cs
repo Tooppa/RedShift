@@ -57,8 +57,10 @@ public class CanvasManager : MonoBehaviour
     }
     public void AddNewUpgrade(Sprite sprite)
     {
-        var obj = Instantiate(screenImage, upgradeScreen);
-        obj.GetComponent<Image>().sprite = sprite;
+        var image = Instantiate(screenImage, upgradeScreen);
+        image.GetComponent<Image>().sprite = sprite;
+        var spawnedTooltip = Instantiate(tooltip, image.transform);
+        //spawnedTooltip.GetComponent<TooltipScript>().ShowTooltip("test");
     }
 
     private void PauseGame()

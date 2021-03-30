@@ -10,24 +10,17 @@ public class TooltipScript : MonoBehaviour
     private TextMeshProUGUI _tooltipText;
     private RectTransform _backround;
 
-    private void Awake()
+    private void Start()
     {
         _backround = transform.Find("Background").GetComponent<RectTransform>();
         _tooltipText = transform.Find("Text").GetComponent<TextMeshProUGUI>();
-
-        ShowTooltip("Random shittii");
     }
 
-    private void ShowTooltip(string tooltipString)
+    public void ShowTooltip(string tooltipString)
     {
         _tooltipText.SetText(tooltipString);
         _tooltipText.ForceMeshUpdate();
         var backGroundSize = _tooltipText.GetRenderedValues(false);
         _backround.sizeDelta = backGroundSize;
-    }
-
-    private void HideTooltip()
-    {
-        gameObject.SetActive(false);
     }
 }
