@@ -6,20 +6,14 @@ using UnityEngine;
 
 public class TooltipScript : MonoBehaviour
 {
-    private TextMeshProUGUI _tooltipText;
-    private RectTransform _backGround;
-
-    private void Start()
-    {
-        _backGround = transform.GetChild(0).GetComponent<RectTransform>();
-        _tooltipText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-    }
-
     public void ShowTooltip(string tooltipString)
     {
-        _tooltipText.text = tooltipString;
-        _tooltipText.ForceMeshUpdate();
-        var backGroundSize = _tooltipText.GetRenderedValues(false);
-        _backGround.sizeDelta = backGroundSize;
+        var tooltipText = transform.Find("Text").GetComponent<TextMeshProUGUI>();
+        var backGround = transform.Find("Background").GetComponent<RectTransform>();
+        
+        tooltipText.text = tooltipString;
+        tooltipText.ForceMeshUpdate();
+        var padding = tooltipString.Length > 0 ? new Vector2(2, 2): Vector2.zero;
+        backGround.sizeDelta = tooltipText.GetPreferredValues() + padding;
     }
 }

@@ -20,3 +20,4 @@ MonoBehaviour:
   fuel: 3
   rocketBoots: 0
   gun: 1
+  statsForUpgrades: Player can shoot

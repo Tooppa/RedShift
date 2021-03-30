@@ -55,12 +55,14 @@ public class CanvasManager : MonoBehaviour
         var obj = Instantiate(screenImage, pickableScreen);
         obj.GetComponent<Image>().sprite = sprite;
     }
-    public void AddNewUpgrade(Sprite sprite)
+    public void AddNewUpgrade(Sprite sprite, string stats)
     {
         var image = Instantiate(screenImage, upgradeScreen);
         image.GetComponent<Image>().sprite = sprite;
         var spawnedTooltip = Instantiate(tooltip, image.transform);
-        //spawnedTooltip.GetComponent<TooltipScript>().ShowTooltip("test");
+        var pos = spawnedTooltip.transform.position;
+        spawnedTooltip.transform.position = new Vector3(pos.x + 1, pos.y - .5f , pos.z);
+        spawnedTooltip.GetComponent<TooltipScript>().ShowTooltip(stats);
     }
 
     private void PauseGame()

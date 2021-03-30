@@ -46,4 +46,9 @@ public class Pickables : MonoBehaviour
     {
         return data.note;
     }
+
+    public string GetStats()
+    {
+        return data.statsForUpgrades;
+    }
 }

@@ -25,6 +25,7 @@ namespace Player
 
             var go = other.gameObject;
             var pickables = go.GetComponent<Pickables>();
+            var sprite = go.GetComponent<SpriteRenderer>().sprite;
 
             if (pickables.HasFuel)
             {
@@ -35,12 +36,12 @@ namespace Player
             if (pickables.RocketBoots && !_playerMovement.HasRocketBoots)
             {
                 _playerMovement.EquipRocketBoots();
-                _canvasManager.AddNewUpgrade(go.GetComponent<SpriteRenderer>().sprite);
+                _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
             }
             if (pickables.Gun && !_playerGun.HasGun)
             {
                 _playerGun.EquipGun();
-                _canvasManager.AddNewUpgrade(go.GetComponent<SpriteRenderer>().sprite);
+                _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
             }
             if (pickables.IsNote)
             {
@@ -48,7 +49,7 @@ namespace Player
                 return;
             }
             go.SetActive(false);
-            _canvasManager.AddNewImage(go.GetComponent<SpriteRenderer>().sprite);
+            _canvasManager.AddNewImage(sprite);
         }
 
         private void OnTriggerStay2D(Collider2D other)
