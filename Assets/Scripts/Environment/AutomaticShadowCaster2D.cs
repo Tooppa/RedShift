@@ -11,9 +11,9 @@ using UnityEngine.Experimental.Rendering.Universal;
 /// </summary>
 public class AutomaticShadowCaster2D : MonoBehaviour
 {
-    [SerializeField] private bool generateSelfShadows;
+    public bool generateSelfShadows = true;
     
-    private void Start()
+    private void Awake()
     {
         // Find a supported collider type
         if (TryGetComponent(out PolygonCollider2D polygonCollider2D))
@@ -27,8 +27,10 @@ public class AutomaticShadowCaster2D : MonoBehaviour
             }
             
             var shadowCaster2D = gameObject.AddComponent<ShadowCaster2D>();
-
+            
             shadowCaster2D.selfShadows = generateSelfShadows;
+            
+            // Shadow caster 2D has horrible support. Use extensions to define the shape
             shadowCaster2D.SetPath(pointsInPath3D.ToArray());
             shadowCaster2D.SetPathHash(Random.Range(int.MinValue, int.MaxValue)); // Hash set initiates internal recalculation of shadows
         }
@@ -55,6 +57,8 @@ public class AutomaticShadowCaster2D : MonoBehaviour
                 var shadowCaster2D = newGameObject.gameObject.AddComponent<ShadowCaster2D>();
                 
                 shadowCaster2D.selfShadows = generateSelfShadows;
+                
+                // Shadow caster 2D has horrible support. Use extensions to define the shape
                 shadowCaster2D.SetPath(pointsInPath3D.ToArray());
                 shadowCaster2D.SetPathHash(Random.Range(int.MinValue,
                     int.MaxValue)); // The hashing function GetShapePathHash could be copied from the LightUtility class
@@ -64,5 +68,6 @@ public class AutomaticShadowCaster2D : MonoBehaviour
             }
         }
     }
-        
+
+    public ShadowCaster2D GeneratedShadowCaster2D => this.gameObject.GetComponent<ShadowCaster2D>();
 }
