@@ -1,5 +1,3 @@
-#if UNITY_EDITOR
- 
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -51,7 +49,6 @@ public static class ShadowCaster2DExtensions
 /// </remarks>
 public class ShadowCaster2DGenerator
 {
-    [UnityEditor.MenuItem("Generate Shadow Casters", menuItem = "Tools/Generate Shadow Casters")]
     public static void GenerateShadowCasters()
     {
         CompositeCollider2D[] colliders = GameObject.FindObjectsOfType<CompositeCollider2D>();
@@ -107,9 +104,6 @@ public class ShadowCaster2DGenerator
             pointsInPath3D.Clear();
         }
        
-        UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
     }
  
 }
- 
-#endif
