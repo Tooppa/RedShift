@@ -5,6 +5,7 @@ namespace Player
     public class PlayerGun : MonoBehaviour
     {
         private ParticleSystem _gun;
+        private bool _hasGun = false;
 
         public float cooldown;
         public float counter;
@@ -17,7 +18,7 @@ namespace Player
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.R) && _gun.gameObject.activeSelf && counter > cooldown)
+            if (Input.GetKeyDown(KeyCode.R) && _gun.gameObject.activeSelf && counter > cooldown && _hasGun)
             {
                 CameraEffects.Instance.ShakeCamera(1.5f, .1f);
                 _gun.Play();
@@ -27,6 +28,11 @@ namespace Player
                 _gun.Stop();
 
             counter += Time.deltaTime;
+        }
+
+        public void EquipGun()
+        {
+            _hasGun = true;
         }
     }
 }

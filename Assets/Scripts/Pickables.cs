@@ -11,8 +11,8 @@ public class Pickables : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     public bool IsNote { private set; get; }
     public bool HasFuel { private set; get; }
-    
     public bool RocketBoots { private set; get; }
+    public bool Gun { private set; get; }
     private GameObject _interact;
     [HideInInspector]public int fuel;
 
@@ -23,6 +23,7 @@ public class Pickables : MonoBehaviour
         IsNote = data.note.Length > 0;
         HasFuel = data.fuel > 0;
         RocketBoots = data.rocketBoots;
+        Gun = data.gun;
         fuel = data.fuel;
     }
 

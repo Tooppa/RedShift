@@ -12,4 +12,5 @@ public class PickableObjects : ScriptableObject
     public GameObject floatingText;
     public int fuel;
     public bool rocketBoots;
+    public bool gun;
 }

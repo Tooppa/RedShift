@@ -29,9 +29,9 @@ namespace Player
                 _canvasManager.SetFuel(_fuel);
             }
             if (pickables.RocketBoots)
-            {
                 gameObject.GetComponent<PlayerMovement>().EquipRocketBoots();
-            }
+            if (pickables.Gun)
+                gameObject.GetComponent<PlayerGun>().EquipGun();
             if (pickables.IsNote)
             {
                 pickables.ShowInteract();
