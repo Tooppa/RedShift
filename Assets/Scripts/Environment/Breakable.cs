@@ -14,8 +14,8 @@ public class Breakable : MonoBehaviour
         {
             var child = transform.GetChild(i);
             
-            // Only add the child if it has a polygon collider and a sprite mask
-            if (child.TryGetComponent(out PolygonCollider2D _) && child.TryGetComponent(out SpriteRenderer _)) 
+            // Only add the child if it has a Piece-type component
+            if (child.TryGetComponent(out Piece _)) 
                 _pieces.Add(child);
         }
     }
@@ -30,16 +30,7 @@ public class Breakable : MonoBehaviour
 
         foreach (var piece in _pieces)
         {
-            // Enable the collider, rigidbody and the sprite renderer of the new broken piece
-            
-            var polygonCollider2D = piece.GetComponent<PolygonCollider2D>();
-            polygonCollider2D.enabled = true;
-
-            piece.GetComponent<Rigidbody2D>().isKinematic = false;
-
-            piece.GetComponent<SpriteRenderer>().enabled = true;
-            
-            piece.gameObject.AddComponent<AutomaticShadowCaster2D>();
+            piece.GetComponent<Piece>().Enable();
         }
         
         if(destroyOriginalObject)
