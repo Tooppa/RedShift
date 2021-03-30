@@ -18,3 +18,5 @@ MonoBehaviour:
   floatingText: {fileID: 0}
   fuel: 0
   rocketBoots: 1
+  gun: 0
+  statsForUpgrades: "Allows player to \ndash 4 blocks with \n0.6/s cooldown."

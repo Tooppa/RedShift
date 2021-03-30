@@ -10,11 +10,13 @@ public class CanvasManager : MonoBehaviour
 {
     public static CanvasManager Instance { get; private set; }
     public GameObject screenImage;
+    public GameObject noteImage;
+    public GameObject tooltip;
     public GameObject hud;
     public GameObject noteScreen;
-    public GameObject noteImage;
     public Transform storedNotesScreen;
     public Transform pickableScreen;
+    public Transform upgradeScreen;
     public Slider healthSlider;
     public Slider fuelSlider;
 
@@ -52,6 +54,15 @@ public class CanvasManager : MonoBehaviour
     {
         var obj = Instantiate(screenImage, pickableScreen);
         obj.GetComponent<Image>().sprite = sprite;
+    }
+    public void AddNewUpgrade(Sprite sprite, string stats)
+    {
+        var image = Instantiate(screenImage, upgradeScreen);
+        image.GetComponent<Image>().sprite = sprite;
+        var spawnedTooltip = Instantiate(tooltip, image.transform);
+        var pos = spawnedTooltip.transform.position;
+        spawnedTooltip.transform.position = new Vector3(pos.x + 1, pos.y - .5f , pos.z);
+        spawnedTooltip.GetComponent<TooltipScript>().ShowTooltip(stats);
     }
 
     private void PauseGame()

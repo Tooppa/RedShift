@@ -16,32 +16,67 @@ namespace Player
         private readonly Vector2 _groundCheckOffset = new Vector2(0,-0.5f);
 
         private bool _isGrounded = false;
-        private bool _hasRocketBoots = false;
+        public bool HasRocketBoots { private set; get; }
         private bool _rocketBootsCooldown = false;
+        private bool runningSoundOnCooldown;
+        private bool isJumping = false;
+        private bool musicPlaying = false;
         private Animator _animator;
         private const float GroundedRadius = 0.3f;
 
         private GameObject _gun;
+
+        private GameObject _audioController;
+
+        public float runningSoundCooldownTime;
 
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _animator = GetComponentInChildren<Animator>();
             _gun = GameObject.Find("Gun");
+            HasRocketBoots = false;
+        }
+
+        private void Start()
+        {
+            _audioController = GameObject.Find("AudioController");
         }
 
         private void Update()
         {
             CheckIsGrounded();
-            Movement();
+            if(Time.timeScale == 1) Movement();
+
+            if (Input.GetKeyDown(KeyCode.G) && !musicPlaying)
+            {
+                _audioController.GetComponent<SFX>().PlayCalmAmbience();
+                musicPlaying = true;
+            }
+            else if(Input.GetKeyDown(KeyCode.G) && musicPlaying)
+            {
+                _audioController.GetComponent<SFX>().calmAmbience.Pause();
+                musicPlaying = false;
+            }
         }
         private void CheckIsGrounded()
         {
-            _isGrounded = Physics2D.OverlapCircle((Vector2) transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
+            _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
+            if (_isGrounded && isJumping)
+            {
+                _audioController.GetComponent<SFX>().PlayLanding();
+
+                isJumping = false;
+            }
         }
-    
+
         private void Movement()
         {
+            if (!_isGrounded)
+            {
+                isJumping = true;
+            }
+
             var inputDirection = Input.GetAxisRaw("Horizontal");
 
             if (inputDirection != 0)
@@ -50,6 +85,12 @@ namespace Player
                 _gun.transform.localScale = new Vector3(inputDirection, 1, 1);
                 CameraEffects.Instance.ChangeOffset(.3f ,inputDirection * 2);
                 _animator.SetBool("Walking", true);
+
+                if(_isGrounded && !runningSoundOnCooldown)
+                {
+                    _audioController.GetComponent<SFX>().PlayRunning();
+                    StartCoroutine(RunningSoundCooldown());
+                }
             }
             else
             {
@@ -61,11 +102,14 @@ namespace Player
 
             if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
             {
+                
                 _animator.SetTrigger("TakeOff");
                 _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+
+                isJumping = false;
             }
 
-            if (_hasRocketBoots && Input.GetKeyDown(KeyCode.LeftShift) && !_rocketBootsCooldown)
+            if (HasRocketBoots && Input.GetKeyDown(KeyCode.LeftShift) && !_rocketBootsCooldown)
             {
                 StartCoroutine(Dash());
             }
@@ -75,7 +119,7 @@ namespace Player
 
         public void EquipRocketBoots()
         {
-            _hasRocketBoots = true;
+            HasRocketBoots = true;
         }
 
         private IEnumerator Dash(){
@@ -94,6 +138,13 @@ namespace Player
             _rocketBootsCooldown = true;
             yield return new WaitForSeconds(cooldownTime);
             _rocketBootsCooldown = false;
+        }
+        private IEnumerator RunningSoundCooldown()
+        {
+            //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
+            runningSoundOnCooldown = true;
+            yield return new WaitForSeconds(runningSoundCooldownTime);
+            runningSoundOnCooldown = false;
         }
     }
 }
