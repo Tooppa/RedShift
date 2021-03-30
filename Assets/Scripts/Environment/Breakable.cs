@@ -1,9 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class Breakable : MonoBehaviour
 {
     [Tooltip("Check this if this script should be responsible of destroying the original object after breaking.")]
@@ -13,9 +10,7 @@ public class Breakable : MonoBehaviour
     [SerializeField] private bool generateSelfShadowsForPieces;
 
     private readonly List<Transform> _pieces = new List<Transform>(); // All children that have a PolygonCollider
-
-    private Sprite _intactObjectSprite;
-
+    
     // Maximum value of render layers id's. Used to calculate a unique render layer on the fly for masking
     private const int MAXRenderLayer = 32767; 
     
@@ -26,11 +21,9 @@ public class Breakable : MonoBehaviour
             var child = transform.GetChild(i);
             
             // Only add the child if it has a polygon collider and a sprite mask
-            if (child.TryGetComponent(out PolygonCollider2D _) && child.TryGetComponent(out SpriteMask _)) 
+            if (child.TryGetComponent(out PolygonCollider2D _) && child.TryGetComponent(out SpriteRenderer _)) 
                 _pieces.Add(child);
         }
-
-        _intactObjectSprite = GetComponent<SpriteRenderer>().sprite;
     }
     
     /// <summary>
@@ -43,32 +36,15 @@ public class Breakable : MonoBehaviour
 
         foreach (var piece in _pieces)
         {
-            // Enable the collider of the new broken piece
+            // Enable the collider, rigidbody and the sprite renderer of the new broken piece
+            
             var polygonCollider2D = piece.GetComponent<PolygonCollider2D>();
             polygonCollider2D.enabled = true;
 
-            // Enable the rigidbody of the piece
             piece.GetComponent<Rigidbody2D>().isKinematic = false;
-            
-            // Create a new sprite renderer
-            var spriteRenderer = piece.gameObject.AddComponent<SpriteRenderer>();
-            spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
-            spriteRenderer.sprite = _intactObjectSprite;
-            
-            /*
-             The piece actually has the whole original object as the sprite. It is just masked with the broken piece to 
-             achieve the illusion of being broken. However, the rendering layer has to be unique. Otherwise pieces 
-             with overlapping sprites could render each other.
-            */
-            
-            int uniqueRenderingLayer = Random.Range(0, MAXRenderLayer);
-            spriteRenderer.sortingOrder = uniqueRenderingLayer;
-            
-            var spriteMask = piece.gameObject.GetComponent<SpriteMask>();
-            spriteMask.isCustomRangeActive = true; // Custom range is used to render every piece independently
-            spriteMask.frontSortingOrder = uniqueRenderingLayer;
-            spriteMask.backSortingOrder = uniqueRenderingLayer - 1;
 
+            piece.GetComponent<SpriteRenderer>().enabled = true;
+            
             piece.gameObject.AddComponent<AutomaticShadowCaster2D>();
         }
         
