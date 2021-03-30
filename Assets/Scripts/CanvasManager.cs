@@ -10,9 +10,10 @@ public class CanvasManager : MonoBehaviour
 {
     public static CanvasManager Instance { get; private set; }
     public GameObject screenImage;
+    public GameObject noteImage;
+    public GameObject tooltip;
     public GameObject hud;
     public GameObject noteScreen;
-    public GameObject noteImage;
     public Transform storedNotesScreen;
     public Transform pickableScreen;
     public Transform upgradeScreen;
