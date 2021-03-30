@@ -6,13 +6,7 @@ public class Breakable : MonoBehaviour
     [Tooltip("Check this if this script should be responsible of destroying the original object after breaking.")]
     [SerializeField] private bool destroyOriginalObject;
     
-    [Tooltip("Pieces' Shadow casters are generated on the fly. Check this if self shadows should be included along with the default options.")]
-    [SerializeField] private bool generateSelfShadowsForPieces;
-
     private readonly List<Transform> _pieces = new List<Transform>(); // All children that have a PolygonCollider
-    
-    // Maximum value of render layers id's. Used to calculate a unique render layer on the fly for masking
-    private const int MAXRenderLayer = 32767; 
     
     private void Start()
     {
