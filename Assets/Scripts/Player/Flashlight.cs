@@ -44,6 +44,7 @@ public class Flashlight : MonoBehaviour
         _audioController = GameObject.Find("AudioController");
         _flickerTime = 2;
         _intensity = _light2D.intensity;
+        PointFlash(0, 1);
     }
 
     // Update is called once per frame
@@ -62,45 +63,15 @@ public class Flashlight : MonoBehaviour
 
         var horizontalDirection = Input.GetAxisRaw("Horizontal");
         var verticalDirection = Input.GetAxisRaw("Vertical");
+        
+        if (verticalDirection != 0 || horizontalDirection != 0)
+            PointFlash(verticalDirection, horizontalDirection);
 
-        // Flashlight up and down
-        if (verticalDirection != 0)
-        {
-            switch (verticalDirection)
-            {
-                case 1:
-                    transform.eulerAngles = new Vector3(0, 0, 0);
-                    _gun.transform.eulerAngles = new Vector3(0, 0, 0);
-                    break;
-                case -1:
-                    transform.eulerAngles = new Vector3(0, 0, 180);
-                    _gun.transform.eulerAngles = new Vector3(0, 0, 180);
-                    break;
-            }
-        }
-
-        // Flashlight left and right
-        else if (horizontalDirection != 0)
-        {
-            switch (horizontalDirection)
-            {
-                case 1:
-                    transform.eulerAngles = new Vector3(0, 0, -90);
-                    _gun.transform.eulerAngles = new Vector3(0, 0, -90);
-                    break;
-                case -1:
-                    transform.eulerAngles = new Vector3(0, 0, 90);
-                    _gun.transform.eulerAngles = new Vector3(0, 0, 90);
-                    break;
-            }
-        }
-
-        if (_light2D.enabled)
-        {
-            if (_flickerTimer >= _flickerTime)
-                StartCoroutine(Flicker());
-            _flickerTimer += Time.deltaTime;
-        }
+        if (!_light2D.enabled) return;
+        
+        if (_flickerTimer >= _flickerTime)
+            StartCoroutine(Flicker());
+        _flickerTimer += Time.deltaTime;
 
         // FlashLight rotation temporarily (or permanently) disabled
         // Rotate the flashlight around the user's mouse
@@ -115,5 +86,15 @@ public class Flashlight : MonoBehaviour
         // Rotate the flashlight by the specific angle
         transform.Rotate(Vector3.forward, angleFromFlashLightToMouse);
         */
+    }
+
+    private void PointFlash(float vertical, float horizontal)
+    {
+        // if horizontal and vertical are both pressed or vertical is below 0
+        // and if vertical is below 0 down else up
+        // else if horizontal is pressed left or right
+        var newAngle = horizontal != 0 && vertical != 0 || vertical < 0 ? vertical < 0 ? 180 : 0 : horizontal != 0 ? -90 * horizontal : 0;
+        transform.eulerAngles = new Vector3(0, 0, newAngle);
+        _gun.transform.eulerAngles = new Vector3(0, 0, newAngle);
     }
 }
