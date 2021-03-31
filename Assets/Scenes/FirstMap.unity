@@ -187,6 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 103754528}
   - component: {fileID: 103754530}
+  - component: {fileID: 103754529}
   m_Layer: 0
   m_Name: Sapphire glow
   m_TagString: Untagged
@@ -208,6 +209,23 @@ Transform:
   m_Father: {fileID: 1002078220}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &103754529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103754527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947798f969e8db98e9c0f13d063e0a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeSpeed: 0.3
+  maxIntensity: 1
+  colors:
+  - {r: 0, g: 0.9587312, b: 1, a: 0}
+  - {r: 0.80863905, g: 0, b: 1, a: 0}
 --- !u!114 &103754530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,8 +241,8 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.645
-  m_Color: {r: 0, g: 0.83711267, b: 1, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.025498405, g: 0.027840143, b: 0.028301895, a: 1}
+  m_Intensity: 0
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
