@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player
 {
     public class PlayerGun : MonoBehaviour
     {
-        private GameObject _gun;
+        public GameObject gun;
         public bool HasGun  { private set; get; }
 
         private GameObject _audioController;
@@ -13,16 +14,20 @@ namespace Player
 
         private void Start()
         {
-            _gun = GameObject.Find("Gun");
+            gun = GameObject.Find("Gun");
             _audioController = GameObject.Find("AudioController");
         }
 
         public void Shoot()
         {
-            if (_cooldown || !HasGun || !_gun.gameObject.activeSelf) return;
+            if (_cooldown || !HasGun || !gun.gameObject.activeSelf) return;
+            
             StartCoroutine(Cooldown(1));
+            
             CameraEffects.Instance.ShakeCamera(1.5f, .1f);
-            _gun.GetComponentInChildren<ParticleSystem>().Play();
+            
+            gun.GetComponentInChildren<ParticleSystem>().Play();
+            
             _audioController.GetComponent<SFX>().PlayGunShot();
         }
         private IEnumerator Cooldown(float cooldownTime)
