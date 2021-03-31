@@ -9,13 +9,12 @@ namespace Player
         public bool HasGun  { private set; get; }
 
         private GameObject _audioController;
-        private bool _cooldown = false;
+        private bool _cooldown;
 
         private void Start()
         {
             _gun = GameObject.Find("Gun");
             _audioController = GameObject.Find("AudioController");
-            HasGun = true;
         }
 
         public void Shoot()

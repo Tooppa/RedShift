@@ -16,23 +16,26 @@ namespace Player
     
         private readonly Vector2 _groundCheckOffset = new Vector2(0,-0.5f);
 
-        private bool _isGrounded = false;
+        private bool _isGrounded;
         public bool HasRocketBoots { private set; get; }
-        private bool _rocketBootsCooldown = false;
-        private bool runningSoundOnCooldown;
-        private bool isJumping = false;
-        private bool musicPlaying = false;
+        private bool _rocketBootsCooldown;
+        private bool _runningSoundOnCooldown;
+        private bool _isJumping;
+        //private bool _musicPlaying = false;
         private Animator _animator;
         private const float GroundedRadius = 0.3f;
 
-        private Vector2 playerStartAltitude;
-        private Vector2 playerEndAltitude;
+        private Vector2 _playerStartAltitude;
+        private Vector2 _playerEndAltitude;
 
         private GameObject _gun;
 
         private SFX _audioController;
 
         public float runningSoundCooldownTime;
+        private static readonly int Walking = Animator.StringToHash("Walking");
+        private static readonly int Jumping = Animator.StringToHash("Jumping");
+        private static readonly int TakeOff = Animator.StringToHash("TakeOff");
 
         private void Awake()
         {
@@ -44,8 +47,8 @@ namespace Player
 
         private void Start()
         {
-            playerStartAltitude = transform.position;
-            _audioController = GameObject.Find("AudioController");
+            _playerStartAltitude = transform.position;
+            _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
             rocketBoots.Stop();
         }
 
@@ -71,31 +74,31 @@ namespace Player
             switch (_isGrounded)
             {
                 case false:
-                    playerEndAltitude = transform.position;
-                    isJumping = true;
+                    _playerEndAltitude = transform.position;
+                    _isJumping = true;
                     break;
-                case true when isJumping && (playerStartAltitude.y - playerEndAltitude.y) > 1:
+                case true when _isJumping && (_playerStartAltitude.y - _playerEndAltitude.y) > 1:
                     _audioController.PlayLanding();
-                    isJumping = false;
+                    _isJumping = false;
                     break;
                 default:
-                    playerStartAltitude = transform.position;
+                    _playerStartAltitude = transform.position;
                     break;
             }
         }
         
         public void Movement(Vector2 move)
         {
-            var inputDirection = move.x;
+            var inputDirection = Mathf.Round(move.x);
             if (inputDirection != 0)
             {
                 transform.localScale = new Vector3(inputDirection, 1, 1);
                 _gun.transform.localScale = new Vector3(inputDirection, 1, 1);
                 CameraEffects.Instance.ChangeOffset(.3f ,inputDirection * 2);
-                _animator.SetBool("Walking", true);
+                _animator.SetBool(Walking, true);
                 rocketBoots.gameObject.transform.localScale = new Vector3(inputDirection, 1, 1);
 
-                if (_isGrounded && !runningSoundOnCooldown)
+                if (_isGrounded && !_runningSoundOnCooldown)
                 {
                     _audioController.PlayRunning();
                     StartCoroutine(RunningSoundCooldown());
@@ -103,19 +106,19 @@ namespace Player
             }
             else
             {
-                _animator.SetBool("Walking", false);
+                _animator.SetBool(Walking, false);
             }
 
             if (Mathf.Abs(_rigidbody2D.velocity.x) < maxSpeed)
                 _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
 
-            _animator.SetBool("Jumping", !_isGrounded);
+            _animator.SetBool(Jumping, !_isGrounded);
         }
 
         public void Jump()
         {
             if (!_isGrounded || Time.timeScale != 1) return;
-            _animator.SetTrigger("TakeOff");
+            _animator.SetTrigger(TakeOff);
             _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
         }
 
@@ -151,9 +154,9 @@ namespace Player
         private IEnumerator RunningSoundCooldown()
         {
             //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
-            runningSoundOnCooldown = true;
+            _runningSoundOnCooldown = true;
             yield return new WaitForSeconds(runningSoundCooldownTime);
-            runningSoundOnCooldown = false;
+            _runningSoundOnCooldown = false;
         }
     }
 }

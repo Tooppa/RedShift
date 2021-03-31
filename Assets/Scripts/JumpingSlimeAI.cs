@@ -30,7 +30,7 @@ public class JumpingSlimeAI : MonoBehaviour
 
     Path path;
     int currentWaypoint = 0;
-    bool reachedEndOfPath = false;
+    //bool reachedEndOfPath = false;
 
     Seeker seeker;
     Rigidbody2D rb;
@@ -83,7 +83,7 @@ public class JumpingSlimeAI : MonoBehaviour
     {
         if (path == null)
             return;
-
+/*
         if (currentWaypoint >= path.vectorPath.Count)
         {
             reachedEndOfPath = true;
@@ -93,7 +93,7 @@ public class JumpingSlimeAI : MonoBehaviour
         {
             reachedEndOfPath = false;
         }
-
+*/
         float distanceToPlayer = Vector2.Distance(transform.position, target.transform.position);
         if (!isTargetInRange && (distanceToPlayer <= -spawnRadius || distanceToPlayer >= spawnRadius))
         {

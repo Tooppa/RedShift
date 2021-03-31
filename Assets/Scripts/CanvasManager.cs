@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
@@ -63,7 +59,7 @@ public class CanvasManager : MonoBehaviour
         spawnedTooltip.GetComponent<TooltipScript>().ShowTooltip(stats);
     }
 
-    public void PauseGame()
+    private void PauseGame()
     {
         Time.timeScale = 0;
     }
