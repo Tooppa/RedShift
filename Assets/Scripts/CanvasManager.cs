@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
@@ -30,10 +26,8 @@ public class CanvasManager : MonoBehaviour
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
     }
 
-    private void Update()
+    public void SetHudActive()
     {
-        if (!Input.GetKeyDown(KeyCode.Tab)) return;
-        
         hud.SetActive(!hud.activeSelf);
         if(hud.activeSelf)
             PauseGame();
@@ -65,7 +59,7 @@ public class CanvasManager : MonoBehaviour
         spawnedTooltip.GetComponent<TooltipScript>().ShowTooltip(stats);
     }
 
-    public void PauseGame()
+    private void PauseGame()
     {
         Time.timeScale = 0;
     }

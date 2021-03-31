@@ -28,7 +28,7 @@ public class FlyingEnemy : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround;
 
     Path path;
-    int currentWaypoint = 0;
+    int currentWaypoint = 0; 
     bool reachedEndOfPath = false;
 
     Seeker seeker;
@@ -82,9 +82,9 @@ public class FlyingEnemy : MonoBehaviour
         {
             reachedEndOfPath = false;
         }
-
+        
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
+        Vector2 force = direction * (speed * Time.deltaTime);
 
         //Adds forward force to the enemy's jump
         if (!isGrounded)
