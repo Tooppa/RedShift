@@ -147,7 +147,7 @@ MonoBehaviour:
   nextWaypointDistance: 1
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   enemyGFX: {fileID: 0}
 --- !u!1001 &7676924853889834297
 PrefabInstance:
