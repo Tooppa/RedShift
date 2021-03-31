@@ -124,7 +124,7 @@ namespace Player
 
         public void Dash()
         {
-            if (HasRocketBoots && _rocketBootsCooldown && Time.timeScale == 1) StartCoroutine(IEDash());
+            if (HasRocketBoots && !_rocketBootsCooldown && Time.timeScale == 1) StartCoroutine(IEDash());
         }
 
         public void EquipRocketBoots()

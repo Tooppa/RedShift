@@ -1,13 +1,13 @@
-using System;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerMechanics : MonoBehaviour
     {
-        private int _fuel = 0;
+        private int _fuel;
         private int _health = 10;
-        private bool _pickableRange = false;
+        private bool _pickableRange;
+        private GameObject _pickableNote;
         private CanvasManager _canvasManager;
         private PlayerMovement _playerMovement;
         private PlayerGun _playerGun;
@@ -33,6 +33,7 @@ namespace Player
             _playerControls.Surface.OpenHud.started += _ => _canvasManager.SetHudActive();
             _playerControls.Surface.Shoot.started += _ => _playerGun.Shoot();
             _playerControls.Surface.Flashlight.started += _ => _flashlight.SwitchLight();
+            _playerControls.Surface.Interact.started += _ => ReadNote();
         }
 
         private void Update()
@@ -85,22 +86,30 @@ namespace Player
         private void OnTriggerStay2D(Collider2D other)
         {
             if (!other.CompareTag("Pickable")) return;
-            var go = other.gameObject;
-            var pickables = go.GetComponent<Pickables>();
-            if (!pickables.IsNote || !Input.GetKey(KeyCode.E)) return;
-            var sprite = go.GetComponent<SpriteRenderer>().sprite;
-            _canvasManager.ShowText(pickables.getNote());
-            SpecialPickups(pickables, sprite);
-            _canvasManager.AddNewNote(go);
-            other.gameObject.SetActive(false);
+            if (!other.gameObject.GetComponent<Pickables>().IsNote) return;
+            _pickableRange = true;
+            _pickableNote = other.gameObject;
+        }
+
+        public void ReadNote()
+        {
+            var note = _pickableNote.GetComponent<Pickables>();
+            if (!_pickableRange || !note.IsNote) return;
+            
+            var sprite = _pickableNote.GetComponent<SpriteRenderer>().sprite;
+            _canvasManager.ShowText(note.getNote());
+            SpecialPickups(note, sprite);
+            _canvasManager.AddNewNote(_pickableNote);
+            _pickableNote.gameObject.SetActive(false);
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             if (!other.CompareTag("Pickable")) return;
             var pickables = other.gameObject.GetComponent<Pickables>();
-            if (pickables.IsNote)
-                pickables.HideInteract();
+            if (!pickables.IsNote) return;
+            pickables.HideInteract();
+            _pickableRange = false;
         }
         private void OnEnable()
         {

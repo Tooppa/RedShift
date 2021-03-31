@@ -28,8 +28,8 @@ public class FlyingEnemy : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround;
 
     Path path;
-    int currentWaypoint = 0;
-    //bool reachedEndOfPath = false;
+    int currentWaypoint = 0; 
+    bool reachedEndOfPath = false;
 
     Seeker seeker;
     Rigidbody2D rb;
@@ -72,7 +72,7 @@ public class FlyingEnemy : MonoBehaviour
     {
         if (path == null)
             return;
-/*
+
         if (currentWaypoint >= path.vectorPath.Count)
         {
             reachedEndOfPath = true;
@@ -82,7 +82,7 @@ public class FlyingEnemy : MonoBehaviour
         {
             reachedEndOfPath = false;
         }
-*/
+        
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * (speed * Time.deltaTime);
 
