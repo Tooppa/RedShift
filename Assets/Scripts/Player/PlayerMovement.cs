@@ -24,6 +24,9 @@ namespace Player
         private Animator _animator;
         private const float GroundedRadius = 0.3f;
 
+        private Vector2 playerStartAltitude;
+        private Vector2 playerEndAltitude;
+
         private GameObject _gun;
 
         private GameObject _audioController;
@@ -40,6 +43,7 @@ namespace Player
 
         private void Start()
         {
+            playerStartAltitude = transform.position;
             _audioController = GameObject.Find("AudioController");
         }
 
@@ -58,24 +62,36 @@ namespace Player
                 _audioController.GetComponent<SFX>().calmAmbience.Pause();
                 musicPlaying = false;
             }
+
+            if (!_isGrounded)
+            {
+                playerEndAltitude = transform.position;
+                isJumping = true;
+            }
+
+            if (_isGrounded && isJumping && (playerStartAltitude.y - playerEndAltitude.y) > 1)
+            {
+                _audioController.GetComponent<SFX>().PlayLanding();
+                isJumping = false;
+            }
+
+            if (_isGrounded)
+            {
+                playerStartAltitude = transform.position;
+            }
         }
         private void CheckIsGrounded()
         {
             _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
-            if (_isGrounded && isJumping)
-            {
-                _audioController.GetComponent<SFX>().PlayLanding();
 
-                isJumping = false;
-            }
         }
 
         private void Movement()
         {
-            if (!_isGrounded)
-            {
-                isJumping = true;
-            }
+            //if (!_isGrounded)
+            //{
+            //    isJumping = true;
+            //}
 
             var inputDirection = Input.GetAxisRaw("Horizontal");
 
@@ -101,12 +117,9 @@ namespace Player
                 _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
 
             if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
-            {
-                
+            {               
                 _animator.SetTrigger("TakeOff");
                 _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-
-                isJumping = false;
             }
 
             if (HasRocketBoots && Input.GetKeyDown(KeyCode.LeftShift) && !_rocketBootsCooldown)

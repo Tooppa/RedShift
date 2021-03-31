@@ -59,6 +59,7 @@ namespace Player
 
         private void OnTriggerStay2D(Collider2D other)
         {
+            if (!other.CompareTag("Pickable")) return;
             var go = other.gameObject;
             var pickables = go.GetComponent<Pickables>();
             if (!pickables.IsNote || !Input.GetKey(KeyCode.E)) return;
@@ -71,6 +72,7 @@ namespace Player
 
         private void OnTriggerExit2D(Collider2D other)
         {
+            if (!other.CompareTag("Pickable")) return;
             var pickables = other.gameObject.GetComponent<Pickables>();
             if (pickables.IsNote)
                 pickables.HideInteract();
