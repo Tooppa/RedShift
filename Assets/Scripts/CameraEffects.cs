@@ -22,6 +22,11 @@ public class CameraEffects : MonoBehaviour
         _transposer = _cam.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
+    private void Start()
+    {
+        _transposer.m_TrackedObjectOffset = Vector3.zero;
+    }
+
     public void ShakeCamera(float intensity, float time)
     {
         StartCoroutine(SmoothShake(intensity, time));
