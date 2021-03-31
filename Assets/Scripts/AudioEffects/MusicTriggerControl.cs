@@ -91,6 +91,7 @@ public class MusicTriggerControl : MonoBehaviour
 
                 case "Intense":
                     _audioController.GetComponent<SFX>().calmAmbience.Stop();
+                    _audioController.GetComponent<SFX>().intenseMusic.volume = 0.35f;
                     _audioController.GetComponent<SFX>().PlayIntenseMusic();
                     if (destroyOnTrigger)
                         Destroy(gameObject);
