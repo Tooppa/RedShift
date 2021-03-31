@@ -65,7 +65,7 @@ public class CanvasManager : MonoBehaviour
         spawnedTooltip.GetComponent<TooltipScript>().ShowTooltip(stats);
     }
 
-    private void PauseGame()
+    public void PauseGame()
     {
         Time.timeScale = 0;
     }
