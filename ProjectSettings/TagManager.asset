@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Pickable
   - Note
+  - SoundTrigger
   layers:
   - Default
   - TransparentFX
