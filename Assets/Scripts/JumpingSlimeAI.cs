@@ -32,8 +32,6 @@ public class JumpingSlimeAI : MonoBehaviour
     int currentWaypoint = 0;
     bool reachedEndOfPath = false;
 
-    public Transform enemyGFX;
-
     Seeker seeker;
     Rigidbody2D rb;
 
@@ -120,11 +118,11 @@ public class JumpingSlimeAI : MonoBehaviour
 
         if (force.x >= 0.01f)
         {
-            enemyGFX.localScale = new Vector3(1f, 1f, 1f);
+            transform.localScale = new Vector3(1f, 1f, 1f);
         }
         else if (force.x <= -0.01f)
         {
-            enemyGFX.localScale = new Vector3(-1f, 1f, 1f);
+            transform.localScale = new Vector3(-1f, 1f, 1f);
         }
 
         //Checks if player is out of enemyObject's range. If out of range, enemy stops moving.
