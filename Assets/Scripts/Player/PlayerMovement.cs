@@ -102,8 +102,9 @@ namespace Player
                 _gun.transform.localScale = new Vector3(inputDirection, 1, 1);
                 CameraEffects.Instance.ChangeOffset(.3f ,inputDirection * 2);
                 _animator.SetBool("Walking", true);
+                rocketBoots.gameObject.transform.localScale = new Vector3(inputDirection, 1, 1);
 
-                if(_isGrounded && !runningSoundOnCooldown)
+                if (_isGrounded && !runningSoundOnCooldown)
                 {
                     _audioController.GetComponent<SFX>().PlayRunning();
                     StartCoroutine(RunningSoundCooldown());
