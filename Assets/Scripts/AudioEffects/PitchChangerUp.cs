@@ -6,8 +6,9 @@ public class PitchChangerUp : MonoBehaviour
 {
     private GameObject _audioController;
     private GameObject player;
+    private GameObject pitchChangerDown;
 
-    private bool upIsTriggered = false;
+    public bool upIsTriggered = false;
 
     public float startingPitch = 1;
     public float endingPitch = 0.35f;
@@ -17,16 +18,18 @@ public class PitchChangerUp : MonoBehaviour
     {
         _audioController = GameObject.Find("AudioController");
         player = GameObject.Find("Player");
+        pitchChangerDown = GameObject.Find("WindPitchChangerDown");
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         if (upIsTriggered)
         {
+
             _audioController.GetComponent<SFX>().wind.pitch += Time.deltaTime * startingPitch / timeToDecrease;
         }
-        if (_audioController.GetComponent<SFX>().wind.pitch >= startingPitch - 0.02)
+        if (upIsTriggered && _audioController.GetComponent<SFX>().wind.pitch >= startingPitch - 0.02)
         {
             upIsTriggered = false;
             _audioController.GetComponent<SFX>().wind.pitch = 1;
@@ -35,8 +38,11 @@ public class PitchChangerUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject == player && _audioController.GetComponent<SFX>().wind.pitch == endingPitch)
+        if (other.gameObject == player && _audioController.GetComponent<SFX>().wind.pitch >= endingPitch)
         {
+            if (pitchChangerDown.GetComponent<PitchChangerDown>().downIsTriggered)
+                pitchChangerDown.GetComponent<PitchChangerDown>().downIsTriggered = false;
+
             Debug.Log("Up Is Triggered");
             upIsTriggered = true;
         }
