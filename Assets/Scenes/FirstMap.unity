@@ -30759,7 +30759,7 @@ GameObject:
   - component: {fileID: 1393643067}
   - component: {fileID: 1393643070}
   - component: {fileID: 1393643069}
-  - component: {fileID: 1393643068}
+  - component: {fileID: 1393643071}
   m_Layer: 0
   m_Name: WindPitchChangerUp
   m_TagString: SoundTrigger
@@ -30781,21 +30781,6 @@ Transform:
   m_Father: {fileID: 541776000}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1393643068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393643066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33d02d46a46198a41947f7fc56df3b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingPitch: 1
-  endingPitch: 0.35
-  timeToDecrease: 5
 --- !u!61 &1393643069
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30873,6 +30858,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1393643071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393643066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 835c8745fc027d348bc76869b27e206a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingPitch: 1
+  endingPitch: 0.35
+  timeToDecrease: 5
 --- !u!1001 &1419975955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87839,14 +87839,14 @@ GameObject:
   - component: {fileID: 1804119581}
   - component: {fileID: 1804119583}
   - component: {fileID: 1804119582}
-  - component: {fileID: 1804119584}
+  - component: {fileID: 1804119585}
   m_Layer: 0
   m_Name: WindPitchChangerDown
-  m_TagString: Untagged
+  m_TagString: SoundTrigger
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1804119581
 Transform:
   m_ObjectHideFlags: 0
@@ -87938,7 +87938,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1804119584
+--- !u!114 &1804119585
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87947,7 +87947,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1804119580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33d02d46a46198a41947f7fc56df3b7c, type: 3}
+  m_Script: {fileID: 11500000, guid: a4bd83870522c774090b907fae9d27d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startingPitch: 1
