@@ -33,7 +33,7 @@ namespace Player
             _playerControls.Surface.Dash.started += _ => _playerMovement.Dash();
             _playerControls.Surface.OpenHud.started += _ => _canvasManager.SetHudActive();
             _playerControls.Surface.Shoot.started += _ => _playerGun.Shoot();
-            _playerControls.Surface.Flashlight.started += _ => _flashlight.SwitchLight();
+            _playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
             _playerControls.Surface.Interact.started += _ => ReadNote();
         }
 
@@ -47,6 +47,15 @@ namespace Player
             
             if(move.x != 0 || move.y != 0)
                PointEquipment(move);
+        }
+
+        // Switch between:
+        // Stronger flashlight and no gun
+        // Weaker flashlight and gun
+        private void SwitchEquipment()
+        {
+            _flashlight.SwitchLight();
+            _playerGun.gun.SetActive(!_playerGun.gun.activeInHierarchy);
         }
         
         private void PointEquipment(Vector2 move)
