@@ -44,31 +44,14 @@ public class Flashlight : MonoBehaviour
         _audioController = GameObject.Find("AudioController");
         _flickerTime = 2;
         _intensity = _light2D.intensity;
-        PointFlash(0, 1);
+        PointFlash(new Vector2(1, 0));
     }
 
     // Update is called once per frame
     private void Update()
     {
-        // Enable and disable the flashlight
-        if (Input.GetKeyDown(KeyCode.F) && !_inCooldown)
-        {
-            _audioController.GetComponent<SFX>().PlayClick();
-            _light2D.enabled = !_light2D.enabled;
-            _light2D.intensity = _intensity;
-            _gun.SetActive(!_gun.activeSelf);
-
-            StartCoroutine(Cooldown());
-        }
-
-        var horizontalDirection = Input.GetAxisRaw("Horizontal");
-        var verticalDirection = Input.GetAxisRaw("Vertical");
-        
-        if (verticalDirection != 0 || horizontalDirection != 0)
-            PointFlash(verticalDirection, horizontalDirection);
-
         if (!_light2D.enabled) return;
-        
+
         if (_flickerTimer >= _flickerTime)
             StartCoroutine(Flicker());
         _flickerTimer += Time.deltaTime;
@@ -88,13 +71,26 @@ public class Flashlight : MonoBehaviour
         */
     }
 
-    private void PointFlash(float vertical, float horizontal)
+    public void PointFlash(Vector2 move)
     {
+        var horizontal = move.x;
+        var vertical = move.y;
         // if horizontal and vertical are both pressed or vertical is below 0
         // and if vertical is below 0 down else up
         // else if horizontal is pressed left or right
-        var newAngle = horizontal != 0 && vertical != 0 || vertical < 0 ? vertical < 0 ? 180 : 0 : horizontal != 0 ? -90 * horizontal : 0;
+        var newAngle = horizontal != 0 && vertical != 0 || vertical < 0 ? vertical < 0 ? 180 :
+            0 :
+            horizontal != 0 ? -90 * horizontal : 0;
         transform.eulerAngles = new Vector3(0, 0, newAngle);
         _gun.transform.eulerAngles = new Vector3(0, 0, newAngle);
+    }
+    public void SwitchLight()
+    {
+        _audioController.GetComponent<SFX>().PlayClick();
+        _light2D.enabled = !_light2D.enabled;
+        _light2D.intensity = _intensity;
+        _gun.SetActive(!_gun.activeSelf);
+
+        StartCoroutine(Cooldown());
     }
 }

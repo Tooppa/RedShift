@@ -30,10 +30,8 @@ public class CanvasManager : MonoBehaviour
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
     }
 
-    private void Update()
+    public void SetHudActive()
     {
-        if (!Input.GetKeyDown(KeyCode.Tab)) return;
-        
         hud.SetActive(!hud.activeSelf);
         if(hud.activeSelf)
             PauseGame();

@@ -11,6 +11,7 @@ namespace Player
         [SerializeField] private LayerMask whatIsGround;
         [SerializeField] private float maxSpeed;
         [SerializeField] private float rocketBootsSpeed;
+        [SerializeField] private ParticleSystem rocketBoots;
         private Rigidbody2D _rigidbody2D;
     
         private readonly Vector2 _groundCheckOffset = new Vector2(0,-0.5f);
@@ -29,7 +30,7 @@ namespace Player
 
         private GameObject _gun;
 
-        private GameObject _audioController;
+        private SFX _audioController;
 
         public float runningSoundCooldownTime;
 
@@ -44,14 +45,14 @@ namespace Player
         private void Start()
         {
             playerStartAltitude = transform.position;
-            _audioController = GameObject.Find("AudioController");
+            _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
+            rocketBoots.Stop();
         }
 
         private void Update()
         {
             CheckIsGrounded();
-            if(Time.timeScale == 1) Movement();
-
+            /* music is disabled since it used old inputs
             if (Input.GetKeyDown(KeyCode.G) && !musicPlaying)
             {
                 _audioController.GetComponent<SFX>().PlayCalmAmbience();
@@ -62,39 +63,30 @@ namespace Player
                 _audioController.GetComponent<SFX>().calmAmbience.Pause();
                 musicPlaying = false;
             }
-
-            if (!_isGrounded)
-            {
-                playerEndAltitude = transform.position;
-                isJumping = true;
-            }
-
-            if (_isGrounded && isJumping && (playerStartAltitude.y - playerEndAltitude.y) > 1)
-            {
-                _audioController.GetComponent<SFX>().PlayLanding();
-                isJumping = false;
-            }
-
-            if (_isGrounded)
-            {
-                playerStartAltitude = transform.position;
-            }
+            */
         }
         private void CheckIsGrounded()
         {
             _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
-
+            switch (_isGrounded)
+            {
+                case false:
+                    playerEndAltitude = transform.position;
+                    isJumping = true;
+                    break;
+                case true when isJumping && (playerStartAltitude.y - playerEndAltitude.y) > 1:
+                    _audioController.PlayLanding();
+                    isJumping = false;
+                    break;
+                default:
+                    playerStartAltitude = transform.position;
+                    break;
+            }
         }
-
-        private void Movement()
+        
+        public void Movement(Vector2 move)
         {
-            //if (!_isGrounded)
-            //{
-            //    isJumping = true;
-            //}
-
-            var inputDirection = Input.GetAxisRaw("Horizontal");
-
+            var inputDirection = move.x;
             if (inputDirection != 0)
             {
                 transform.localScale = new Vector3(inputDirection, 1, 1);
@@ -104,7 +96,7 @@ namespace Player
 
                 if(_isGrounded && !runningSoundOnCooldown)
                 {
-                    _audioController.GetComponent<SFX>().PlayRunning();
+                    _audioController.PlayRunning();
                     StartCoroutine(RunningSoundCooldown());
                 }
             }
@@ -116,18 +108,19 @@ namespace Player
             if (Mathf.Abs(_rigidbody2D.velocity.x) < maxSpeed)
                 _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
 
-            if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
-            {               
-                _animator.SetTrigger("TakeOff");
-                _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-            }
-
-            if (HasRocketBoots && Input.GetKeyDown(KeyCode.LeftShift) && !_rocketBootsCooldown)
-            {
-                StartCoroutine(Dash());
-            }
-
             _animator.SetBool("Jumping", !_isGrounded);
+        }
+
+        public void Jump()
+        {
+            if (!_isGrounded || Time.timeScale != 1) return;
+            _animator.SetTrigger("TakeOff");
+            _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+        }
+
+        public void Dash()
+        {
+            if (HasRocketBoots && _rocketBootsCooldown && Time.timeScale == 1) StartCoroutine(IEDash());
         }
 
         public void EquipRocketBoots()
@@ -135,15 +128,17 @@ namespace Player
             HasRocketBoots = true;
         }
 
-        private IEnumerator Dash(){
+        private IEnumerator IEDash(){
             StartCoroutine(Cooldown(.6f));
             _rigidbody2D.AddForce(Vector2.right  * (transform.localScale.x * rocketBootsSpeed), ForceMode2D.Impulse);
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0f);
             _rigidbody2D.gravityScale = .1f;
+            rocketBoots.Play();
 
             yield return new WaitForSeconds(0.2f);
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x * 0.5f, 0f);
             _rigidbody2D.gravityScale = 1;
+            rocketBoots.Stop();
         }
         private IEnumerator Cooldown(float cooldownTime)
         {

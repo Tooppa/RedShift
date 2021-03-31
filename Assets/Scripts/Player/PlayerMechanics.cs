@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Player
@@ -6,9 +7,17 @@ namespace Player
     {
         private int _fuel = 0;
         private int _health = 10;
+        private bool _pickableRange = false;
         private CanvasManager _canvasManager;
         private PlayerMovement _playerMovement;
         private PlayerGun _playerGun;
+        private PlayerControls _playerControls;
+        private Flashlight _flashlight;
+
+        private void Awake()
+        {
+            _playerControls = new PlayerControls();
+        }
 
         private void Start()
         {
@@ -17,6 +26,22 @@ namespace Player
             _canvasManager.SetHealth(_health);
             _playerMovement = gameObject.GetComponent<PlayerMovement>();
             _playerGun = gameObject.GetComponent<PlayerGun>();
+            _flashlight = gameObject.GetComponentInChildren<Flashlight>();
+            
+            _playerControls.Surface.Jump.started += _ => _playerMovement.Jump();
+            _playerControls.Surface.Dash.started += _ => _playerMovement.Dash();
+            _playerControls.Surface.OpenHud.started += _ => _canvasManager.SetHudActive();
+            _playerControls.Surface.Shoot.started += _ => _playerGun.Shoot();
+            _playerControls.Surface.Flashlight.started += _ => _flashlight.SwitchLight();
+        }
+
+        private void Update()
+        {
+            var move = _playerControls.Surface.Move.ReadValue<Vector2>();
+            if (Time.timeScale != 1) return;
+            _playerMovement.Movement(move);
+            if(move.x != 0 || move.y != 0)
+                _flashlight.PointFlash(move);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -76,6 +101,15 @@ namespace Player
             var pickables = other.gameObject.GetComponent<Pickables>();
             if (pickables.IsNote)
                 pickables.HideInteract();
+        }
+        private void OnEnable()
+        {
+            _playerControls.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _playerControls.Disable();
         }
     }
 }
