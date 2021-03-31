@@ -26,7 +26,6 @@ public class PitchChangerUp : MonoBehaviour
     {
         if (upIsTriggered)
         {
-
             _audioController.GetComponent<SFX>().wind.pitch += Time.deltaTime * startingPitch / timeToDecrease;
         }
         if (upIsTriggered && _audioController.GetComponent<SFX>().wind.pitch >= startingPitch - 0.02)
@@ -43,7 +42,6 @@ public class PitchChangerUp : MonoBehaviour
             if (pitchChangerDown.GetComponent<PitchChangerDown>().downIsTriggered)
                 pitchChangerDown.GetComponent<PitchChangerDown>().downIsTriggered = false;
 
-            Debug.Log("Up Is Triggered");
             upIsTriggered = true;
         }
     }

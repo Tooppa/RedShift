@@ -26,7 +26,6 @@ public class PitchChangerDown : MonoBehaviour
     {
         if (downIsTriggered)
         {
-
             _audioController.GetComponent<SFX>().wind.pitch -= Time.deltaTime * startingPitch / timeToDecrease;
         }
         if (downIsTriggered && _audioController.GetComponent<SFX>().wind.pitch <= endingPitch + 0.02)
@@ -38,8 +37,6 @@ public class PitchChangerDown : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
-
         if (other.gameObject == player && _audioController.GetComponent<SFX>().wind.pitch <= startingPitch)
         {
             if (pitchChangerUp.GetComponent<PitchChangerUp>().upIsTriggered == true)
