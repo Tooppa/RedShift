@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8184761996721902539}
   - component: {fileID: 5889837140530593824}
-  - component: {fileID: 380569035201422825}
+  - component: {fileID: 6631228288277313788}
+  - component: {fileID: 378110874114371513}
   m_Layer: 0
   m_Name: PitchChangerDown
   m_TagString: Untagged
@@ -58,7 +59,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &380569035201422825
+--- !u!114 &6631228288277313788
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,12 +68,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 5637954491965996242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 835c8745fc027d348bc76869b27e206a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4999baf1077463a489331b479ec7574e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
-  pitchTriggerUp: 0
+  pitchTrigger: 
+  startingPitch: 1
+  desiredPitch: 0
+  timeToDecrease: 5
+--- !u!114 &378110874114371513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5637954491965996242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4999baf1077463a489331b479ec7574e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
   pitchTrigger: Down
   startingPitch: 1
   desiredPitch: 0.35
-  timeToDecrease: 5
+  timeToDecrease: 4
