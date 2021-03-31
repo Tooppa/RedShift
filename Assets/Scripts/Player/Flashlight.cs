@@ -8,7 +8,6 @@ namespace Player
     public class Flashlight : MonoBehaviour
     {
         private Light2D _light2D;
-        private GameObject _gun;
         private GameObject _audioController;
 
         public float cooldownTime;
@@ -42,7 +41,6 @@ namespace Player
         private void Start()
         {
             _light2D = GetComponent<Light2D>();
-            _gun = GameObject.Find("Gun");
             _audioController = GameObject.Find("AudioController");
             _flickerTime = 2;
             _intensity = _light2D.intensity;
@@ -84,7 +82,6 @@ namespace Player
                 0 :
                 horizontal != 0 ? -90 * horizontal : 0;
             transform.eulerAngles = new Vector3(0, 0, newAngle);
-            _gun.transform.eulerAngles = new Vector3(0, 0, newAngle);
         }
         public void SwitchLight()
         {
@@ -93,7 +90,6 @@ namespace Player
             _audioController.GetComponent<SFX>().PlayClick();
             _light2D.enabled = !_light2D.enabled;
             _light2D.intensity = _intensity;
-            _gun.SetActive(!_gun.activeSelf);
 
             StartCoroutine(Cooldown());
         }
