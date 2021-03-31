@@ -44,7 +44,6 @@ namespace Player
             _audioController = GameObject.Find("AudioController");
             _flickerTime = 2;
             _intensity = _light2D.intensity;
-            PointFlash(new Vector2(1, 0));
         }
 
         // Update is called once per frame
@@ -55,34 +54,8 @@ namespace Player
             if (_flickerTimer >= _flickerTime)
                 StartCoroutine(Flicker());
             _flickerTimer += Time.deltaTime;
-
-            // FlashLight rotation temporarily (or permanently) disabled
-            // Rotate the flashlight around the user's mouse
-            /*
-        var transformCache = transform;
-        
-        var flashlightToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transformCache.position;
-        flashlightToMouse.z = 0; // Negate z axis that came from the camera
-        
-        var angleFromFlashLightToMouse = Vector3.SignedAngle(transformCache.up, flashlightToMouse, Vector3.forward);
-        
-        // Rotate the flashlight by the specific angle
-        transform.Rotate(Vector3.forward, angleFromFlashLightToMouse);
-        */
         }
-
-        public void PointFlash(Vector2 move)
-        {
-            var horizontal = move.x;
-            var vertical = move.y;
-            // if horizontal and vertical are both pressed or vertical is below 0
-            // and if vertical is below 0 down else up
-            // else if horizontal is pressed left or right
-            var newAngle = horizontal != 0 && vertical != 0 || vertical < 0 ? vertical < 0 ? 180 :
-                0 :
-                horizontal != 0 ? -90 * horizontal : 0;
-            transform.eulerAngles = new Vector3(0, 0, newAngle);
-        }
+        
         public void SwitchLight()
         {
             if (_inCooldown) return;
