@@ -25,14 +25,7 @@ public class ParticleCollision : MonoBehaviour
 
         if (other.GetComponent<Rigidbody2D>() != null && 
             (other.GetComponent<Breakable>() != null || other.GetComponent<Piece>()) )
-        {
-            float time = 0;
-            while(time < 0.5f)
-            {
-                other.GetComponent<Rigidbody2D>().AddForceAtPosition(direction.normalized * 30, collisionEvents[0].intersection);
-                time += Time.deltaTime;
-            }
-        }
+                other.GetComponent<Rigidbody2D>().AddForceAtPosition(direction.normalized * 200, collisionEvents[0].intersection, ForceMode2D.Impulse);
         
 
         if (other.TryGetComponent(out Health health))

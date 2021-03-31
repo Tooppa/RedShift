@@ -28,8 +28,8 @@ namespace Player
         private Vector2 playerEndAltitude;
 
         private GameObject _gun;
-
         private GameObject _audioController;
+        public ParticleSystem rocketBoots;
 
         public float runningSoundCooldownTime;
 
@@ -45,6 +45,7 @@ namespace Player
         {
             playerStartAltitude = transform.position;
             _audioController = GameObject.Find("AudioController");
+            rocketBoots.Stop();
         }
 
         private void Update()
@@ -140,10 +141,12 @@ namespace Player
             _rigidbody2D.AddForce(Vector2.right  * (transform.localScale.x * rocketBootsSpeed), ForceMode2D.Impulse);
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0f);
             _rigidbody2D.gravityScale = .1f;
+            rocketBoots.Play();
 
             yield return new WaitForSeconds(0.2f);
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x * 0.5f, 0f);
             _rigidbody2D.gravityScale = 1;
+            rocketBoots.Stop();
         }
         private IEnumerator Cooldown(float cooldownTime)
         {
