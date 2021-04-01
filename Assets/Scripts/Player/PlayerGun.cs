@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Serialization;
 
 namespace Player
@@ -11,11 +13,16 @@ namespace Player
 
         private GameObject _audioController;
         private bool _cooldown;
+        private Light2D _light2D;
+        private float _intensity;
 
         private void Start()
         {
             gun = GameObject.Find("Gun");
             _audioController = GameObject.Find("AudioController");
+            _light2D = GetComponentInChildren<Light2D>();
+            _intensity = _light2D.intensity;
+            _light2D.intensity = 0;
         }
 
         public void Shoot()
@@ -41,6 +48,7 @@ namespace Player
         public void EquipGun()
         {
             HasGun = true;
+            _light2D.intensity = _intensity;
         }
     }
 }

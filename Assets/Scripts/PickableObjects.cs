@@ -14,6 +14,7 @@ public class PickableObjects : ScriptableObject
     public int fuel;
     public bool rocketBoots;
     public bool gun;
+    public bool flashlight;
     [TextArea(5,10)]
     public string statsForUpgrades;
 }
