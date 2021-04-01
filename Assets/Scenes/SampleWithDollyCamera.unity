@@ -576,12 +576,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &625016627 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3611172027972970966, guid: 6585a3dadb24a2849b333fc700e84efa, type: 3}
-  m_PrefabInstance: {fileID: 670015188}
-  m_PrefabAsset: {fileID: 0}
---- !u!43 &635218485
+--- !u!43 &497977855
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -745,6 +740,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &625016627 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3611172027972970966, guid: 6585a3dadb24a2849b333fc700e84efa, type: 3}
+  m_PrefabInstance: {fileID: 670015188}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &664732393
 GameObject:
   m_ObjectHideFlags: 0
