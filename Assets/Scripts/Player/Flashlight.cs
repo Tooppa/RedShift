@@ -11,6 +11,7 @@ namespace Player
         private GameObject _audioController;
 
         public float cooldownTime;
+        public bool HasFlashlight { private set; get; }
         private bool _inCooldown;
 
         private float _intensity;
@@ -44,6 +45,7 @@ namespace Player
             _audioController = GameObject.Find("AudioController");
             _flickerTime = 2;
             _intensity = _light2D.intensity;
+            HasFlashlight = false;
         }
 
         // Update is called once per frame
@@ -65,6 +67,11 @@ namespace Player
             _light2D.intensity = _intensity;
 
             StartCoroutine(Cooldown());
+        }
+
+        public void EquipFlashlight()
+        {
+            HasFlashlight = true;
         }
     }
 }

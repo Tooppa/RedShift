@@ -28,6 +28,7 @@ namespace Player
             _playerMovement = gameObject.GetComponent<PlayerMovement>();
             _playerGun = gameObject.GetComponent<PlayerGun>();
             _flashlight = gameObject.GetComponentInChildren<Flashlight>();
+            PointEquipment(new Vector2(1, 0));
             
             _playerControls.Surface.Jump.started += _ => _playerMovement.Jump();
             _playerControls.Surface.Dash.started += _ => _playerMovement.Dash();
@@ -82,7 +83,7 @@ namespace Player
             var pickables = go.GetComponent<Pickables>();
             var sprite = go.GetComponent<SpriteRenderer>().sprite;
             
-            if (pickables.IsNote)
+            if (pickables.IsNote || pickables.Flashlight)
             {
                 pickables.ShowInteract();
                 return;
