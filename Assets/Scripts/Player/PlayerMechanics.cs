@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Player
@@ -14,6 +15,7 @@ namespace Player
         private PlayerGun _playerGun;
         private PlayerControls _playerControls;
         private Flashlight _flashlight;
+        private bool _inCooldown = false;
 
         private void Awake()
         {
@@ -49,14 +51,24 @@ namespace Player
             if(move.x != 0 || move.y != 0)
                PointEquipment(move);
         }
+        private IEnumerator Cooldown()
+        {
+            //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
+            _inCooldown = true;
+            yield return new WaitForSeconds(.3f);
+            _inCooldown = false;
+        }
 
         // Switch between:
         // Stronger flashlight and no gun
         // Weaker flashlight and gun
         private void SwitchEquipment()
         {
+            if (!_flashlight.HasFlashlight || !_playerGun.HasGun || _inCooldown) return;
+            
             _flashlight.SwitchLight();
             _playerGun.gun.SetActive(!_playerGun.gun.activeInHierarchy);
+            StartCoroutine(Cooldown());
         }
         
         private void PointEquipment(Vector2 move)
@@ -111,26 +123,33 @@ namespace Player
                 _playerGun.EquipGun();
                 _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
             }
+            if (pickables.Flashlight && !_flashlight.HasFlashlight)
+            {
+                _flashlight.EquipFlashlight();
+                _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
+            }
         }
 
         private void OnTriggerStay2D(Collider2D other)
         {
             if (!other.CompareTag("Pickable")) return;
-            if (!other.gameObject.GetComponent<Pickables>().IsNote) return;
+            var component = other.gameObject.GetComponent<Pickables>();
+            if (!component.IsNote && !component.Flashlight) return;
             _pickableRange = true;
             _pickableNote = other.gameObject;
         }
 
-        public void ReadNote()
+        private void ReadNote()
         {
-            var note = _pickableNote.GetComponent<Pickables>();
-            if (!_pickableRange || !note.IsNote) return;
+            var component = _pickableNote.GetComponent<Pickables>();
+            if (!_pickableRange || (!component.IsNote && !component.Flashlight)) return;
             
             var sprite = _pickableNote.GetComponent<SpriteRenderer>().sprite;
-            _canvasManager.ShowText(note.getNote());
-            SpecialPickups(note, sprite);
-            _canvasManager.AddNewNote(_pickableNote);
+            SpecialPickups(component, sprite);
             _pickableNote.gameObject.SetActive(false);
+            if (component.Flashlight) return;
+            _canvasManager.ShowText(component.getNote());
+            _canvasManager.AddNewNote(_pickableNote);
         }
 
         private void OnTriggerExit2D(Collider2D other)

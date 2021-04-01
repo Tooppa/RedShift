@@ -12,19 +12,10 @@ namespace Player
 
         public float cooldownTime;
         public bool HasFlashlight { private set; get; }
-        private bool _inCooldown;
 
         private float _intensity;
         private float _flickerTimer;
         private float _flickerTime;
-
-        private IEnumerator Cooldown()
-        {
-            //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
-            _inCooldown = true;
-            yield return new WaitForSeconds(cooldownTime);
-            _inCooldown = false;
-        }
 
         private IEnumerator Flicker()
         {
@@ -46,12 +37,13 @@ namespace Player
             _flickerTime = 2;
             _intensity = _light2D.intensity;
             HasFlashlight = false;
+            _light2D.intensity = 0;
         }
 
         // Update is called once per frame
         private void Update()
         {
-            if (!_light2D.enabled) return;
+            if (!_light2D.enabled || !HasFlashlight) return;
 
             if (_flickerTimer >= _flickerTime)
                 StartCoroutine(Flicker());
@@ -60,18 +52,16 @@ namespace Player
         
         public void SwitchLight()
         {
-            if (_inCooldown) return;
-            StartCoroutine(Cooldown());
+            if (!HasFlashlight) return;
             _audioController.GetComponent<SFX>().PlayClick();
             _light2D.enabled = !_light2D.enabled;
             _light2D.intensity = _intensity;
-
-            StartCoroutine(Cooldown());
         }
 
         public void EquipFlashlight()
         {
             HasFlashlight = true;
+            SwitchLight();
         }
     }
 }
