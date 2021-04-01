@@ -11,6 +11,7 @@ public class SFX : MonoBehaviour
     public AudioSource playerLanding;
     public AudioSource wind;
     public AudioSource calmAmbience;
+    public AudioSource intenseMusic;
 
     public void PlayClick()
     {
@@ -45,5 +46,10 @@ public class SFX : MonoBehaviour
     public void PlayCalmAmbience()
     {
         calmAmbience.Play();
+    }
+
+    public void PlayIntenseMusic()
+    {
+        intenseMusic.Play();
     }
 }
