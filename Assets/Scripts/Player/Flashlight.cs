@@ -61,7 +61,6 @@ namespace Player
         public void EquipFlashlight()
         {
             HasFlashlight = true;
-            SwitchLight();
         }
     }
 }

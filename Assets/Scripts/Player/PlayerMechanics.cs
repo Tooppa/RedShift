@@ -65,7 +65,6 @@ namespace Player
         private void SwitchEquipment()
         {
             if (!_flashlight.HasFlashlight || !_playerGun.HasGun || _inCooldown) return;
-            
             _flashlight.SwitchLight();
             _playerGun.gun.SetActive(!_playerGun.gun.activeInHierarchy);
             StartCoroutine(Cooldown());
@@ -126,6 +125,8 @@ namespace Player
             if (pickables.Flashlight && !_flashlight.HasFlashlight)
             {
                 _flashlight.EquipFlashlight();
+                _flashlight.SwitchLight();
+                _playerGun.gun.SetActive(!_playerGun.gun.activeInHierarchy);
                 _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
             }
         }
