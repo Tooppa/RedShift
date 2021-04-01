@@ -13,6 +13,7 @@ public class Pickables : MonoBehaviour
     public bool HasFuel { private set; get; }
     public bool RocketBoots { private set; get; }
     public bool Gun { private set; get; }
+    public bool Flashlight { private set; get; }
     private GameObject _interact;
     [HideInInspector]public int fuel;
 
@@ -24,6 +25,7 @@ public class Pickables : MonoBehaviour
         HasFuel = data.fuel > 0;
         RocketBoots = data.rocketBoots;
         Gun = data.gun;
+        Flashlight = data.flashlight;
         fuel = data.fuel;
     }
 
