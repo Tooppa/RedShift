@@ -28,7 +28,7 @@ public class MusicTriggerControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
+    void Update()
     {
         if (lowerTheVolume)
         {
@@ -43,7 +43,12 @@ public class MusicTriggerControl : MonoBehaviour
 
     private void MusicFader()
     {
-
+        if (_audioController.GetComponent<SFX>().calmAmbience.volume == desiredVolume && _audioController.GetComponent<SFX>().intenseMusic.volume == desiredVolume)
+        {
+            musicFader.GetComponent<MusicTriggerControl>().lowerTheVolume = false;
+            lowerTheVolume = false;
+            return;
+        }
         _audioController.GetComponent<SFX>().calmAmbience.volume -= Time.deltaTime * 1 / timeToDecrease;
         _audioController.GetComponent<SFX>().intenseMusic.volume -= Time.deltaTime * 1 / timeToDecrease;
 
@@ -60,6 +65,12 @@ public class MusicTriggerControl : MonoBehaviour
 
     private void MusicIncreaser()
     {
+        if (_audioController.GetComponent<SFX>().calmAmbience.volume >= desiredVolume && _audioController.GetComponent<SFX>().intenseMusic.volume >= desiredVolume)
+        {
+            musicIncreaser.GetComponent<MusicTriggerControl>().increaseTheVolume = false;
+            increaseTheVolume = false;
+            return;
+        }
 
         _audioController.GetComponent<SFX>().calmAmbience.volume += Time.deltaTime * 1 / timeToDecrease;
         _audioController.GetComponent<SFX>().intenseMusic.volume += Time.deltaTime * 1 / timeToDecrease;
@@ -83,6 +94,10 @@ public class MusicTriggerControl : MonoBehaviour
             switch(musicTrigger)
             {
                 case "Calm":
+                    musicIncreaser.GetComponent<MusicTriggerControl>().increaseTheVolume = false;
+                    increaseTheVolume = false;
+                    musicFader.GetComponent<MusicTriggerControl>().lowerTheVolume = false;
+                    lowerTheVolume = false;
                     _audioController.GetComponent<SFX>().intenseMusic.Stop();
                     _audioController.GetComponent<SFX>().PlayCalmAmbience();
                     if(destroyOnTrigger)
@@ -90,7 +105,11 @@ public class MusicTriggerControl : MonoBehaviour
                     break;
 
                 case "Intense":
-                    _audioController.GetComponent<SFX>().calmAmbience.Stop();
+                    musicIncreaser.GetComponent<MusicTriggerControl>().increaseTheVolume = false;
+                    increaseTheVolume = false;
+                    musicFader.GetComponent<MusicTriggerControl>().lowerTheVolume = false;
+                    lowerTheVolume = false;
+                    _audioController.GetComponent<SFX>().calmAmbience.Pause();
                     _audioController.GetComponent<SFX>().intenseMusic.volume = 0.35f;
                     _audioController.GetComponent<SFX>().PlayIntenseMusic();
                     if (destroyOnTrigger)
@@ -99,22 +118,21 @@ public class MusicTriggerControl : MonoBehaviour
 
                 case "FadeMusic":
                     musicIncreaser.GetComponent<MusicTriggerControl>().increaseTheVolume = false;
-                    lowerTheVolume = true;
                     increaseTheVolume = false;
-                    if (destroyOnTrigger)
-                        Destroy(gameObject);
+                    lowerTheVolume = true;
                     break;
 
                 case "IncreaseMusic":
                     musicFader.GetComponent<MusicTriggerControl>().lowerTheVolume = false;
-                    increaseTheVolume = true;
                     lowerTheVolume = false;
-
+                    increaseTheVolume = true;
                     break;
 
                 case "StopMusic":
-                    _audioController.GetComponent<SFX>().calmAmbience.volume = 0;
-                    _audioController.GetComponent<SFX>().intenseMusic.volume = 0;
+                    _audioController.GetComponent<SFX>().calmAmbience.Stop();
+                    _audioController.GetComponent<SFX>().intenseMusic.Stop();
+                    _audioController.GetComponent<SFX>().calmAmbience.volume = 0.35f;
+                    _audioController.GetComponent<SFX>().intenseMusic.volume = 0.35f;
                     if (destroyOnTrigger)
                         Destroy(gameObject);
                     break;
