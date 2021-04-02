@@ -25,7 +25,7 @@ public class DamageApplier : MonoBehaviour
     /// Can be tweaked to further configure the occasion's when damage should apply. This prevents seemingly still objects
     /// from applying damage.
     /// </summary>
-    [Tooltip("If the object's speed is below the treshold, no damage will be applied. Recommended value is >= 1.5")]
+    [Tooltip("If the object's speed is below the treshold, no damage will be applied.")]
     [SerializeField] private float minimumSpeedTreshold;
 
     private Rigidbody2D _rigidbody2D;
