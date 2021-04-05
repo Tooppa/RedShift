@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Pickables : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class Pickables : MonoBehaviour
         Gun = data.gun;
         Flashlight = data.flashlight;
         fuel = data.fuel;
+        transform.GetComponentInChildren<Light2D>().enabled = Flashlight;
     }
 
     public void ShowInteract()
