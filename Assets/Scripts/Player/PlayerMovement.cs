@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace Player
         private readonly Vector2 _groundCheckOffset = new Vector2(0,-0.5f);
 
         private bool _isGrounded;
+        private bool _holdingJump;
         public bool HasRocketBoots { private set; get; }
         private bool _rocketBootsCooldown;
         private bool _runningSoundOnCooldown;
@@ -115,11 +117,25 @@ namespace Player
             _animator.SetBool(Jumping, !_isGrounded);
         }
 
-        public void Jump()
+        public void Jump(float value)
         {
-            if (!_isGrounded || Time.timeScale != 1) return;
-            _animator.SetTrigger(TakeOff);
-            _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+            if (value > 0)
+            {
+                if (!_isGrounded || Time.timeScale != 1) return;
+                _holdingJump = true;
+                _animator.SetTrigger(TakeOff);
+                _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+                return;
+            }
+            _holdingJump = false;
+        }
+
+        private void FixedUpdate()
+        {
+            if (_holdingJump && _rigidbody2D.velocity.y > 0)
+            {
+                _rigidbody2D.AddForce(Vector2.up * 40, ForceMode2D.Impulse);
+            }
         }
 
         public void Dash()

@@ -4989,7 +4989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1875
-  jumpHeight: 1125
+  jumpHeight: 800
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
@@ -5262,8 +5262,16 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3477308104087162423, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477308104087162423, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
+      propertyPath: m_UseNormalMap
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477308104087162423, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
       propertyPath: m_ShadowIntensity
-      value: 0.99
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 3477308104087162423, guid: ff8a190a259d105f0918297dd420a7b7, type: 3}
       propertyPath: m_PointLightInnerAngle
