@@ -20,16 +20,15 @@ public class ParticleCollision : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
         int numCollisionEvents = _ps.GetCollisionEvents(other, collisionEvents);
-
         GameObject explosion = Instantiate(explosionPrefab, collisionEvents[0].intersection, Quaternion.identity);
+        Vector3 direction = other.transform.position - transform.position;
 
-        ParticleSystem p = explosion.GetComponent<ParticleSystem>();
-        var pmain = p.main;
-
-        if (other.GetComponent<Rigidbody2D>() != null)
-            other.GetComponent<Rigidbody2D>().AddForceAtPosition(collisionEvents[0].intersection * 10 - transform.position, collisionEvents[0].intersection);
+        if (other.GetComponent<Rigidbody2D>() != null && 
+            (other.GetComponent<Breakable>() != null || other.GetComponent<Piece>()) )
+                other.GetComponent<Rigidbody2D>().AddForceAtPosition(direction.normalized * 200, collisionEvents[0].intersection, ForceMode2D.Impulse);
+        
 
         if (other.TryGetComponent(out Health health))
-            health.TakeDamage(100);
+            health.TakeDamage(20);
     }
 }

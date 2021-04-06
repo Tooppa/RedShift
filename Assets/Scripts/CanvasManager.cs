@@ -1,20 +1,18 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
     public static CanvasManager Instance { get; private set; }
     public GameObject screenImage;
+    public GameObject noteImage;
+    public GameObject tooltip;
     public GameObject hud;
     public GameObject noteScreen;
-    public GameObject noteImage;
     public Transform storedNotesScreen;
     public Transform pickableScreen;
+    public Transform upgradeScreen;
     public Slider healthSlider;
     public Slider fuelSlider;
 
@@ -28,10 +26,8 @@ public class CanvasManager : MonoBehaviour
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
     }
 
-    private void Update()
+    public void SetHudActive()
     {
-        if (!Input.GetKeyDown(KeyCode.Tab)) return;
-        
         hud.SetActive(!hud.activeSelf);
         if(hud.activeSelf)
             PauseGame();
@@ -52,6 +48,15 @@ public class CanvasManager : MonoBehaviour
     {
         var obj = Instantiate(screenImage, pickableScreen);
         obj.GetComponent<Image>().sprite = sprite;
+    }
+    public void AddNewUpgrade(Sprite sprite, string stats)
+    {
+        var image = Instantiate(screenImage, upgradeScreen);
+        image.GetComponent<Image>().sprite = sprite;
+        var spawnedTooltip = Instantiate(tooltip, image.transform);
+        var pos = spawnedTooltip.transform.position;
+        spawnedTooltip.transform.position = new Vector3(pos.x + 1, pos.y - .5f , pos.z);
+        spawnedTooltip.GetComponent<TooltipScript>().ShowTooltip(stats);
     }
 
     private void PauseGame()
@@ -76,6 +81,6 @@ public class CanvasManager : MonoBehaviour
         var obj = Instantiate(noteImage, storedNotesScreen);
         obj.GetComponent<Image>().sprite = go.GetComponent<SpriteRenderer>().sprite;
         var btn = obj.GetComponent<Button>();
-        btn.onClick.AddListener(() => { ShowText(go.GetComponent<Pickables>().data.note);});
+        btn.onClick.AddListener(() => { ShowText(go.GetComponent<Pickables>().getNote());});
     }
 }

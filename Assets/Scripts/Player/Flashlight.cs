@@ -1,76 +1,66 @@
-using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-[RequireComponent(typeof(Light2D))]
-public class Flashlight : MonoBehaviour
+namespace Player
 {
-    private Light2D _light2D;
-    private GameObject _gun;
-
-    private void Start()
+    [RequireComponent(typeof(Light2D))]
+    public class Flashlight : MonoBehaviour
     {
-        _light2D = GetComponent<Light2D>();
-        _gun = GameObject.Find("Gun");
-    }
+        private Light2D _light2D;
+        private GameObject _audioController;
 
-    // Update is called once per frame
-    private void Update()
-    {
-        // Enable and disable the flashlight
-        if (Input.GetKeyDown(KeyCode.F))
+        public float cooldownTime;
+        public bool HasFlashlight { private set; get; }
+
+        private float _intensity;
+        private float _flickerTimer;
+        private float _flickerTime;
+
+        private IEnumerator Flicker()
         {
+            //Turn the flashlight off, wait for the cooldown time to pass, then turn the flashlight back on
+            _light2D.intensity = 0.1f;
+            yield return new WaitForSeconds(.1f);
+            _light2D.intensity = _intensity;
+            yield return new WaitForSeconds(.2f);
+            _light2D.intensity = 0.1f;
+            yield return new WaitForSeconds(Random.Range(0, 2));
+            _light2D.intensity = _intensity;
+            _flickerTimer = 0;
+        }
+
+        private void Start()
+        {
+            _light2D = GetComponent<Light2D>();
+            _audioController = GameObject.Find("AudioController");
+            _flickerTime = 2;
+            _intensity = _light2D.intensity;
+            HasFlashlight = false;
+            _light2D.intensity = 0;
+        }
+
+        // Update is called once per frame
+        private void Update()
+        {
+            if (!_light2D.enabled || !HasFlashlight) return;
+
+            if (_flickerTimer >= _flickerTime)
+                StartCoroutine(Flicker());
+            _flickerTimer += Time.deltaTime;
+        }
+        
+        public void SwitchLight()
+        {
+            if (!HasFlashlight) return;
+            _audioController.GetComponent<SFX>().PlayClick();
             _light2D.enabled = !_light2D.enabled;
-            _gun.SetActive(!_gun.activeSelf);
+            _light2D.intensity = _intensity;
         }
 
-        var horizontalDirection = Input.GetAxisRaw("Horizontal");
-        var verticalDirection = Input.GetAxisRaw("Vertical");
-
-        // Flashlight left and right
-        if (horizontalDirection != 0)
+        public void EquipFlashlight()
         {
-            switch (horizontalDirection)
-            {
-                case 1:
-                    transform.eulerAngles = new Vector3(0, 0, -90);
-                    _gun.transform.eulerAngles = new Vector3(0, 0, -90);
-                    break;
-                case -1:
-                    transform.eulerAngles = new Vector3(0, 0, 90);
-                    _gun.transform.eulerAngles = new Vector3(0, 0, 90);
-                    break;
-            }
+            HasFlashlight = true;
         }
-
-        // Flashlight up and down
-        if (verticalDirection != 0)
-        {
-            switch(verticalDirection)
-            {
-                case 1:
-                    transform.eulerAngles = new Vector3(0, 0, 0);
-                    _gun.transform.eulerAngles = new Vector3(0, 0, 0);
-                    break;
-                case -1:
-                    transform.eulerAngles = new Vector3(0, 0, 180);
-                    _gun.transform.eulerAngles = new Vector3(0, 0, 180);
-                    break;
-            }
-        }
-
-        // FlashLight rotation temporarily (or permanently) disabled
-        // Rotate the flashlight around the user's mouse
-        /*
-        var transformCache = transform;
-        
-        var flashlightToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transformCache.position;
-        flashlightToMouse.z = 0; // Negate z axis that came from the camera
-        
-        var angleFromFlashLightToMouse = Vector3.SignedAngle(transformCache.up, flashlightToMouse, Vector3.forward);
-        
-        // Rotate the flashlight by the specific angle
-        transform.Rotate(Vector3.forward, angleFromFlashLightToMouse);
-        */
     }
 }

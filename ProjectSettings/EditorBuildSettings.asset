@@ -4,5 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SampleWithDollyCamera.unity
+    guid: 731498910922dd847aacd4b5b1a8aa85
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: c721fdc9f127ae648a11d0621299277b, type: 2}
