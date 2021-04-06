@@ -43,7 +43,7 @@
                     "id": "e110194a-af62-4c2b-b4a9-b860392ee48a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "Dash",
