@@ -30,6 +30,9 @@ namespace Player
         private Vector2 _playerStartAltitude;
         private Vector2 _playerEndAltitude;
 
+        [SerializeField] private float holdingJumpTime = 0;
+        [SerializeField] private float holdingJumpTimeMax = 0.2f;
+        
         private GameObject _gun;
 
         private SFX _audioController;
@@ -70,6 +73,7 @@ namespace Player
             }
             */
         }
+        
         private void CheckIsGrounded()
         {
             _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
@@ -116,8 +120,7 @@ namespace Player
 
             _animator.SetBool(Jumping, !_isGrounded);
         }
-
-        private float _timer = 0;
+        
         public void Jump(float value)
         {
             if (value > 0)
@@ -129,15 +132,16 @@ namespace Player
                 return;
             }
             _holdingJump = false;
-            _timer = 0;
+            holdingJumpTime = 0;
         }
 
         private void FixedUpdate()
         {
-            if (!_holdingJump || !(_rigidbody2D.velocity.y > 0)) return;
-            
-            _timer += Time.deltaTime;
-            _rigidbody2D.AddForce(Vector2.up * (_timer * 40 * _rigidbody2D.velocity.y), ForceMode2D.Impulse);
+            if (_holdingJump && holdingJumpTime < holdingJumpTimeMax)
+            {
+                _rigidbody2D.AddForce(Vector2.up * (2 * (Mathf.Pow((holdingJumpTime + 1) * 5,2))), ForceMode2D.Impulse);
+                holdingJumpTime += Time.deltaTime;
+            }
         }
 
         public void Dash()
