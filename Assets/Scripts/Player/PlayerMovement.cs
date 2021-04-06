@@ -117,6 +117,7 @@ namespace Player
             _animator.SetBool(Jumping, !_isGrounded);
         }
 
+        private float _timer = 0;
         public void Jump(float value)
         {
             if (value > 0)
@@ -128,14 +129,15 @@ namespace Player
                 return;
             }
             _holdingJump = false;
+            _timer = 0;
         }
 
         private void FixedUpdate()
         {
-            if (_holdingJump && _rigidbody2D.velocity.y > 0)
-            {
-                _rigidbody2D.AddForce(Vector2.up * 40, ForceMode2D.Impulse);
-            }
+            if (!_holdingJump || !(_rigidbody2D.velocity.y > 0)) return;
+            
+            _timer += Time.deltaTime;
+            _rigidbody2D.AddForce(Vector2.up * (_timer * 40 * _rigidbody2D.velocity.y), ForceMode2D.Impulse);
         }
 
         public void Dash()
