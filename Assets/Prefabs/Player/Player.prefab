@@ -4989,13 +4989,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1875
-  jumpHeight: 800
+  jumpHeight: 720
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
   maxSpeed: 12.5
   rocketBootsSpeed: 1000
   rocketBoots: {fileID: 2059804918}
+  holdingJumpTime: 0
+  holdingJumpTimeMax: 0.2
   runningSoundCooldownTime: 0.3
 --- !u!114 &1351595938136843858
 MonoBehaviour:
