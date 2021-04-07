@@ -31,9 +31,11 @@ public class MusicFader : MonoBehaviour
 
     private void MusicFade()
     {
-        if (_audioController.GetComponent<SFX>().calmAmbience.volume == desiredVolume && _audioController.GetComponent<SFX>().intenseMusic.volume == desiredVolume)
+        if (_audioController.GetComponent<SFX>().calmAmbience.volume == desiredVolume || _audioController.GetComponent<SFX>().intenseMusic.volume == desiredVolume)
         {
             musicFader.GetComponent<MusicFader>().lowerTheVolume = false;
+            _audioController.GetComponent<SFX>().calmAmbience.volume = desiredVolume;
+            _audioController.GetComponent<SFX>().intenseMusic.volume = desiredVolume;
             lowerTheVolume = false;
             return;
         }

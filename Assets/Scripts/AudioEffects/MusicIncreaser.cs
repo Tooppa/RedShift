@@ -21,7 +21,7 @@ public class MusicIncreaser : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
+    private void Update()
     {
         if (increaseTheVolume)
         {
@@ -31,9 +31,11 @@ public class MusicIncreaser : MonoBehaviour
 
     private void MusicIncrease()
     {
-        if (_audioController.GetComponent<SFX>().calmAmbience.volume >= desiredVolume && _audioController.GetComponent<SFX>().intenseMusic.volume >= desiredVolume)
+        if (_audioController.GetComponent<SFX>().calmAmbience.volume >= desiredVolume || _audioController.GetComponent<SFX>().intenseMusic.volume >= desiredVolume)
         {
             musicIncreaser.GetComponent<MusicIncreaser>().increaseTheVolume = false;
+            _audioController.GetComponent<SFX>().calmAmbience.volume = desiredVolume;
+            _audioController.GetComponent<SFX>().intenseMusic.volume = desiredVolume;
             increaseTheVolume = false;
             return;
         }
