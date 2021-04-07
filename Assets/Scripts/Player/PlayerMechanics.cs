@@ -157,7 +157,7 @@ namespace Player
         {
             if (!other.CompareTag("Pickable")) return;
             var pickables = other.gameObject.GetComponent<Pickables>();
-            if (!pickables.IsNote) return;
+            if (!pickables.IsNote && !pickables.Flashlight) return;
             pickables.HideInteract();
             _pickableRange = false;
         }
