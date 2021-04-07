@@ -32,7 +32,7 @@ namespace Player
             _flashlight = gameObject.GetComponentInChildren<Flashlight>();
             PointEquipment(new Vector2(1, 0));
             
-            _playerControls.Surface.Jump.started += _ => _playerMovement.Jump();
+            _playerControls.Surface.Jump.performed += ctx => _playerMovement.Jump(ctx.ReadValue<float>());
             _playerControls.Surface.Dash.started += _ => _playerMovement.Dash();
             _playerControls.Surface.OpenHud.started += _ => _canvasManager.SetHudActive();
             _playerControls.Surface.Shoot.started += _ => _playerGun.Shoot();

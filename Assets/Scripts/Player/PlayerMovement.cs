@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace Player
         private readonly Vector2 _groundCheckOffset = new Vector2(0,-0.5f);
 
         private bool _isGrounded;
+        private bool _holdingJump;
         public bool HasRocketBoots { private set; get; }
         private bool _rocketBootsCooldown;
         private bool _runningSoundOnCooldown;
@@ -28,6 +30,9 @@ namespace Player
         private Vector2 _playerStartAltitude;
         private Vector2 _playerEndAltitude;
 
+        [SerializeField] private float holdingJumpTime = 0;
+        [SerializeField] private float holdingJumpTimeMax = 0.2f;
+        
         private GameObject _gun;
 
         private SFX _audioController;
@@ -68,6 +73,7 @@ namespace Player
             }
             */
         }
+        
         private void CheckIsGrounded()
         {
             _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
@@ -114,12 +120,28 @@ namespace Player
 
             _animator.SetBool(Jumping, !_isGrounded);
         }
-
-        public void Jump()
+        
+        public void Jump(float value)
         {
-            if (!_isGrounded || Time.timeScale != 1) return;
-            _animator.SetTrigger(TakeOff);
-            _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+            if (value > 0)
+            {
+                if (!_isGrounded || Time.timeScale != 1) return;
+                _holdingJump = true;
+                _animator.SetTrigger(TakeOff);
+                _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+                return;
+            }
+            _holdingJump = false;
+            holdingJumpTime = 0;
+        }
+
+        private void FixedUpdate()
+        {
+            if (_holdingJump && holdingJumpTime < holdingJumpTimeMax)
+            {
+                _rigidbody2D.AddForce(Vector2.up * (2 * (Mathf.Pow((holdingJumpTime + 1) * 5,2))), ForceMode2D.Impulse);
+                holdingJumpTime += Time.deltaTime;
+            }
         }
 
         public void Dash()
