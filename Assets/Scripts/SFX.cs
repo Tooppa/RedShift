@@ -12,6 +12,8 @@ public class SFX : MonoBehaviour
     public AudioSource wind;
     public AudioSource calmAmbience;
     public AudioSource intenseMusic;
+    public AudioSource morkoGrowl1;
+    public AudioSource morkoGrowl2;
 
     public void PlayClick()
     {
@@ -51,5 +53,15 @@ public class SFX : MonoBehaviour
     public void PlayIntenseMusic()
     {
         intenseMusic.Play();
+    }
+
+    public void PlayMorkoGrowlOne()
+    {
+        morkoGrowl1.Play();
+    }
+
+    public void PlayMorkoGrowlTwo()
+    {
+        morkoGrowl2.Play();
     }
 }
