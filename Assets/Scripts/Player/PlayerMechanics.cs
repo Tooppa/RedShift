@@ -161,13 +161,14 @@ namespace Player
             pickables.HideInteract();
             _pickableRange = false;
         }
-        private void OnEnable()
-        {
-            _playerControls.Enable();
-        }
-        private void OnDisable()
+
+        public void DisableMovement()
         {
             _playerControls.Disable();
+        }
+        public void EnableMovement()
+        {
+            _playerControls.Enable();
         }
     }
 }
