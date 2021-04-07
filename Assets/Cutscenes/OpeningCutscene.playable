@@ -198,7 +198,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: CM vcam2
+    m_DisplayName: CM Opening
   - m_Version: 1
     m_Start: 0.3333333333333333
     m_ClipIn: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: CM vcam1
+    m_DisplayName: CM Player
   m_Markers:
     m_Objects: []
 --- !u!114 &-3698887538292081003
