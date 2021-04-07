@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -85,7 +86,6 @@ namespace Player
             _flashlight.transform.eulerAngles = new Vector3(0, 0, newAngle);
             _playerGun.gun.transform.eulerAngles = new Vector3(0, 0, newAngle);
         }
-
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.CompareTag("Pickable")) return;
@@ -142,8 +142,8 @@ namespace Player
 
         private void ReadNote()
         {
-            var component = _pickableNote.GetComponent<Pickables>();
-            if (!_pickableRange || (!component.IsNote && !component.Flashlight)) return;
+            var component = _pickableNote ? _pickableNote.GetComponent<Pickables>() : null;
+            if (!component || !_pickableRange || (!component.IsNote && !component.Flashlight)) return;
             
             var sprite = _pickableNote.GetComponent<SpriteRenderer>().sprite;
             SpecialPickups(component, sprite);
@@ -165,7 +165,6 @@ namespace Player
         {
             _playerControls.Enable();
         }
-
         private void OnDisable()
         {
             _playerControls.Disable();
