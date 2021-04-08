@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
+#pragma warning disable 0414
+
 public class FlyingEnemy : MonoBehaviour
 {
     public EnemyScriptable data;
