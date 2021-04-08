@@ -8,19 +8,22 @@ public class MusicTriggerControl : MonoBehaviour
 
     private AudioSource _audio;
 
-    public float fadeTime;
+    private float fadeTime = 4;
 
     private bool lowerTheVolume = false;
     private bool increaseTheVolume = false;
     private bool upIsTriggered = false;
     private bool downIsTriggered = false;
+    private bool fadeOutIn = false;
+    public int caseNumber = 1;
 
-    public string musicTrigger;
-    public float desiredVolume;
-    public bool destroyOnTrigger = false;
+    private string _audioName;
 
-    public float startingPitch = 1;
-    public float desiredPitch;
+    private float desiredVolume = 0.5f;
+    private bool destroyOnTrigger = false;
+
+    private float startingPitch = 1;
+    private float desiredPitch;
     public float timeToDecrease = 5;
 
     // Start is called before the first frame update
@@ -42,6 +45,7 @@ public class MusicTriggerControl : MonoBehaviour
 
         if (upIsTriggered)
             UpPitcher();
+
     }
 
     public void SelectSoundMusic(AudioSource audio)
@@ -51,18 +55,20 @@ public class MusicTriggerControl : MonoBehaviour
 
     private void MusicIncrease()
     {
-        if (_audio.volume >= desiredVolume)
+        if (_audioController.calmAmbience.volume >= desiredVolume && _audioController.intenseMusic.volume >= desiredVolume)
         {
             increaseTheVolume = false;
             _audio.volume = desiredVolume;
             return;
         }
 
-        _audio.volume += Time.deltaTime * 1 / fadeTime;
+        _audioController.calmAmbience.volume += Time.deltaTime * 1 / fadeTime;
+        _audioController.intenseMusic.volume += Time.deltaTime * 1 / fadeTime;
 
-        if (_audio.volume >= desiredVolume)
+        if (_audioController.calmAmbience.volume >= desiredVolume && _audioController.intenseMusic.volume >= desiredVolume)
         {
-            _audio.volume = desiredVolume;
+            _audioController.calmAmbience.volume = desiredVolume;
+            _audioController.intenseMusic.volume = desiredVolume;
 
             increaseTheVolume = false;
             if (destroyOnTrigger)
@@ -72,15 +78,16 @@ public class MusicTriggerControl : MonoBehaviour
 
     private void MusicFade()
     {
-        if (_audio.volume == 0)
+        if (_audioController.calmAmbience.volume == 0 && _audioController.intenseMusic.volume == 0)
         {
             lowerTheVolume = false;
             return;
         }
 
-        _audio.volume -= Time.deltaTime * 1 / fadeTime;
+        _audioController.calmAmbience.volume -= Time.deltaTime * 1 / fadeTime;
+        _audioController.intenseMusic.volume -= Time.deltaTime * 1 / fadeTime;
 
-        if (_audio.volume == 0)
+        if (_audioController.calmAmbience.volume == 0 && _audioController.intenseMusic.volume == 0)
         {
             //_audio.Pause();
             lowerTheVolume = false;
@@ -128,10 +135,10 @@ public class MusicTriggerControl : MonoBehaviour
 
     private void DownPitcher()
     {
-        _audio.pitch += Time.deltaTime * startingPitch / timeToDecrease;
-        if (_audio.pitch >= desiredPitch - 0.02)
+        _audio.pitch -= Time.deltaTime * startingPitch / timeToDecrease;
+        if (_audio.pitch <= desiredPitch - 0.02)
         {
-            upIsTriggered = false;
+            downIsTriggered = false;
             _audio.pitch = desiredPitch;
         }
 
@@ -139,10 +146,11 @@ public class MusicTriggerControl : MonoBehaviour
 
     private void UpPitcher()
     { 
-        _audio.pitch -= Time.deltaTime * startingPitch / timeToDecrease;
+        _audio.pitch += Time.deltaTime * startingPitch / timeToDecrease;
 
-        if (_audio.pitch <= desiredPitch + 0.02)
+        if (_audio.pitch >= desiredPitch + 0.02)
         {
+            upIsTriggered = false;
             _audio.pitch = desiredPitch;
         }
     }
@@ -174,9 +182,67 @@ public class MusicTriggerControl : MonoBehaviour
         upIsTriggered = true;
     }
 
-    public void FadeOutAndInSong(string audioName)
+    //public void FadeOutAndIn(string audioName)
+    //{
+    //    _audioName = audioName;
+    //    fadeOutIn = true;
+    //}
+
+    //private void FadeOutAndInSong()
+    //{
+    //    if((_audioController.calmAmbience.isPlaying && _audioName == "Calm") || _audioController.intenseMusic.isPlaying && _audioName == "Intense")
+    //    {
+    //        return;
+    //    }
+
+    //    switch (caseNumber)
+    //    {
+    //        case 1:
+    //            if (_audio.volume > 0)
+    //            {
+    //                lowerTheVolume = true;
+    //            }
+    //            if (_audio.volume == 0)
+    //            {
+    //                lowerTheVolume = false;
+                    
+    //                if (_audioName == "Intense")
+    //                {
+    //                    _audioController.intenseMusic.volume = 0;
+    //                    _audioController.calmAmbience.Stop();
+    //                    _audioController.intenseMusic.Play();
+    //                }
+    //                if (_audioName == "Calm")
+    //                {
+    //                    _audioController.calmAmbience.volume = 0;
+    //                    _audioController.intenseMusic.Stop();
+    //                    _audioController.calmAmbience.Play();
+    //                }
+    //                caseNumber = 2;
+    //            }
+    //            break;
+
+    //        case 2:
+    //            if(_audio.volume <= desiredVolume)
+    //            {
+    //                increaseTheVolume = true;
+    //            }
+    //            if(_audio.volume > desiredVolume)
+    //            {
+    //                increaseTheVolume = false;
+    //                fadeOutIn = false;
+                    
+    //            }
+    //            break;
+    //    }
+    //    if (!fadeOutIn)
+    //        caseNumber = 1;
+    //    //StartCoroutine(FadeOutAndInCR(audioName));
+    //}
+
+    public void FadeOutAndIn(string audioName)
     {
-        if((_audioController.calmAmbience.isPlaying && audioName == "Calm") || _audioController.intenseMusic.isPlaying && audioName == "Intense")
+        if ((_audioController.calmAmbience.isPlaying && audioName == "Calm") || _audioController.intenseMusic.isPlaying && audioName == "Intense")
         {
             return;
         }
@@ -185,17 +251,20 @@ public class MusicTriggerControl : MonoBehaviour
 
     private IEnumerator FadeOutAndInCR(string audioName)
     {
-
         lowerTheVolume = true;
         yield return new WaitForSeconds(2);
         lowerTheVolume = false;
-        if(audioName == "Calm")
+        if (audioName == "Calm")
         {
+            _audioController.intenseMusic.volume = 0;
+            _audioController.calmAmbience.volume = 0;
             _audioController.intenseMusic.Stop();
             _audioController.calmAmbience.Play();
         }
-        if(audioName == "Intense")
+        if (audioName == "Intense")
         {
+            _audioController.intenseMusic.volume = 0;
+            _audioController.calmAmbience.volume = 0;
             _audioController.calmAmbience.Stop();
             _audioController.intenseMusic.Play();
         }
