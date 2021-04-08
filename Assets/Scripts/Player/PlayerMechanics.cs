@@ -162,6 +162,16 @@ namespace Player
             _pickableRange = false;
         }
 
+        private void OnEnable()
+        {
+            _playerControls.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _playerControls.Disable();
+        }
+
         public void DisableMovement()
         {
             _playerControls.Disable();
