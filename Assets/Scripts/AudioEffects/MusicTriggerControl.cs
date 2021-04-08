@@ -5,176 +5,203 @@ using UnityEngine;
 public class MusicTriggerControl : MonoBehaviour
 {
     private SFX _audioController;
-    private GameObject player;
-    private GameObject musicFader;
-    private GameObject musicIncreaser;
+
+    private AudioSource _audio;
+
+    public float fadeTime;
 
     private bool lowerTheVolume = false;
     private bool increaseTheVolume = false;
+    private bool upIsTriggered = false;
+    private bool downIsTriggered = false;
 
     public string musicTrigger;
-    public float timeToDecrease;
     public float desiredVolume;
     public bool destroyOnTrigger = false;
+
+    public float startingPitch = 1;
+    public float desiredPitch;
+    public float timeToDecrease = 5;
 
     // Start is called before the first frame update
     void Start()
     {
         _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
-        player = GameObject.Find("Player");
-        musicFader = GameObject.Find("MusicFader");
-        musicIncreaser = GameObject.Find("MusicIncreaser");
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        
+        if (lowerTheVolume)
+            MusicFade();
+
+        if (increaseTheVolume)
+            MusicIncrease();
+
+        if (downIsTriggered)
+            DownPitcher();
+
+        if (upIsTriggered)
+            UpPitcher();
     }
 
-    public void MusicIncrease()
+    public void SelectSoundMusic(AudioSource audio)
     {
-        if (_audioController.calmAmbience.volume >= desiredVolume || _audioController.intenseMusic.volume >= desiredVolume)
+        _audio = audio;
+    }
+
+    private void MusicIncrease()
+    {
+        if (_audio.volume >= desiredVolume)
         {
-            musicIncreaser.GetComponent<MusicIncreaser>().increaseTheVolume = false;
-            _audioController.calmAmbience.volume = desiredVolume;
-            _audioController.intenseMusic.volume = desiredVolume;
             increaseTheVolume = false;
+            _audio.volume = desiredVolume;
             return;
         }
 
-        _audioController.calmAmbience.volume += Time.deltaTime * 1 / timeToDecrease;
-        _audioController.intenseMusic.volume += Time.deltaTime * 1 / timeToDecrease;
+        _audio.volume += Time.deltaTime * 1 / fadeTime;
 
-        if (_audioController.calmAmbience.volume >= desiredVolume && _audioController.intenseMusic.volume >= desiredVolume)
+        if (_audio.volume >= desiredVolume)
         {
-            _audioController.calmAmbience.volume = desiredVolume;
-            _audioController.intenseMusic.volume = desiredVolume;
+            _audio.volume = desiredVolume;
+
             increaseTheVolume = false;
             if (destroyOnTrigger)
                 Destroy(gameObject);
-
         }
-
     }
 
-    public void MusicFade()
+    private void MusicFade()
     {
-        if (_audioController.calmAmbience.volume == desiredVolume || _audioController.intenseMusic.volume == desiredVolume)
+        if (_audio.volume == 0)
         {
-            musicFader.GetComponent<MusicFader>().lowerTheVolume = false;
-            _audioController.calmAmbience.volume = desiredVolume;
-            _audioController.intenseMusic.volume = desiredVolume;
             lowerTheVolume = false;
             return;
         }
-        _audioController.calmAmbience.volume -= Time.deltaTime * 1 / timeToDecrease;
-        _audioController.intenseMusic.volume -= Time.deltaTime * 1 / timeToDecrease;
 
-        if (_audioController.calmAmbience.volume == 0 && _audioController.intenseMusic.volume == 0)
+        _audio.volume -= Time.deltaTime * 1 / fadeTime;
+
+        if (_audio.volume == 0)
         {
-            //_audioController.GetComponent<SFX>().calmAmbience.Pause();
-            //_audioController.GetComponent<SFX>().intenseMusic.Pause();
+            //_audio.Pause();
             lowerTheVolume = false;
+            if (destroyOnTrigger)
+                Destroy(gameObject);
+        }
+    }
+
+    public void CalmStart(float desiredVolume)
+    {
+        if(!_audioController.calmAmbience.isPlaying)
+        {
+            increaseTheVolume = false;
+            lowerTheVolume = false;
+            _audioController.intenseMusic.Stop();
+            _audioController.calmAmbience.volume = desiredVolume;
+            _audioController.calmAmbience.Play();
+            if (destroyOnTrigger)
+                Destroy(gameObject);
+        }
+    }
+
+    public void IntenseStart(float desiredVolume)
+    {
+        if(!_audioController.intenseMusic.isPlaying)
+        {
+            increaseTheVolume = false;
+            lowerTheVolume = false;
+            _audioController.calmAmbience.Pause();
+            _audioController.intenseMusic.volume = desiredVolume;
+            _audioController.intenseMusic.Play();
             if (destroyOnTrigger)
                 Destroy(gameObject);
         }
 
     }
 
-    public void Funtionality(string musicTrigger)
+    public void StopMusic()
     {
-
-        if (musicTrigger == "Calm")
-        {
-        musicIncreaser.GetComponent<MusicIncreaser>().increaseTheVolume = false;
-        musicFader.GetComponent<MusicFader>().lowerTheVolume = false;
-        _audioController.intenseMusic.Stop();
-        _audioController.PlayCalmAmbience();
+        _audio.Stop();
+        //_audioController.intenseMusic.Stop();
         if (destroyOnTrigger)
             Destroy(gameObject);
-        }
-
-
-        if (musicTrigger == "Intense")
-        {
-            musicIncreaser.GetComponent<MusicIncreaser>().increaseTheVolume = false;
-            musicFader.GetComponent<MusicFader>().lowerTheVolume = false;
-            _audioController.calmAmbience.Pause();
-            _audioController.intenseMusic.volume = 0.35f;
-            _audioController.PlayIntenseMusic();
-            if (destroyOnTrigger)
-                Destroy(gameObject);
-        }
-
-        if (musicTrigger == "FadeMusic")
-        {
-            musicIncreaser.GetComponent<MusicIncreaser>().increaseTheVolume = false;
-            musicFader.GetComponent<MusicFader>().lowerTheVolume = true;
-        }
-
-        if (musicTrigger == "IncreaseMusic")
-        {
-            musicFader.GetComponent<MusicFader>().lowerTheVolume = false;
-            musicIncreaser.GetComponent<MusicIncreaser>().increaseTheVolume = true;
-        }
-
-        if (musicTrigger == "StopMusic")
-        {
-            _audioController.calmAmbience.Stop();
-            _audioController.intenseMusic.Stop();
-            _audioController.calmAmbience.volume = 0.35f;
-            _audioController.intenseMusic.volume = 0.35f;
-            if (destroyOnTrigger)
-                Destroy(gameObject);
-        }
-        
-        
     }
 
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if(other.gameObject == player)
-    //    {
-    //        switch(musicTrigger)
-    //        {
-    //            case "Calm":
-    //                musicIncreaser.GetComponent<MusicIncreaser>().increaseTheVolume = false;
-    //                musicFader.GetComponent<MusicFader>().lowerTheVolume = false;
-    //                _audioController.intenseMusic.Stop();
-    //                _audioController.PlayCalmAmbience();
-    //                if(destroyOnTrigger)
-    //                    Destroy(gameObject);
-    //                break;
+    private void DownPitcher()
+    {
+        _audio.pitch += Time.deltaTime * startingPitch / timeToDecrease;
+        if (_audio.pitch >= desiredPitch - 0.02)
+        {
+            upIsTriggered = false;
+            _audio.pitch = desiredPitch;
+        }
 
-    //            case "Intense":
-    //                musicIncreaser.GetComponent<MusicIncreaser>().increaseTheVolume = false;
-    //                musicFader.GetComponent<MusicFader>().lowerTheVolume = false;
-    //                _audioController.calmAmbience.Pause();
-    //                _audioController.intenseMusic.volume = 0.35f;
-    //                _audioController.PlayIntenseMusic();
-    //                if (destroyOnTrigger)
-    //                    Destroy(gameObject);
-    //                break;
+    }
 
-    //            case "FadeMusic":
-    //                musicIncreaser.GetComponent<MusicIncreaser>().increaseTheVolume = false;
-    //                musicFader.GetComponent<MusicFader>().lowerTheVolume = true;
-    //                break;
+    private void UpPitcher()
+    { 
+        _audio.pitch -= Time.deltaTime * startingPitch / timeToDecrease;
 
-    //            case "IncreaseMusic":
-    //                musicFader.GetComponent<MusicFader>().lowerTheVolume = false;
-    //                musicIncreaser.GetComponent<MusicIncreaser>().increaseTheVolume = true;
-    //                break;
+        if (_audio.pitch <= desiredPitch + 0.02)
+        {
+            _audio.pitch = desiredPitch;
+        }
+    }
 
-    //            case "StopMusic":
-    //                _audioController.calmAmbience.Stop();
-    //                _audioController.intenseMusic.Stop();
-    //                _audioController.calmAmbience.volume = 0.35f;
-    //                _audioController.intenseMusic.volume = 0.35f;
-    //                if (destroyOnTrigger)
-    //                    Destroy(gameObject);
-    //                break;
-    //        }
-    //    }
-    //}
+    public void FadeOutMusic()
+    {
+        increaseTheVolume = false;
+        lowerTheVolume = true;
+    }
+
+    public void FadeInMusic(float musicVolume)
+    {
+        desiredVolume = musicVolume;
+        lowerTheVolume = false;
+        increaseTheVolume = true;
+    }
+
+    public void PitchDown(float desiredSoundPitch)
+    {
+        desiredPitch = desiredSoundPitch;
+        upIsTriggered = false;
+        downIsTriggered = true;
+    }
+
+    public void PitchUp(float desiredSoundPitch)
+    {
+        desiredPitch = desiredSoundPitch;
+        downIsTriggered = false;
+        upIsTriggered = true;
+    }
+
+    public void FadeOutAndInSong(string audioName)
+    {
+        if((_audioController.calmAmbience.isPlaying && audioName == "Calm") || _audioController.intenseMusic.isPlaying && audioName == "Intense")
+        {
+            return;
+        }
+        StartCoroutine(FadeOutAndInCR(audioName));
+    }
+
+    private IEnumerator FadeOutAndInCR(string audioName)
+    {
+
+        lowerTheVolume = true;
+        yield return new WaitForSeconds(2);
+        lowerTheVolume = false;
+        if(audioName == "Calm")
+        {
+            _audioController.intenseMusic.Stop();
+            _audioController.calmAmbience.Play();
+        }
+        if(audioName == "Intense")
+        {
+            _audioController.calmAmbience.Stop();
+            _audioController.intenseMusic.Play();
+        }
+        increaseTheVolume = true;
+        yield return new WaitForSeconds(2);
+        increaseTheVolume = false;
+    }
+
 }
