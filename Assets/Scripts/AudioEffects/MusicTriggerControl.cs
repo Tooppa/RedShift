@@ -13,8 +13,8 @@ public class MusicTriggerControl : MonoBehaviour
     private string _audioName;
 
     private bool canBeFaded = false;
-    private bool lowerTheVolume = false;
-    private bool increaseTheVolume = false;
+    private bool lowerTheMusicVolume = false;
+    private bool increaseTheMusicVolume = false;
     private bool upIsTriggered = false;
     private bool downIsTriggered = false;
 
@@ -34,10 +34,10 @@ public class MusicTriggerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (lowerTheVolume)
+        if (lowerTheMusicVolume)
             MusicFade();
 
-        if (increaseTheVolume)
+        if (increaseTheMusicVolume)
             MusicIncrease();
 
         if (downIsTriggered)
@@ -52,10 +52,10 @@ public class MusicTriggerControl : MonoBehaviour
 
     private void MusicIncrease()
     {
-        lowerTheVolume = false;
+        lowerTheMusicVolume = false;
         if (_audioController.calmAmbience.volume >= desiredVolume && _audioController.intenseMusic.volume >= desiredVolume)
         {
-            increaseTheVolume = false;
+            increaseTheMusicVolume = false;
             _audioController.calmAmbience.volume = desiredVolume;
             _audioController.intenseMusic.volume = desiredVolume;
             return;
@@ -69,16 +69,16 @@ public class MusicTriggerControl : MonoBehaviour
             _audioController.calmAmbience.volume = desiredVolume;
             _audioController.intenseMusic.volume = desiredVolume;
 
-            increaseTheVolume = false;
+            increaseTheMusicVolume = false;
         }
     }
 
     private void MusicFade()
     {
-        increaseTheVolume = false;
+        increaseTheMusicVolume = false;
         if (_audioController.calmAmbience.volume == 0 && _audioController.intenseMusic.volume == 0)
         {
-            lowerTheVolume = false;
+            lowerTheMusicVolume = false;
             return;
         }
 
@@ -86,6 +86,45 @@ public class MusicTriggerControl : MonoBehaviour
         _audioController.intenseMusic.volume -= Time.deltaTime * 1 / fadeTime;
 
         if (_audioController.calmAmbience.volume == 0 && _audioController.intenseMusic.volume == 0)
+        {
+            //_audio.Pause();
+            lowerTheVolume = false;
+            if (destroyOnTrigger)
+                Destroy(gameObject);
+        }
+    }
+
+    private void SoundIncrease()
+    {
+        lowerTheVolume = false;
+        if (_audio.volume >= desiredVolume)
+        {
+            increaseTheVolume = false;
+            _audio.volume = desiredVolume;
+            return;
+        }
+
+        _audio.volume += Time.deltaTime * 1 / fadeTime;
+
+        if (_audio.volume >= desiredVolume)
+        {
+            _audio.volume = desiredVolume;
+            increaseTheVolume = false;
+        }
+    }
+
+    private void SoundFade()
+    {
+        increaseTheVolume = false;
+        if (_audio.volume == 0)
+        {
+            lowerTheVolume = false;
+            return;
+        }
+
+        _audio.volume -= Time.deltaTime * 1 / fadeTime;
+
+        if (_audio.volume == 0)
         {
             //_audio.Pause();
             lowerTheVolume = false;
@@ -121,13 +160,13 @@ public class MusicTriggerControl : MonoBehaviour
         _audio = audio;
     }
 
-    public void PlaySFX(AudioSource audio, bool loop)
-    {
+    //public void PlaySFX(AudioSource audio, bool loop)
+    //{
 
-        audio.Play();
-        if (loop == true)
-            audio.loop = true;
-    }
+    //    audio.Play();
+    //    if (loop == true)
+    //        audio.loop = true;
+    //}
 
     public void CalmStart(float volume)
     {
