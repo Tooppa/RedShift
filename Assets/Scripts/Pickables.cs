@@ -15,7 +15,6 @@ public class Pickables : MonoBehaviour
     public bool RocketBoots { private set; get; }
     public bool Gun { private set; get; }
     public bool Flashlight { private set; get; }
-    private GameObject _interact;
     [HideInInspector]public int fuel;
 
     private void Awake()
@@ -31,22 +30,7 @@ public class Pickables : MonoBehaviour
         transform.GetComponentInChildren<Light2D>().enabled = Flashlight;
     }
 
-    public void ShowInteract()
-    {
-        if (!_interact)
-        {
-            _interact = Instantiate(data.floatingText, transform.position + Vector3.up, quaternion.identity, transform);
-            return;
-        }
-        _interact.SetActive(true);
-    }
-
-    public void HideInteract()
-    {
-        _interact.SetActive(false);
-    }
-
-    public string getNote()
+    public string GetNote()
     {
         return data.note;
     }
