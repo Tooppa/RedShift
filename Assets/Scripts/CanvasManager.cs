@@ -5,15 +5,12 @@ using UnityEngine.UI;
 public class CanvasManager : MonoBehaviour
 {
     public static CanvasManager Instance { get; private set; }
-    public GameObject screenImage;
-    public GameObject noteImage;
-    public GameObject tooltip;
+    public GameObject uiButton;
     public GameObject hud;
     public GameObject noteScreen;
     public Transform storedNotesScreen;
-    public Transform pickableScreen;
-    public Transform upgradeScreen;
-    public Slider healthSlider;
+    public Transform upgradeGrid;
+    public TextMeshProUGUI upgradeText;
     public Slider fuelSlider;
 
     private void Awake()
@@ -34,29 +31,16 @@ public class CanvasManager : MonoBehaviour
         else
             ResumeGame();
     }
-
-    public void SetHealth(int health)
-    {
-        healthSlider.value = health;
-    }
     public void SetFuel(int fuel)
     {
         fuelSlider.value = fuel;
     }
-
-    public void AddNewImage(Sprite sprite)
-    {
-        var obj = Instantiate(screenImage, pickableScreen);
-        obj.GetComponent<Image>().sprite = sprite;
-    }
     public void AddNewUpgrade(Sprite sprite, string stats)
     {
-        var image = Instantiate(screenImage, upgradeScreen);
-        image.GetComponent<Image>().sprite = sprite;
-        var spawnedTooltip = Instantiate(tooltip, image.transform);
-        var pos = spawnedTooltip.transform.position;
-        spawnedTooltip.transform.position = new Vector3(pos.x + 1, pos.y - .5f , pos.z);
-        spawnedTooltip.GetComponent<TooltipScript>().ShowTooltip(stats);
+        var upgrade = Instantiate(uiButton, upgradeGrid);
+        upgrade.GetComponent<Image>().sprite = sprite;
+        var btn = upgrade.GetComponent<Button>();
+        btn.onClick.AddListener(() => { upgradeText.text = stats; });
     }
 
     private void PauseGame()
@@ -76,11 +60,11 @@ public class CanvasManager : MonoBehaviour
         PauseGame();
     }
 
-    public void AddNewNote(GameObject go)
+    public void AddNewNote(Sprite sprite, string note)
     {
-        var obj = Instantiate(noteImage, storedNotesScreen);
-        obj.GetComponent<Image>().sprite = go.GetComponent<SpriteRenderer>().sprite;
+        var obj = Instantiate(uiButton, storedNotesScreen);
+        obj.GetComponent<Image>().sprite = sprite;
         var btn = obj.GetComponent<Button>();
-        btn.onClick.AddListener(() => { ShowText(go.GetComponent<Pickables>().getNote());});
+        btn.onClick.AddListener(() => { ShowText(note);});
     }
 }
