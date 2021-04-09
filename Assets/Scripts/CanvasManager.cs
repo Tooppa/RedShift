@@ -11,6 +11,7 @@ public class CanvasManager : MonoBehaviour
     public GameObject floatingText;
     public GameObject hud;
     public GameObject noteScreen;
+    public GameObject rocketButton;
     public Transform storedNotesScreen;
     public Transform upgradeGrid;
     public TextMeshProUGUI upgradeText;
@@ -24,6 +25,7 @@ public class CanvasManager : MonoBehaviour
     {
         Instance = this;
         _currentNoteScreenHeight = 0;
+        rocketButton.SetActive(false);
     }
 
     private void Start()
@@ -74,6 +76,9 @@ public class CanvasManager : MonoBehaviour
     {
         if (!_currentNoteScreen || location != _currentLocation)
         {
+            // special case for rocket area
+            if(location == "Rocket")
+                rocketButton.SetActive(true);
             var current = Instantiate(notesByLocation, storedNotesScreen);
             _currentNoteScreen = current.GetComponentInChildren<HorizontalLayoutGroup>().transform;
             _currentLocation = location;
