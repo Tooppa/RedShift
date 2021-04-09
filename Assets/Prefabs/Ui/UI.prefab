@@ -2315,9 +2315,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiButton: {fileID: 5896334881187268010, guid: 4c4b920ed0adad747890179583e411c4, type: 3}
+  notesByLocation: {fileID: 1916781580715854640, guid: aaf433c0feeb6044f90b81bc2d98b6d5, type: 3}
   hud: {fileID: 8389815746921093069}
   noteScreen: {fileID: 8389815745677484111}
-  storedNotesScreen: {fileID: 0}
+  storedNotesScreen: {fileID: 8892225452591331775}
   upgradeGrid: {fileID: 6144790300335266735}
   upgradeText: {fileID: 6442273210417872210}
   fuelSlider: {fileID: 6201462242007582969}

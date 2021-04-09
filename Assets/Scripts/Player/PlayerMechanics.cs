@@ -134,8 +134,6 @@ namespace Player
         private void OnTriggerStay2D(Collider2D other)
         {
             if (!other.CompareTag("Pickable")) return;
-            var component = other.gameObject.GetComponent<Pickables>();
-            if (!component.IsNote && !component.Flashlight) return;
             _pickableRange = true;
             _pickableItem = other.gameObject;
         }
@@ -156,9 +154,7 @@ namespace Player
         private void OnTriggerExit2D(Collider2D other)
         {
             if (!other.CompareTag("Pickable")) return;
-            var pickables = other.gameObject.GetComponent<Pickables>();
-            if (!pickables.IsNote && !pickables.Flashlight) return;
-            pickables.HideInteract();
+            other.gameObject.GetComponent<Pickables>().HideInteract();
             _pickableRange = false;
         }
 
