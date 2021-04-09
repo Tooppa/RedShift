@@ -6,28 +6,30 @@ namespace Player
 {
     public class PlayerMechanics : MonoBehaviour
     {
+        public string startLocation;
         private int _fuel;
         private int _health = 10;
         private bool _pickableRange;
         
-        private GameObject _pickableNote;
+        private GameObject _pickableItem;
         private CanvasManager _canvasManager;
         private PlayerMovement _playerMovement;
         private PlayerGun _playerGun;
         private PlayerControls _playerControls;
         private Flashlight _flashlight;
         private bool _inCooldown = false;
+        private string _currentLocation;
 
         private void Awake()
         {
             _playerControls = new PlayerControls();
+            _currentLocation = startLocation;
         }
 
         private void Start()
         {
             _canvasManager = CanvasManager.Instance;
             _canvasManager.SetFuel(_fuel);
-            _canvasManager.SetHealth(_health);
             _playerMovement = gameObject.GetComponent<PlayerMovement>();
             _playerGun = gameObject.GetComponent<PlayerGun>();
             _flashlight = gameObject.GetComponentInChildren<Flashlight>();
@@ -38,7 +40,7 @@ namespace Player
             _playerControls.Surface.OpenHud.started += _ => _canvasManager.SetHudActive();
             _playerControls.Surface.Shoot.started += _ => _playerGun.Shoot();
             _playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
-            _playerControls.Surface.Interact.started += _ => ReadNote();
+            _playerControls.Surface.Interact.started += _ => PickItem();
         }
 
         private void Update()
@@ -89,19 +91,7 @@ namespace Player
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.CompareTag("Pickable")) return;
-
-            var go = other.gameObject;
-            var pickables = go.GetComponent<Pickables>();
-            var sprite = go.GetComponent<SpriteRenderer>().sprite;
-            
-            if (pickables.IsNote || pickables.Flashlight)
-            {
-                pickables.ShowInteract();
-                return;
-            }
-            SpecialPickups(pickables, sprite);
-            go.SetActive(false);
-            _canvasManager.AddNewImage(sprite);
+            _canvasManager.ShowInteract(other.transform);
         }
 
         private void SpecialPickups(Pickables pickables, Sprite sprite)
@@ -134,32 +124,33 @@ namespace Player
         private void OnTriggerStay2D(Collider2D other)
         {
             if (!other.CompareTag("Pickable")) return;
-            var component = other.gameObject.GetComponent<Pickables>();
-            if (!component.IsNote && !component.Flashlight) return;
             _pickableRange = true;
-            _pickableNote = other.gameObject;
+            _pickableItem = other.gameObject;
         }
 
-        private void ReadNote()
+        private void PickItem()
         {
-            var component = _pickableNote ? _pickableNote.GetComponent<Pickables>() : null;
-            if (!component || !_pickableRange || (!component.IsNote && !component.Flashlight)) return;
+            var component = _pickableItem ? _pickableItem.GetComponent<Pickables>() : null;
+            if (!component || !_pickableRange) return;
             
-            var sprite = _pickableNote.GetComponent<SpriteRenderer>().sprite;
+            var sprite = _pickableItem.GetComponent<SpriteRenderer>().sprite;
             SpecialPickups(component, sprite);
-            _pickableNote.gameObject.SetActive(false);
-            if (component.Flashlight) return;
-            _canvasManager.ShowText(component.getNote());
-            _canvasManager.AddNewNote(_pickableNote);
+            _pickableItem.gameObject.SetActive(false);
+            if (!component.IsNote) return;
+            _canvasManager.ShowText(component.GetNote());
+            _canvasManager.AddNewNote(sprite, component.GetNote(), _currentLocation);
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             if (!other.CompareTag("Pickable")) return;
-            var pickables = other.gameObject.GetComponent<Pickables>();
-            if (!pickables.IsNote && !pickables.Flashlight) return;
-            pickables.HideInteract();
+            _canvasManager.HideInteract();
             _pickableRange = false;
+        }
+
+        public void ChangeLocation(string newLocation)
+        {
+            _currentLocation = newLocation;
         }
 
         private void OnEnable()

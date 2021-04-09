@@ -15,8 +15,9 @@ MonoBehaviour:
   name: RocketBoots
   sprite: {fileID: 21300000, guid: 5c3f80a43e0bc1640a86c42b0af271fa, type: 3}
   note: 
-  floatingText: {fileID: 0}
+  floatingText: {fileID: 5894124435458801362, guid: 8bbc9053982ed644f9a61c4fe10d3ae4, type: 3}
   fuel: 0
   rocketBoots: 1
   gun: 0
-  statsForUpgrades: "Allows player to \ndash 4 blocks with \n0.6/s cooldown."
+  flashlight: 0
+  statsForUpgrades: Allows player to dash.
