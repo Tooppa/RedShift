@@ -6,6 +6,7 @@ namespace Player
 {
     public class PlayerMechanics : MonoBehaviour
     {
+        public string startLocation;
         private int _fuel;
         private int _health = 10;
         private bool _pickableRange;
@@ -17,10 +18,12 @@ namespace Player
         private PlayerControls _playerControls;
         private Flashlight _flashlight;
         private bool _inCooldown = false;
+        private string _currentLocation;
 
         private void Awake()
         {
             _playerControls = new PlayerControls();
+            _currentLocation = startLocation;
         }
 
         private void Start()
@@ -88,20 +91,7 @@ namespace Player
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.CompareTag("Pickable")) return;
-
-            var go = other.gameObject;
-            var pickables = go.GetComponent<Pickables>();
-            var sprite = go.GetComponent<SpriteRenderer>().sprite;
-            pickables.ShowInteract();
-            /*
-            if (pickables.IsNote || pickables.Flashlight)
-            {
-                pickables.ShowInteract();
-                return;
-            }
-            SpecialPickups(pickables, sprite);
-            go.SetActive(false);
-            */
+            _canvasManager.ShowInteract(other.transform);
         }
 
         private void SpecialPickups(Pickables pickables, Sprite sprite)
@@ -147,15 +137,20 @@ namespace Player
             SpecialPickups(component, sprite);
             _pickableItem.gameObject.SetActive(false);
             if (!component.IsNote) return;
-            _canvasManager.ShowText(component.getNote());
-            _canvasManager.AddNewNote(sprite, component.getNote());
+            _canvasManager.ShowText(component.GetNote());
+            _canvasManager.AddNewNote(sprite, component.GetNote(), _currentLocation);
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             if (!other.CompareTag("Pickable")) return;
-            other.gameObject.GetComponent<Pickables>().HideInteract();
+            _canvasManager.HideInteract();
             _pickableRange = false;
+        }
+
+        public void ChangeLocation(string newLocation)
+        {
+            _currentLocation = newLocation;
         }
 
         private void OnEnable()
