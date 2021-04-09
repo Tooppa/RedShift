@@ -15,6 +15,46 @@ public class SFX : MonoBehaviour
     public AudioSource morkoGrowl1;
     public AudioSource morkoGrowl2;
 
+    public string CurrentMusicPlaying()
+    {
+        for(int i = 0;i < transform.GetChild(1).childCount; i++)
+        {
+            if (transform.GetChild(1).GetChild(i).GetComponent<AudioSource>().isPlaying)
+            {
+                if (transform.GetChild(1).GetChild(i).GetComponent<AudioSource>() == calmAmbience)
+                    return "Calm";
+
+                if (transform.GetChild(1).GetChild(i).GetComponent<AudioSource>() == intenseMusic)
+                    return "Intense";
+
+            }
+        }
+        return "";
+    }
+
+    public bool IsAmbiencePlaying()
+    {
+        for (int i = 0; i < transform.GetChild(0).childCount; i++)
+        {
+            if (transform.GetChild(0).GetChild(i).GetComponent<AudioSource>().isPlaying)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void StopAllMusic()
+    {
+        for (int i = 0; i < transform.GetChild(1).childCount; i++)
+        {
+            if (transform.GetChild(1).GetChild(i).GetComponent<AudioSource>().isPlaying)
+            {
+                transform.GetChild(1).GetChild(i).GetComponent<AudioSource>().Stop();
+            }
+        }
+    }
+
     public void PlayClick()
     {
         playerFlashlight.Play();
