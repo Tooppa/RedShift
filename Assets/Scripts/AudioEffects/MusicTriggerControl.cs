@@ -5,7 +5,7 @@ using UnityEngine;
 public class MusicTriggerControl : MonoBehaviour
 {
     private SFX _audioController;
-    public SoundSourceScriptable soundSourceData;
+    //public SoundSourceScriptable soundSourceData;
 
     private AudioSource _audio;
     private AudioSource _audioToFadeOut;
