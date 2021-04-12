@@ -37,7 +37,7 @@ namespace Particle_System
                 _pointLight.intensity += increment;
                 yield return new WaitForEndOfFrame();
             }
-            CameraEffects.Instance.ShakeCamera(1,.1f);
+            CameraEffects.Instance.ShakeCamera(2,.7f);
             _laser.SetPosition(1, new Vector3( 20,0,0));
             while (_pointLight.intensity > 0)
             {
@@ -45,6 +45,7 @@ namespace Particle_System
                 _pointLight.intensity -= increment;
                 yield return new WaitForEndOfFrame();
             }
+            _pointLight.intensity = 0;
             yield return new WaitForSeconds(.5f);
             _laser.SetPosition(1, Vector3.zero);
         }
