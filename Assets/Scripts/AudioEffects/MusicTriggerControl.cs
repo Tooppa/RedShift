@@ -5,28 +5,31 @@ using UnityEngine;
 public class MusicTriggerControl : MonoBehaviour
 {
     private SFX _audioController;
+    private GameObject player;
     //public SoundSourceScriptable soundSourceData;
 
-    private AudioSource _audio;
-    private AudioSource _audioToFadeOut;
-    private AudioSource _audioToFadeIn;
+    public AudioSource _audio;
+    public AudioSource _audioToFadeOut;
+    public AudioSource _audioToFadeIn;
+
 
     //private AudioSource instantiableAudio;
     //private GameObject soundSource;
     //private Vector2 soundSourceLocation;
     //private bool soundSourceLoop;
 
-    private bool canBeFaded = false;
-    private bool lowerTheSelectedSoundVolume = false;
-    private bool increaseTheSelectedSoundVolume = false;
-    private bool upIsTriggered = false;
-    private bool downIsTriggered = false;
-    private bool loop = false;
+    public bool canBeFaded = false;
+    public bool lowerTheSelectedSoundVolume = false;
+    public bool increaseTheSelectedSoundVolume = false;
+    public bool upIsTriggered = false;
+    public bool downIsTriggered = false;
+    public bool loop = false;
+    public bool destroyOnTrigger = false;
 
-    private float fadeTime = 4;
-    private float desiredVolume = 0.5f;
+    public float fadeTime = 4;
+    public float desiredVolume = 0.5f;
     private float startingPitch = 1;
-    private float desiredPitch;
+    public float desiredPitch;
 
     private void Awake()
     {
@@ -37,6 +40,7 @@ public class MusicTriggerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
         _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
     }
 
@@ -104,7 +108,7 @@ public class MusicTriggerControl : MonoBehaviour
 
     private void DownPitcher()
     {
-        _audio.pitch -= Time.deltaTime * startingPitch / fadeTime;
+         _audio.pitch -= Time.deltaTime * startingPitch / fadeTime;
         if (_audio.pitch <= desiredPitch - 0.02)
         {
             downIsTriggered = false;
@@ -144,7 +148,7 @@ public class MusicTriggerControl : MonoBehaviour
 
     public void StartSelectedAudio(float volume)
     {
-        if(!_audioController.calmAmbience.isPlaying)
+        if(!_audio.isPlaying)
         {
             increaseTheSelectedSoundVolume = false;
             lowerTheSelectedSoundVolume = false;
@@ -198,7 +202,9 @@ public class MusicTriggerControl : MonoBehaviour
     public void FadeOutSelectedAudio()
     {
         increaseTheSelectedSoundVolume = false;
-        lowerTheSelectedSoundVolume = true;    
+        lowerTheSelectedSoundVolume = true;
+        //increaseTheSelectedSoundVolume = false;
+        //lowerTheSelectedSoundVolume = true;    
     }
 
     public void FadeInSelectedAudio(float volume)
@@ -273,8 +279,92 @@ public class MusicTriggerControl : MonoBehaviour
     //    Instantiate(soundSource, soundSourceLocation, Quaternion.identity);
     //}
 
-    public void DestroyGameObject(GameObject go)
-    {
-        Destroy(go);
-    }
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.gameObject == player)
+    //    {
+    //        switch (audioOptions)
+    //        {
+    //            case AudioOptions.Start:
+
+    //                upIsTriggered = false;
+    //                downIsTriggered = false;
+    //                if (!_audio.isPlaying)
+    //                {
+
+    //                    increaseTheSelectedSoundVolume = false;
+    //                    lowerTheSelectedSoundVolume = false;
+    //                    _audioController.StopAllMusic();
+    //                    _audio.volume = desiredVolume;
+    //                    _audio.Play();
+    //                    if (destroyOnTrigger)
+    //                        Destroy(gameObject);
+    //                }
+    //                break;
+
+    //            case AudioOptions.Stop:
+
+    //                _audio.Stop();
+    //                if (destroyOnTrigger)
+    //                    Destroy(gameObject);
+    //                break;
+
+    //            case AudioOptions.FadeOut:
+
+    //                upIsTriggered = false;
+    //                downIsTriggered = false;
+    //                increaseTheSelectedSoundVolume = false;
+    //                lowerTheSelectedSoundVolume = true;
+    //                if (destroyOnTrigger)
+    //                    Destroy(gameObject);
+    //                break;
+
+    //            case AudioOptions.FadeIn:
+    //                upIsTriggered = false;
+    //                downIsTriggered = false;
+    //                lowerTheSelectedSoundVolume = false;
+    //                increaseTheSelectedSoundVolume = true;
+    //                if (destroyOnTrigger)
+    //                    Destroy(gameObject);
+    //                break;
+
+    //            case AudioOptions.FadeOutAndIn:
+
+    //                if (_audioToFadeIn.isPlaying)
+    //                {
+    //                    break;
+    //                }
+
+    //                canBeFaded = true;
+    //                if (destroyOnTrigger)
+    //                    Destroy(gameObject);
+    //                break;
+
+    //            case AudioOptions.PitchUp:
+    //                downIsTriggered = false;
+    //                upIsTriggered = true;
+    //                if (destroyOnTrigger)
+    //                    Destroy(gameObject);
+    //                break;
+
+    //            case AudioOptions.PitchDown:
+    //                upIsTriggered = false;
+    //                downIsTriggered = true;
+    //                if (destroyOnTrigger)
+    //                    Destroy(gameObject);
+    //                break;
+
+    //        }
+    //    }
+    //}
+    //public enum AudioOptions
+    //{
+    //    Start,
+    //    Stop,
+    //    FadeOut,
+    //    FadeIn,
+    //    FadeOutAndIn,
+    //    PitchUp,
+    //    PitchDown
+    //};
 }
