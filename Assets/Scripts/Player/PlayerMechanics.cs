@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Experimental.Rendering.Universal;
 
 namespace Player
 {
@@ -158,6 +160,27 @@ namespace Player
             if (newLocation == "Rocket")
             {
                 _canvasManager.ShowRocketButton();
+            }
+        }
+
+        public void DisablePlayerLightsForSeconds(float sec)
+        {
+            StartCoroutine(DisableLights(sec));
+        }
+
+        private IEnumerator DisableLights(float sec)
+        {
+            var light2Ds = GetComponentsInChildren<Light2D>();
+            List<float> values = new List<float>();
+            for (var i = 0; i < light2Ds.Length; i++)
+            {
+                values.Add(light2Ds[i].intensity);
+                light2Ds[i].intensity = 0;
+            }
+            yield return new WaitForSeconds(sec);
+            for (var i = 0; i < light2Ds.Length; i++)
+            {
+                light2Ds[i].intensity = values[i];
             }
         }
 
