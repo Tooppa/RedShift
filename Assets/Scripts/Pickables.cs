@@ -33,6 +33,11 @@ public class Pickables : MonoBehaviour
 
     }
 
+    public Sprite GetSprite()
+    {
+        return data.sprite;
+    }
+
     public string GetNote()
     {
         return data.note;

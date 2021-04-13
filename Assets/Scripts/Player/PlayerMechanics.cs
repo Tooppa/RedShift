@@ -98,13 +98,7 @@ namespace Player
 
         private void SpecialPickups(GameObject go)
         {
-            if (go.TryGetComponent(out Trigger trigger))
-            {
-                trigger.@event.Invoke();
-                return;
-            }
             var pickables = go.GetComponent<Pickables>();
-            var sprite = _pickableItem.GetComponent<SpriteRenderer>().sprite;
             if (pickables.HasFuel)
             {
                 _fuel += pickables.fuel;
@@ -114,20 +108,22 @@ namespace Player
             if (pickables.RocketBoots && !_playerMovement.HasRocketBoots)
             {
                 _playerMovement.EquipRocketBoots();
-                _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
+                _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
             if (pickables.Gun && !_playerGun.HasGun)
             {
                 _playerGun.EquipGun();
-                _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
+                _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
             if (pickables.Flashlight && !_flashlight.HasFlashlight)
             {
                 _flashlight.EquipFlashlight();
                 _flashlight.SwitchLight();
                 _playerGun.gun.SetActive(!_playerGun.gun.activeInHierarchy);
-                _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
+                _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
+            if (go.TryGetComponent(out Trigger trigger))
+                trigger.@event.Invoke();
         }
 
         private void OnTriggerStay2D(Collider2D other)
