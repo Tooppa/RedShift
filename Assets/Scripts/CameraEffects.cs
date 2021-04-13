@@ -39,6 +39,18 @@ public class CameraEffects : MonoBehaviour
         perlin.m_AmplitudeGain = 0f;
     }
 
+    public void ShakeInsideRocket()
+    {
+        StartCoroutine(RocketScene());
+    }
+
+    private IEnumerator RocketScene()
+    {
+        ShakeCamera(3, 1);
+        yield return new WaitForSeconds(1.5f);
+        ShakeCamera(5, .1f);
+    }
+
     public void ChangeOffset(float timer, float x)
     {
         StartCoroutine(Offset(timer, _transposer.m_TrackedObjectOffset.x, x));

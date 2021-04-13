@@ -22,7 +22,7 @@ namespace Particle_System
             _pointLight.intensity = 0;
         }
 
-        private void Start()
+        private void OnEnable()
         {
             StartCoroutine(ShootLaser());
         }
