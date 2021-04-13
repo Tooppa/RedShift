@@ -76,9 +76,6 @@ public class CanvasManager : MonoBehaviour
     {
         if (!_currentNoteScreen || location != _currentLocation)
         {
-            // special case for rocket area
-            if(location == "Rocket")
-                rocketButton.SetActive(true);
             var current = Instantiate(notesByLocation, storedNotesScreen);
             _currentNoteScreen = current.GetComponentInChildren<HorizontalLayoutGroup>().transform;
             _currentLocation = location;
@@ -115,5 +112,10 @@ public class CanvasManager : MonoBehaviour
             return;
         }
         _interact.SetActive(true);
+    }
+
+    public void ShowRocketButton()
+    {
+        rocketButton.SetActive(true);
     }
 }
