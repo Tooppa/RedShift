@@ -25,6 +25,7 @@ namespace Player
         {
             _playerControls = new PlayerControls();
             _currentLocation = startLocation;
+            _pickableItem = new GameObject();
         }
 
         private void Start()
@@ -95,8 +96,9 @@ namespace Player
             _canvasManager.ShowInteract(other.transform);
         }
 
-        private void SpecialPickups(Pickables pickables, Sprite sprite)
+        private void SpecialPickups(GameObject go, Sprite sprite)
         {
+            var pickables = go.GetComponent<Pickables>();
             if (pickables.HasFuel)
             {
                 _fuel += pickables.fuel;
@@ -120,7 +122,7 @@ namespace Player
                 _playerGun.gun.SetActive(!_playerGun.gun.activeInHierarchy);
                 _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
             }
-            if (pickables.gameObject.TryGetComponent(out Trigger trigger))
+            if (go.TryGetComponent(out Trigger trigger))
             {
                 Debug.Log("VAR");
                 trigger.@event.Invoke();
@@ -136,11 +138,10 @@ namespace Player
 
         private void PickItem()
         {
-            var component = _pickableItem ? _pickableItem.GetComponent<Pickables>() : null;
-            if (!component || !_pickableRange) return;
+            if (!_pickableItem.TryGetComponent(out Pickables component) || !_pickableRange) return;
             
             var sprite = _pickableItem.GetComponent<SpriteRenderer>().sprite;
-            SpecialPickups(component, sprite);
+            SpecialPickups(_pickableItem, sprite);
             _pickableItem.gameObject.SetActive(false);
             if (!component.IsNote) return;
             _canvasManager.ShowText(component.GetNote());
