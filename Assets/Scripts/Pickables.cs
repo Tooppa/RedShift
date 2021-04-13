@@ -19,15 +19,18 @@ public class Pickables : MonoBehaviour
 
     private void Awake()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = data.sprite;
+        if(TryGetComponent(out _spriteRenderer))
+            _spriteRenderer.sprite = data.sprite;
         IsNote = data.note.Length > 0;
         HasFuel = data.fuel > 0;
         RocketBoots = data.rocketBoots;
         Gun = data.gun;
         Flashlight = data.flashlight;
         fuel = data.fuel;
-        transform.GetComponentInChildren<Light2D>().enabled = Flashlight;
+        var light2D = transform.GetComponentInChildren<Light2D>();
+        if (light2D)
+            light2D.enabled = Flashlight;
+
     }
 
     public string GetNote()

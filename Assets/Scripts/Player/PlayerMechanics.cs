@@ -158,6 +158,11 @@ namespace Player
         public void ChangeLocation(string newLocation)
         {
             _currentLocation = newLocation;
+            //Special case for rocket
+            if (newLocation == "Rocket")
+            {
+                _canvasManager.ShowRocketButton();
+            }
         }
 
         private void OnEnable()
