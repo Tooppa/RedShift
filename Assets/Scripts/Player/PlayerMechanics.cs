@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Experimental.Rendering.Universal;
 
 namespace Player
 {
@@ -24,6 +27,7 @@ namespace Player
         {
             _playerControls = new PlayerControls();
             _currentLocation = startLocation;
+            _pickableItem = new GameObject();
         }
 
         private void Start()
@@ -94,8 +98,9 @@ namespace Player
             _canvasManager.ShowInteract(other.transform);
         }
 
-        private void SpecialPickups(Pickables pickables, Sprite sprite)
+        private void SpecialPickups(GameObject go)
         {
+            var pickables = go.GetComponent<Pickables>();
             if (pickables.HasFuel)
             {
                 _fuel += pickables.fuel;
@@ -105,20 +110,22 @@ namespace Player
             if (pickables.RocketBoots && !_playerMovement.HasRocketBoots)
             {
                 _playerMovement.EquipRocketBoots();
-                _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
+                _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
             if (pickables.Gun && !_playerGun.HasGun)
             {
                 _playerGun.EquipGun();
-                _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
+                _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
             if (pickables.Flashlight && !_flashlight.HasFlashlight)
             {
                 _flashlight.EquipFlashlight();
                 _flashlight.SwitchLight();
                 _playerGun.gun.SetActive(!_playerGun.gun.activeInHierarchy);
-                _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
+                _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
+            if (go.TryGetComponent(out Trigger trigger))
+                trigger.@event.Invoke();
         }
 
         private void OnTriggerStay2D(Collider2D other)
@@ -130,14 +137,12 @@ namespace Player
 
         private void PickItem()
         {
-            var component = _pickableItem ? _pickableItem.GetComponent<Pickables>() : null;
-            if (!component || !_pickableRange) return;
-            
-            var sprite = _pickableItem.GetComponent<SpriteRenderer>().sprite;
-            SpecialPickups(component, sprite);
+            if (!_pickableRange) return;
+            SpecialPickups(_pickableItem);
             _pickableItem.gameObject.SetActive(false);
-            if (!component.IsNote) return;
+            if (!_pickableItem.TryGetComponent(out Pickables component) || !component.IsNote) return;
             _canvasManager.ShowText(component.GetNote());
+            var sprite = _pickableItem.GetComponent<SpriteRenderer>().sprite;
             _canvasManager.AddNewNote(sprite, component.GetNote(), _currentLocation);
         }
 
@@ -151,6 +156,32 @@ namespace Player
         public void ChangeLocation(string newLocation)
         {
             _currentLocation = newLocation;
+            //Special case for rocket
+            if (newLocation == "Rocket")
+            {
+                _canvasManager.ShowRocketButton();
+            }
+        }
+
+        public void DisablePlayerLightsForSeconds(float sec)
+        {
+            StartCoroutine(DisableLights(sec));
+        }
+
+        private IEnumerator DisableLights(float sec)
+        {
+            var light2Ds = GetComponentsInChildren<Light2D>();
+            List<float> values = new List<float>();
+            for (var i = 0; i < light2Ds.Length; i++)
+            {
+                values.Add(light2Ds[i].intensity);
+                light2Ds[i].intensity = 0;
+            }
+            yield return new WaitForSeconds(sec);
+            for (var i = 0; i < light2Ds.Length; i++)
+            {
+                light2Ds[i].intensity = values[i];
+            }
         }
 
         private void OnEnable()

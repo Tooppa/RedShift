@@ -10,7 +10,7 @@ public class Trigger : MonoBehaviour
     public UnityEvent @event;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag(collideWith))
+        if (other.gameObject.CompareTag(collideWith) && !transform.CompareTag("Pickable"))
             @event.Invoke();
     }
 }
