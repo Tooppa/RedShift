@@ -8,6 +8,7 @@ public class AudioTriggerController : MonoBehaviour
     private SFX _audioController;
     private MusicTriggerControl musicTriggerController;
     private GameObject player;
+    public GameObject destroyableSoundSource;
 
     public AudioOptions audioOptions = new AudioOptions();
 
@@ -186,6 +187,9 @@ public class AudioTriggerController : MonoBehaviour
                     musicTriggerController.PlaySFX();
                     break;
 
+                case AudioOptions.DestroySoundSource:
+                    Destroy(destroyableSoundSource);
+                    break;
             }
         }
     }
@@ -203,7 +207,8 @@ public class AudioTriggerController : MonoBehaviour
         FadeOutAndInSFX,
         PitchUpSFX,
         PitchDownSFX,
-        PlaySFX
+        PlaySFX,
+        DestroySoundSource
     };
 }
 

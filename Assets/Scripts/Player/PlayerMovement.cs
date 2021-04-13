@@ -109,10 +109,13 @@ namespace Player
                     _audioController.PlayRunning();
                     StartCoroutine(RunningSoundCooldown());
                 }
+                else if (!_isGrounded)
+                    _audioController.playerRunning.Stop();
             }
             else
             {
                 _animator.SetBool(Walking, false);
+                _audioController.playerRunning.Stop();
             }
 
             if (Mathf.Abs(_rigidbody2D.velocity.x) < maxSpeed)
