@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player
 {
@@ -118,6 +119,11 @@ namespace Player
                 _flashlight.SwitchLight();
                 _playerGun.gun.SetActive(!_playerGun.gun.activeInHierarchy);
                 _canvasManager.AddNewUpgrade(sprite, pickables.GetStats());
+            }
+            if (pickables.gameObject.TryGetComponent(out Trigger trigger))
+            {
+                Debug.Log("VAR");
+                trigger.@event.Invoke();
             }
         }
 
