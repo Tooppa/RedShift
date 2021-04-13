@@ -8,9 +8,12 @@ public class MusicTriggerControl : MonoBehaviour
     private GameObject player;
     //public SoundSourceScriptable soundSourceData;
 
-    public AudioSource _audio;
-    public AudioSource _audioToFadeOut;
-    public AudioSource _audioToFadeIn;
+    private AudioSource _music;
+    private AudioSource _sfx;
+    private AudioSource _musicToFadeOut;
+    private AudioSource _musicToFadeIn;
+    private AudioSource _sfxToFadeOut;
+    private AudioSource _sfxToFadeIn;
 
 
     //private AudioSource instantiableAudio;
@@ -18,21 +21,30 @@ public class MusicTriggerControl : MonoBehaviour
     //private Vector2 soundSourceLocation;
     //private bool soundSourceLoop;
 
-    public bool canBeFaded = false;
-    public bool lowerTheSelectedSoundVolume = false;
-    public bool increaseTheSelectedSoundVolume = false;
+    private bool canBeFadedMusic = false;
+    private bool canBeFadedSFX = false;
+    private bool lowerTheSelectedMusicVolume = false;
+    private bool increaseTheSelectedMusicVolume = false;
+    private bool lowerTheSelectedSFXVolume = false;
+    private bool increaseTheSelectedSFXVolume = false;
     public bool upIsTriggered = false;
     public bool downIsTriggered = false;
-    public bool loop = false;
+    private bool loop = false;
     public bool destroyOnTrigger = false;
 
-    public float fadeTime = 4;
-    public float desiredVolume = 0.5f;
+    private float musicFadeTime = 4;
+    private float sfxFadeTime = 4;
+    private float desiredVolume = 0.5f;
+    private float desiredIncreasedMusicVolume = 0;
+    private float desiredIncreasedSFXVolume = 0;
+    private float desiredFadedMusicVolume = 0;
+    private float desiredFadedSFXVolume = 0;
     private float startingPitch = 1;
-    public float desiredPitch;
+    private float desiredPitch;
 
     private void Awake()
     {
+
         //instantiableAudio = soundSourceData.audio;
         //soundSourceLocation = soundSourceData.location;
         //soundSourceLoop = soundSourceData.loop;
@@ -49,123 +61,196 @@ public class MusicTriggerControl : MonoBehaviour
         //if (lowerTheMusicVolume)
         //    MusicFade();
 
-        if (lowerTheSelectedSoundVolume)
-            AudioFade();
+        if (lowerTheSelectedMusicVolume)
+            MusicFade();
 
         //if (increaseTheMusicVolume)
         //    MusicIncrease();
 
-        if (increaseTheSelectedSoundVolume)
-            AudioIncrease();
+        if (increaseTheSelectedMusicVolume)
+            MusicIncrease();
+
+        if (lowerTheSelectedSFXVolume)
+            SFXFade();
+
+        if (increaseTheSelectedSFXVolume)
+            SFXIncrease();
 
         if (downIsTriggered)
-            DownPitcher();
+            SFXDownPitcher();
 
         if (upIsTriggered)
-            UpPitcher();
+            SFXUpPitcher();
 
-        if (canBeFaded)
-            FadeOutAndInControl();
+        if (canBeFadedMusic)
+            FadeOutAndInMusicControl();
+
+        if (canBeFadedSFX)
+            FadeOutAndInSFXControl();
 
     }
 
-    private void AudioIncrease()
+    private void MusicIncrease()
     {
-        lowerTheSelectedSoundVolume = false;
-        if (_audioToFadeIn.volume >= desiredVolume)
+        lowerTheSelectedMusicVolume = false;
+        if (_musicToFadeIn.volume >= desiredIncreasedMusicVolume)
         {
-            increaseTheSelectedSoundVolume = false;
-            _audioToFadeIn.volume = desiredVolume;
+            increaseTheSelectedMusicVolume = false;
+            _musicToFadeIn.volume = desiredIncreasedMusicVolume;
             return;
         }
 
-        _audioToFadeIn.volume += Time.deltaTime * 1 / fadeTime;
+        _musicToFadeIn.volume += Time.deltaTime * 1 / musicFadeTime;
 
-        if (_audioToFadeIn.volume >= desiredVolume)
+        if (_musicToFadeIn.volume >= desiredIncreasedMusicVolume)
         {
-            _audioToFadeIn.volume = desiredVolume;
-            increaseTheSelectedSoundVolume = false;
+            _musicToFadeIn.volume = desiredIncreasedMusicVolume;
+            increaseTheSelectedMusicVolume = false;
         }
     }
 
-    private void AudioFade()
+    private void MusicFade()
     {
-        increaseTheSelectedSoundVolume = false;
-        if (_audioToFadeOut.volume == 0)
+        increaseTheSelectedMusicVolume = false;
+        if (_musicToFadeOut.volume == desiredFadedMusicVolume)
         {
-            lowerTheSelectedSoundVolume = false;
+            lowerTheSelectedMusicVolume = false;
             return;
         }
 
-        _audioToFadeOut.volume -= Time.deltaTime * 1 / fadeTime;
+        _musicToFadeOut.volume -= Time.deltaTime * 1 / musicFadeTime;
 
-        if (_audioToFadeOut.volume == 0)
+        if (_musicToFadeOut.volume <= desiredFadedMusicVolume)
         {
             //_audio.Pause();
-            lowerTheSelectedSoundVolume = false;
+            _musicToFadeOut.volume = desiredFadedMusicVolume;
+            lowerTheSelectedMusicVolume = false;
         }
     }
 
-    private void DownPitcher()
+    private void SFXFade()
     {
-         _audio.pitch -= Time.deltaTime * startingPitch / fadeTime;
-        if (_audio.pitch <= desiredPitch - 0.02)
+        increaseTheSelectedSFXVolume = false;
+        if (_sfxToFadeOut.volume == desiredFadedSFXVolume)
+        {
+            lowerTheSelectedSFXVolume = false;
+            return;
+        }
+
+        _sfxToFadeOut.volume -= Time.deltaTime * 1 / sfxFadeTime;
+
+        if (_sfxToFadeOut.volume <= desiredFadedSFXVolume)
+        {
+            //_audio.Pause();
+            _sfxToFadeOut.volume = desiredFadedSFXVolume;
+            lowerTheSelectedSFXVolume = false;
+        }
+    }
+
+    private void SFXIncrease()
+    {
+        lowerTheSelectedSFXVolume = false;
+        if (_sfxToFadeIn.volume >= desiredIncreasedSFXVolume)
+        {
+            increaseTheSelectedSFXVolume = false;
+            _sfxToFadeIn.volume = desiredIncreasedSFXVolume;
+            return;
+        }
+
+        _sfxToFadeIn.volume += Time.deltaTime * 1 / sfxFadeTime;
+
+        if (_sfxToFadeIn.volume >= desiredIncreasedSFXVolume)
+        {
+            _sfxToFadeIn.volume = desiredIncreasedSFXVolume;
+            increaseTheSelectedSFXVolume = false;
+        }
+    }
+
+    private void SFXDownPitcher()
+    {
+         _sfx.pitch -= Time.deltaTime * startingPitch / sfxFadeTime;
+        if (_sfx.pitch <= desiredPitch - 0.02)
         {
             downIsTriggered = false;
-            _audio.pitch = desiredPitch;
+            _sfx.pitch = desiredPitch;
         }
 
     }
 
-    private void UpPitcher()
+    private void SFXUpPitcher()
     {
-        _audio.pitch += Time.deltaTime * startingPitch / fadeTime;
+        _sfx.pitch += Time.deltaTime * startingPitch / sfxFadeTime;
 
-        if (_audio.pitch >= desiredPitch + 0.02)
+        if (_sfx.pitch >= desiredPitch + 0.02)
         {
             upIsTriggered = false;
-            _audio.pitch = desiredPitch;
+            _sfx.pitch = desiredPitch;
         }
     }
 
-    public void SelectAudio(AudioSource audio)
+    //public void SelectAudio(AudioSource audio)
+    //{
+    //    _audio = audio;
+    //}
+
+    public void Music(AudioSource audio)
     {
-        _audio = audio;
+        _music = audio;
     }
 
-    public void PlaySFX(AudioSource audio)
+    public void SFX(AudioSource audio)
     {
-
-        audio.Play();
-        if (loop == true)
-            audio.loop = true;
+        _sfx = audio;
     }
 
-    public void Loop(bool looped)
+    public void PlaySFX()
     {
-        loop = looped;
+        _sfx.Play();
     }
 
-    public void StartSelectedAudio(float volume)
+
+    public void PlaySelectedSFX()
     {
-        if(!_audio.isPlaying)
+        if (!_sfx.isPlaying)
         {
-            increaseTheSelectedSoundVolume = false;
-            lowerTheSelectedSoundVolume = false;
-            _audioController.StopAllMusic();
-            _audio.volume = volume;
-            _audio.Play();
+            increaseTheSelectedSFXVolume = false;
+            lowerTheSelectedSFXVolume = false;
+            _sfx.volume = desiredVolume;
+            //_audioController.StopAllMusic();
+            _sfx.Play();
         }
     }
 
-    public void AudioToFadeOut(AudioSource fadeOutAudio)
+    public void PlaySelectedMusic()
     {
-        _audioToFadeOut = fadeOutAudio;
+        if (!_music.isPlaying)
+        {
+            increaseTheSelectedMusicVolume = false;
+            lowerTheSelectedMusicVolume = false;
+            _audioController.StopAllMusic();
+            _music.volume = desiredVolume;
+            _music.Play();
+        }
     }
 
-    public void AudioToFadeIn(AudioSource fadeInAudio)
+    public void MusicToFadeOut(AudioSource fadeOutAudio)
     {
-        _audioToFadeIn = fadeInAudio;
+        _musicToFadeOut = fadeOutAudio;
+    }
+
+    public void SFXToFadeOut(AudioSource fadeOutAudio)
+    {
+        _sfxToFadeOut = fadeOutAudio;
+    }
+
+    public void MusicToFadeIn(AudioSource fadeInAudio)
+    {
+        _musicToFadeIn = fadeInAudio;
+    }
+
+    public void SFXToFadeIn(AudioSource fadeInAudio)
+    {
+        _sfxToFadeIn = fadeInAudio;
     }
 
     //public void IntenseStart(float volume)
@@ -180,11 +265,27 @@ public class MusicTriggerControl : MonoBehaviour
     //    }
     //}
 
-    public void StopSelectedMusic()
+    public void StopSelectedAudio()
     {
-        _audio.Stop();
+        if(_sfx != null)
+             _sfx.Stop();
+
+        if (_music != null)
+            _music.Stop();
+            
+        //_audio.Stop();
         //_audioController.intenseMusic.Stop();
     }
+
+  
+
+    //public void StopSelectedMusic()
+    //{
+    //    _music.Stop();
+
+    //    _audio.Stop();
+    //    _audioController.intenseMusic.Stop();
+    //}
 
     //public void FadeOutMusic()
     //{
@@ -199,38 +300,60 @@ public class MusicTriggerControl : MonoBehaviour
     //    increaseTheMusicVolume = true;
     //}
 
-    public void FadeOutSelectedAudio()
+    public void FadeOutSelectedMusic(float volume)
     {
-        increaseTheSelectedSoundVolume = false;
-        lowerTheSelectedSoundVolume = true;
+        desiredFadedMusicVolume = volume;
+        increaseTheSelectedMusicVolume = false;
+        lowerTheSelectedMusicVolume = true;
         //increaseTheSelectedSoundVolume = false;
         //lowerTheSelectedSoundVolume = true;    
     }
 
-    public void FadeInSelectedAudio(float volume)
+    public void FadeInSelectedMusic(float volume)
     {
-        desiredVolume = volume;
-        lowerTheSelectedSoundVolume = false;
-        increaseTheSelectedSoundVolume = true;
+        desiredIncreasedMusicVolume = volume;
+        lowerTheSelectedMusicVolume = false;
+        increaseTheSelectedMusicVolume = true;
     }
 
-    public void PitchDown(float desiredSoundPitch)
+    public void FadeOutSelectedSFX(float volume)
+    {
+        desiredFadedSFXVolume = volume;
+        increaseTheSelectedSFXVolume = false;
+        lowerTheSelectedSFXVolume = true;
+        //increaseTheSelectedSoundVolume = false;
+        //lowerTheSelectedSoundVolume = true;    
+    }
+
+    public void FadeInSelectedSFX(float volume)
+    {
+        desiredIncreasedSFXVolume = volume;
+        lowerTheSelectedSFXVolume = false;
+        increaseTheSelectedSFXVolume = true;
+    }
+
+    public void SFXPitchDown(float desiredSoundPitch)
     {
         desiredPitch = desiredSoundPitch;
         upIsTriggered = false;
         downIsTriggered = true;
     }
 
-    public void PitchUp(float desiredSoundPitch)
+    public void SFXPitchUp(float desiredSoundPitch)
     {
         desiredPitch = desiredSoundPitch;
         downIsTriggered = false;
         upIsTriggered = true;
     }
 
-    public void FadeTime(float desiredFadeTime)
+    public void MusicFadeTime(float desiredFadeTime)
     {
-        fadeTime = desiredFadeTime;
+        musicFadeTime = desiredFadeTime;
+    }
+
+    public void SFXFadeTime(float desiredFadeTime)
+    {
+        sfxFadeTime = desiredFadeTime;
     }
 
     public void Volume(float volume)
@@ -238,28 +361,78 @@ public class MusicTriggerControl : MonoBehaviour
         desiredVolume = volume;
     }
 
-    public void FadeOutAndInAudio()
+    public void DesiredIncreasedMusicVolume(float increasedVolume)
+    {
+        desiredIncreasedMusicVolume = increasedVolume;
+    }
+
+    public void DesiredIncreasedSFXVolume(float increasedVolume)
+    {
+        desiredIncreasedSFXVolume = increasedVolume;
+    }
+
+    public void DesiredFadedMusicVolume(float fadedVolume)
+    {
+        desiredFadedMusicVolume = fadedVolume;
+    }
+
+    public void DesiredFadedSFXVolume(float fadedVolume)
+    {
+        desiredFadedSFXVolume = fadedVolume;
+    }
+
+    public void Loop(bool looped)
+    {
+        loop = looped;
+    }
+
+    public void FadeOutAndInMusic()
     {
 
-        if (_audioToFadeIn.isPlaying)
+        if (_musicToFadeIn.isPlaying)
         {
             return;
         }
-        canBeFaded = true;
+        canBeFadedMusic = true;
     }
 
-    private void FadeOutAndInControl()
+    private void FadeOutAndInMusicControl()
     {
-        lowerTheSelectedSoundVolume = true;
-        if(_audioToFadeOut.volume == 0 && canBeFaded)
+        lowerTheSelectedMusicVolume = true;
+        if(_musicToFadeOut.volume == 0 && canBeFadedMusic)
         {
-            lowerTheSelectedSoundVolume = false;
-            _audioToFadeIn.volume = 0;
-            _audioToFadeOut.Stop();
-            _audioToFadeIn.Play();
+            lowerTheSelectedMusicVolume = false;
+            _musicToFadeIn.volume = 0;
+            _musicToFadeOut.Stop();
+            _musicToFadeIn.Play();
 
-            increaseTheSelectedSoundVolume = true;
-            canBeFaded = false;
+            increaseTheSelectedMusicVolume = true;
+            canBeFadedMusic = false;
+        }
+    }
+
+    public void FadeOutAndInSFX()
+    {
+
+        if (_sfxToFadeIn.isPlaying)
+        {
+            return;
+        }
+        canBeFadedSFX = true;
+    }
+
+    private void FadeOutAndInSFXControl()
+    {
+        lowerTheSelectedSFXVolume = true;
+        if (_sfxToFadeOut.volume == 0 && canBeFadedSFX)
+        {
+            lowerTheSelectedSFXVolume = false;
+            _sfxToFadeIn.volume = 0;
+            _sfxToFadeOut.Stop();
+            _sfxToFadeIn.Play();
+
+            increaseTheSelectedSFXVolume = true;
+            canBeFadedSFX = false;
         }
     }
 

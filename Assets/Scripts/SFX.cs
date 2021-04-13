@@ -55,6 +55,17 @@ public class SFX : MonoBehaviour
         }
     }
 
+    public void StopAllAudio()
+    {
+        for (int i = 0; i < transform.GetChild(0).childCount; i++)
+        {
+            if (transform.GetChild(0).GetChild(i).GetComponent<AudioSource>().isPlaying)
+            {
+                transform.GetChild(0).GetChild(i).GetComponent<AudioSource>().Stop();
+            }
+        }
+    }
+
     public void PlayClick()
     {
         playerFlashlight.Play();

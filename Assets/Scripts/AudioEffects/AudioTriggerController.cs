@@ -5,31 +5,36 @@ using UnityEngine;
 
 public class AudioTriggerController : MonoBehaviour
 {
-    //Laita t‰nne jotain muuttujia, joihin MusicTriggerControllerilla on p‰‰sy, ja ett‰ se laittaa t‰‰lt‰ parametrit omaan scriptiin
-    //!!!
-    //T‰m‰ scripti triggereille
     private SFX _audioController;
     private MusicTriggerControl musicTriggerController;
     private GameObject player;
+
     public AudioOptions audioOptions = new AudioOptions();
 
-    public AudioSource _audio;
-    public AudioSource _audioToFadeOut;
-    public AudioSource _audioToFadeIn;
+    public AudioSource _music;
+    public AudioSource _sfx;
+    public AudioSource _musicToFadeOut;
+    public AudioSource _musicToFadeIn;
+    public AudioSource _sfxToFadeOut;
+    public AudioSource _sfxToFadeIn;
 
     //private bool canBeFaded = false;
     //private bool lowerTheSelectedSoundVolume = false;
     //private bool increaseTheSelectedSoundVolume = false;
     //private bool upIsTriggered = false;
     //private bool downIsTriggered = false;
-    //private bool loop = false;
+    public bool loop = false;
 
     public bool destroyOnTrigger = false;
 
-    public float fadeTime = 4;
-    public float desiredVolume = 0.5f;
-    private float startingPitch = 1;
-    public float desiredPitch;
+    public float musicFadeTime = 4;
+    public float sfxFadeTime = 4;
+    public float volume;
+    public float desiredIncreasedMusicVolume = 0;
+    public float desiredIncreasedSFXVolume = 0;
+    public float desiredFadedMusicVolume = 0;
+    public float desiredFadedSFXVolume = 0;
+    public float desiredPitch = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -37,92 +42,148 @@ public class AudioTriggerController : MonoBehaviour
         musicTriggerController = GameObject.Find("AudioEventSystem").GetComponent<MusicTriggerControl>();
         _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
         player = GameObject.Find("Player");
-
-        //audioOptions = (AudioOptions)EditorGUILayout.EnumPopup(audioOptions);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject == player)
         {
-            
-            
-            
-
+            if (_sfx != null)
+            {
+                musicTriggerController.SFX(_sfx);
+            }
+            else if (_music != null)
+            {
+                musicTriggerController.Music(_music);
+            }
+                
             switch (audioOptions)
             {
-                case AudioOptions.Start:
-                    musicTriggerController._audio = _audio;
+                case AudioOptions.MusicStart:
+                    musicTriggerController.Loop(loop);
+                    musicTriggerController.Volume(volume);
+                    //musicTriggerController.upIsTriggered = false;
+                    //musicTriggerController.downIsTriggered = false;
+                    musicTriggerController.PlaySelectedMusic();
+                    if (destroyOnTrigger)
+                        Destroy(gameObject);
+                    
+                    break;
+
+                case AudioOptions.AudioStop:
+                    musicTriggerController.StopSelectedAudio();
+                    if (destroyOnTrigger)
+                        Destroy(gameObject);
+                    break;
+
+                case AudioOptions.SFXStart:
+                    musicTriggerController.SFX(_sfx);
+                    musicTriggerController.Volume(volume);
+                    musicTriggerController.Loop(loop);
                     musicTriggerController.upIsTriggered = false;
                     musicTriggerController.downIsTriggered = false;
-                    if (!musicTriggerController._audio.isPlaying)
-                    {
-
-                        musicTriggerController.increaseTheSelectedSoundVolume = false;
-                        musicTriggerController.lowerTheSelectedSoundVolume = false;
-                        _audioController.StopAllMusic();
-                        musicTriggerController._audio.volume = desiredVolume;
-                        musicTriggerController._audio.Play();
-                        if (destroyOnTrigger)
-                            Destroy(gameObject);
-                    }
-                    break;
-
-                case AudioOptions.Stop:
-                    musicTriggerController._audio = _audio;
-                    musicTriggerController._audio.Stop();
+                    musicTriggerController.PlaySelectedSFX();
                     if (destroyOnTrigger)
                         Destroy(gameObject);
+
                     break;
 
-                case AudioOptions.FadeOut:
-                    musicTriggerController._audioToFadeOut = _audioToFadeOut;
+                //case AudioOptions.SFXStop:
+                //    musicTriggerController.SFX(_sfx);
+                //    musicTriggerController.StopSelectedAudio();
+                //    if (destroyOnTrigger)
+                //        Destroy(gameObject);
+                //    break;
+
+                case AudioOptions.StopAllAudio:
+                    _audioController.StopAllMusic();
+                    _audioController.StopAllAudio();
+                    break;
+
+                case AudioOptions.FadeOutMusic:
+                    musicTriggerController.MusicFadeTime(musicFadeTime);
+                    musicTriggerController.DesiredFadedMusicVolume(desiredFadedMusicVolume);
+                    musicTriggerController.MusicToFadeOut(_musicToFadeOut);
                     musicTriggerController.upIsTriggered = false;
                     musicTriggerController.downIsTriggered = false;
-                    musicTriggerController.increaseTheSelectedSoundVolume = false;
-                    musicTriggerController.lowerTheSelectedSoundVolume = true;
+                    musicTriggerController.FadeOutSelectedMusic(desiredFadedMusicVolume);
                     if (destroyOnTrigger)
                         Destroy(gameObject);
                     break;
 
-                case AudioOptions.FadeIn:
-                    musicTriggerController._audioToFadeIn = _audioToFadeIn;
+                case AudioOptions.FadeInMusic:
+                    musicTriggerController.MusicFadeTime(musicFadeTime);
+                    musicTriggerController.MusicToFadeIn(_musicToFadeIn);
                     musicTriggerController.upIsTriggered = false;
                     musicTriggerController.downIsTriggered = false;
-                    musicTriggerController.lowerTheSelectedSoundVolume = false;
-                    musicTriggerController.increaseTheSelectedSoundVolume = true;
+                    musicTriggerController.FadeInSelectedMusic(desiredFadedMusicVolume);
                     if (destroyOnTrigger)
                         Destroy(gameObject);
                     break;
 
-                case AudioOptions.FadeOutAndIn:                   
-                    musicTriggerController._audioToFadeIn = _audioToFadeIn;
-                    if (musicTriggerController._audioToFadeIn.isPlaying)
-                    {
-                        break;
-                    }
-                    musicTriggerController._audioToFadeOut = _audioToFadeOut;
-                    musicTriggerController.canBeFaded = true;
-                    if (destroyOnTrigger)
-                        Destroy(gameObject);
-                    break;
-
-                case AudioOptions.PitchUp:
-                    musicTriggerController._audio = _audio;
-                    musicTriggerController.desiredPitch = desiredPitch;
-                    musicTriggerController.downIsTriggered = false;
-                    musicTriggerController.upIsTriggered = true;
-                    if (destroyOnTrigger)
-                        Destroy(gameObject);
-                    break;
-
-                case AudioOptions.PitchDown:
-                    musicTriggerController._audio = _audio;
-                    musicTriggerController.desiredPitch = desiredPitch;
+                case AudioOptions.FadeOutSFX:
+                    musicTriggerController.SFX(_sfx);
+                    musicTriggerController.SFXFadeTime(sfxFadeTime);
+                    musicTriggerController.DesiredFadedSFXVolume(desiredFadedSFXVolume);
+                    musicTriggerController.SFXToFadeOut(_sfxToFadeOut);
                     musicTriggerController.upIsTriggered = false;
-                    musicTriggerController.downIsTriggered = true;
+                    musicTriggerController.downIsTriggered = false;
+                    musicTriggerController.FadeOutSelectedSFX(desiredFadedSFXVolume);
                     if (destroyOnTrigger)
                         Destroy(gameObject);
+                    break;
+
+                case AudioOptions.FadeInSFX:
+                    musicTriggerController.SFX(_sfx);
+                    musicTriggerController.SFXFadeTime(sfxFadeTime);
+                    musicTriggerController.SFXToFadeIn(_sfxToFadeIn);
+                    musicTriggerController.upIsTriggered = false;
+                    musicTriggerController.downIsTriggered = false;
+                    musicTriggerController.FadeInSelectedMusic(desiredFadedSFXVolume);
+                    if (destroyOnTrigger)
+                        Destroy(gameObject);
+                    break;
+
+                case AudioOptions.FadeOutAndInMusic:
+                    musicTriggerController.MusicFadeTime(musicFadeTime);
+                    musicTriggerController.DesiredIncreasedMusicVolume(desiredIncreasedMusicVolume);
+                    musicTriggerController.DesiredFadedMusicVolume(desiredFadedMusicVolume);
+                    musicTriggerController.MusicToFadeIn(_musicToFadeIn);
+                    musicTriggerController.MusicToFadeOut(_musicToFadeOut);
+                    musicTriggerController.FadeOutAndInMusic();
+                    if (destroyOnTrigger)
+                        Destroy(gameObject);
+                    break;
+
+                case AudioOptions.FadeOutAndInSFX:
+                    musicTriggerController.SFXFadeTime(sfxFadeTime);
+                    musicTriggerController.DesiredIncreasedSFXVolume(desiredIncreasedSFXVolume);
+                    musicTriggerController.DesiredFadedSFXVolume(desiredFadedSFXVolume);
+                    musicTriggerController.SFXToFadeIn(_sfxToFadeIn);
+                    musicTriggerController.SFXToFadeOut(_sfxToFadeOut);
+                    musicTriggerController.FadeOutAndInSFX();
+                    if (destroyOnTrigger)
+                        Destroy(gameObject);
+                    break;
+
+                case AudioOptions.PitchUpSFX:
+                    musicTriggerController.SFXFadeTime(sfxFadeTime);
+                    musicTriggerController.SFXPitchUp(desiredPitch);
+                    if (destroyOnTrigger)
+                        Destroy(gameObject);
+                    break;
+
+                case AudioOptions.PitchDownSFX:
+                    musicTriggerController.SFXFadeTime(sfxFadeTime);
+                    musicTriggerController.SFXPitchDown(desiredPitch);
+                    if (destroyOnTrigger)
+                        Destroy(gameObject);
+                    break;
+
+                case AudioOptions.PlaySFX:
+                    musicTriggerController.Loop(loop);
+                    musicTriggerController.Volume(volume);
+                    musicTriggerController.PlaySFX();
                     break;
 
             }
@@ -130,13 +191,19 @@ public class AudioTriggerController : MonoBehaviour
     }
     public enum AudioOptions
     {
-        Start,
-        Stop,
-        FadeOut,
-        FadeIn,
-        FadeOutAndIn,
-        PitchUp,
-        PitchDown
+        MusicStart,
+        AudioStop,
+        SFXStart,
+        StopAllAudio,
+        FadeOutMusic,
+        FadeInMusic,
+        FadeOutSFX,
+        FadeInSFX,
+        FadeOutAndInMusic,
+        FadeOutAndInSFX,
+        PitchUpSFX,
+        PitchDownSFX,
+        PlaySFX
     };
 }
 
