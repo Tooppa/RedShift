@@ -6,7 +6,6 @@ public class MusicTriggerControl : MonoBehaviour
 {
     private SFX _audioController;
     private GameObject player;
-    //public SoundSourceScriptable soundSourceData;
 
     private AudioSource _music;
     private AudioSource _sfx;
@@ -14,12 +13,6 @@ public class MusicTriggerControl : MonoBehaviour
     private AudioSource _musicToFadeIn;
     private AudioSource _sfxToFadeOut;
     private AudioSource _sfxToFadeIn;
-
-
-    //private AudioSource instantiableAudio;
-    //private GameObject soundSource;
-    //private Vector2 soundSourceLocation;
-    //private bool soundSourceLoop;
 
     private bool canBeFadedMusic = false;
     private bool canBeFadedSFX = false;
@@ -42,13 +35,6 @@ public class MusicTriggerControl : MonoBehaviour
     private float startingPitch = 1;
     private float desiredPitch;
 
-    private void Awake()
-    {
-
-        //instantiableAudio = soundSourceData.audio;
-        //soundSourceLocation = soundSourceData.location;
-        //soundSourceLoop = soundSourceData.loop;
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -58,14 +44,8 @@ public class MusicTriggerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (lowerTheMusicVolume)
-        //    MusicFade();
-
         if (lowerTheSelectedMusicVolume)
             MusicFade();
-
-        //if (increaseTheMusicVolume)
-        //    MusicIncrease();
 
         if (increaseTheSelectedMusicVolume)
             MusicIncrease();
@@ -188,11 +168,6 @@ public class MusicTriggerControl : MonoBehaviour
         }
     }
 
-    //public void SelectAudio(AudioSource audio)
-    //{
-    //    _audio = audio;
-    //}
-
     public void Music(AudioSource audio)
     {
         _music = audio;
@@ -217,7 +192,6 @@ public class MusicTriggerControl : MonoBehaviour
             increaseTheSelectedSFXVolume = false;
             lowerTheSelectedSFXVolume = false;
             _sfx.volume = desiredVolume;
-            //_audioController.StopAllMusic();
             _sfx.Play();
         }
     }
@@ -254,30 +228,14 @@ public class MusicTriggerControl : MonoBehaviour
         _sfxToFadeIn = fadeInAudio;
     }
 
-    //public void IntenseStart(float volume)
-    //{
-    //    if(!_audioController.intenseMusic.isPlaying)
-    //    {
-    //        increaseTheMusicVolume = false;
-    //        lowerTheMusicVolume = false;
-    //        _audioController.StopAllMusic();
-    //        _audioController.intenseMusic.volume = volume;
-    //        _audioController.intenseMusic.Play();
-    //    }
-    //}
-
     public void StopSelectedAudio()
     {
         if(_sfx != null)
              _sfx.Stop();
 
         if (_music != null)
-            _music.Stop();
-            
-        //_audio.Stop();
-        //_audioController.intenseMusic.Stop();
+            _music.Stop();        
     }
-
   
 
     //public void StopSelectedMusic()
@@ -305,9 +263,7 @@ public class MusicTriggerControl : MonoBehaviour
     {
         desiredFadedMusicVolume = volume;
         increaseTheSelectedMusicVolume = false;
-        lowerTheSelectedMusicVolume = true;
-        //increaseTheSelectedSoundVolume = false;
-        //lowerTheSelectedSoundVolume = true;    
+        lowerTheSelectedMusicVolume = true;   
     }
 
     public void FadeInSelectedMusic(float volume)
@@ -321,9 +277,7 @@ public class MusicTriggerControl : MonoBehaviour
     {
         desiredFadedSFXVolume = volume;
         increaseTheSelectedSFXVolume = false;
-        lowerTheSelectedSFXVolume = true;
-        //increaseTheSelectedSoundVolume = false;
-        //lowerTheSelectedSoundVolume = true;    
+        lowerTheSelectedSFXVolume = true;  
     }
 
     public void FadeInSelectedSFX(float volume, float pitch)
@@ -404,7 +358,6 @@ public class MusicTriggerControl : MonoBehaviour
         }
         canBeFadedMusic = true;
     }
-
     private void FadeOutAndInMusicControl()
     {
         lowerTheSelectedMusicVolume = true;
@@ -419,7 +372,6 @@ public class MusicTriggerControl : MonoBehaviour
             canBeFadedMusic = false;
         }
     }
-
     public void FadeOutAndInSFX()
     {
 
@@ -444,109 +396,4 @@ public class MusicTriggerControl : MonoBehaviour
             canBeFadedSFX = false;
         }
     }
-
-    //public void SoundSourceToInstantiate(GameObject go)
-    //{
-    //    soundSource = go;
-    //}
-
-    //public void SoundSourceLocation(Vector2 location)
-    //{
-    //    soundSourceLocation = location;
-    //}
-
-
-    //public void InstantiateSoundSource()
-    //{
-    //    Instantiate(soundSource, soundSourceLocation, Quaternion.identity);
-    //}
-
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.gameObject == player)
-    //    {
-    //        switch (audioOptions)
-    //        {
-    //            case AudioOptions.Start:
-
-    //                upIsTriggered = false;
-    //                downIsTriggered = false;
-    //                if (!_audio.isPlaying)
-    //                {
-
-    //                    increaseTheSelectedSoundVolume = false;
-    //                    lowerTheSelectedSoundVolume = false;
-    //                    _audioController.StopAllMusic();
-    //                    _audio.volume = desiredVolume;
-    //                    _audio.Play();
-    //                    if (destroyOnTrigger)
-    //                        Destroy(gameObject);
-    //                }
-    //                break;
-
-    //            case AudioOptions.Stop:
-
-    //                _audio.Stop();
-    //                if (destroyOnTrigger)
-    //                    Destroy(gameObject);
-    //                break;
-
-    //            case AudioOptions.FadeOut:
-
-    //                upIsTriggered = false;
-    //                downIsTriggered = false;
-    //                increaseTheSelectedSoundVolume = false;
-    //                lowerTheSelectedSoundVolume = true;
-    //                if (destroyOnTrigger)
-    //                    Destroy(gameObject);
-    //                break;
-
-    //            case AudioOptions.FadeIn:
-    //                upIsTriggered = false;
-    //                downIsTriggered = false;
-    //                lowerTheSelectedSoundVolume = false;
-    //                increaseTheSelectedSoundVolume = true;
-    //                if (destroyOnTrigger)
-    //                    Destroy(gameObject);
-    //                break;
-
-    //            case AudioOptions.FadeOutAndIn:
-
-    //                if (_audioToFadeIn.isPlaying)
-    //                {
-    //                    break;
-    //                }
-
-    //                canBeFaded = true;
-    //                if (destroyOnTrigger)
-    //                    Destroy(gameObject);
-    //                break;
-
-    //            case AudioOptions.PitchUp:
-    //                downIsTriggered = false;
-    //                upIsTriggered = true;
-    //                if (destroyOnTrigger)
-    //                    Destroy(gameObject);
-    //                break;
-
-    //            case AudioOptions.PitchDown:
-    //                upIsTriggered = false;
-    //                downIsTriggered = true;
-    //                if (destroyOnTrigger)
-    //                    Destroy(gameObject);
-    //                break;
-
-    //        }
-    //    }
-    //}
-    //public enum AudioOptions
-    //{
-    //    Start,
-    //    Stop,
-    //    FadeOut,
-    //    FadeIn,
-    //    FadeOutAndIn,
-    //    PitchUp,
-    //    PitchDown
-    //};
 }

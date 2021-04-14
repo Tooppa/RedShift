@@ -41,11 +41,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2c48c4e8ff019f0419a8301452526114, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -54,7 +54,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 100
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -73,11 +73,11 @@ AudioSource:
     - serializedVersion: 3
       time: 0.9444504
       value: 0
-      inSlope: -3.6835237
-      outSlope: -3.6835237
+      inSlope: -2.091288
+      outSlope: -2.091288
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.117652625
+      inWeight: 0.11397613
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
