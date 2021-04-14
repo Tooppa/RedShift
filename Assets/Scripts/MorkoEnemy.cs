@@ -24,7 +24,7 @@ public class MorkoEnemy : MonoBehaviour
 
     private bool isTargetInRange = false;
     private bool isGrounded = false;
-    private readonly Vector2 _groundCheckOffset = new Vector2(0, -0.5f);
+    private readonly Vector2 _groundCheckOffset = new Vector2(0, -2.335f);
     private const float GroundedRadius = 0.45f;
     [SerializeField] private LayerMask whatIsGround;
 

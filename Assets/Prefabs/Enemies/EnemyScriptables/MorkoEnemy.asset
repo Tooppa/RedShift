@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MorkoEnemy
   m_EditorClassIdentifier: 
   speed: 10000
-  jumpHeight: 200
+  jumpHeight: 150
   enemyRange: 14
   attack: 3
   health: 10000
