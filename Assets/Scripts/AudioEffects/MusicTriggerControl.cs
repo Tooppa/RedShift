@@ -205,6 +205,7 @@ public class MusicTriggerControl : MonoBehaviour
 
     public void PlaySFX()
     {
+        _sfx.volume = desiredVolume;
         _sfx.Play();
     }
 
@@ -325,9 +326,11 @@ public class MusicTriggerControl : MonoBehaviour
         //lowerTheSelectedSoundVolume = true;    
     }
 
-    public void FadeInSelectedSFX(float volume)
+    public void FadeInSelectedSFX(float volume, float pitch)
     {
+        desiredPitch = pitch;
         desiredIncreasedSFXVolume = volume;
+        _sfxToFadeIn.pitch = desiredPitch;
         lowerTheSelectedSFXVolume = false;
         increaseTheSelectedSFXVolume = true;
     }
@@ -359,6 +362,12 @@ public class MusicTriggerControl : MonoBehaviour
     public void Volume(float volume)
     {
         desiredVolume = volume;
+    }
+
+    public void Pitch(float pitch)
+    {
+        desiredPitch = pitch;
+        _sfx.pitch = desiredPitch;
     }
 
     public void DesiredIncreasedMusicVolume(float increasedVolume)

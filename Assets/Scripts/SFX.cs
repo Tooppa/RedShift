@@ -6,7 +6,11 @@ public class SFX : MonoBehaviour
 {
     public AudioSource playerFlashlight;
     public AudioSource playerGunShot;
-    public AudioSource playerRunning;
+    public AudioSource[] playerSteps;
+    //public AudioSource playerStepOne;
+    //public AudioSource playerStepTwo;
+    //public AudioSource playerStepThree;
+    //public AudioSource playerStepFour;
     public AudioSource playerJump;
     public AudioSource playerLanding;
     public AudioSource wind;
@@ -76,9 +80,30 @@ public class SFX : MonoBehaviour
         playerGunShot.Play();
     }
 
-    public void PlayRunning()
+    //public void PlayStepOne()
+    //{
+    //    playerStepOne.Play();
+    //}
+
+    //public void PlayStepTwo()
+    //{
+    //    playerStepTwo.Play();
+    //}
+
+    //public void PlayStepThree()
+    //{
+    //    playerStepThree.Play();
+    //}
+
+    //public void PlayStepFour()
+    //{
+    //    playerStepFour.Play();
+    //}
+
+    public void PlayRandomPlayerStepSound()
     {
-        playerRunning.Play();
+        int random = Random.Range(0, 3);
+        playerSteps[random].Play();
     }
 
     public void PlayJump()
