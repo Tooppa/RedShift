@@ -45,7 +45,7 @@ namespace Player
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
-            _animator = GetComponentInChildren<Animator>();
+            _animator = transform.GetChild(1).GetComponent<Animator>();
             _gun = GameObject.Find("Gun");
             HasRocketBoots = false;
         }
