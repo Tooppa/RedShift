@@ -13,6 +13,7 @@ public class CameraEffects : MonoBehaviour
     // change offsett toimii asettamalla x akselin arvon
     // esim. CameraEffects.Instance.ChangeOffset(0.4f ,-2);
     public static CameraEffects Instance { get; private set; }
+    public ParticleSystem particle;
     private CinemachineVirtualCamera _cam;
     private CinemachineFramingTransposer _transposer;
     private void Awake()
@@ -46,8 +47,10 @@ public class CameraEffects : MonoBehaviour
 
     private IEnumerator RocketScene()
     {
+        Instantiate(particle,transform);
         ShakeCamera(3, 1);
         yield return new WaitForSeconds(1.5f);
+        Instantiate(particle,transform);
         ShakeCamera(5, .1f);
     }
 
