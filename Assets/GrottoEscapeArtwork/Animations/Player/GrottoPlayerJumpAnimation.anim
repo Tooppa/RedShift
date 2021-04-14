@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Slime_Down
+  m_Name: GrottoPlayerJumpAnimation
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -19,10 +19,8 @@ AnimationClip:
   m_FloatCurves: []
   m_PPtrCurves:
   - curve:
-    - time: 0
-      value: {fileID: 1591550974466868223, guid: 766e9cf9672e8cb46ae73dc543fa1b11, type: 3}
     - time: 0.083333336
-      value: {fileID: -6309063888215938134, guid: 766e9cf9672e8cb46ae73dc543fa1b11, type: 3}
+      value: {fileID: 21300000, guid: c7b8e28128af14abeb5699aeef6de04c, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -42,8 +40,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 1591550974466868223, guid: 766e9cf9672e8cb46ae73dc543fa1b11, type: 3}
-    - {fileID: -6309063888215938134, guid: 766e9cf9672e8cb46ae73dc543fa1b11, type: 3}
+    - {fileID: 21300000, guid: c7b8e28128af14abeb5699aeef6de04c, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -54,7 +51,7 @@ AnimationClip:
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 1
+    m_LoopTime: 0
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
