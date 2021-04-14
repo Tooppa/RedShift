@@ -99,8 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 25dfa914726227342948923356053733, type: 2}
-  target: {fileID: 0}
-  playerRB: {fileID: 0}
   nextWaypointDistance: 1
   whatIsGround:
     serializedVersion: 2
