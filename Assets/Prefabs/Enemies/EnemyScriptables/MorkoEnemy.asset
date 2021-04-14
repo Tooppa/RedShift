@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dadb3d51a7ec78242b731ba8a133a2e9, type: 3}
+  m_Name: MorkoEnemy
+  m_EditorClassIdentifier: 
+  speed: 10000
+  jumpHeight: 150
+  enemyRange: 14
+  attack: 3
+  health: 10000
+  knockbackForce: 6000
+  knockbackRadius: 1
+  spawnRadius: 20
+  flyingEnemyBounciness: 0
