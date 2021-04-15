@@ -21,24 +21,15 @@ namespace Player
         private bool _holdingJump;
         public bool HasRocketBoots { private set; get; }
         private bool _rocketBootsCooldown;
-        private bool _runningSoundOnCooldown;
-        private bool _isJumping;
-        private bool _isLanding;
         //private bool _musicPlaying = false;
         private Animator _animator;
         private const float GroundedRadius = 0.3f;
-
-        private Vector2 _playerStartAltitude;
-        private Vector2 _playerEndAltitude;
 
         [SerializeField] private float holdingJumpTime = 0;
         [SerializeField] private float holdingJumpTimeMax = 0.2f;
 
         private GameObject _gun;
 
-        private SFX _audioController;
-
-        public float runningSoundCooldownTime;
         private static readonly int Walking = Animator.StringToHash("Walking");
         private static readonly int Jumping = Animator.StringToHash("Jumping");
         private static readonly int TakeOff = Animator.StringToHash("TakeOff");
@@ -54,47 +45,19 @@ namespace Player
 
         private void Start()
         {
-            _playerStartAltitude = transform.position;
-            _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
             rocketBoots.Stop();
         }
 
         private void Update()
         {
             CheckIsGrounded();
-            /* music is disabled since it used old inputs
-            if (Input.GetKeyDown(KeyCode.G) && !musicPlaying)
-            {
-                _audioController.GetComponent<SFX>().PlayCalmAmbience();
-                musicPlaying = true;
-            }
-            else if(Input.GetKeyDown(KeyCode.G) && musicPlaying)
-            {
-                _audioController.GetComponent<SFX>().calmAmbience.Pause();
-                musicPlaying = false;
-            }
-            */
         }
 
         private void CheckIsGrounded()
         {
+            var beforeGroundedCheck = _isGrounded;
             _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
-            _isLanding = _rigidbody2D.velocity.y < -0.1f && !_isGrounded;
-            _animator.SetBool(Landing, _isLanding);
-
-            switch (_isGrounded)
-            {
-                case false:
-                    _playerEndAltitude = transform.position;
-                    _isJumping = true;
-                    break;
-                case true when _isJumping && (_playerStartAltitude.y - _playerEndAltitude.y) > 1:
-                    _isJumping = false;
-                    break;
-                default:
-                    _playerStartAltitude = transform.position;
-                    break;
-            }
+            _animator.SetBool(Landing, _rigidbody2D.velocity.y < -0.1f);
         }
 
         public void Movement(Vector2 move)
@@ -107,12 +70,6 @@ namespace Player
                 CameraEffects.Instance.ChangeOffset(.3f, inputDirection * 2);
                 _animator.SetBool(Walking, true);
                 rocketBoots.gameObject.transform.localScale = new Vector3(inputDirection, 1, 1);
-
-                if (_isGrounded && !_runningSoundOnCooldown)
-                {
-                    _audioController.PlayRunning();
-                    StartCoroutine(RunningSoundCooldown());
-                }
             }
             else
             {
@@ -121,8 +78,6 @@ namespace Player
 
             if (Mathf.Abs(_rigidbody2D.velocity.x) < maxSpeed)
                 _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
-
-            _animator.SetBool(Jumping, !_isGrounded);
         }
 
         public void Jump(float value)
@@ -177,13 +132,6 @@ namespace Player
             _rocketBootsCooldown = true;
             yield return new WaitForSeconds(cooldownTime);
             _rocketBootsCooldown = false;
-        }
-        private IEnumerator RunningSoundCooldown()
-        {
-            //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
-            _runningSoundOnCooldown = true;
-            yield return new WaitForSeconds(runningSoundCooldownTime);
-            _runningSoundOnCooldown = false;
         }
     }
 }
