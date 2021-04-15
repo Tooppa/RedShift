@@ -13,6 +13,7 @@ namespace Player
         [SerializeField] private float maxSpeed;
         [SerializeField] private float rocketBootsSpeed;
         [SerializeField] private ParticleSystem rocketBoots;
+        [SerializeField] private float coyoteTime;
         private Rigidbody2D _rigidbody2D;
 
         private readonly Vector2 _groundCheckOffset = new Vector2(0, -0.5f);
@@ -24,6 +25,7 @@ namespace Player
         //private bool _musicPlaying = false;
         private Animator _animator;
         private const float GroundedRadius = 0.3f;
+        private float _timer;
 
         [SerializeField] private float holdingJumpTime = 0;
         [SerializeField] private float holdingJumpTimeMax = 0.2f;
@@ -58,6 +60,9 @@ namespace Player
             var beforeGroundedCheck = _isGrounded;
             _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
             _animator.SetBool(Landing, _rigidbody2D.velocity.y < -0.1f);
+            if (beforeGroundedCheck && !_isGrounded)
+                _timer = 0;
+            _timer += Time.deltaTime;
         }
 
         public void Movement(Vector2 move)
@@ -84,6 +89,7 @@ namespace Player
         {
             if (value > 0)
             {
+                if (_timer < coyoteTime) _isGrounded = true;
                 if (!_isGrounded || Time.timeScale != 1) return;
                 _holdingJump = true;
                 _animator.SetTrigger(TakeOff);
