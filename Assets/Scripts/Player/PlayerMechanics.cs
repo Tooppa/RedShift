@@ -171,17 +171,22 @@ namespace Player
         private IEnumerator DisableLights(float sec)
         {
             var light2Ds = GetComponentsInChildren<Light2D>();
-            List<float> values = new List<float>();
-            for (var i = 0; i < light2Ds.Length; i++)
+            Flashlight flashlight = null;
+            var values = new List<float>();
+            foreach (var t in light2Ds)
             {
-                values.Add(light2Ds[i].intensity);
-                light2Ds[i].intensity = 0;
+                if(t.TryGetComponent(out flashlight))
+                    flashlight.DisableFlashlight();
+                values.Add(t.intensity);
+                t.intensity = 0;
             }
             yield return new WaitForSeconds(sec);
             for (var i = 0; i < light2Ds.Length; i++)
             {
                 light2Ds[i].intensity = values[i];
             }
+            if (flashlight)
+                flashlight.EquipFlashlight();
         }
 
         private void OnEnable()
