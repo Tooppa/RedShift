@@ -42,6 +42,7 @@ namespace Player
         private static readonly int Walking = Animator.StringToHash("Walking");
         private static readonly int Jumping = Animator.StringToHash("Jumping");
         private static readonly int TakeOff = Animator.StringToHash("TakeOff");
+        private static readonly int Landing = Animator.StringToHash("Landing");
 
         private void Awake()
         {
@@ -78,8 +79,8 @@ namespace Player
         private void CheckIsGrounded()
         {
             _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
-            _isLanding = _rigidbody2D.velocity.y < -0.5f ? true : false;
-            _animator.SetBool("Landing", _isLanding);
+            _isLanding = _rigidbody2D.velocity.y < -0.1f && !_isGrounded;
+            _animator.SetBool(Landing, _isLanding);
 
             switch (_isGrounded)
             {
