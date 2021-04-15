@@ -62,5 +62,11 @@ namespace Player
         {
             HasFlashlight = true;
         }
+
+        public void DisableFlashlight()
+        {
+            HasFlashlight = false;
+            StopAllCoroutines();
+        }
     }
 }
