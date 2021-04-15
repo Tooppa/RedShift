@@ -87,9 +87,8 @@ public class MorkoEnemy : MonoBehaviour
     {
         if (_path == null)
             return;
-
-        if (_currentWaypoint > _path.vectorPath.Count - 1)
-            return;
+        
+        // Don't increment waypoint if approaching the array bounds
         if (_currentWaypoint + 2 < _path.vectorPath.Count)
         {
             float distanceToWaypoint = Vector2.Distance(_rigidbody2D.position, _path.vectorPath[_currentWaypoint]);
