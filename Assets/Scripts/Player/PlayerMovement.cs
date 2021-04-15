@@ -22,14 +22,10 @@ namespace Player
         public bool HasRocketBoots { private set; get; }
         private bool _rocketBootsCooldown;
         private bool _runningSoundOnCooldown;
-        private bool _isJumping;
         private bool _isLanding;
         //private bool _musicPlaying = false;
         private Animator _animator;
         private const float GroundedRadius = 0.3f;
-
-        private Vector2 _playerStartAltitude;
-        private Vector2 _playerEndAltitude;
 
         [SerializeField] private float holdingJumpTime = 0;
         [SerializeField] private float holdingJumpTimeMax = 0.2f;
@@ -54,7 +50,6 @@ namespace Player
 
         private void Start()
         {
-            _playerStartAltitude = transform.position;
             _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
             rocketBoots.Stop();
         }
@@ -81,20 +76,6 @@ namespace Player
             _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
             _isLanding = _rigidbody2D.velocity.y < -0.1f && !_isGrounded;
             _animator.SetBool(Landing, _isLanding);
-
-            switch (_isGrounded)
-            {
-                case false:
-                    _playerEndAltitude = transform.position;
-                    _isJumping = true;
-                    break;
-                case true when _isJumping && (_playerStartAltitude.y - _playerEndAltitude.y) > 1:
-                    _isJumping = false;
-                    break;
-                default:
-                    _playerStartAltitude = transform.position;
-                    break;
-            }
         }
 
         public void Movement(Vector2 move)
