@@ -14,34 +14,38 @@ public class MorkoEnemy : MonoBehaviour
 
     private Vector2 origin;
 
-    private float speed;
-    private float jumpHeight;
-    private float enemyRange;
-    private float knockbackForce;
-    private float knockbackRadius;
-    private float spawnRadius;
+    private float _speed;
+    private float _jumpHeight;
+    private float _enemyRange;
+    private float _knockbackForce;
+    private float _knockbackRadius;
 
-    private bool isTargetInRange = false;
-    private bool isGrounded = false;
+    private bool _isGrounded = false;
     private readonly Vector2 _groundCheckOffset = new Vector2(0, -2.335f);
     private const float GroundedRadius = 0.45f;
     [SerializeField] private LayerMask whatIsGround;
 
-    Path path;
-    int currentWaypoint = 0;
-    bool reachedEndOfPath = false;
+    private Path _path;
+    private int _currentWaypoint = 0;
+    private bool _reachedEndOfPath = false;
 
     private Seeker _seeker;
     private Rigidbody2D _rigidbody2D;
 
     private void Awake()
     {
-        speed = data.speed;
-        jumpHeight = data.jumpHeight;
-        enemyRange = data.enemyRange;
-        knockbackForce = data.knockbackForce;
-        knockbackRadius = data.knockbackRadius;
-        spawnRadius = data.spawnRadius;
+        if (data == null)
+        {
+            Debug.LogWarning($"No scriptable object for {gameObject.name}");
+            this.enabled = false;
+            return;
+        }
+        
+        _speed = data.speed;
+        _jumpHeight = data.jumpHeight;
+        _enemyRange = data.enemyRange;
+        _knockbackForce = data.knockbackForce;
+        _knockbackRadius = data.knockbackRadius;
     }
     
     // Start is called before the first frame update
@@ -61,9 +65,7 @@ public class MorkoEnemy : MonoBehaviour
         _seeker = GetComponent<Seeker>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
 
-        InvokeRepeating("UpdatePath", 0f, 0.5f);
-        InvokeRepeating("SlimeHop", 0f, 2f);
-
+        InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
     }
     
     void UpdatePath()
@@ -71,77 +73,46 @@ public class MorkoEnemy : MonoBehaviour
         if (_seeker.IsDone())
             _seeker.StartPath(_rigidbody2D.position, _player.transform.position, OnPathComplete);
     }
-
-    //Function invoked every 2 seconds. Adds upwards force to the enemy.
-    void SlimeHop()
-    {
-        if(isTargetInRange && isGrounded)
-            _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-    }
-
+    
     void OnPathComplete(Path p)
     {
-        if (!p.error)
-        {
-            path = p;
-            currentWaypoint = 0;
-        }
+        if (p.error) return;
+        
+        _path = p;
+        _currentWaypoint = 0;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (path == null)
+        if (_path == null)
             return;
 
-        if (currentWaypoint >= path.vectorPath.Count)
-        {
-            reachedEndOfPath = true;
+        if (_currentWaypoint > _path.vectorPath.Count - 1)
             return;
-        }
-        else
+        if (_currentWaypoint + 2 < _path.vectorPath.Count)
         {
-            reachedEndOfPath = false;
-        }
+            float distanceToWaypoint = Vector2.Distance(_rigidbody2D.position, _path.vectorPath[_currentWaypoint]);
 
-        float distanceToPlayer = Vector2.Distance(transform.position, _player.position);
-        if (!isTargetInRange && (distanceToPlayer <= -spawnRadius || distanceToPlayer >= spawnRadius))
-        {
-            transform.position = origin;
+            if (distanceToWaypoint < nextWaypointDistance)
+            {
+                _currentWaypoint++;
+            }
         }
-
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - _rigidbody2D.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
-
-        //Adds forward force to the enemy's jump
-        if (!isGrounded)
-        {
-            _rigidbody2D.AddForce(force);
-        }
-
-        float distance = Vector2.Distance(_rigidbody2D.position, path.vectorPath[currentWaypoint]);
-
-        if (distance < nextWaypointDistance)
-        {
-            currentWaypoint++;
-        }
-
-        if (force.x >= 0.01f)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-        }
-        else if (force.x <= -0.01f)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-        }
-
-        //Checks if player is out of enemyObject's range. If out of range, enemy stops moving.
-        isTargetInRange = true;
-        if(distanceToPlayer <= -enemyRange || distanceToPlayer >= enemyRange)
-        {
-            isTargetInRange = false;
-            transform.position = Vector2.MoveTowards(transform.position, origin, 0.15f);
-        }
+        
+        var distanceToPlayer = Vector2.Distance(transform.position, _player.position); // Always positive
+        
+        if(distanceToPlayer > _enemyRange)
+            return;
+        
+        // Correct waypoint selected, move towards the waypoint
+        
+        Vector2 enemyToWaypoint = ((Vector2)_path.vectorPath[_currentWaypoint] - _rigidbody2D.position).normalized;
+        
+        Vector2 force = enemyToWaypoint * _speed;
+        
+        _rigidbody2D.AddForce(force);
+        
     }
 
     private void Update()
@@ -152,23 +123,23 @@ public class MorkoEnemy : MonoBehaviour
 
     private void CheckIsGrounded()
     {
-        isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
+        _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
     }
 
     private void PlayerHit()
     {
         float distanceX = _player.position.x - transform.position.x;
         float distanceY = _player.position.y - transform.position.y;
-        if (distanceX <= knockbackRadius && distanceX > -knockbackRadius && distanceY <= knockbackRadius && distanceY > -knockbackRadius)
+        if (distanceX <= _knockbackRadius && distanceX > -_knockbackRadius && distanceY <= _knockbackRadius && distanceY > -_knockbackRadius)
         {
             Debug.Log("Hit!");
-            playerPushback();
+            PlayerPushback();
         }
     }
 
-    void playerPushback()
+    private void PlayerPushback()
     {
         Vector2 knockbackDirection = (_player.position - transform.position).normalized;
-        _playerRigidbody2D.AddForce(knockbackDirection * knockbackForce);
+        _playerRigidbody2D.AddForce(knockbackDirection * _knockbackForce);
     }
 }
