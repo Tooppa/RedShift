@@ -6,6 +6,7 @@ public class SFX : MonoBehaviour
 {
     public AudioSource playerFlashlight;
     public AudioSource industrialLightKillSound;
+    public AudioSource buttonBuzz;
     public AudioSource playerGunShot;
     public AudioSource[] playerSteps;
     public AudioSource playerJump;
@@ -16,6 +17,10 @@ public class SFX : MonoBehaviour
     public AudioSource morkoGrowling;
     public AudioSource morkoBreathing;
     public AudioSource morkoNeckCrunch;
+    public AudioSource spaceshipLaser;
+    public AudioSource spaceshipLaserExplosion;
+    public AudioSource rockSlide;
+    public AudioSource spaceshipRumbling;
 
     public string CurrentMusicPlaying()
     {
@@ -78,6 +83,11 @@ public class SFX : MonoBehaviour
         industrialLightKillSound.Play();
     }
 
+    public void PlayButtonBuzz()
+    {
+        buttonBuzz.Play();
+    }
+
     public void PlayGunShot()
     {
         playerGunShot.Play();
@@ -128,5 +138,30 @@ public class SFX : MonoBehaviour
     public void PlayMorkoBreathing()
     {
         morkoBreathing.Play();
+    }
+
+    public void PlayMorkoNeckCrunch()
+    {
+        morkoNeckCrunch.Play();
+    }
+
+    public void PlaySpaceshipRumbling()
+    {
+        spaceshipRumbling.Play();
+    }
+
+    public void PlaySpaceshipLaser()
+    {
+        spaceshipLaser.Play();
+    }
+
+    public void PlaySpaceshipLaserExplosion()
+    {
+        spaceshipLaserExplosion.Play();
+    }
+
+    public void PlayRockSlide()
+    {
+        rockSlide.Play();
     }
 }
