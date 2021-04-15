@@ -14,8 +14,8 @@ namespace Player
         [SerializeField] private float rocketBootsSpeed;
         [SerializeField] private ParticleSystem rocketBoots;
         private Rigidbody2D _rigidbody2D;
-    
-        private readonly Vector2 _groundCheckOffset = new Vector2(0,-0.5f);
+
+        private readonly Vector2 _groundCheckOffset = new Vector2(0, -0.5f);
 
         private bool _isGrounded;
         private bool _holdingJump;
@@ -23,6 +23,7 @@ namespace Player
         private bool _rocketBootsCooldown;
         private bool _runningSoundOnCooldown;
         private bool _isJumping;
+        private bool _isLanding;
         //private bool _musicPlaying = false;
         private Animator _animator;
         private const float GroundedRadius = 0.3f;
@@ -32,7 +33,7 @@ namespace Player
 
         [SerializeField] private float holdingJumpTime = 0;
         [SerializeField] private float holdingJumpTimeMax = 0.2f;
-        
+
         private GameObject _gun;
 
         private SFX _audioController;
@@ -73,10 +74,13 @@ namespace Player
             }
             */
         }
-        
+
         private void CheckIsGrounded()
         {
             _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
+            _isLanding = _rigidbody2D.velocity.y < -0.5f ? true : false;
+            _animator.SetBool("Landing", _isLanding);
+
             switch (_isGrounded)
             {
                 case false:
@@ -84,7 +88,6 @@ namespace Player
                     _isJumping = true;
                     break;
                 case true when _isJumping && (_playerStartAltitude.y - _playerEndAltitude.y) > 1:
-                    _audioController.PlayLanding();
                     _isJumping = false;
                     break;
                 default:
@@ -92,7 +95,7 @@ namespace Player
                     break;
             }
         }
-        
+
         public void Movement(Vector2 move)
         {
             var inputDirection = Mathf.Round(move.x);
@@ -100,7 +103,7 @@ namespace Player
             {
                 transform.localScale = new Vector3(inputDirection, 1, 1);
                 _gun.transform.localScale = new Vector3(inputDirection, 1, 1);
-                CameraEffects.Instance.ChangeOffset(.3f ,inputDirection * 2);
+                CameraEffects.Instance.ChangeOffset(.3f, inputDirection * 2);
                 _animator.SetBool(Walking, true);
                 rocketBoots.gameObject.transform.localScale = new Vector3(inputDirection, 1, 1);
 
@@ -120,7 +123,7 @@ namespace Player
 
             _animator.SetBool(Jumping, !_isGrounded);
         }
-        
+
         public void Jump(float value)
         {
             if (value > 0)
@@ -139,7 +142,7 @@ namespace Player
         {
             if (_holdingJump && holdingJumpTime < holdingJumpTimeMax)
             {
-                _rigidbody2D.AddForce(Vector2.up * (2 * (Mathf.Pow((holdingJumpTime + 1) * 5,2))), ForceMode2D.Impulse);
+                _rigidbody2D.AddForce(Vector2.up * (2 * (Mathf.Pow((holdingJumpTime + 1) * 5, 2))), ForceMode2D.Impulse);
                 holdingJumpTime += Time.deltaTime;
             }
         }
@@ -154,9 +157,10 @@ namespace Player
             HasRocketBoots = true;
         }
 
-        private IEnumerator IEDash(){
+        private IEnumerator IEDash()
+        {
             StartCoroutine(Cooldown(.6f));
-            _rigidbody2D.AddForce(Vector2.right  * (transform.localScale.x * rocketBootsSpeed), ForceMode2D.Impulse);
+            _rigidbody2D.AddForce(Vector2.right * (transform.localScale.x * rocketBootsSpeed), ForceMode2D.Impulse);
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0f);
             _rigidbody2D.gravityScale = .1f;
             rocketBoots.Play();
