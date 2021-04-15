@@ -82,6 +82,12 @@ public class SFX : MonoBehaviour
         playerSteps[random].Play();
     }
 
+    public void StopPlayerRunningSound()
+    {
+        for(int i = 0; i < 4;i++)
+            playerSteps[i].Stop();
+    }
+
     public void PlayJump()
     {
         playerJump.Play();

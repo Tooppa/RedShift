@@ -23,6 +23,7 @@ namespace Player
         private bool _rocketBootsCooldown;
         private bool _runningSoundOnCooldown;
         private bool _isJumping;
+        private bool _isFalling = false;
         private bool _isLanding;
         //private bool _musicPlaying = false;
         private Animator _animator;
@@ -78,7 +79,12 @@ namespace Player
                     break;
                 case true when _isJumping && (_playerStartAltitude.y - _playerEndAltitude.y) > 1:
                     _isJumping = false;
+                    _audioController.PlayLanding();
                     break;
+                //case true when _isFalling:
+                //    _isFalling = false;
+                //    _audioController.PlayLanding();
+                //    break;
                 default:
                     _playerStartAltitude = transform.position;
                     break;
@@ -98,20 +104,16 @@ namespace Player
 
                 if (_isGrounded && !_runningSoundOnCooldown)
                 {
-                    //_audioController.PlayRunning();
+                    if (_audioController.playerLanding.isPlaying)
+                        StartCoroutine(RunningSoundCooldown());
+
                     _audioController.PlayRandomPlayerStepSound();
                     StartCoroutine(RunningSoundCooldown());
                 }
-                else if (!_isGrounded)
-                {
-
-                }
-                    //_audioController.playerRunning.Stop();
             }
             else
             {
                 _animator.SetBool(Walking, false);
-                //_audioController.playerRunning.Stop();
             }
 
             if (Mathf.Abs(_rigidbody2D.velocity.x) < maxSpeed)

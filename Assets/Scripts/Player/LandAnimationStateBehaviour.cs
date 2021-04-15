@@ -10,8 +10,8 @@ public class LandAnimationStateBehaviour : StateMachineBehaviour
     {
         _audioController = GameObject.Find("AudioController");
     }
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        _audioController.GetComponent<SFX>().PlayLanding();
-    }
+    //public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    _audioController.GetComponent<SFX>().PlayLanding();
+    //}
 }
