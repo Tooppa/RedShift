@@ -65,6 +65,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Landing
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: Walking
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -9184402505163963598}
   m_Solo: 0
