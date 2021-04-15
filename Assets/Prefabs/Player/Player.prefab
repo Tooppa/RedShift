@@ -181,7 +181,6 @@ MonoBehaviour:
   rocketBoots: {fileID: 2059804918}
   holdingJumpTime: 0
   holdingJumpTimeMax: 0.2
-  runningSoundCooldownTime: 0.3
 --- !u!114 &1351595938136843858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +239,7 @@ GameObject:
   - component: {fileID: 5398604713659043454}
   - component: {fileID: 1649057767}
   - component: {fileID: 1649057769}
+  - component: {fileID: 3824784874894553770}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -390,6 +390,18 @@ MonoBehaviour:
   - {x: 0.018651962, y: 0.008014679, z: 0}
   - {x: -0.058273315, y: -0.035798073, z: 0}
   - {x: -0.099962234, y: -0.118777275, z: 0}
+--- !u!114 &3824784874894553770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5398604713659043448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eecd14dd4ac39247b9fce05af39bffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &62654656
 MonoBehaviour:
   m_ObjectHideFlags: 0
