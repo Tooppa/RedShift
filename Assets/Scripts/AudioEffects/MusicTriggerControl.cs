@@ -181,6 +181,7 @@ public class MusicTriggerControl : MonoBehaviour
     public void PlaySFX()
     {
         _sfx.volume = desiredVolume;
+        _sfx.loop = loop;
         _sfx.Play();
     }
 

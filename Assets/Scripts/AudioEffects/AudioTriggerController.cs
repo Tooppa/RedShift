@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioTriggerController : MonoBehaviour
 {
@@ -19,11 +20,10 @@ public class AudioTriggerController : MonoBehaviour
     public AudioSource _sfxToFadeOut;
     public AudioSource _sfxToFadeIn;
 
-    //private bool canBeFaded = false;
-    //private bool lowerTheSelectedSoundVolume = false;
-    //private bool increaseTheSelectedSoundVolume = false;
-    //private bool upIsTriggered = false;
-    //private bool downIsTriggered = false;
+    public AudioMixerSnapshot[] audioSnapshot;
+    public AudioMixer mixer;
+    public float[] weights;
+
     public bool loop = false;
 
     public bool destroyOnTrigger = false;
@@ -64,6 +64,7 @@ public class AudioTriggerController : MonoBehaviour
                     musicTriggerController.Loop(loop);
                     musicTriggerController.Volume(volume);
                     musicTriggerController.PlaySelectedMusic();
+                    mixer.TransitionToSnapshots(audioSnapshot, weights, 3);
                     if (destroyOnTrigger)
                         Destroy(gameObject);
                     
