@@ -5,6 +5,7 @@ namespace Behaviors
 {
     public class WalkAnimationCooldown : MonoBehaviour
     {
+        public float cooldownTime;
         private bool _runningSoundOnCooldown;
         public void StartCooldown()
         {
@@ -19,7 +20,7 @@ namespace Behaviors
         {
             //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
             _runningSoundOnCooldown = true;
-            yield return new WaitForSeconds(.3f);
+            yield return new WaitForSeconds(cooldownTime);
             _runningSoundOnCooldown = false;
         }
     }
