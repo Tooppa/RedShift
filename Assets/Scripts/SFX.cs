@@ -5,6 +5,7 @@ using UnityEngine;
 public class SFX : MonoBehaviour
 {
     public AudioSource playerFlashlight;
+    public AudioSource industrialLightKillSound;
     public AudioSource playerGunShot;
     public AudioSource[] playerSteps;
     public AudioSource playerJump;
@@ -12,8 +13,9 @@ public class SFX : MonoBehaviour
     public AudioSource wind;
     public AudioSource calmAmbience;
     public AudioSource intenseMusic;
-    public AudioSource morkoGrowl1;
-    public AudioSource morkoGrowl2;
+    public AudioSource morkoGrowling;
+    public AudioSource morkoBreathing;
+    public AudioSource morkoNeckCrunch;
 
     public string CurrentMusicPlaying()
     {
@@ -71,6 +73,11 @@ public class SFX : MonoBehaviour
         playerFlashlight.Play();
     }
 
+    public void PlayIndustrialLightKillSound()
+    {
+        industrialLightKillSound.Play();
+    }
+
     public void PlayGunShot()
     {
         playerGunShot.Play();
@@ -113,13 +120,13 @@ public class SFX : MonoBehaviour
         intenseMusic.Play();
     }
 
-    public void PlayMorkoGrowlOne()
+    public void PlayMorkoGrowling()
     {
-        morkoGrowl1.Play();
+        morkoGrowling.Play();
     }
 
-    public void PlayMorkoGrowlTwo()
+    public void PlayMorkoBreathing()
     {
-        morkoGrowl2.Play();
+        morkoBreathing.Play();
     }
 }
