@@ -60,18 +60,6 @@ namespace Player
         private void Update()
         {
             CheckIsGrounded();
-            /* music is disabled since it used old inputs
-            if (Input.GetKeyDown(KeyCode.G) && !musicPlaying)
-            {
-                _audioController.GetComponent<SFX>().PlayCalmAmbience();
-                musicPlaying = true;
-            }
-            else if(Input.GetKeyDown(KeyCode.G) && musicPlaying)
-            {
-                _audioController.GetComponent<SFX>().calmAmbience.Pause();
-                musicPlaying = false;
-            }
-            */
         }
         
         private void CheckIsGrounded()
