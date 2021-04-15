@@ -156,6 +156,7 @@ public class AudioTriggerController : MonoBehaviour
                     musicTriggerController.DesiredFadedSFXVolume(desiredFadedSFXVolume);
                     musicTriggerController.SFXToFadeIn(_sfxToFadeIn);
                     musicTriggerController.SFXToFadeOut(_sfxToFadeOut);
+                    musicTriggerController.Pitch(desiredPitch);
                     musicTriggerController.FadeOutAndInSFX();
                     if (destroyOnTrigger)
                         Destroy(gameObject);

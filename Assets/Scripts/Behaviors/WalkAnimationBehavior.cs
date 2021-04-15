@@ -19,7 +19,10 @@ namespace Behaviors
             base.OnStateUpdate(animator, stateInfo, layerIndex, controller);
             if (_cooldown.GetCooldown()) return;
             _cooldown.StartCooldown();
-            _audioController.GetComponent<SFX>().PlayRunning();
+            if (_audioController.GetComponent<SFX>().playerLanding.isPlaying)
+                _cooldown.StartCooldown();
+            else
+                _audioController.GetComponent<SFX>().PlayRandomPlayerStepSound();
         }
     }
 }
