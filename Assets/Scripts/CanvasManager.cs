@@ -23,6 +23,7 @@ public class CanvasManager : MonoBehaviour
     private string _currentLocation;
     private GameObject _interact;
     private RectTransform _currentInfoScreen;
+    private SFX _audioController;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class CanvasManager : MonoBehaviour
 
     private void Start()
     {
+        _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         _currentNoteScreen = null;
         _currentInfoScreen = noteInventory;
@@ -50,6 +52,7 @@ public class CanvasManager : MonoBehaviour
             rect.DORotate(Vector3.zero, .3f)
                 .SetUpdate(true);
             PauseGame();
+            _audioController.PlayOpenInventory();
         }
         else
         {
@@ -58,6 +61,7 @@ public class CanvasManager : MonoBehaviour
             rect.DORotate(new Vector3(0,0,90), .3f)
                 .SetUpdate(true);
             ResumeGame();
+            _audioController.PlayCloseInventory();
         }
     }
     public void SetFuel(int fuel)
