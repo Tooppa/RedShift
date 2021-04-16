@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyableSoundSource: {fileID: 0}
-  audioOptions: 4
+  audioOptions: 5
   _music: {fileID: 0}
   _sfx: {fileID: 0}
   _musicToFadeOut: {fileID: 0}
