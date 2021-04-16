@@ -2,10 +2,12 @@ using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class CanvasManager : MonoBehaviour
 {
     public static CanvasManager Instance { get; private set; }
+    public RectTransform noteInventory, upgradeInventory, rocketInventory;
     public GameObject uiButton;
     public GameObject notesByLocation;
     public GameObject floatingText;
@@ -20,6 +22,7 @@ public class CanvasManager : MonoBehaviour
     private float _currentNoteScreenHeight;
     private string _currentLocation;
     private GameObject _interact;
+    private RectTransform _currentInfoScreen;
     private SFX _audioController;
 
     private void Awake()
@@ -34,22 +37,32 @@ public class CanvasManager : MonoBehaviour
         _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         _currentNoteScreen = null;
+        _currentInfoScreen = noteInventory;
+        hud.transform.DORotate(new Vector3(0,0,90), .3f)
+            .SetUpdate(true);
     }
 
     public void SetHudActive()
     {
-        hud.SetActive(!hud.activeSelf);
-        if(hud.activeSelf)
+        var rect = hud.GetComponent<RectTransform>();
+        if (rect.anchoredPosition.y != 0)
         {
+            rect.DOAnchorPos(new Vector2(30, 0), .3f)
+                .SetUpdate(true);
+            rect.DORotate(Vector3.zero, .3f)
+                .SetUpdate(true);
             PauseGame();
             _audioController.PlayOpenInventory();
         }
         else
         {
+            rect.DOAnchorPos(new Vector2(30, -500), .3f)
+                .SetUpdate(true);
+            rect.DORotate(new Vector3(0,0,90), .3f)
+                .SetUpdate(true);
             ResumeGame();
             _audioController.PlayCloseInventory();
         }
-
     }
     public void SetFuel(int fuel)
     {
@@ -69,7 +82,7 @@ public class CanvasManager : MonoBehaviour
     }
     public void ResumeGame()
     {
-        if (hud.activeSelf)return;
+        if (hud.GetComponent<RectTransform>().anchoredPosition.y < -500)return;
         Time.timeScale = 1;
     }
 
@@ -107,6 +120,30 @@ public class CanvasManager : MonoBehaviour
         obj.GetComponent<Image>().sprite = sprite;
         var btn = obj.GetComponent<Button>();
         btn.onClick.AddListener(() => { ShowText(note);});
+    }
+
+    public void OpenNoteInventory()
+    {
+        _audioController.PlayCloseInventory();
+        _currentInfoScreen.gameObject.SetActive(false);
+        noteInventory.gameObject.SetActive(true);
+        _currentInfoScreen = noteInventory;
+    }
+    public void OpenUpgradeInventory()
+    {
+        _audioController.PlayCloseInventory();
+        _currentInfoScreen.gameObject.SetActive(false);
+        upgradeInventory.gameObject.SetActive(true);
+        _currentInfoScreen = upgradeInventory;
+    }
+    public void OpenRocketInventory()
+    {
+        _audioController.PlayCloseInventory();
+        if(!rocketButton.activeSelf)
+            rocketButton.SetActive(true);
+        _currentInfoScreen.gameObject.SetActive(false);
+        rocketInventory.gameObject.SetActive(true);
+        _currentInfoScreen = rocketInventory;
     }
 
     public void HideInteract()
