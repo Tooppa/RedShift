@@ -124,18 +124,21 @@ public class CanvasManager : MonoBehaviour
 
     public void OpenNoteInventory()
     {
+        _audioController.PlayCloseInventory();
         _currentInfoScreen.gameObject.SetActive(false);
         noteInventory.gameObject.SetActive(true);
         _currentInfoScreen = noteInventory;
     }
     public void OpenUpgradeInventory()
     {
+        _audioController.PlayCloseInventory();
         _currentInfoScreen.gameObject.SetActive(false);
         upgradeInventory.gameObject.SetActive(true);
         _currentInfoScreen = upgradeInventory;
     }
     public void OpenRocketInventory()
     {
+        _audioController.PlayCloseInventory();
         if(!rocketButton.activeSelf)
             rocketButton.SetActive(true);
         _currentInfoScreen.gameObject.SetActive(false);
