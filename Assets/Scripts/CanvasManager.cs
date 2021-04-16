@@ -36,7 +36,6 @@ public class CanvasManager : MonoBehaviour
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         _currentNoteScreen = null;
         _currentInfoScreen = noteInventory;
-        noteInventory.gameObject.SetActive(true);
     }
 
     public void SetHudActive()
