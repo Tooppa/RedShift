@@ -33,7 +33,6 @@ namespace Player
         private GameObject _gun;
 
         private static readonly int Walking = Animator.StringToHash("Walking");
-        private static readonly int Jumping = Animator.StringToHash("Jumping");
         private static readonly int TakeOff = Animator.StringToHash("TakeOff");
         private static readonly int Landing = Animator.StringToHash("Landing");
 
@@ -53,6 +52,8 @@ namespace Player
         private void Update()
         {
             CheckIsGrounded();
+            if (_holdingJump && holdingJumpTime < holdingJumpTimeMax)
+                holdingJumpTime += Time.deltaTime;
         }
 
         private void CheckIsGrounded()
@@ -60,7 +61,7 @@ namespace Player
             var beforeGroundedCheck = _isGrounded;
             _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
             _animator.SetBool(Landing, _rigidbody2D.velocity.y < -0.1f);
-            if (beforeGroundedCheck && !_isGrounded)
+            if (beforeGroundedCheck && !_isGrounded && holdingJumpTime == 0)
                 _timer = 0;
             _timer += Time.deltaTime;
         }
@@ -87,26 +88,22 @@ namespace Player
 
         public void Jump(float value)
         {
-            if (value > 0)
+            _holdingJump = value > 0;
+            if (_holdingJump)
             {
-                if (_timer < coyoteTime) _isGrounded = true;
-                if (!_isGrounded || Time.timeScale != 1) return;
-                _holdingJump = true;
+                var coyote = _timer < coyoteTime;
+                if ((!_isGrounded && !coyote) || Time.timeScale != 1) return;
                 _animator.SetTrigger(TakeOff);
                 _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-                return;
+                _timer += coyoteTime;
             }
-            _holdingJump = false;
             holdingJumpTime = 0;
         }
 
         private void FixedUpdate()
         {
             if (_holdingJump && holdingJumpTime < holdingJumpTimeMax)
-            {
                 _rigidbody2D.AddForce(Vector2.up * (2 * (Mathf.Pow((holdingJumpTime + 1) * 5, 2))), ForceMode2D.Impulse);
-                holdingJumpTime += Time.deltaTime;
-            }
         }
 
         public void Dash()

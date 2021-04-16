@@ -2,10 +2,12 @@ using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class CanvasManager : MonoBehaviour
 {
     public static CanvasManager Instance { get; private set; }
+    public RectTransform noteInventory, upgradeInventory, rocketInventory;
     public GameObject uiButton;
     public GameObject notesByLocation;
     public GameObject floatingText;
@@ -20,6 +22,7 @@ public class CanvasManager : MonoBehaviour
     private float _currentNoteScreenHeight;
     private string _currentLocation;
     private GameObject _interact;
+    private RectTransform _currentInfoScreen;
 
     private void Awake()
     {
@@ -32,15 +35,27 @@ public class CanvasManager : MonoBehaviour
     {
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         _currentNoteScreen = null;
+        _currentInfoScreen = noteInventory;
+        noteInventory
+            .DOAnchorPos(Vector2.zero, .5f)
+            .SetUpdate(true);
     }
 
     public void SetHudActive()
     {
-        hud.SetActive(!hud.activeSelf);
-        if(hud.activeSelf)
+        var rect = hud.GetComponent<RectTransform>();
+        if (rect.anchoredPosition.y != 0)
+        {
+            rect.DOAnchorPos(new Vector2(30, 0), .5f)
+                .SetUpdate(true);
             PauseGame();
+        }
         else
+        {
+            rect.DOAnchorPos(new Vector2(30, -500), .5f)
+                .SetUpdate(true);
             ResumeGame();
+        }
     }
     public void SetFuel(int fuel)
     {
@@ -60,7 +75,7 @@ public class CanvasManager : MonoBehaviour
     }
     public void ResumeGame()
     {
-        if (hud.activeSelf)return;
+        if (hud.GetComponent<RectTransform>().anchoredPosition.y < -500)return;
         Time.timeScale = 1;
     }
 
@@ -98,6 +113,29 @@ public class CanvasManager : MonoBehaviour
         obj.GetComponent<Image>().sprite = sprite;
         var btn = obj.GetComponent<Button>();
         btn.onClick.AddListener(() => { ShowText(note);});
+    }
+
+    public void OpenNoteInventory()
+    {
+        _currentInfoScreen
+            .DOAnchorPos(new Vector2(-500, 0), .5f)
+            .SetUpdate(true);
+        noteInventory
+            .DOAnchorPos(Vector2.zero, .5f)
+            .SetUpdate(true);
+        _currentInfoScreen = noteInventory;
+    }
+    public void OpenUpgradeInventory()
+    {
+        _currentInfoScreen.DOAnchorPos(new Vector2(-500, 0), .5f);
+        upgradeInventory.DOAnchorPos(Vector2.zero, .5f);
+        _currentInfoScreen = upgradeInventory;
+    }
+    public void OpenRocketInventory()
+    {
+        _currentInfoScreen.DOAnchorPos(new Vector2(-500, 0), .5f);
+        rocketInventory.DOAnchorPos(Vector2.zero, .5f);
+        _currentInfoScreen = rocketInventory;
     }
 
     public void HideInteract()
