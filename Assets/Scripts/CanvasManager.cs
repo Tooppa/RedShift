@@ -36,9 +36,7 @@ public class CanvasManager : MonoBehaviour
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         _currentNoteScreen = null;
         _currentInfoScreen = noteInventory;
-        noteInventory
-            .DOAnchorPos(Vector2.zero, .5f)
-            .SetUpdate(true);
+        noteInventory.gameObject.SetActive(true);
     }
 
     public void SetHudActive()
@@ -117,32 +115,20 @@ public class CanvasManager : MonoBehaviour
 
     public void OpenNoteInventory()
     {
-        _currentInfoScreen
-            .DOAnchorPos(new Vector2(-500, 0), .5f)
-            .SetUpdate(true);
-        noteInventory
-            .DOAnchorPos(Vector2.zero, .5f)
-            .SetUpdate(true);
+        _currentInfoScreen.gameObject.SetActive(false);
+        noteInventory.gameObject.SetActive(true);
         _currentInfoScreen = noteInventory;
     }
     public void OpenUpgradeInventory()
     {
-        _currentInfoScreen
-            .DOAnchorPos(new Vector2(-500, 0), .5f)
-            .SetUpdate(true);
-        upgradeInventory
-            .DOAnchorPos(Vector2.zero, .5f)
-            .SetUpdate(true);
+        _currentInfoScreen.gameObject.SetActive(false);
+        upgradeInventory.gameObject.SetActive(true);
         _currentInfoScreen = upgradeInventory;
     }
     public void OpenRocketInventory()
     {
-        _currentInfoScreen
-            .DOAnchorPos(new Vector2(-500, 0), .5f)
-            .SetUpdate(true);
-        rocketInventory
-            .DOAnchorPos(Vector2.zero, .5f)
-            .SetUpdate(true);
+        _currentInfoScreen.gameObject.SetActive(false);
+        rocketInventory.gameObject.SetActive(true);
         _currentInfoScreen = rocketInventory;
     }
 
