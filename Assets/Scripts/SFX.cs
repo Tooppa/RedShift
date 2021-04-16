@@ -15,8 +15,10 @@ public class SFX : MonoBehaviour
     public AudioSource calmAmbience;
     public AudioSource intenseMusic;
     public AudioSource morkoGrowling;
+    public AudioSource morkoGrowlOne;
     public AudioSource morkoBreathing;
     public AudioSource morkoNeckCrunch;
+    public AudioSource morkoSteps;
     public AudioSource spaceshipLaser;
     public AudioSource spaceshipLaserExplosion;
     public AudioSource rockSlide;
@@ -135,6 +137,11 @@ public class SFX : MonoBehaviour
         morkoGrowling.Play();
     }
 
+    public void PlayMorkoGrowlOne()
+    {
+        morkoGrowlOne.Play();
+    }
+
     public void PlayMorkoBreathing()
     {
         morkoBreathing.Play();
@@ -143,6 +150,11 @@ public class SFX : MonoBehaviour
     public void PlayMorkoNeckCrunch()
     {
         morkoNeckCrunch.Play();
+    }
+
+    public void PlayMorkoSteps()
+    {
+        morkoSteps.Play();
     }
 
     public void PlaySpaceshipRumbling()
