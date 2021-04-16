@@ -20,6 +20,7 @@ namespace Player
 
         private bool _isGrounded;
         private bool _holdingJump;
+        private bool _pressedJump;
         public bool HasRocketBoots { private set; get; }
         private bool _rocketBootsCooldown;
         //private bool _musicPlaying = false;
@@ -52,8 +53,6 @@ namespace Player
         private void Update()
         {
             CheckIsGrounded();
-            if (_holdingJump && holdingJumpTime < holdingJumpTimeMax)
-                holdingJumpTime += Time.deltaTime;
         }
 
         private void CheckIsGrounded()
@@ -61,8 +60,15 @@ namespace Player
             var beforeGroundedCheck = _isGrounded;
             _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
             _animator.SetBool(Landing, _rigidbody2D.velocity.y < -0.1f);
-            if (beforeGroundedCheck && !_isGrounded && holdingJumpTime == 0)
-                _timer = 0;
+            switch (beforeGroundedCheck)
+            {
+                case true when !_isGrounded && !_pressedJump:
+                    _timer = 0;
+                    break;
+                case false when _isGrounded:
+                    _pressedJump = false;
+                    break;
+            }
             _timer += Time.deltaTime;
         }
 
@@ -78,9 +84,7 @@ namespace Player
                 rocketBoots.gameObject.transform.localScale = new Vector3(inputDirection, 1, 1);
             }
             else
-            {
                 _animator.SetBool(Walking, false);
-            }
 
             if (Mathf.Abs(_rigidbody2D.velocity.x) < maxSpeed)
                 _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
@@ -92,20 +96,22 @@ namespace Player
             if (_holdingJump)
             {
                 var coyote = _timer < coyoteTime;
+                _pressedJump = true;
                 if ((!_isGrounded && !coyote) || Time.timeScale != 1) return;
                 _animator.SetTrigger(TakeOff);
                 _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-                _timer += coyoteTime;
+                return;
             }
             holdingJumpTime = 0;
         }
-
         private void FixedUpdate()
         {
             if (_holdingJump && holdingJumpTime < holdingJumpTimeMax)
+            {
                 _rigidbody2D.AddForce(Vector2.up * (2 * (Mathf.Pow((holdingJumpTime + 1) * 5, 2))), ForceMode2D.Impulse);
+                holdingJumpTime += Time.deltaTime;
+            }
         }
-
         public void Dash()
         {
             if (HasRocketBoots && !_rocketBootsCooldown && Time.timeScale == 1) StartCoroutine(IEDash());

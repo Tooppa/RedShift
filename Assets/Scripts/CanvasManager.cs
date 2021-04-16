@@ -127,14 +127,22 @@ public class CanvasManager : MonoBehaviour
     }
     public void OpenUpgradeInventory()
     {
-        _currentInfoScreen.DOAnchorPos(new Vector2(-500, 0), .5f);
-        upgradeInventory.DOAnchorPos(Vector2.zero, .5f);
+        _currentInfoScreen
+            .DOAnchorPos(new Vector2(-500, 0), .5f)
+            .SetUpdate(true);
+        upgradeInventory
+            .DOAnchorPos(Vector2.zero, .5f)
+            .SetUpdate(true);
         _currentInfoScreen = upgradeInventory;
     }
     public void OpenRocketInventory()
     {
-        _currentInfoScreen.DOAnchorPos(new Vector2(-500, 0), .5f);
-        rocketInventory.DOAnchorPos(Vector2.zero, .5f);
+        _currentInfoScreen
+            .DOAnchorPos(new Vector2(-500, 0), .5f)
+            .SetUpdate(true);
+        rocketInventory
+            .DOAnchorPos(Vector2.zero, .5f)
+            .SetUpdate(true);
         _currentInfoScreen = rocketInventory;
     }
 
