@@ -20,6 +20,7 @@ public class CanvasManager : MonoBehaviour
     private float _currentNoteScreenHeight;
     private string _currentLocation;
     private GameObject _interact;
+    private SFX _audioController;
 
     private void Awake()
     {
@@ -30,6 +31,7 @@ public class CanvasManager : MonoBehaviour
 
     private void Start()
     {
+        _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         _currentNoteScreen = null;
     }
@@ -38,9 +40,16 @@ public class CanvasManager : MonoBehaviour
     {
         hud.SetActive(!hud.activeSelf);
         if(hud.activeSelf)
+        {
             PauseGame();
+            _audioController.PlayOpenInventory();
+        }
         else
+        {
             ResumeGame();
+            _audioController.PlayCloseInventory();
+        }
+
     }
     public void SetFuel(int fuel)
     {

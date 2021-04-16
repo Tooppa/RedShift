@@ -23,6 +23,10 @@ namespace Player
         public bool HasRocketBoots { private set; get; }
         private bool _rocketBootsCooldown;
 
+        public float cooldownTime;
+        private bool _runningSoundOnCooldown;
+        private bool _runningSoundPlayable;
+
         private Animator _animator;
         private const float GroundedRadius = 0.3f;
         private float _timer;
@@ -31,7 +35,7 @@ namespace Player
         [SerializeField] private float holdingJumpTimeMax = 0.2f;
 
         private GameObject _gun;
-        private GameObject _audioController;
+        private SFX _audioController;
 
         private static readonly int Walking = Animator.StringToHash("Walking");
         private static readonly int Jumping = Animator.StringToHash("Jumping");
@@ -43,7 +47,7 @@ namespace Player
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _animator = transform.GetChild(1).GetComponent<Animator>();
             _gun = GameObject.Find("Gun");
-            _audioController = GameObject.Find("AudioController");
+            _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
             HasRocketBoots = false;
         }
 
@@ -64,6 +68,14 @@ namespace Player
             _animator.SetBool(Landing, _rigidbody2D.velocity.y < -0.1f);
             if (beforeGroundedCheck && !_isGrounded)
                 _timer = 0;
+
+            //if(!_runningSoundOnCooldown && _isGrounded && !_audioController.playerLanding.isPlaying)
+            //{
+            //    _runningSoundPlayable = true;
+            //}
+
+
+
             _timer += Time.deltaTime;
         }
 
@@ -77,6 +89,18 @@ namespace Player
                 CameraEffects.Instance.ChangeOffset(.3f, inputDirection * 2);
                 _animator.SetBool(Walking, true);
                 rocketBoots.gameObject.transform.localScale = new Vector3(inputDirection, 1, 1);
+
+                //if(_runningSoundPlayable)
+                //{
+                //    if (_audioController.playerLanding.isPlaying)
+                //        StartCoroutine(RunningSoundCooldown());
+                //    else
+                //    {
+                //        _runningSoundPlayable = false;
+                //        _audioController.PlayRandomPlayerStepSound();
+                //        StartCoroutine(RunningSoundCooldown());
+                //    }
+                //}
             }
             else
             {
@@ -115,7 +139,7 @@ namespace Player
         {
             if (HasRocketBoots && !_rocketBootsCooldown && Time.timeScale == 1)
             {
-                _audioController.GetComponent<SFX>().PlayPlayerRocketDash();
+                _audioController.PlayPlayerRocketDash();
                 StartCoroutine(IEDash());
             }
 
@@ -123,7 +147,7 @@ namespace Player
 
         public void EquipRocketBoots()
         {
-            _audioController.GetComponent<SFX>().PlayPowerUp();
+            _audioController.PlayPowerUp();
             HasRocketBoots = true;
         }
 
@@ -146,6 +170,15 @@ namespace Player
             _rocketBootsCooldown = true;
             yield return new WaitForSeconds(cooldownTime);
             _rocketBootsCooldown = false;
+        }
+
+
+        private IEnumerator RunningSoundCooldown()
+        {
+            //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
+            _runningSoundOnCooldown = true;
+            yield return new WaitForSeconds(cooldownTime);
+            _runningSoundOnCooldown = false;
         }
     }
 }

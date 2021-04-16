@@ -13,6 +13,9 @@ public class SFX : MonoBehaviour
     public AudioSource playerLanding;
     public AudioSource playerRocketDash;
     public AudioSource playerPowerUp;
+    public AudioSource openInventory;
+    public AudioSource closeInventory;
+    public AudioSource inventoryClick;
     public AudioSource wind;
     public AudioSource calmAmbience;
     public AudioSource intenseMusic;
@@ -127,6 +130,21 @@ public class SFX : MonoBehaviour
     public void PlayPowerUp()
     {
         playerPowerUp.Play();
+    }
+
+    public void PlayOpenInventory()
+    {
+        openInventory.Play();
+    }
+
+    public void PlayCloseInventory()
+    {
+        closeInventory.Play();
+    }
+
+    public void PlayInventoryClick()
+    {
+        inventoryClick.Play();
     }
 
     public void PlayWind()
