@@ -1,7 +1,7 @@
 using Pathfinding;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(Seeker))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Seeker), typeof(Animator))]
 public class MorkoEnemy : MonoBehaviour
 {
     public EnemyScriptable data;
@@ -26,7 +26,8 @@ public class MorkoEnemy : MonoBehaviour
     private Seeker _seeker;
     private Rigidbody2D _rigidbody2D;
 
-    private const float JumpAngle = 0.75f;
+    private Animator _animator;
+    private static readonly int Walk = Animator.StringToHash("Walk");
 
     private void Awake()
     {
@@ -53,6 +54,7 @@ public class MorkoEnemy : MonoBehaviour
         
         _seeker = GetComponent<Seeker>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
 
         InvokeRepeating(nameof(UpdatePath), 0f, 0.2f);
     }
@@ -84,7 +86,7 @@ public class MorkoEnemy : MonoBehaviour
         if(distanceToPlayer > data.enemyRange)
             return;
 
-        //Debug.Log(_currentWaypoint);
+        _animator.SetTrigger(Walk);
         
         if (_currentWaypoint < _path.vectorPath.Count - 1)
         {
