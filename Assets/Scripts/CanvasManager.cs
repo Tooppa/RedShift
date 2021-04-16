@@ -136,6 +136,8 @@ public class CanvasManager : MonoBehaviour
     }
     public void OpenRocketInventory()
     {
+        if(!rocketButton.activeSelf)
+            rocketButton.SetActive(true);
         _currentInfoScreen.gameObject.SetActive(false);
         rocketInventory.gameObject.SetActive(true);
         _currentInfoScreen = rocketInventory;

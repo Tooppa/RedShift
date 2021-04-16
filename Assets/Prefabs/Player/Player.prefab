@@ -180,6 +180,7 @@ MonoBehaviour:
   rocketBootsSpeed: 1000
   rocketBoots: {fileID: 2059804918}
   coyoteTime: 0.1
+  cooldownTime: 0.3
   holdingJumpTime: 0
   holdingJumpTimeMax: 0.2
 --- !u!114 &1351595938136843858
