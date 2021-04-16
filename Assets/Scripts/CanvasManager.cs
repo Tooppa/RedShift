@@ -36,6 +36,8 @@ public class CanvasManager : MonoBehaviour
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         _currentNoteScreen = null;
         _currentInfoScreen = noteInventory;
+        hud.transform.DORotate(new Vector3(0,0,90), .3f)
+            .SetUpdate(true);
     }
 
     public void SetHudActive()
@@ -43,13 +45,17 @@ public class CanvasManager : MonoBehaviour
         var rect = hud.GetComponent<RectTransform>();
         if (rect.anchoredPosition.y != 0)
         {
-            rect.DOAnchorPos(new Vector2(30, 0), .5f)
+            rect.DOAnchorPos(new Vector2(30, 0), .3f)
+                .SetUpdate(true);
+            rect.DORotate(Vector3.zero, .3f)
                 .SetUpdate(true);
             PauseGame();
         }
         else
         {
-            rect.DOAnchorPos(new Vector2(30, -500), .5f)
+            rect.DOAnchorPos(new Vector2(30, -500), .3f)
+                .SetUpdate(true);
+            rect.DORotate(new Vector3(0,0,90), .3f)
                 .SetUpdate(true);
             ResumeGame();
         }
