@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2657833758530413687}
   - component: {fileID: 6322883666029882253}
   - component: {fileID: 1770475362211959620}
+  - component: {fileID: 190297692}
   m_Layer: 0
   m_Name: Morko
   m_TagString: Untagged
@@ -103,6 +104,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  distanceFromRaycast: 1.2
 --- !u!114 &2657833758530413687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,10 +146,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 10
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 59ce3285105c28449810a137efc5a371, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -168,3 +170,22 @@ CapsuleCollider2D:
   m_Offset: {x: -0.050109863, y: -0.07547188}
   m_Size: {x: 1.513794, y: 4.5895424}
   m_Direction: 0
+--- !u!95 &190297692
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829833270507068404}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 523d0d3d2855c6f4f8453f8a95cbc408, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
