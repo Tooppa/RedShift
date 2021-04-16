@@ -76,8 +76,10 @@ public class MorkoEnemy : MonoBehaviour
     {
         if (_path == null)
             return;
+     
+        var positionCache = transform.position;
         
-        var distanceToPlayer = Vector2.Distance(transform.position, _player.position); // Always positive
+        var distanceToPlayer = Vector2.Distance(positionCache, _player.position); // Always positive
         
         if(distanceToPlayer > data.enemyRange)
             return;
@@ -95,31 +97,32 @@ public class MorkoEnemy : MonoBehaviour
         }
         
         // Correct waypoint selected, move towards the waypoint
-        
-        Vector2 enemyToWaypoint = ((Vector2)_path.vectorPath[_currentWaypoint] - (Vector2) transform.position).normalized;
+
+        Vector2 enemyToWaypoint = ((Vector2)_path.vectorPath[_currentWaypoint] - (Vector2) positionCache).normalized;
         
         Vector2 force = enemyToWaypoint * data.speed;
         
         _rigidbody2D.AddForce(force);
         
         // Flip the sprite around if direction changes
-        transform.localScale = new Vector3(1 * Mathf.Sign(force.x), 1, 1);
-        
+        var transformCache = transform;
+        transformCache.localScale = new Vector3(1 * Mathf.Sign(force.x), 1, 1);
+
         // Check if there is a need to jump
         // Determine that by raycasting from the legs
-        var legPosition = (Vector2) transform.position + _legOffset;
+        var legPosition = (Vector2) positionCache + _legOffset;
 
         // Raycast from the legs by the specified length. Only collide with Ground
-        var hit = Physics2D.Raycast(legPosition, Vector3.right * transform.localScale.x, distanceFromRaycast, LayerMask.GetMask("Ground"));
+        var hit = Physics2D.Raycast(legPosition, Vector3.right * transformCache.localScale.x, distanceFromRaycast, LayerMask.GetMask("Ground"));
 
         if (hit.collider != null)
         {
-            Debug.DrawRay(legPosition, Vector3.right * (distanceFromRaycast * transform.localScale.x), Color.red);
-            _rigidbody2D.AddForce(Vector2.up * 20, ForceMode2D.Impulse);
+            Debug.DrawRay(legPosition, Vector3.right * (distanceFromRaycast * transformCache.localScale.x), Color.red);
+            _rigidbody2D.AddForce(Vector2.up * 18, ForceMode2D.Impulse);
         }
         else
         {
-            Debug.DrawRay(legPosition, Vector3.right * (distanceFromRaycast * transform.localScale.x), Color.gray);
+            Debug.DrawRay(legPosition, Vector3.right * (distanceFromRaycast * transformCache.localScale.x), Color.gray);
         }
 
     }
