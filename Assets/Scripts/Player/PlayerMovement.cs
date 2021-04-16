@@ -22,7 +22,7 @@ namespace Player
         private bool _holdingJump;
         public bool HasRocketBoots { private set; get; }
         private bool _rocketBootsCooldown;
-        //private bool _musicPlaying = false;
+
         private Animator _animator;
         private const float GroundedRadius = 0.3f;
         private float _timer;
@@ -31,6 +31,7 @@ namespace Player
         [SerializeField] private float holdingJumpTimeMax = 0.2f;
 
         private GameObject _gun;
+        private GameObject _audioController;
 
         private static readonly int Walking = Animator.StringToHash("Walking");
         private static readonly int Jumping = Animator.StringToHash("Jumping");
@@ -42,6 +43,7 @@ namespace Player
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _animator = transform.GetChild(1).GetComponent<Animator>();
             _gun = GameObject.Find("Gun");
+            _audioController = GameObject.Find("AudioController");
             HasRocketBoots = false;
         }
 
@@ -111,11 +113,17 @@ namespace Player
 
         public void Dash()
         {
-            if (HasRocketBoots && !_rocketBootsCooldown && Time.timeScale == 1) StartCoroutine(IEDash());
+            if (HasRocketBoots && !_rocketBootsCooldown && Time.timeScale == 1)
+            {
+                _audioController.GetComponent<SFX>().PlayPlayerRocketDash();
+                StartCoroutine(IEDash());
+            }
+
         }
 
         public void EquipRocketBoots()
         {
+            _audioController.GetComponent<SFX>().PlayPowerUp();
             HasRocketBoots = true;
         }
 

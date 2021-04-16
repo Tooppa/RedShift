@@ -11,6 +11,8 @@ public class SFX : MonoBehaviour
     public AudioSource[] playerSteps;
     public AudioSource playerJump;
     public AudioSource playerLanding;
+    public AudioSource playerRocketDash;
+    public AudioSource playerPowerUp;
     public AudioSource wind;
     public AudioSource calmAmbience;
     public AudioSource intenseMusic;
@@ -107,6 +109,11 @@ public class SFX : MonoBehaviour
             playerSteps[i].Stop();
     }
 
+    public void PlayPlayerRocketDash()
+    {
+        playerRocketDash.Play();
+    }
+
     public void PlayJump()
     {
         playerJump.Play();
@@ -115,6 +122,11 @@ public class SFX : MonoBehaviour
     public void PlayLanding()
     {
         playerLanding.Play();
+    }
+
+    public void PlayPowerUp()
+    {
+        playerPowerUp.Play();
     }
 
     public void PlayWind()
