@@ -24,5 +24,9 @@ namespace Behaviors
             else
                 _audioController.GetComponent<SFX>().PlayRandomPlayerStepSound();
         }
+        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            _audioController.GetComponent<SFX>().StopPlayerRunningSound();
+        }
     }
 }
