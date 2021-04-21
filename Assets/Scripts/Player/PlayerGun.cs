@@ -9,12 +9,15 @@ namespace Player
     public class PlayerGun : MonoBehaviour
     {
         public GameObject gun;
+        public float powerShotTimer;
         public bool HasGun  { private set; get; }
+        public bool HasPowerfulGun  { private set; get; }
 
         private GameObject _audioController;
         private bool _cooldown;
         private Light2D _light2D;
         private float _intensity;
+        private float _chargeTimer = 0;
         private bool _holdingShoot;
 
         private void Start()
@@ -28,18 +31,35 @@ namespace Player
 
         public void Shoot(float value)
         {
-            _holdingShoot = value > 0;
             if (_cooldown || !HasGun || !gun.gameObject.activeSelf) return;
+            if (HasPowerfulGun)
+            {
+                _holdingShoot = value > 0;
+                if (_holdingShoot || _chargeTimer < powerShotTimer) return;
 
-            if (!_holdingShoot)
+                StartCoroutine(Cooldown(1));
+                CameraEffects.Instance.ShakeCamera(1.5f, .1f);
+                gun.GetComponentInChildren<ParticleSystem>().Play();
+                _audioController.GetComponent<SFX>().PlayGunShot();
+            }
+            else
             {
                 StartCoroutine(Cooldown(1));
-
-                CameraEffects.Instance.ShakeCamera(1.5f, .1f);
-
+                //CameraEffects.Instance.ShakeCamera(1.5f, .1f);
                 gun.GetComponentInChildren<ParticleSystem>().Play();
+                _audioController.GetComponent<SFX>().PlayButtonBuzz();
+            }
+        }
 
-                _audioController.GetComponent<SFX>().PlayGunShot();
+        private void FixedUpdate()
+        {
+            if (_holdingShoot)
+            {
+                _chargeTimer += Time.deltaTime;
+            }
+            else
+            {
+                _chargeTimer =   0;
             }
         }
         private IEnumerator Cooldown(float cooldownTime)
@@ -54,6 +74,10 @@ namespace Player
         {
             HasGun = true;
             _light2D.intensity = _intensity;
+        }
+        public void EquipPowerfulGun()
+        {
+            HasPowerfulGun = true;
         }
     }
 }
