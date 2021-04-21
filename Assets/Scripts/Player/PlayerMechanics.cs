@@ -42,7 +42,7 @@ namespace Player
             _playerControls.Surface.Jump.performed += ctx => _playerMovement.Jump(ctx.ReadValue<float>());
             _playerControls.Surface.Dash.started += _ => _playerMovement.Dash();
             _playerControls.Surface.OpenHud.started += _ => _canvasManager.SetHudActive();
-            _playerControls.Surface.Shoot.started += _ => _playerGun.Shoot();
+            _playerControls.Surface.Shoot.performed += ctx => _playerGun.Shoot(ctx.ReadValue<float>());
             _playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
             _playerControls.Surface.Interact.started += _ => PickItem();
         }
@@ -115,6 +115,11 @@ namespace Player
             if (pickables.Gun && !_playerGun.HasGun)
             {
                 _playerGun.EquipGun();
+                _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
+            }
+            if (pickables.PowerfulGun && !_playerGun.HasPowerfulGun)
+            {
+                _playerGun.EquipPowerfulGun();
                 _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
             if (pickables.Flashlight && !_flashlight.HasFlashlight)

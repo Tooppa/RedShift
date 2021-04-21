@@ -13,6 +13,7 @@ public class PickableObjects : ScriptableObject
     public bool rocketBoots;
     public bool gun;
     public bool flashlight;
+    public bool breakObjectsWithGun;
     [TextArea(5,10)]
     public string statsForUpgrades;
 }
