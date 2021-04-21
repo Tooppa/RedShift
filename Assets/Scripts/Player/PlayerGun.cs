@@ -20,10 +20,14 @@ namespace Player
         private float _chargeTimer = 0;
         private bool _holdingShoot;
 
+        private Animator _animator;
+        private static readonly int Shooting = Animator.StringToHash("Shoot");
+
         private void Start()
         {
             gun = GameObject.Find("Gun");
             _audioController = GameObject.Find("AudioController");
+            _animator = transform.GetChild(1).GetComponent<Animator>();
             _light2D = GetComponentInChildren<Light2D>();
             _intensity = _light2D.intensity;
             _light2D.intensity = 0;
@@ -41,11 +45,13 @@ namespace Player
                     PowerfulShot(particleCollision);
                 else WeakShot(particleCollision);
             }
-            else WeakShot(particleCollision);
+            else if (_holdingShoot)
+                WeakShot(particleCollision);
         }
 
         private void PowerfulShot(ParticleCollision particleCollision)
         {
+            _animator.SetTrigger(Shooting);
             StartCoroutine(Cooldown(1));
             particleCollision.DisableWeakShot();
             CameraEffects.Instance.ShakeCamera(1.5f, .1f);
@@ -55,6 +61,7 @@ namespace Player
 
         private void WeakShot(ParticleCollision particleCollision)
         {
+            _animator.SetTrigger(Shooting);
             StartCoroutine(Cooldown(1));
             particleCollision.EnableWeakShot();
             CameraEffects.Instance.ShakeCamera(.5f, .1f);
