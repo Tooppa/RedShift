@@ -117,6 +117,11 @@ namespace Player
                 _playerGun.EquipGun();
                 _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
+            if (pickables.PowerfulGun && !_playerGun.HasPowerfulGun)
+            {
+                _playerGun.EquipPowerfulGun();
+                _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
+            }
             if (pickables.Flashlight && !_flashlight.HasFlashlight)
             {
                 _flashlight.EquipFlashlight();
