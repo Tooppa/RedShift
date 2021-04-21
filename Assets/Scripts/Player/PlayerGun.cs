@@ -31,33 +31,35 @@ namespace Player
 
         public void Shoot(float value)
         {
+            _holdingShoot = value > 0;
             if (_cooldown || !HasGun || !gun.gameObject.activeSelf) return;
+            var particleCollision = gun.GetComponentInChildren<ParticleCollision>();
             if (HasPowerfulGun)
             {
-                _holdingShoot = value > 0;
                 if (_holdingShoot) return;
                 if (_chargeTimer >= powerShotTimer)
-                {
-                    StartCoroutine(Cooldown(1));
-                    CameraEffects.Instance.ShakeCamera(1.5f, .1f);
-                    gun.GetComponentInChildren<ParticleSystem>().Play();
-                    _audioController.GetComponent<SFX>().PlayGunShot();
-                }
-                else
-                {
-                    StartCoroutine(Cooldown(1));
-                    //CameraEffects.Instance.ShakeCamera(1.5f, .1f);
-                    gun.GetComponentInChildren<ParticleSystem>().Play();
-                    _audioController.GetComponent<SFX>().PlayButtonBuzz();
-                }
+                    PowerfulShot(particleCollision);
+                else WeakShot(particleCollision);
             }
-            else
-            {
-                StartCoroutine(Cooldown(1));
-                //CameraEffects.Instance.ShakeCamera(1.5f, .1f);
-                gun.GetComponentInChildren<ParticleSystem>().Play();
-                _audioController.GetComponent<SFX>().PlayButtonBuzz();
-            }
+            else WeakShot(particleCollision);
+        }
+
+        private void PowerfulShot(ParticleCollision particleCollision)
+        {
+            StartCoroutine(Cooldown(1));
+            particleCollision.DisableWeakShot();
+            CameraEffects.Instance.ShakeCamera(1.5f, .1f);
+            gun.GetComponentInChildren<ParticleSystem>().Play();
+            _audioController.GetComponent<SFX>().PlayGunShot();
+        }
+
+        private void WeakShot(ParticleCollision particleCollision)
+        {
+            StartCoroutine(Cooldown(1));
+            particleCollision.EnableWeakShot();
+            CameraEffects.Instance.ShakeCamera(.5f, .1f);
+            gun.GetComponentInChildren<ParticleSystem>().Play();
+            _audioController.GetComponent<SFX>().PlayButtonBuzz();
         }
 
         private void FixedUpdate()
