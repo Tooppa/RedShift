@@ -15,6 +15,7 @@ namespace Player
         private bool _cooldown;
         private Light2D _light2D;
         private float _intensity;
+        private bool _holdingShoot;
 
         private void Start()
         {
@@ -25,17 +26,21 @@ namespace Player
             _light2D.intensity = 0;
         }
 
-        public void Shoot()
+        public void Shoot(float value)
         {
+            _holdingShoot = value > 0;
             if (_cooldown || !HasGun || !gun.gameObject.activeSelf) return;
-            
-            StartCoroutine(Cooldown(1));
-            
-            CameraEffects.Instance.ShakeCamera(1.5f, .1f);
-            
-            gun.GetComponentInChildren<ParticleSystem>().Play();
-            
-            _audioController.GetComponent<SFX>().PlayGunShot();
+
+            if (!_holdingShoot)
+            {
+                StartCoroutine(Cooldown(1));
+
+                CameraEffects.Instance.ShakeCamera(1.5f, .1f);
+
+                gun.GetComponentInChildren<ParticleSystem>().Play();
+
+                _audioController.GetComponent<SFX>().PlayGunShot();
+            }
         }
         private IEnumerator Cooldown(float cooldownTime)
         {
