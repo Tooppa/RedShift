@@ -88,7 +88,7 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowText(string note)
     {
-        hud.SetActive(true);
+        SetHudActive();
         noteScreen.SetActive(true);
         noteScreen.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = note;
         PauseGame();

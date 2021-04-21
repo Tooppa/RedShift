@@ -10,6 +10,8 @@ public class ParticleCollision : MonoBehaviour
     public CinemachineVirtualCamera cam;
     public GameObject explosionPrefab;
 
+    private bool _weakShot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,18 +19,29 @@ public class ParticleCollision : MonoBehaviour
         collisionEvents = new List<ParticleCollisionEvent>();
     }
 
+    public void DisableWeakShot()
+    {
+        _weakShot = false;
+    }
+    public void EnableWeakShot()
+    {
+        _weakShot = true;
+    }
+
     private void OnParticleCollision(GameObject other)
     {
-        int numCollisionEvents = _ps.GetCollisionEvents(other, collisionEvents);
-        GameObject explosion = Instantiate(explosionPrefab, collisionEvents[0].intersection, Quaternion.identity);
-        Vector3 direction = other.transform.position - transform.position;
-
-        if (other.GetComponent<Rigidbody2D>() != null && 
-            (other.GetComponent<Breakable>() != null || other.GetComponent<Piece>()) )
-                other.GetComponent<Rigidbody2D>().AddForceAtPosition(direction.normalized * 200, collisionEvents[0].intersection, ForceMode2D.Impulse);
-        
-
-        if (other.TryGetComponent(out Health health))
+        var breakable = other.TryGetComponent(out Breakable _);
+        if (other.TryGetComponent(out Health health) && !(_weakShot && breakable))
             health.TakeDamage(20);
+        if (_weakShot) return;
+        
+        var numCollisionEvents = _ps.GetCollisionEvents(other, collisionEvents);
+        var explosion = Instantiate(explosionPrefab, collisionEvents[0].intersection, Quaternion.identity);
+        var direction = other.transform.position - transform.position;
+
+        if (other.TryGetComponent(out Rigidbody2D component) && 
+            (breakable || other.TryGetComponent(out Piece piece)))
+            component.AddForceAtPosition(direction.normalized * 200, collisionEvents[0].intersection, ForceMode2D.Impulse);
+        
     }
 }
