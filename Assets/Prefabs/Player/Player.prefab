@@ -209,6 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 0}
+  powerShotTimer: 1
 --- !u!95 &1813138844
 Animator:
   serializedVersion: 3
