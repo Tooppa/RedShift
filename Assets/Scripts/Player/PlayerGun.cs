@@ -35,12 +35,21 @@ namespace Player
             if (HasPowerfulGun)
             {
                 _holdingShoot = value > 0;
-                if (_holdingShoot || _chargeTimer < powerShotTimer) return;
-
-                StartCoroutine(Cooldown(1));
-                CameraEffects.Instance.ShakeCamera(1.5f, .1f);
-                gun.GetComponentInChildren<ParticleSystem>().Play();
-                _audioController.GetComponent<SFX>().PlayGunShot();
+                if (_holdingShoot) return;
+                if (_chargeTimer >= powerShotTimer)
+                {
+                    StartCoroutine(Cooldown(1));
+                    CameraEffects.Instance.ShakeCamera(1.5f, .1f);
+                    gun.GetComponentInChildren<ParticleSystem>().Play();
+                    _audioController.GetComponent<SFX>().PlayGunShot();
+                }
+                else
+                {
+                    StartCoroutine(Cooldown(1));
+                    //CameraEffects.Instance.ShakeCamera(1.5f, .1f);
+                    gun.GetComponentInChildren<ParticleSystem>().Play();
+                    _audioController.GetComponent<SFX>().PlayButtonBuzz();
+                }
             }
             else
             {
