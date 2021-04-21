@@ -45,11 +45,13 @@ namespace Player
                     PowerfulShot(particleCollision);
                 else WeakShot(particleCollision);
             }
-            else WeakShot(particleCollision);
+            else if (_holdingShoot)
+                WeakShot(particleCollision);
         }
 
         private void PowerfulShot(ParticleCollision particleCollision)
         {
+            _animator.SetTrigger(Shooting);
             StartCoroutine(Cooldown(1));
             particleCollision.DisableWeakShot();
             CameraEffects.Instance.ShakeCamera(1.5f, .1f);
