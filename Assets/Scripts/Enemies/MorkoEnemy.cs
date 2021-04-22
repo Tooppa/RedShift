@@ -9,7 +9,6 @@ public class MorkoEnemy : MonoBehaviour
     private Rigidbody2D _playerRigidbody2D;
     
     // Mörkö tries to find and climb over obstacles of this height
-    //private readonly Vector2 _waistOffset = new Vector2(0,-0.5f);
     private readonly Vector2 _footOffset = new Vector2(0,-2.3f);
     
     [SerializeField] private float distanceToTriggerJump;
@@ -77,10 +76,9 @@ public class MorkoEnemy : MonoBehaviour
         // Check if there is a need to climb
         // Determine that by raycasting on the leg level
         var footPosition = (Vector2) positionCache + _footOffset;
-        //var waistPosition = (Vector2) positionCache + _waistOffset;
         
-        var footPositionInRaycast = footPosition + new Vector2(Mathf.Sign(force.x) * distanceToTriggerJump ,0);
-        var bodyPositionInRaycast = (Vector2) positionCache + new Vector2(Mathf.Sign(force.x) * distanceToTriggerJump ,0);
+        var footPositionInRaycast = footPosition + new Vector2(localScaleCache.x * distanceToTriggerJump ,0);
+        var bodyPositionInRaycast = (Vector2) positionCache + new Vector2(localScaleCache.x * distanceToTriggerJump ,0);
 
         // Raycast from the legs by the specified length. Only collide with Ground
         // Raycast from feet to the knee from distanceToTriggerJump
