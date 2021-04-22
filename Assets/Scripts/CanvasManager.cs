@@ -24,6 +24,7 @@ public class CanvasManager : MonoBehaviour
     private GameObject _interact;
     private RectTransform _currentInfoScreen;
     private SFX _audioController;
+    private Image _noteImage;
 
     private void Awake()
     {
@@ -86,15 +87,26 @@ public class CanvasManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void ShowText(string note)
+    public void ShowText(string note, Sprite sprite)
     {
-        SetHudActive();
+        var rect = hud.GetComponent<RectTransform>();
+        if (rect.anchoredPosition.y != 0)
+            SetHudActive();
         noteScreen.SetActive(true);
-        noteScreen.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = note;
+        noteScreen.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = note;
+        if (!_noteImage)
+            _noteImage = noteScreen.transform.GetChild(0).GetComponentInChildren<Image>();
+        if (sprite)
+        {
+            _noteImage.gameObject.SetActive(true);
+            _noteImage.sprite = sprite;
+        }
+        else
+            _noteImage.gameObject.SetActive(false);
         PauseGame();
     }
 
-    public void AddNewNote(Sprite sprite, string note, string location)
+    public void AddNewNote(Sprite sprite, Sprite picture, string note, string location)
     {
         if (!_currentNoteScreen || location != _currentLocation)
         {
@@ -119,7 +131,7 @@ public class CanvasManager : MonoBehaviour
         var obj = Instantiate(uiButton, _currentNoteScreen);
         obj.GetComponent<Image>().sprite = sprite;
         var btn = obj.GetComponent<Button>();
-        btn.onClick.AddListener(() => { ShowText(note);});
+        btn.onClick.AddListener(() => { ShowText(note, picture);});
     }
 
     public void OpenNoteInventory()
