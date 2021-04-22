@@ -8,7 +8,9 @@ public class MorkoEnemy : MonoBehaviour
 
     private Rigidbody2D _playerRigidbody2D;
     
-    private readonly Vector2 _legOffset = new Vector2(0,-2.3f);
+    // Mörkö tries to find and climb over obstacles of this height
+    private readonly Vector2 _footOffset = new Vector2(0,-2.3f);
+    
     [SerializeField] private float distanceToTriggerJump;
 
     private Rigidbody2D _rigidbody2D;
@@ -68,15 +70,21 @@ public class MorkoEnemy : MonoBehaviour
         // Flip the sprite around if direction changes
         var transformCache = transform;
         transformCache.localScale = new Vector3(1 * Mathf.Sign(force.x), 1, 1);
+        
+        var localScaleCache = transformCache.localScale;
 
-        // Check if there is a need to jump
-        // Determine that by raycasting from the legs
-        var legPosition = (Vector2) positionCache + _legOffset;
+        // Check if there is a need to climb
+        // Determine that by raycasting on the leg level
+        var footPosition = (Vector2) positionCache + _footOffset;
+        
+        var footPositionInRaycast = footPosition + new Vector2(localScaleCache.x * distanceToTriggerJump ,0);
+        var bodyPositionInRaycast = (Vector2) positionCache + new Vector2(localScaleCache.x * distanceToTriggerJump ,0);
 
         // Raycast from the legs by the specified length. Only collide with Ground
-        var hit = Physics2D.Raycast(legPosition, Vector3.right * transformCache.localScale.x, distanceToTriggerJump, LayerMask.GetMask("Ground"));
+        // Raycast from feet to the knee from distanceToTriggerJump
+        var hitFromFeetToLegs = Physics2D.Linecast(footPositionInRaycast, bodyPositionInRaycast, LayerMask.GetMask("Ground"));
 
-        if (hit.collider != null)
+        if (hitFromFeetToLegs.collider != null)
         {
             _rigidbody2D.AddForce(Vector2.up * 18, ForceMode2D.Impulse);
         }
