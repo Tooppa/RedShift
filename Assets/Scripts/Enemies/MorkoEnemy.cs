@@ -9,8 +9,8 @@ public class MorkoEnemy : MonoBehaviour
     private Rigidbody2D _playerRigidbody2D;
     
     // Mörkö tries to find and climb over obstacles of this height
-    private readonly Vector2 _kneeOffset = new Vector2(0,-1.7f);
-    private readonly Vector2 _legOffset = new Vector2(0,-2.3f);
+    //private readonly Vector2 _waistOffset = new Vector2(0,-0.5f);
+    private readonly Vector2 _footOffset = new Vector2(0,-2.3f);
     
     [SerializeField] private float distanceToTriggerJump;
 
@@ -75,19 +75,22 @@ public class MorkoEnemy : MonoBehaviour
         var localScaleCache = transformCache.localScale;
 
         // Check if there is a need to climb
-        // Determine that by raycasting from the legs
-        var legPosition = (Vector2) positionCache + _legOffset;
-        var kneePosition = (Vector2) positionCache + _kneeOffset;
+        // Determine that by raycasting on the leg level
+        var footPosition = (Vector2) positionCache + _footOffset;
+        //var waistPosition = (Vector2) positionCache + _waistOffset;
+        
+        var footPositionInRaycast = footPosition + new Vector2(Mathf.Sign(force.x) * distanceToTriggerJump ,0);
+        var bodyPositionInRaycast = (Vector2) positionCache + new Vector2(Mathf.Sign(force.x) * distanceToTriggerJump ,0);
 
         // Raycast from the legs by the specified length. Only collide with Ground
-        var hitFromLegs = Physics2D.Raycast(legPosition, Vector3.right * localScaleCache.x, distanceToTriggerJump, LayerMask.GetMask("Ground"));
-        var hitFromKnee = Physics2D.Raycast(kneePosition, Vector3.right * localScaleCache.x, distanceToTriggerJump, LayerMask.GetMask("Ground"));
-        
-        if (hitFromLegs.collider != null || hitFromKnee.collider != null)
+        // Raycast from feet to the knee from distanceToTriggerJump
+        var hitFromFeetToLegs = Physics2D.Linecast(footPositionInRaycast, bodyPositionInRaycast, LayerMask.GetMask("Ground"));
+
+        if (hitFromFeetToLegs.collider != null)
         {
             _rigidbody2D.AddForce(Vector2.up * 18, ForceMode2D.Impulse);
         }
-        
+
     }
     
     private void Attack() => PushBack();
