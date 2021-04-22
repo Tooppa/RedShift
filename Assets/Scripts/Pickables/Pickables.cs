@@ -49,4 +49,9 @@ public class Pickables : MonoBehaviour
     {
         return data.statsForUpgrades;
     }
+
+    public Sprite GetPicture()
+    {
+        return data.notePicture ? data.notePicture : null;
+    }
 }
