@@ -24,6 +24,7 @@ public class CanvasManager : MonoBehaviour
     private GameObject _interact;
     private RectTransform _currentInfoScreen;
     private SFX _audioController;
+    private Image _noteImage;
 
     private void Awake()
     {
@@ -93,12 +94,18 @@ public class CanvasManager : MonoBehaviour
             SetHudActive();
         noteScreen.SetActive(true);
         noteScreen.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = note;
+        if (!_noteImage)
+        {
+            _noteImage = noteScreen.transform.GetChild(0).GetComponentInChildren<Image>();
+            Debug.Log(_noteImage);
+        }
         if (sprite)
         {
-            var noteImage = noteScreen.transform.GetChild(0).GetComponentInChildren<Image>();
-            noteImage.gameObject.SetActive(true);
-            noteImage.sprite = sprite;
+            _noteImage.gameObject.SetActive(true);
+            _noteImage.sprite = sprite;
         }
+        else
+            _noteImage.gameObject.SetActive(false);
         PauseGame();
     }
 
