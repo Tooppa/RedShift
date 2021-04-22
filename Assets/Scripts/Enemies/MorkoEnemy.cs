@@ -78,12 +78,7 @@ public class MorkoEnemy : MonoBehaviour
 
         if (hit.collider != null)
         {
-            Debug.DrawRay(legPosition, Vector3.right * (distanceToTriggerJump * transformCache.localScale.x), Color.red);
             _rigidbody2D.AddForce(Vector2.up * 18, ForceMode2D.Impulse);
-        }
-        else
-        {
-            Debug.DrawRay(legPosition, Vector3.right * (distanceToTriggerJump * transformCache.localScale.x), Color.gray);
         }
 
     }
