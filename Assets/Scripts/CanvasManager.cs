@@ -95,10 +95,7 @@ public class CanvasManager : MonoBehaviour
         noteScreen.SetActive(true);
         noteScreen.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = note;
         if (!_noteImage)
-        {
             _noteImage = noteScreen.transform.GetChild(0).GetComponentInChildren<Image>();
-            Debug.Log(_noteImage);
-        }
         if (sprite)
         {
             _noteImage.gameObject.SetActive(true);
