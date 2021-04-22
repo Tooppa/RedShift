@@ -146,9 +146,9 @@ namespace Player
             SpecialPickups(_pickableItem);
             _pickableItem.gameObject.SetActive(false);
             if (!_pickableItem.TryGetComponent(out Pickables component) || !component.IsNote) return;
-            _canvasManager.ShowText(component.GetNote());
+            _canvasManager.ShowText(component.GetNote(), component.GetPicture());
             var sprite = _pickableItem.GetComponent<SpriteRenderer>().sprite;
-            _canvasManager.AddNewNote(sprite, component.GetNote(), _currentLocation);
+            _canvasManager.AddNewNote(sprite, component.GetPicture(), component.GetNote(), _currentLocation);
         }
 
         private void OnTriggerExit2D(Collider2D other)

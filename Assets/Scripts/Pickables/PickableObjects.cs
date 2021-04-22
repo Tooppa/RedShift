@@ -9,6 +9,7 @@ public class PickableObjects : ScriptableObject
     public Sprite sprite;
     [TextArea(5,10)]
     public string note;
+    public Sprite notePicture;
     public int fuel;
     public bool rocketBoots;
     public bool gun;
