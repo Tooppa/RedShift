@@ -5,8 +5,8 @@ public class MorkoEnemy : MonoBehaviour
     public EnemyScriptable data;
 
     private Transform _player;
-
     private Rigidbody2D _playerRigidbody2D;
+    private Health _playerHealth;
     
     // Mörkö tries to find and climb over obstacles of this height
     private readonly Vector2 _footOffset = new Vector2(0,-2.3f);
@@ -38,6 +38,11 @@ public class MorkoEnemy : MonoBehaviour
         _playerRigidbody2D = _player.GetComponent<Rigidbody2D>();
 
         if (_playerRigidbody2D == null)
+            this.enabled = false;
+
+        _playerHealth = _player.GetComponent<Health>();
+
+        if (_playerHealth == null)
             this.enabled = false;
         
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -90,12 +95,17 @@ public class MorkoEnemy : MonoBehaviour
         }
 
     }
-    
-    private void Attack() => PushBack();
+
+    private void Attack()
+    {
+        PushBack();
+
+        _playerHealth.TakeDamage(100);
+    } 
 
     private void PushBack()
     {
         // Direction always from the enemy to the player
-        _playerRigidbody2D.AddForce((_player.position - transform.position) * data.knockbackForce);
+        _playerRigidbody2D.AddForce((_player.position - transform.position).normalized * data.knockbackForce);
     }
 }
