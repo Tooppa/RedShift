@@ -70,9 +70,6 @@ public class MorkoEnemy : MonoBehaviour
         if(distanceToPlayer > data.enemyRange)
             return;
         
-        if(distanceToPlayer <= data.knockbackRadius && _canAttack)
-            Attack();
-
         _animator.SetTrigger(Walk);
         
         // Move towards the player
@@ -102,18 +99,23 @@ public class MorkoEnemy : MonoBehaviour
 
         if (hitFromFeetToLegs.collider != null)
         {
-            _rigidbody2D.AddForce(Vector2.up * 18, ForceMode2D.Impulse);
+            _rigidbody2D.AddForce(Vector2.up * data.jumpHeight, ForceMode2D.Impulse);
         }
 
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!other.gameObject.CompareTag("Player")) return;
+        
+        if(_canAttack) Attack();
+    }
+
     private void Attack()
     {
-        Debug.Log("Attack");
-        
         PushBack();
 
-        _playerHealth.TakeDamage(25);
+        _playerHealth.TakeDamage(data.attack);
 
         StartCoroutine(AttackCooldown());
     } 
