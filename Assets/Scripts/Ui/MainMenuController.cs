@@ -8,5 +8,10 @@ namespace Ui
         {
             gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         }
+
+        public void ExitGame()
+        {
+            
+        }
     }
 }

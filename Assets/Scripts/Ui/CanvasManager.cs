@@ -9,7 +9,7 @@ namespace Ui
     public class CanvasManager : MonoBehaviour
     {
         public static CanvasManager Instance { get; private set; }
-        public RectTransform noteInventory, upgradeInventory, rocketInventory;
+        public CanvasGroup noteInventory, upgradeInventory, rocketInventory;
         public GameObject uiButton;
         public GameObject notesByLocation;
         public GameObject floatingText;
@@ -24,7 +24,7 @@ namespace Ui
         private float _currentNoteScreenHeight;
         private string _currentLocation;
         private GameObject _interact;
-        private RectTransform _currentInfoScreen;
+        private CanvasGroup _currentInfoScreen;
         private SFX _audioController;
         private Image _noteImage;
 
@@ -139,15 +139,31 @@ namespace Ui
         public void OpenNoteInventory()
         {
             _audioController.PlayCloseInventory();
-            _currentInfoScreen.gameObject.SetActive(false);
-            noteInventory.gameObject.SetActive(true);
+            _currentInfoScreen
+                .DOFade(0, 0.3f)
+                .SetUpdate(true);
+            _currentInfoScreen.interactable = false;
+            _currentInfoScreen.blocksRaycasts = false;
+            noteInventory
+                .DOFade(1, 0.3f)
+                .SetUpdate(true);
+            noteInventory.interactable = true;
+            noteInventory.blocksRaycasts = true;
             _currentInfoScreen = noteInventory;
         }
         public void OpenUpgradeInventory()
         {
             _audioController.PlayCloseInventory();
-            _currentInfoScreen.gameObject.SetActive(false);
-            upgradeInventory.gameObject.SetActive(true);
+            _currentInfoScreen
+                .DOFade(0, 0.3f)
+                .SetUpdate(true);
+            _currentInfoScreen.interactable = false;
+            _currentInfoScreen.blocksRaycasts = false;
+            upgradeInventory
+                .DOFade(1, 0.3f)
+                .SetUpdate(true);
+            upgradeInventory.interactable = true;
+            upgradeInventory.blocksRaycasts = true;
             _currentInfoScreen = upgradeInventory;
         }
         public void OpenRocketInventory()
@@ -155,8 +171,16 @@ namespace Ui
             _audioController.PlayCloseInventory();
             if(!rocketButton.activeSelf)
                 rocketButton.SetActive(true);
-            _currentInfoScreen.gameObject.SetActive(false);
-            rocketInventory.gameObject.SetActive(true);
+            _currentInfoScreen
+                .DOFade(0, 0.3f)
+                .SetUpdate(true);
+            _currentInfoScreen.interactable = false;
+            _currentInfoScreen.blocksRaycasts = false;
+            rocketInventory
+                .DOFade(1, 0.3f)
+                .SetUpdate(true);
+            rocketInventory.interactable = true;
+            rocketInventory.blocksRaycasts = true;
             _currentInfoScreen = rocketInventory;
         }
 

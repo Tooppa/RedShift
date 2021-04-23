@@ -1905,13 +1905,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8198866751880770473}
+  - component: {fileID: 5866060133372268114}
   m_Layer: 5
   m_Name: UpgradeUpInventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8198866751880770473
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1934,6 +1935,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 350, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &5866060133372268114
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5475531372809660735}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &5556903940837205001
 GameObject:
   m_ObjectHideFlags: 0
@@ -2301,6 +2314,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6161839878383128846}
+  - component: {fileID: 894050058850624070}
   m_Layer: 5
   m_Name: NotesInventory
   m_TagString: Untagged
@@ -2330,6 +2344,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 350, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &894050058850624070
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836438649235395954}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7916110374890560732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2615,13 +2641,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2023766265512721991}
+  - component: {fileID: 4219211196201304816}
   m_Layer: 5
   m_Name: RocketshipData
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2023766265512721991
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2645,6 +2672,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 350, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &4219211196201304816
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8035434422533923525}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &8099470518151184625
 GameObject:
   m_ObjectHideFlags: 0
@@ -2955,9 +2994,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15541ca704d6b5242b6b859b06f40ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteInventory: {fileID: 6161839878383128846}
-  upgradeInventory: {fileID: 8198866751880770473}
-  rocketInventory: {fileID: 2023766265512721991}
+  noteInventory: {fileID: 894050058850624070}
+  upgradeInventory: {fileID: 5866060133372268114}
+  rocketInventory: {fileID: 4219211196201304816}
   uiButton: {fileID: 5896334881187268010, guid: 4c4b920ed0adad747890179583e411c4, type: 3}
   notesByLocation: {fileID: 1916781580715854640, guid: aaf433c0feeb6044f90b81bc2d98b6d5, type: 3}
   floatingText: {fileID: 5894124435458801362, guid: 8bbc9053982ed644f9a61c4fe10d3ae4, type: 3}
