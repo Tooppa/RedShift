@@ -18,6 +18,6 @@ MonoBehaviour:
   attack: 3
   health: 10000
   knockbackForce: 23000
-  knockbackRadius: 2
+  knockbackRadius: 2.2
   spawnRadius: 20
   flyingEnemyBounciness: 0

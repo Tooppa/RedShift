@@ -59,7 +59,7 @@ public class MorkoEnemy : MonoBehaviour
         if(distanceToPlayer > data.enemyRange)
             return;
         
-        if(distanceToPlayer < data.knockbackRadius)
+        if(distanceToPlayer <= data.knockbackRadius)
             Attack();
 
         _animator.SetTrigger(Walk);
