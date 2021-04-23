@@ -138,6 +138,7 @@ namespace Ui
 
         public void OpenNoteInventory()
         {
+            if (_currentInfoScreen == noteInventory) return;
             _audioController.PlayCloseInventory();
             _currentInfoScreen
                 .DOFade(0, 0.3f)
@@ -153,6 +154,7 @@ namespace Ui
         }
         public void OpenUpgradeInventory()
         {
+            if (_currentInfoScreen == upgradeInventory) return;
             _audioController.PlayCloseInventory();
             _currentInfoScreen
                 .DOFade(0, 0.3f)
@@ -168,6 +170,7 @@ namespace Ui
         }
         public void OpenRocketInventory()
         {
+            if (_currentInfoScreen == rocketInventory) return;
             _audioController.PlayCloseInventory();
             if(!rocketButton.activeSelf)
                 rocketButton.SetActive(true);
