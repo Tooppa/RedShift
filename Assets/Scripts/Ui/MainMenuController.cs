@@ -39,8 +39,17 @@ namespace Ui
 
         public void ExitGame()
         {
-            
+            StartCoroutine(QuitApplication());
         }
+
+        private IEnumerator QuitApplication()
+        {
+            yield return new WaitForEndOfFrame();
+            fader
+                .DOFade(1, .5f)
+                .OnComplete(Application.Quit);
+        }
+
         public void OpenOptions()
         {
             options
