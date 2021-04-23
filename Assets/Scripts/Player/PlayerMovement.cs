@@ -20,6 +20,7 @@ namespace Player
 
         private bool _isGrounded;
         private bool _holdingJump;
+        private bool _pressedJump;
         public bool HasRocketBoots { private set; get; }
         private bool _rocketBootsCooldown;
 
@@ -38,7 +39,6 @@ namespace Player
         private SFX _audioController;
 
         private static readonly int Walking = Animator.StringToHash("Walking");
-        private static readonly int Jumping = Animator.StringToHash("Jumping");
         private static readonly int TakeOff = Animator.StringToHash("TakeOff");
         private static readonly int Landing = Animator.StringToHash("Landing");
 
@@ -66,16 +66,15 @@ namespace Player
             var beforeGroundedCheck = _isGrounded;
             _isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
             _animator.SetBool(Landing, _rigidbody2D.velocity.y < -0.1f);
-            if (beforeGroundedCheck && !_isGrounded)
-                _timer = 0;
-
-            //if(!_runningSoundOnCooldown && _isGrounded && !_audioController.playerLanding.isPlaying)
-            //{
-            //    _runningSoundPlayable = true;
-            //}
-
-
-
+            switch (beforeGroundedCheck)
+            {
+                case true when !_isGrounded && !_pressedJump:
+                    _timer = 0;
+                    break;
+                case false when _isGrounded:
+                    _pressedJump = false;
+                    break;
+            }
             _timer += Time.deltaTime;
         }
 
@@ -103,9 +102,7 @@ namespace Player
                 //}
             }
             else
-            {
                 _animator.SetBool(Walking, false);
-            }
 
             if (Mathf.Abs(_rigidbody2D.velocity.x) < maxSpeed)
                 _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);
@@ -113,19 +110,18 @@ namespace Player
 
         public void Jump(float value)
         {
-            if (value > 0)
+            _holdingJump = value > 0;
+            if (_holdingJump)
             {
-                if (_timer < coyoteTime) _isGrounded = true;
-                if (!_isGrounded || Time.timeScale != 1) return;
-                _holdingJump = true;
+                var coyote = _timer < coyoteTime;
+                _pressedJump = true;
+                if ((!_isGrounded && !coyote) || Time.timeScale != 1) return;
                 _animator.SetTrigger(TakeOff);
                 _rigidbody2D.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
                 return;
             }
-            _holdingJump = false;
             holdingJumpTime = 0;
         }
-
         private void FixedUpdate()
         {
             if (_holdingJump && holdingJumpTime < holdingJumpTimeMax)
@@ -134,7 +130,6 @@ namespace Player
                 holdingJumpTime += Time.deltaTime;
             }
         }
-
         public void Dash()
         {
             if (HasRocketBoots && !_rocketBootsCooldown && Time.timeScale == 1)

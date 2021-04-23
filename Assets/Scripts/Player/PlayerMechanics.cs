@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Ui;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -42,7 +43,7 @@ namespace Player
             _playerControls.Surface.Jump.performed += ctx => _playerMovement.Jump(ctx.ReadValue<float>());
             _playerControls.Surface.Dash.started += _ => _playerMovement.Dash();
             _playerControls.Surface.OpenHud.started += _ => _canvasManager.SetHudActive();
-            _playerControls.Surface.Shoot.started += _ => _playerGun.Shoot();
+            _playerControls.Surface.Shoot.performed += ctx => _playerGun.Shoot(ctx.ReadValue<float>());
             _playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
             _playerControls.Surface.Interact.started += _ => PickItem();
         }
@@ -117,6 +118,11 @@ namespace Player
                 _playerGun.EquipGun();
                 _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
+            if (pickables.PowerfulGun && !_playerGun.HasPowerfulGun)
+            {
+                _playerGun.EquipPowerfulGun();
+                _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
+            }
             if (pickables.Flashlight && !_flashlight.HasFlashlight)
             {
                 _flashlight.EquipFlashlight();
@@ -141,9 +147,9 @@ namespace Player
             SpecialPickups(_pickableItem);
             _pickableItem.gameObject.SetActive(false);
             if (!_pickableItem.TryGetComponent(out Pickables component) || !component.IsNote) return;
-            _canvasManager.ShowText(component.GetNote());
+            _canvasManager.ShowText(component.GetNote(), component.GetPicture());
             var sprite = _pickableItem.GetComponent<SpriteRenderer>().sprite;
-            _canvasManager.AddNewNote(sprite, component.GetNote(), _currentLocation);
+            _canvasManager.AddNewNote(sprite, component.GetPicture(), component.GetNote(), _currentLocation);
         }
 
         private void OnTriggerExit2D(Collider2D other)

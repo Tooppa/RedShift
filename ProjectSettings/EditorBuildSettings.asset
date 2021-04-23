@@ -5,8 +5,14 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleWithDollyCamera.unity
     guid: 731498910922dd847aacd4b5b1a8aa85
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 2435139b5e0823b408469af9a9be87db
+  - enabled: 1
+    path: Assets/Scenes/FirstMap.unity
+    guid: 733e51b13b080524a9878bc2f0bf0380
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c721fdc9f127ae648a11d0621299277b, type: 2}

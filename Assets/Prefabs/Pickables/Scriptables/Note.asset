@@ -19,4 +19,5 @@ MonoBehaviour:
   rocketBoots: 0
   gun: 1
   flashlight: 0
+  breakObjectsWithGun: 1
   statsForUpgrades: Player can shoot

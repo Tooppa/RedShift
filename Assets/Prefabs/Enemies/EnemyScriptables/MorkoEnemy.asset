@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 350
   jumpHeight: 150
-  enemyRange: 45
+  enemyRange: 55
   attack: 3
   health: 10000
   knockbackForce: 23000
