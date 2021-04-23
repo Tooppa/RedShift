@@ -11,7 +11,6 @@ namespace Player
     {
         public string startLocation;
         private int _fuel;
-        private int _health = 10;
         private bool _pickableRange;
         
         private GameObject _pickableItem;
@@ -20,8 +19,11 @@ namespace Player
         private PlayerGun _playerGun;
         private PlayerControls _playerControls;
         private Flashlight _flashlight;
+        private Health _health;
         private bool _inCooldown = false;
         private string _currentLocation;
+
+        private Light2D playerVitalSignLight;
 
         private void Awake()
         {
@@ -45,6 +47,12 @@ namespace Player
             _playerControls.Surface.Shoot.performed += ctx => _playerGun.Shoot(ctx.ReadValue<float>());
             _playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
             _playerControls.Surface.Interact.started += _ => PickItem();
+            
+            _health = gameObject.GetComponent<Health>();
+            _health.TakingDamage += OnTakingDamage;
+
+            // Prefab guarantees existence
+            playerVitalSignLight = GameObject.FindWithTag("PlayerVitalSignLight").GetComponent<Light2D>();
         }
 
         private void Update()
@@ -58,6 +66,7 @@ namespace Player
             if(move.x != 0 || move.y != 0)
                PointEquipment(move);
         }
+        
         private IEnumerator Cooldown()
         {
             //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
@@ -92,6 +101,7 @@ namespace Player
             _flashlight.transform.eulerAngles = new Vector3(0, 0, newAngle);
             _playerGun.gun.transform.eulerAngles = new Vector3(0, 0, newAngle);
         }
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.CompareTag("Pickable")) return;
@@ -202,6 +212,26 @@ namespace Player
         private void OnDisable()
         {
             _playerControls.Disable();
+        }
+
+        /// <summary>
+        /// Switches the health indicator led's color based on current percentage of health.
+        /// If health drops to zero or below, the player dies
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="eventArgs"></param>
+        private void OnTakingDamage(object sender, EventArgs eventArgs)
+        {
+            var healthPercent = _health.CurrentHealth / _health.MaxHealth;
+            
+            var ledColor = healthPercent switch
+            {
+                var n when (n > 0.66) => Color.green,
+                var n when (n > 0.33) => Color.yellow,
+                _ => Color.red
+            };
+
+            playerVitalSignLight.color = ledColor;
         }
 
         public void DisableMovement()
