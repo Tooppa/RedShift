@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MorkoEnemy : MonoBehaviour
@@ -18,6 +19,16 @@ public class MorkoEnemy : MonoBehaviour
     private Animator _animator;
     private static readonly int Walk = Animator.StringToHash("Walk");
 
+    private readonly float attackCooldown = 1f;
+    private bool _canAttack = true;
+
+    private IEnumerator AttackCooldown()
+    {
+        _canAttack = false;
+        yield return new WaitForSeconds(attackCooldown);
+        _canAttack = true;
+    }
+    
     private void Awake()
     {
         if (data == null)
@@ -50,7 +61,7 @@ public class MorkoEnemy : MonoBehaviour
     }
     
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         var positionCache = transform.position;
         
@@ -59,7 +70,7 @@ public class MorkoEnemy : MonoBehaviour
         if(distanceToPlayer > data.enemyRange)
             return;
         
-        if(distanceToPlayer <= data.knockbackRadius)
+        if(distanceToPlayer <= data.knockbackRadius && _canAttack)
             Attack();
 
         _animator.SetTrigger(Walk);
@@ -98,14 +109,18 @@ public class MorkoEnemy : MonoBehaviour
 
     private void Attack()
     {
+        Debug.Log("Attack");
+        
         PushBack();
 
-        _playerHealth.TakeDamage(100);
+        _playerHealth.TakeDamage(25);
+
+        StartCoroutine(AttackCooldown());
     } 
 
     private void PushBack()
     {
         // Direction always from the enemy to the player
-        _playerRigidbody2D.AddForce((_player.position - transform.position).normalized * data.knockbackForce);
+        _playerRigidbody2D.AddForce((_player.position - transform.position).normalized * data.knockbackForce, ForceMode2D.Impulse);
     }
 }
