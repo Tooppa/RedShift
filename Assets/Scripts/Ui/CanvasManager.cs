@@ -9,15 +9,9 @@ namespace Ui
     public class CanvasManager : MonoBehaviour
     {
         public static CanvasManager Instance { get; private set; }
-        public CanvasGroup noteInventory, upgradeInventory, rocketInventory;
-        public GameObject uiButton;
-        public GameObject notesByLocation;
-        public GameObject floatingText;
-        public GameObject hud;
-        public GameObject noteScreen;
-        public GameObject rocketButton;
-        public Transform storedNotesScreen;
-        public Transform upgradeGrid;
+        public CanvasGroup noteInventory, upgradeInventory, rocketInventory, logScreen, bluePrintScreen;
+        public GameObject uiButton, notesByLocation, floatingText, hud, noteScreen, rocketButton;
+        public Transform storedNotesScreen, upgradeGrid;
         public TextMeshProUGUI upgradeText;
         public Slider fuelSlider;
         private Transform _currentNoteScreen;
@@ -185,6 +179,37 @@ namespace Ui
             rocketInventory.interactable = true;
             rocketInventory.blocksRaycasts = true;
             _currentInfoScreen = rocketInventory;
+        }
+
+        public void OpenBluePrintScreen()
+        {
+            if (bluePrintScreen.interactable) return;
+            _audioController.PlayCloseInventory();
+            logScreen
+                .DOFade(0, 0.3f)
+                .SetUpdate(true);
+            logScreen.interactable = false;
+            logScreen.blocksRaycasts = false;
+            bluePrintScreen
+                .DOFade(1, 0.3f)
+                .SetUpdate(true);
+            bluePrintScreen.interactable = true;
+            bluePrintScreen.blocksRaycasts = true;
+        }
+        public void OpenLogScreen()
+        {
+            if (logScreen.interactable) return;
+            _audioController.PlayCloseInventory();
+            bluePrintScreen
+                .DOFade(0, 0.3f)
+                .SetUpdate(true);
+            bluePrintScreen.interactable = false;
+            bluePrintScreen.blocksRaycasts = false;
+            logScreen
+                .DOFade(1, 0.3f)
+                .SetUpdate(true);
+            logScreen.interactable = true;
+            logScreen.blocksRaycasts = true;
         }
 
         public void HideInteract()

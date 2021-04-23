@@ -388,10 +388,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5556903940837205001}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 8389815745173538501}
+        m_TargetAssemblyTypeName: Ui.CanvasManager, Assembly-CSharp
+        m_MethodName: OpenLogScreen
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -399,18 +399,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3262958092991932978}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &1462123310731604552
 GameObject:
@@ -740,22 +728,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5556903940837205001}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 3262958092991932978}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 8389815745173538501}
+        m_TargetAssemblyTypeName: Ui.CanvasManager, Assembly-CSharp
+        m_MethodName: OpenBluePrintScreen
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -944,13 +920,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7392250100481028572}
+  - component: {fileID: 8010636539197159600}
   m_Layer: 5
   m_Name: LogsScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7392250100481028572
 RectTransform:
   m_ObjectHideFlags: 0
@@ -972,6 +949,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 350, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &8010636539197159600
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3262958092991932978}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &3329193294438377080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1956,6 +1945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8972621005160453093}
+  - component: {fileID: 7008347750823812856}
   m_Layer: 5
   m_Name: BlueprintScreen
   m_TagString: Untagged
@@ -1984,6 +1974,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 350, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &7008347750823812856
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556903940837205001}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5564016822114770126
 GameObject:
   m_ObjectHideFlags: 0
@@ -2997,6 +2999,8 @@ MonoBehaviour:
   noteInventory: {fileID: 894050058850624070}
   upgradeInventory: {fileID: 5866060133372268114}
   rocketInventory: {fileID: 4219211196201304816}
+  logScreen: {fileID: 8010636539197159600}
+  bluePrintScreen: {fileID: 7008347750823812856}
   uiButton: {fileID: 5896334881187268010, guid: 4c4b920ed0adad747890179583e411c4, type: 3}
   notesByLocation: {fileID: 1916781580715854640, guid: aaf433c0feeb6044f90b81bc2d98b6d5, type: 3}
   floatingText: {fileID: 5894124435458801362, guid: 8bbc9053982ed644f9a61c4fe10d3ae4, type: 3}
@@ -3675,7 +3679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 732266449546135919, guid: 455496647f1fd094fae8e81ef4e61b71, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 732266449546135919, guid: 455496647f1fd094fae8e81ef4e61b71, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3683,7 +3687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 732266449546135919, guid: 455496647f1fd094fae8e81ef4e61b71, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 732266449546135919, guid: 455496647f1fd094fae8e81ef4e61b71, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3723,11 +3727,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 732266449546135919, guid: 455496647f1fd094fae8e81ef4e61b71, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 175
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 732266449546135919, guid: 455496647f1fd094fae8e81ef4e61b71, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 732266449546135919, guid: 455496647f1fd094fae8e81ef4e61b71, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
