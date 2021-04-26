@@ -5,6 +5,7 @@ using Ui;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -233,6 +234,11 @@ namespace Player
             };
 
             playerVitalSignLight.color = ledColor;
+
+            if (healthPercent <= 0)
+            {
+                SaveAndLoad.LoadLastSave();
+            }
         }
 
         public void DisableMovement()
