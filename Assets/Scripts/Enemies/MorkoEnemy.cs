@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MorkoEnemy : MonoBehaviour
@@ -18,6 +19,16 @@ public class MorkoEnemy : MonoBehaviour
     private Animator _animator;
     private static readonly int Walk = Animator.StringToHash("Walk");
 
+    private readonly float attackCooldown = 1f;
+    private bool _canAttack = true;
+
+    private IEnumerator AttackCooldown()
+    {
+        _canAttack = false;
+        yield return new WaitForSeconds(attackCooldown);
+        _canAttack = true;
+    }
+    
     private void Awake()
     {
         if (data == null)
@@ -50,7 +61,7 @@ public class MorkoEnemy : MonoBehaviour
     }
     
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         var positionCache = transform.position;
         
@@ -59,9 +70,6 @@ public class MorkoEnemy : MonoBehaviour
         if(distanceToPlayer > data.enemyRange)
             return;
         
-        if(distanceToPlayer < data.knockbackRadius)
-            Attack();
-
         _animator.SetTrigger(Walk);
         
         // Move towards the player
@@ -91,21 +99,30 @@ public class MorkoEnemy : MonoBehaviour
 
         if (hitFromFeetToLegs.collider != null)
         {
-            _rigidbody2D.AddForce(Vector2.up * 18, ForceMode2D.Impulse);
+            _rigidbody2D.AddForce(Vector2.up * data.jumpHeight, ForceMode2D.Impulse);
         }
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!other.gameObject.CompareTag("Player")) return;
+        
+        if(_canAttack) Attack();
     }
 
     private void Attack()
     {
         PushBack();
 
-        _playerHealth.TakeDamage(100);
+        _playerHealth.TakeDamage(data.attack);
+
+        StartCoroutine(AttackCooldown());
     } 
 
     private void PushBack()
     {
         // Direction always from the enemy to the player
-        _playerRigidbody2D.AddForce((_player.position - transform.position).normalized * data.knockbackForce);
+        _playerRigidbody2D.AddForce((_player.position - transform.position).normalized * data.knockbackForce, ForceMode2D.Impulse);
     }
 }
