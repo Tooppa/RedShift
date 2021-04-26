@@ -25,6 +25,8 @@ namespace Player
         private bool _rocketBootsCooldown;
 
         public float cooldownTime;
+        private bool _runningSoundOnCooldown;
+        private bool _runningSoundPlayable;
 
         private Animator _animator;
         private const float GroundedRadius = 0.3f;
@@ -86,6 +88,18 @@ namespace Player
                 CameraEffects.Instance.ChangeOffset(.3f, inputDirection * 2);
                 _animator.SetBool(Walking, true);
                 rocketBoots.gameObject.transform.localScale = new Vector3(inputDirection, 1, 1);
+
+                //if(_runningSoundPlayable)
+                //{
+                //    if (_audioController.playerLanding.isPlaying)
+                //        StartCoroutine(RunningSoundCooldown());
+                //    else
+                //    {
+                //        _runningSoundPlayable = false;
+                //        _audioController.PlayRandomPlayerStepSound();
+                //        StartCoroutine(RunningSoundCooldown());
+                //    }
+                //}
             }
             else
                 _animator.SetBool(Walking, false);
@@ -151,6 +165,15 @@ namespace Player
             _rocketBootsCooldown = true;
             yield return new WaitForSeconds(cooldownTime);
             _rocketBootsCooldown = false;
+        }
+
+
+        private IEnumerator RunningSoundCooldown()
+        {
+            //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
+            _runningSoundOnCooldown = true;
+            yield return new WaitForSeconds(cooldownTime);
+            _runningSoundOnCooldown = false;
         }
     }
 }
