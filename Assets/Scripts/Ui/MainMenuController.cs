@@ -10,7 +10,7 @@ namespace Ui
     public class MainMenuController : MonoBehaviour
     {
         public RectTransform options, credits;
-        public CanvasGroup fader;
+        public CanvasGroup fader, buttons;
         public TMP_Text resolutionText;
         public Vector2[] resolutions;
         public int startResolution;
@@ -98,24 +98,36 @@ namespace Ui
 
         public void OpenOptions()
         {
+            buttons
+                .DOFade(0, .1f)
+                .SetUpdate(true);
             options
                 .DOAnchorPos(Vector2.zero, .3f)
                 .SetUpdate(true);
         }
         public void OpenCredits()
         {
+            buttons
+                .DOFade(0, .1f)
+                .SetUpdate(true);
             credits
                 .DOAnchorPos(Vector2.zero, .3f)
                 .SetUpdate(true);
         }
         public void CloseOptions()
         {
+            buttons
+                .DOFade(1, .1f)
+                .SetUpdate(true);
             options
                 .DOAnchorPos(new Vector2(0, -500), .3f)
                 .SetUpdate(true);
         }
         public void CloseCredits()
         {
+            buttons
+                .DOFade(1, .1f)
+                .SetUpdate(true);
             credits
                 .DOAnchorPos(new Vector2(0, -500), .3f)
                 .SetUpdate(true);
