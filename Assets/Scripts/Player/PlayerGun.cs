@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Serialization;
@@ -20,12 +21,16 @@ namespace Player
         private bool _holdingShoot;
 
         private Animator _animator;
-        private static readonly int Shooting = Animator.StringToHash("Shoot");
+        private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
 
         private void Start()
         {
             _audioController = GameObject.Find("AudioController");
-            _animator = transform.parent.GetComponentInChildren<Animator>();
+
+            // Unity is so bonkers that it returns the parent's component with this statement
+            // Skip the parent's animator. Player's prefab guarantees the Sprite-object to have an animator
+            _animator = transform.parent.GetComponentsInChildren<Animator>()[1];
+            
             _light2D = GetComponentInChildren<Light2D>();
             _intensity = _light2D.intensity;
             _light2D.intensity = 0;
@@ -49,7 +54,7 @@ namespace Player
 
         private void PowerfulShot(ParticleCollision particleCollision)
         {
-            _animator.SetTrigger(Shooting);
+            _animator.SetTrigger("Shoot");
             StartCoroutine(Cooldown(1));
             particleCollision.DisableWeakShot();
             CameraEffects.Instance.ShakeCamera(1.5f, .1f);
@@ -59,7 +64,7 @@ namespace Player
 
         private void WeakShot(ParticleCollision particleCollision)
         {
-            _animator.SetTrigger(Shooting);
+            _animator.SetTrigger("Shoot");
             StartCoroutine(Cooldown(1));
             particleCollision.EnableWeakShot();
             CameraEffects.Instance.ShakeCamera(.5f, .1f);
