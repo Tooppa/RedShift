@@ -15,7 +15,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 3326da33259c0458ab859474a1cc4935, type: 3}
   note: "Hienoa osasit avata kirjeen. L\xF6ysit my\xF6s 3 kanisteria polttoainetta
     ja aseen."
-  fuel: 3
+  notePicture: {fileID: 0}
+  fuel: 1
   rocketBoots: 0
   gun: 1
   flashlight: 0
