@@ -21,13 +21,10 @@ public class MorkoEnemy : MonoBehaviour
     private Animator _animator;
     private static readonly int Walk = Animator.StringToHash("Walk");
 
-    private float cooldownTime = 2f;
-
     private readonly float attackCooldown = 1f;
     private bool _canAttack = true;
 
     private bool isMorkoAwake = false;
-    private bool _screamSoundOnCooldown = true;
 
     public AudioSource[] morkoSteps;
     public AudioSource morkoScream;
