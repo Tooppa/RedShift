@@ -99,7 +99,7 @@ namespace Ui
         public void OpenOptions()
         {
             buttons
-                .DOFade(0, .1f)
+                .DOFade(0, .3f)
                 .SetUpdate(true);
             options
                 .DOAnchorPos(Vector2.zero, .3f)
@@ -108,7 +108,7 @@ namespace Ui
         public void OpenCredits()
         {
             buttons
-                .DOFade(0, .1f)
+                .DOFade(0, .3f)
                 .SetUpdate(true);
             credits
                 .DOAnchorPos(Vector2.zero, .3f)
@@ -117,7 +117,7 @@ namespace Ui
         public void CloseOptions()
         {
             buttons
-                .DOFade(1, .1f)
+                .DOFade(1, .3f)
                 .SetUpdate(true);
             options
                 .DOAnchorPos(new Vector2(0, -500), .3f)
@@ -126,7 +126,7 @@ namespace Ui
         public void CloseCredits()
         {
             buttons
-                .DOFade(1, .1f)
+                .DOFade(1, .3f)
                 .SetUpdate(true);
             credits
                 .DOAnchorPos(new Vector2(0, -500), .3f)
