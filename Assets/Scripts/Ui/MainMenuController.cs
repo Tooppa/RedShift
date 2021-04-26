@@ -25,7 +25,7 @@ namespace Ui
             _fullScreen = Screen.fullScreen;
             _resSpot = startResolution;
             _currentResolution = resolutions[_resSpot];
-            resolutionText.text = _currentResolution.ToString();
+            ChangeResText();
             Screen.SetResolution((int)_currentResolution.x, (int)_currentResolution.y, _fullScreen);
         }
 
@@ -62,7 +62,7 @@ namespace Ui
             if (_resSpot < resolutions.Length - 1)
                 _resSpot++;
             _currentResolution = resolutions[_resSpot];
-            resolutionText.text = _currentResolution.ToString();
+            ChangeResText();
         }
         
         public void ResolutionDown()
@@ -70,7 +70,12 @@ namespace Ui
             if (_resSpot > 0) 
                 _resSpot--;
             _currentResolution = resolutions[_resSpot];
-            resolutionText.text = _currentResolution.ToString();
+            ChangeResText();
+        }
+
+        private void ChangeResText()
+        {
+            resolutionText.text = ((int) _currentResolution.x + ", " + (int) _currentResolution.y);
         }
 
         public void ApplySettings()
