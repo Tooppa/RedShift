@@ -1,5 +1,7 @@
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,9 +11,22 @@ namespace Ui
     {
         public RectTransform options, credits;
         public CanvasGroup fader;
+        public TMP_Text resolutionText;
+        public Vector2[] resolutions;
+        public int startResolution;
+
+        private bool _fullScreen;
+        private Vector2 _currentResolution;
+        private int _resSpot;
+
         private void Start()
         {
             gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
+            _fullScreen = Screen.fullScreen;
+            _resSpot = startResolution;
+            _currentResolution = resolutions[_resSpot];
+            resolutionText.text = _currentResolution.ToString();
+            Screen.SetResolution((int)_currentResolution.x, (int)_currentResolution.y, _fullScreen);
         }
 
         public void LoadGame()
@@ -42,12 +57,38 @@ namespace Ui
             StartCoroutine(QuitApplication());
         }
 
+        public void ResolutionUp()
+        {
+            if (_resSpot < resolutions.Length - 1)
+                _resSpot++;
+            _currentResolution = resolutions[_resSpot];
+            resolutionText.text = _currentResolution.ToString();
+        }
+        
+        public void ResolutionDown()
+        {
+            if (_resSpot > 0) 
+                _resSpot--;
+            _currentResolution = resolutions[_resSpot];
+            resolutionText.text = _currentResolution.ToString();
+        }
+
+        public void ApplySettings()
+        {
+            Screen.SetResolution((int)_currentResolution.x, (int)_currentResolution.y, _fullScreen);
+        }
+
         private IEnumerator QuitApplication()
         {
             yield return new WaitForEndOfFrame();
             fader
                 .DOFade(1, .5f)
                 .OnComplete(Application.Quit);
+        }
+        
+        public void ToggleFullscreen()
+        {
+            _fullScreen = !Screen.fullScreen;
         }
 
         public void OpenOptions()
