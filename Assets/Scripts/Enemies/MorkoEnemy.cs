@@ -8,6 +8,8 @@ public class MorkoEnemy : MonoBehaviour
     private Transform _player;
     private Rigidbody2D _playerRigidbody2D;
     private Health _playerHealth;
+
+    private MorkoSFXController morkoSFX;
     
     // Mörkö tries to find and climb over obstacles of this height
     private readonly Vector2 _footOffset = new Vector2(0,-2.3f);
@@ -19,8 +21,16 @@ public class MorkoEnemy : MonoBehaviour
     private Animator _animator;
     private static readonly int Walk = Animator.StringToHash("Walk");
 
+    private float cooldownTime = 2f;
+
     private readonly float attackCooldown = 1f;
     private bool _canAttack = true;
+
+    private bool isMorkoAwake = false;
+    private bool _screamSoundOnCooldown = true;
+
+    public AudioSource[] morkoSteps;
+    public AudioSource morkoScream;
 
     private IEnumerator AttackCooldown()
     {
@@ -28,20 +38,21 @@ public class MorkoEnemy : MonoBehaviour
         yield return new WaitForSeconds(attackCooldown);
         _canAttack = true;
     }
-    
+
     private void Awake()
     {
         if (data == null)
         {
             Debug.LogWarning($"No scriptable object for {gameObject.name}");
             this.enabled = false;
-        }
+        }       
     }
     
     // Start is called before the first frame update
     private void Start()
     {
         _player = GameObject.FindWithTag("Player").transform;
+        morkoSFX = GameObject.Find("MorkoSFXController").GetComponent<MorkoSFXController>();
 
         if (_player == null) 
             this.enabled = false;
@@ -63,6 +74,13 @@ public class MorkoEnemy : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+        if (this.isActiveAndEnabled && !isMorkoAwake)
+        {
+            morkoSFX.PlayMorkoScream();
+            isMorkoAwake = true;
+            morkoSFX.PlayMorkoGrowl();
+        }         
+
         var positionCache = transform.position;
         
         var distanceToPlayer = Vector2.Distance(positionCache, _player.position); // Always positive
@@ -125,4 +143,6 @@ public class MorkoEnemy : MonoBehaviour
         // Direction always from the enemy to the player
         _playerRigidbody2D.AddForce((_player.position - transform.position).normalized * data.knockbackForce, ForceMode2D.Impulse);
     }
+
+
 }
