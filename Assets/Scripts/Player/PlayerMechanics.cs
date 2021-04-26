@@ -39,7 +39,7 @@ namespace Player
             _canvasManager = CanvasManager.Instance;
             _canvasManager.SetFuel(_fuel);
             _playerMovement = gameObject.GetComponent<PlayerMovement>();
-            _playerGun = gameObject.GetComponent<PlayerGun>();
+            _playerGun = gameObject.GetComponentInChildren<PlayerGun>();
             _flashlight = gameObject.GetComponentInChildren<Flashlight>();
             PointEquipment(new Vector2(1, 0));
             
@@ -84,7 +84,7 @@ namespace Player
         {
             if (!_flashlight.HasFlashlight || !_playerGun.HasGun || _inCooldown) return;
             _flashlight.SwitchLight();
-            _playerGun.gun.SetActive(!_playerGun.gun.activeInHierarchy);
+            _playerGun.gameObject.SetActive(!_playerGun.gameObject.activeInHierarchy);
             StartCoroutine(Cooldown());
         }
         
@@ -101,7 +101,7 @@ namespace Player
                 horizontalMove != 0 ? -90 * horizontalMove : 0;
             
             _flashlight.transform.eulerAngles = new Vector3(0, 0, newAngle);
-            _playerGun.gun.transform.eulerAngles = new Vector3(0, 0, newAngle);
+            _playerGun.gameObject.transform.eulerAngles = new Vector3(0, 0, newAngle);
         }
         
         private void OnTriggerEnter2D(Collider2D other)
@@ -138,7 +138,7 @@ namespace Player
             {
                 _flashlight.EquipFlashlight();
                 _flashlight.SwitchLight();
-                _playerGun.gun.SetActive(!_playerGun.gun.activeInHierarchy);
+                _playerGun.gameObject.SetActive(!_playerGun.gameObject.activeInHierarchy);
                 _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
             if (go.TryGetComponent(out Trigger trigger))

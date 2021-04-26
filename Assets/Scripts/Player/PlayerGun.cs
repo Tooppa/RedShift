@@ -8,7 +8,6 @@ namespace Player
 {
     public class PlayerGun : MonoBehaviour
     {
-        public GameObject gun;
         public float powerShotTimer;
         public bool HasGun  { private set; get; }
         public bool HasPowerfulGun  { private set; get; }
@@ -25,9 +24,8 @@ namespace Player
 
         private void Start()
         {
-            gun = GameObject.Find("Gun");
             _audioController = GameObject.Find("AudioController");
-            _animator = transform.GetChild(1).GetComponent<Animator>();
+            _animator = transform.parent.GetComponentInChildren<Animator>();
             _light2D = GetComponentInChildren<Light2D>();
             _intensity = _light2D.intensity;
             _light2D.intensity = 0;
@@ -36,8 +34,8 @@ namespace Player
         public void Shoot(float value)
         {
             _holdingShoot = value > 0;
-            if (_cooldown || !HasGun || !gun.gameObject.activeSelf) return;
-            var particleCollision = gun.GetComponentInChildren<ParticleCollision>();
+            if (_cooldown || !HasGun || !gameObject.activeSelf) return;
+            var particleCollision = GetComponentInChildren<ParticleCollision>();
             if (HasPowerfulGun)
             {
                 if (_holdingShoot) return;
@@ -55,7 +53,7 @@ namespace Player
             StartCoroutine(Cooldown(1));
             particleCollision.DisableWeakShot();
             CameraEffects.Instance.ShakeCamera(1.5f, .1f);
-            gun.GetComponentInChildren<ParticleSystem>().Play();
+            GetComponentInChildren<ParticleSystem>().Play();
             _audioController.GetComponent<SFX>().PlayGunShot();
         }
 
@@ -65,7 +63,7 @@ namespace Player
             StartCoroutine(Cooldown(1));
             particleCollision.EnableWeakShot();
             CameraEffects.Instance.ShakeCamera(.5f, .1f);
-            gun.GetComponentInChildren<ParticleSystem>().Play();
+            GetComponentInChildren<ParticleSystem>().Play();
             _audioController.GetComponent<SFX>().PlayButtonBuzz();
         }
 
