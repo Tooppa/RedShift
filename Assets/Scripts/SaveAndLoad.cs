@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public static class SaveAndLoad
 {
     private const string FilePath = "/levelStatus.dat";
+
+    private const string DefaultMap = "scenes/FirstMap";
     
     /// <summary>
     /// Serializes and saves the given <see cref="LevelStatus"/> to a file.
@@ -54,7 +56,7 @@ public static class SaveAndLoad
             Console.WriteLine(e);
         }
 
-        return new LevelStatus(); // If file didn't exist, return an empty one
+        return new LevelStatus(DefaultMap, "Start"); // If file didn't exist, return an empty one
     }
     
     /// <summary>
