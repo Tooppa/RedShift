@@ -20,9 +20,9 @@ public class AudioTriggerController : MonoBehaviour
     public AudioSource _sfxToFadeOut;
     public AudioSource _sfxToFadeIn;
 
-    public AudioMixerSnapshot[] audioSnapshot;
-    public AudioMixer mixer;
-    public float[] weights;
+    //public AudioMixerSnapshot[] audioSnapshot;
+    //public AudioMixer mixer;
+    //public float[] weights;
 
     public bool loop = false;
 
@@ -64,7 +64,7 @@ public class AudioTriggerController : MonoBehaviour
                     musicTriggerController.Loop(loop);
                     musicTriggerController.Volume(volume);
                     musicTriggerController.PlaySelectedMusic();
-                    mixer.TransitionToSnapshots(audioSnapshot, weights, 3);
+                    //mixer.TransitionToSnapshots(audioSnapshot, weights, 3);
                     if (destroyOnTrigger)
                         Destroy(gameObject);
                     
