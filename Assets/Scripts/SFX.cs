@@ -28,8 +28,6 @@ public class SFX : MonoBehaviour
     public AudioSource spaceshipLaserExplosion;
     public AudioSource rockSlide;
     public AudioSource spaceshipRumbling;
-    public AudioSource run;
-    public AudioSource titleScreen;
 
     public string CurrentMusicPlaying()
     {
@@ -207,14 +205,5 @@ public class SFX : MonoBehaviour
     public void PlayRockSlide()
     {
         rockSlide.Play();
-    }
-
-    public void PlayTitleScreen()
-    {
-        titleScreen.Play();
-    }
-    public void PlayRun()
-    {
-        run.Play();
     }
 }
