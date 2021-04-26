@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
-using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -54,7 +51,7 @@ namespace Player
 
         private void PowerfulShot(ParticleCollision particleCollision)
         {
-            _animator.SetTrigger("Shoot");
+            _animator.SetTrigger(ShootTrigger);
             StartCoroutine(Cooldown(1));
             particleCollision.DisableWeakShot();
             CameraEffects.Instance.ShakeCamera(1.5f, .1f);
@@ -64,7 +61,7 @@ namespace Player
 
         private void WeakShot(ParticleCollision particleCollision)
         {
-            _animator.SetTrigger("Shoot");
+            _animator.SetTrigger(ShootTrigger);
             StartCoroutine(Cooldown(1));
             particleCollision.EnableWeakShot();
             CameraEffects.Instance.ShakeCamera(.5f, .1f);
