@@ -36,9 +36,8 @@ namespace Ui
         {
             _volume = AudioVolume.Instance.GetVolume();
             AudioVolume.Instance.SetVolume(_volume);
-            titleScreenMusic.volume = 0;
             titleScreenMusic.Play();
-            titleScreenMusic.DOFade(1, 2).SetUpdate(true);
+            titleScreenMusic.DOFade(.7f, 2).SetUpdate(true);
         }
 
         public void LoadGame()
