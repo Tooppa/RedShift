@@ -49,6 +49,7 @@ namespace Ui
                 .DORotate(new Vector3(0, 0, 90), .3f)
                 .SetUpdate(true);
             StartCoroutine(FuelIconBlinker());
+            ResumeGame();
         }
         
         public void VolumeSlider(float volume)

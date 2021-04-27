@@ -18,22 +18,17 @@ namespace Ui
         public Slider slider;
         public Toggle toggle;
         public AudioSource titleScreenMusic;
-        public Vector2[] resolutions;
-        public int startResolution;
 
-        private bool _fullScreen;
-        private Vector2 _currentResolution;
-        private int _resSpot;
         private float _volume;
+        private ResolutionManager res;
+        private bool _fullScreen;
 
         private void Start()
         {
-            gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
+            res = ResolutionManager.Instance;
             _fullScreen = Screen.fullScreen;
-            _resSpot = startResolution;
-            _currentResolution = resolutions[_resSpot];
+            gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
             ChangeResText();
-            Screen.SetResolution((int)_currentResolution.x, (int)_currentResolution.y, _fullScreen);
             fader.alpha = 1;
             fader.DOFade(0, 1).SetUpdate(true);
             toggle.isOn = Screen.fullScreen;
@@ -44,6 +39,7 @@ namespace Ui
         private void MenuMusic()
         {
             AudioVolume.Instance.SetVolume(100);
+            _volume = 100;
             titleScreenMusic.volume = 0;
             titleScreenMusic.Play();
             titleScreenMusic.DOFade(1, 2).SetUpdate(true);
@@ -81,28 +77,30 @@ namespace Ui
 
         public void ResolutionUp()
         {
-            if (_resSpot < resolutions.Length - 1)
-                _resSpot++;
-            _currentResolution = resolutions[_resSpot];
+            var resSpot = res.GetResSpot();
+            if (resSpot < res.GetResLength() - 1)
+                res.SetResSpot(resSpot + 1);
             ChangeResText();
         }
         
         public void ResolutionDown()
         {
-            if (_resSpot > 0) 
-                _resSpot--;
-            _currentResolution = resolutions[_resSpot];
+            var resSpot = res.GetResSpot();
+            if (resSpot > 0) 
+                res.SetResSpot(resSpot - 1);
             ChangeResText();
         }
 
         private void ChangeResText()
         {
-            resolutionText.text = ((int) _currentResolution.x + ", " + (int) _currentResolution.y);
+            var currentResolution = res.GetResolution();
+            resolutionText.text = ((int) currentResolution.x + ", " + (int) currentResolution.y);
         }
 
         public void ApplySettings()
         {
-            Screen.SetResolution((int)_currentResolution.x, (int)_currentResolution.y, _fullScreen);
+            var currentResolution = res.GetResolution();
+            res.SetResolution(currentResolution, _fullScreen);
             AudioVolume.Instance.SetVolume(_volume);
         }
 

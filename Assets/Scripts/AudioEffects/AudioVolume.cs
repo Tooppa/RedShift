@@ -10,8 +10,10 @@ public class AudioVolume : MonoBehaviour
 
     private void Awake()
     {
-        if(!AudioVolume.Instance)
-            Instance = this;
+        if (Instance != null && Instance != this)
+            Destroy(this); 
+        else Instance = this;
+        DontDestroyOnLoad(this);
     }
 
     private void Start()

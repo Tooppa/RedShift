@@ -1809,11 +1809,6 @@ MonoBehaviour:
   slider: {fileID: 2140279009}
   toggle: {fileID: 1498092466}
   titleScreenMusic: {fileID: 1879267162}
-  resolutions:
-  - {x: 1280, y: 720}
-  - {x: 1920, y: 1080}
-  - {x: 2560, y: 1440}
-  startResolution: 1
 --- !u!1 &524881031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1824,8 +1819,9 @@ GameObject:
   m_Component:
   - component: {fileID: 524881033}
   - component: {fileID: 524881032}
+  - component: {fileID: 524881034}
   m_Layer: 0
-  m_Name: AudioVolumeManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1857,6 +1853,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &524881034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524881031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f77c3a854bd5a341aa4fe0a06b91d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutions:
+  - {x: 1280, y: 720}
+  - {x: 1920, y: 1080}
+  - {x: 2560, y: 1440}
+  startResolution: 0
+  fullScreen: 0
 --- !u!1 &625915729
 GameObject:
   m_ObjectHideFlags: 0
