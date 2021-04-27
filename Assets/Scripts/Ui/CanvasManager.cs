@@ -4,6 +4,7 @@ using DG.Tweening;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Ui
@@ -11,12 +12,17 @@ namespace Ui
     public class CanvasManager : MonoBehaviour
     {
         public static CanvasManager Instance { get; private set; }
-        public CanvasGroup noteInventory, upgradeInventory, rocketInventory, logScreen, bluePrintScreen;
-        public GameObject uiButton, notesByLocation, floatingText, hud, noteScreen, rocketButton;
+        public CanvasGroup noteInventory, upgradeInventory, rocketInventory, 
+            logScreen, bluePrintScreen, pauseMenu, fader, buttons;
+        public RectTransform options;
+        public GameObject uiButton, notesByLocation, floatingText, hud, 
+            noteScreen, rocketButton;
         public Transform storedNotesScreen, upgradeGrid;
         public TextMeshProUGUI upgradeText;
         public Slider fuelSlider;
         public Image fuelIcon;
+        public TMP_InputField sliderText;
+        public Slider slider;
         private Transform _currentNoteScreen;
         private float _currentNoteScreenHeight;
         private string _currentLocation;
@@ -24,6 +30,7 @@ namespace Ui
         private CanvasGroup _currentInfoScreen;
         private SFX _audioController;
         private Image _noteImage;
+        private float _volume;
 
         private void Awake()
         {
@@ -39,9 +46,48 @@ namespace Ui
             _currentNoteScreen = null;
             _currentInfoScreen = noteInventory;
             hud.transform
-                .DORotate(new Vector3(0,0,90), .3f)
-                .SetUpdate(true); 
+                .DORotate(new Vector3(0, 0, 90), .3f)
+                .SetUpdate(true);
             StartCoroutine(FuelIconBlinker());
+            ResumeGame();
+        }
+        
+        public void VolumeSlider(float volume)
+        {
+            _volume = volume;
+            sliderText.text = _volume.ToString(); 
+        }
+
+        public void AdjustSlider(string volume)
+        {
+            _volume = int.Parse(volume);
+            slider.value = _volume;
+        }
+        public void ApplySettings()
+        {
+            //Screen.SetResolution((int)_currentResolution.x, (int)_currentResolution.y, _fullScreen);
+            AudioVolume.Instance.SetVolume(_volume);
+        }
+        public void OpenOptions()
+        {
+            var volume = AudioVolume.Instance.GetVolume();
+            VolumeSlider(volume);
+            AdjustSlider(volume.ToString());
+            buttons
+                .DOFade(0, .3f)
+                .SetUpdate(true);
+            options
+                .DOAnchorPos(Vector2.zero, .3f)
+                .SetUpdate(true);
+        }
+        public void CloseOptions()
+        {
+            buttons
+                .DOFade(1, .3f)
+                .SetUpdate(true);
+            options
+                .DOAnchorPos(new Vector2(0, -500), .3f)
+                .SetUpdate(true);
         }
 
         private IEnumerator FuelIconBlinker()
@@ -93,6 +139,48 @@ namespace Ui
                 ResumeGame();
                 _audioController.PlayCloseInventory();
             }
+        }
+        public void SetPauseMenuActive()
+        {
+            if (pauseMenu.alpha == 0)
+            {
+                pauseMenu.DOFade(1, .3f).SetUpdate(true);
+                pauseMenu.interactable = true;
+                pauseMenu.blocksRaycasts = true;
+                PauseGame();
+                _audioController.PlayOpenInventory();
+            }
+            else
+            {
+                pauseMenu.DOFade(0, .3f).SetUpdate(true);
+                pauseMenu.interactable = false;
+                pauseMenu.blocksRaycasts = false;
+                ResumeGame();
+                _audioController.PlayCloseInventory();
+            }
+        }
+        public void OpenMainMenu()
+        {
+            StartCoroutine(LoadYourAsyncScene());
+        }
+        private IEnumerator LoadYourAsyncScene()
+        {
+            var sceneActivation = false;
+            fader
+                .DOFade(1, 1)
+                .SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    sceneActivation = true;
+                });
+            var asyncLoad = SceneManager.LoadSceneAsync(0);
+            asyncLoad.allowSceneActivation = sceneActivation;
+            while (!asyncLoad.isDone)
+            {
+                asyncLoad.allowSceneActivation = sceneActivation;
+                yield return new WaitForEndOfFrame();
+            }
+            ResumeGame();
         }
         public void SetFuel(int fuel)
         {

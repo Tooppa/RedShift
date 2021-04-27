@@ -86,7 +86,7 @@ namespace Player
         {
             if (_holdingShoot)
             {
-                if (_chargeTimer >= powerShotTimer)
+                if (HasPowerfulGun && _chargeTimer >= powerShotTimer)
                 {
                     _chargeEffect.Stop();
                     _chargeReadyEffect.Play();
