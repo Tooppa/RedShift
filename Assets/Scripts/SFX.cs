@@ -8,6 +8,8 @@ public class SFX : MonoBehaviour
     public AudioSource industrialLightKillSound;
     public AudioSource buttonBuzz;
     public AudioSource playerGunShot;
+    public AudioSource playerPowerfulShot;
+    public AudioSource playerPowerfulCharge;
     public AudioSource[] playerSteps;
     public AudioSource playerJump;
     public AudioSource playerLanding;
@@ -100,6 +102,16 @@ public class SFX : MonoBehaviour
     public void PlayGunShot()
     {
         playerGunShot.Play();
+    }
+
+    public void PlayPowerfulShot()
+    {
+        playerPowerfulShot.Play();
+    }
+
+    public void PlayPowerfulCharge()
+    {
+        playerPowerfulCharge.Play();
     }
 
     public void PlayRandomPlayerStepSound()

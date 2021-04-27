@@ -19,6 +19,7 @@ namespace Player
         private float _intensity;
         private float _chargeTimer = 0;
         private bool _holdingShoot;
+        private bool chargeSFXPlaying = false;
 
         private Animator _animator;
         private static readonly int Shooting = Animator.StringToHash("Shoot");
@@ -56,7 +57,9 @@ namespace Player
             particleCollision.DisableWeakShot();
             CameraEffects.Instance.ShakeCamera(1.5f, .1f);
             gun.GetComponentInChildren<ParticleSystem>().Play();
-            _audioController.GetComponent<SFX>().PlayGunShot();
+            _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
+            _audioController.GetComponent<SFX>().PlayPowerfulShot();
+            chargeSFXPlaying = false;
         }
 
         private void WeakShot(ParticleCollision particleCollision)
@@ -66,17 +69,27 @@ namespace Player
             particleCollision.EnableWeakShot();
             CameraEffects.Instance.ShakeCamera(.5f, .1f);
             gun.GetComponentInChildren<ParticleSystem>().Play();
-            _audioController.GetComponent<SFX>().PlayButtonBuzz();
+            _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
+            _audioController.GetComponent<SFX>().PlayGunShot();
+            chargeSFXPlaying = false;
         }
 
         private void FixedUpdate()
         {
             if (_holdingShoot)
             {
+                if(HasPowerfulGun && !chargeSFXPlaying)
+                {
+                    _audioController.GetComponent<SFX>().PlayPowerfulCharge();
+                    chargeSFXPlaying = true;
+                }
+                
                 _chargeTimer += Time.deltaTime;
             }
             else
             {
+                _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
+                chargeSFXPlaying = false;
                 _chargeTimer =   0;
             }
         }
