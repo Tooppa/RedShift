@@ -114,6 +114,9 @@ namespace Player
         private void SpecialPickups(GameObject go)
         {
             var pickables = go.GetComponent<Pickables>();
+            
+            SaveAndLoad.CurrentlyPickedItems.Add(pickables.data.name);
+            
             if (pickables.HasFuel)
             {
                 _fuel += pickables.fuel;
