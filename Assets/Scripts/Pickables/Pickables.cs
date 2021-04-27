@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-[Serializable]
 public class Pickables : MonoBehaviour
 {
     public PickableObjects data;
