@@ -1384,7 +1384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -1885,6 +1885,7 @@ MonoBehaviour:
   fader: {fileID: 1594706144}
   buttons: {fileID: 1466834930}
   resolutionText: {fileID: 1037968641}
+  toggle: {fileID: 1498092466}
   resolutions:
   - {x: 1280, y: 720}
   - {x: 1920, y: 1080}
@@ -5330,7 +5331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}

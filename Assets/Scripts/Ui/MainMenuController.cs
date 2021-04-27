@@ -4,6 +4,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Ui
 {
@@ -12,6 +13,7 @@ namespace Ui
         public RectTransform options, credits;
         public CanvasGroup fader, buttons;
         public TMP_Text resolutionText;
+        public Toggle toggle;
         public Vector2[] resolutions;
         public int startResolution;
 
@@ -29,6 +31,7 @@ namespace Ui
             Screen.SetResolution((int)_currentResolution.x, (int)_currentResolution.y, _fullScreen);
             fader.alpha = 1;
             fader.DOFade(0, 1).SetUpdate(true);
+            toggle.isOn = Screen.fullScreen;
         }
 
         public void LoadGame()
