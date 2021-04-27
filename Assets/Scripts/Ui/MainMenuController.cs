@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -13,13 +14,17 @@ namespace Ui
         public RectTransform options, credits;
         public CanvasGroup fader, buttons;
         public TMP_Text resolutionText;
+        public TMP_InputField sliderText;
+        public Slider slider;
         public Toggle toggle;
+        public AudioSource titleScreenMusic;
         public Vector2[] resolutions;
         public int startResolution;
 
         private bool _fullScreen;
         private Vector2 _currentResolution;
         private int _resSpot;
+        private float _volume;
 
         private void Start()
         {
@@ -32,6 +37,16 @@ namespace Ui
             fader.alpha = 1;
             fader.DOFade(0, 1).SetUpdate(true);
             toggle.isOn = Screen.fullScreen;
+            _volume = AudioVolume.Instance.GetVolume();
+            MenuMusic();
+        }
+
+        private void MenuMusic()
+        {
+            AudioVolume.Instance.SetVolume(100);
+            titleScreenMusic.volume = 0;
+            titleScreenMusic.Play();
+            titleScreenMusic.DOFade(1, 2).SetUpdate(true);
         }
 
         public void LoadGame()
@@ -49,6 +64,7 @@ namespace Ui
                 {
                     sceneActivation = true;
                 });
+            titleScreenMusic.DOFade(0, 1).SetUpdate(true);
             var asyncLoad = SceneManager.LoadSceneAsync(1);
             asyncLoad.allowSceneActivation = sceneActivation;
             while (!asyncLoad.isDone)
@@ -87,6 +103,7 @@ namespace Ui
         public void ApplySettings()
         {
             Screen.SetResolution((int)_currentResolution.x, (int)_currentResolution.y, _fullScreen);
+            AudioVolume.Instance.SetVolume(_volume);
         }
 
         private IEnumerator QuitApplication()
@@ -120,6 +137,17 @@ namespace Ui
             credits
                 .DOAnchorPos(Vector2.zero, .3f)
                 .SetUpdate(true);
+        }
+        public void VolumeSlider(float volume)
+        {
+            _volume = volume;
+            sliderText.text = _volume.ToString(); 
+        }
+
+        public void AdjustSlider(string volume)
+        {
+            _volume = int.Parse(volume);
+            slider.value = _volume;
         }
         public void CloseOptions()
         {
