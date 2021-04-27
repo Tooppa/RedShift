@@ -9,17 +9,18 @@ namespace Player
         /// <summary>
         /// Describes the scene's name that can be loaded as a file.
         /// </summary>
-        public readonly string Scene;
+        public string scene;
 
         /// <summary>
-        /// A list of saved items. These will be forwarded to <see cref="PlayerMechanics"/> when loading a save.
+        /// A list of the prefab names of picked items. The name will be used to instantiate a new prefab.
+        /// The instance will be forwarded to <see cref="PlayerMechanics"/> when loading a save.
         /// </summary>
-        public readonly List<Pickables> PickedItems;
+        public List<string> pickedItems;
     
-        public LevelStatus(string scene = "", List<Pickables> pickedItems = null)
+        public LevelStatus(string scene, List<string> pickedItems)
         {
-            Scene = scene;
-            PickedItems = pickedItems;
+            this.scene = scene;
+            this.pickedItems = pickedItems;
         }
     }
 }

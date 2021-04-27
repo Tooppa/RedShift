@@ -47,7 +47,8 @@ namespace Player
             _playerControls.Surface.Dash.started += _ => _playerMovement.Dash();
             _playerControls.Surface.OpenHud.started += _ => _canvasManager.SetHudActive();
             _playerControls.Surface.Shoot.performed += ctx => _playerGun.Shoot(ctx.ReadValue<float>());
-            _playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
+            //_playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
+            _playerControls.Surface.Flashlight.started += _ => SaveAndLoad.Test();
             _playerControls.Surface.Interact.started += _ => PickItem();
             
             _health = gameObject.GetComponent<Health>();
@@ -114,8 +115,7 @@ namespace Player
         {
             var pickables = go.GetComponent<Pickables>();
             
-            // Serialize Pickables-component and save it to a file
-            
+            SaveAndLoad.CurrentlyPickedItems.Add(pickables.data.name);
             
             if (pickables.HasFuel)
             {

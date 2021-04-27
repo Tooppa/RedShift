@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,14 +15,29 @@ namespace Player
         private const string FallBackScene = "scenes/FirstMap"; // If anything fails, this will be loaded
 
         /// <summary>
-        /// Holds currently picked items.
+        /// Holds currently picked items' ScriptableObject names.
         /// This will be saved in a file at the next checkpoint.
-        /// This will be replaced by the one in the file if the player dies
+        /// This will be replaced by the one in the file if the player dies.
         /// </summary>
-        public static List<Pickables> CurrentPickedItems = new List<Pickables>();
+        public static List<string> CurrentlyPickedItems = new List<string>();
+
+        public static void Test()
+        {
+            // Debug test saving and loading
+            
+            SaveStatus(FallBackScene);
+
+            LoadLastSave();
+            
+            foreach (var item in CurrentlyPickedItems)
+            {
+                Debug.Log(item);
+            }
+            
+        }
         
         /// <summary>
-        /// Serializes and saves a <see cref="LevelStatus"/> to a file.
+        /// Serializes and saves a <see cref="LevelStatus"/> to a file. Currently picked up items will also be saved.
         /// </summary>
         /// <param name="scene">String path to the scene</param>
         public static void SaveStatus(string scene)
@@ -32,7 +48,7 @@ namespace Player
                 var fileStream = File.Create(Application.persistentDataPath + SerializedLevelStatusPath);
         
                 // Create a new LevelStatus based on given parameters and CurrentPickedItems
-                var newLevelStatus = new LevelStatus(scene, CurrentPickedItems);
+                var newLevelStatus = new LevelStatus(scene, CurrentlyPickedItems);
                 
                 binaryFormatter.Serialize(fileStream, newLevelStatus);
         
@@ -70,7 +86,7 @@ namespace Player
                 Console.WriteLine("Couldn't load level status!\n" + e);
             }
 
-            return new LevelStatus(FallBackScene); // If file didn't exist, return an empty one
+            return new LevelStatus(FallBackScene, null); // If file didn't exist, return an empty one
         }
     
         /// <summary>
@@ -80,15 +96,15 @@ namespace Player
         {
             var levelStatus = LoadStatus();
 
-            if (levelStatus.Scene == null)
+            if (levelStatus.scene == null || levelStatus.pickedItems == null)
             {
-                Debug.LogWarning("LevelStatus had null fields!");
+                Debug.LogWarning($"Level Status had null fields! Scene: {levelStatus.scene}, PickedItems: {levelStatus.pickedItems}");
                 return;
             }
 
-            CurrentPickedItems = levelStatus.PickedItems; // Loading last save means that currently picked items will be replaced by the ones in the file
+            CurrentlyPickedItems = levelStatus.pickedItems.ToList(); // Loading last save means that currently picked items will be replaced by the ones in the file
         
-            SceneManager.LoadScene(levelStatus.Scene);
+            SceneManager.LoadScene(levelStatus.scene);
             
         }
     }
