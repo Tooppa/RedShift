@@ -4,6 +4,7 @@ using DG.Tweening;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Ui
@@ -11,7 +12,7 @@ namespace Ui
     public class CanvasManager : MonoBehaviour
     {
         public static CanvasManager Instance { get; private set; }
-        public CanvasGroup noteInventory, upgradeInventory, rocketInventory, logScreen, bluePrintScreen, pauseMenu;
+        public CanvasGroup noteInventory, upgradeInventory, rocketInventory, logScreen, bluePrintScreen, pauseMenu, fader;
         public GameObject uiButton, notesByLocation, floatingText, hud, noteScreen, rocketButton;
         public Transform storedNotesScreen, upgradeGrid;
         public TextMeshProUGUI upgradeText;
@@ -112,6 +113,29 @@ namespace Ui
                 ResumeGame();
                 _audioController.PlayCloseInventory();
             }
+        }
+        public void OpenMainMenu()
+        {
+            StartCoroutine(LoadYourAsyncScene());
+        }
+        private IEnumerator LoadYourAsyncScene()
+        {
+            var sceneActivation = false;
+            fader
+                .DOFade(1, 1)
+                .SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    sceneActivation = true;
+                });
+            var asyncLoad = SceneManager.LoadSceneAsync(0);
+            asyncLoad.allowSceneActivation = sceneActivation;
+            while (!asyncLoad.isDone)
+            {
+                asyncLoad.allowSceneActivation = sceneActivation;
+                yield return new WaitForEndOfFrame();
+            }
+            ResumeGame();
         }
         public void SetFuel(int fuel)
         {

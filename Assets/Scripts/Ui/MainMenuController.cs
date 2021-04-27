@@ -27,6 +27,8 @@ namespace Ui
             _currentResolution = resolutions[_resSpot];
             ChangeResText();
             Screen.SetResolution((int)_currentResolution.x, (int)_currentResolution.y, _fullScreen);
+            fader.alpha = 1;
+            fader.DOFade(0, 1).SetUpdate(true);
         }
 
         public void LoadGame()
@@ -39,6 +41,7 @@ namespace Ui
             var sceneActivation = false;
             fader
                 .DOFade(1, 1)
+                .SetUpdate(true)
                 .OnComplete(() =>
                 {
                     sceneActivation = true;
@@ -88,6 +91,7 @@ namespace Ui
             yield return new WaitForEndOfFrame();
             fader
                 .DOFade(1, .5f)
+                .SetUpdate(true)
                 .OnComplete(Application.Quit);
         }
         
