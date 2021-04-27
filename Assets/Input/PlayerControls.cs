@@ -35,6 +35,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""PauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""17cd91ea-4067-43b6-9624-e78031efb797"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""b3fd68d1-9ee0-4221-bf90-86174348857c"",
@@ -196,6 +204,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c66fe8b-c71c-4532-9fcb-792cf23e20ec"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +225,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Surface = asset.FindActionMap("Surface", throwIfNotFound: true);
         m_Surface_Move = m_Surface.FindAction("Move", throwIfNotFound: true);
         m_Surface_OpenHud = m_Surface.FindAction("OpenHud", throwIfNotFound: true);
+        m_Surface_PauseMenu = m_Surface.FindAction("PauseMenu", throwIfNotFound: true);
         m_Surface_Interact = m_Surface.FindAction("Interact", throwIfNotFound: true);
         m_Surface_Flashlight = m_Surface.FindAction("Flashlight", throwIfNotFound: true);
         m_Surface_Jump = m_Surface.FindAction("Jump", throwIfNotFound: true);
@@ -262,6 +282,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private ISurfaceActions m_SurfaceActionsCallbackInterface;
     private readonly InputAction m_Surface_Move;
     private readonly InputAction m_Surface_OpenHud;
+    private readonly InputAction m_Surface_PauseMenu;
     private readonly InputAction m_Surface_Interact;
     private readonly InputAction m_Surface_Flashlight;
     private readonly InputAction m_Surface_Jump;
@@ -273,6 +294,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public SurfaceActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Surface_Move;
         public InputAction @OpenHud => m_Wrapper.m_Surface_OpenHud;
+        public InputAction @PauseMenu => m_Wrapper.m_Surface_PauseMenu;
         public InputAction @Interact => m_Wrapper.m_Surface_Interact;
         public InputAction @Flashlight => m_Wrapper.m_Surface_Flashlight;
         public InputAction @Jump => m_Wrapper.m_Surface_Jump;
@@ -293,6 +315,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @OpenHud.started -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnOpenHud;
                 @OpenHud.performed -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnOpenHud;
                 @OpenHud.canceled -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnOpenHud;
+                @PauseMenu.started -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnPauseMenu;
+                @PauseMenu.performed -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnPauseMenu;
+                @PauseMenu.canceled -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnPauseMenu;
                 @Interact.started -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnInteract;
@@ -318,6 +343,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @OpenHud.started += instance.OnOpenHud;
                 @OpenHud.performed += instance.OnOpenHud;
                 @OpenHud.canceled += instance.OnOpenHud;
+                @PauseMenu.started += instance.OnPauseMenu;
+                @PauseMenu.performed += instance.OnPauseMenu;
+                @PauseMenu.canceled += instance.OnPauseMenu;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
@@ -341,6 +369,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnOpenHud(InputAction.CallbackContext context);
+        void OnPauseMenu(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnFlashlight(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);

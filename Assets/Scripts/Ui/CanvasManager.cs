@@ -11,7 +11,7 @@ namespace Ui
     public class CanvasManager : MonoBehaviour
     {
         public static CanvasManager Instance { get; private set; }
-        public CanvasGroup noteInventory, upgradeInventory, rocketInventory, logScreen, bluePrintScreen;
+        public CanvasGroup noteInventory, upgradeInventory, rocketInventory, logScreen, bluePrintScreen, pauseMenu;
         public GameObject uiButton, notesByLocation, floatingText, hud, noteScreen, rocketButton;
         public Transform storedNotesScreen, upgradeGrid;
         public TextMeshProUGUI upgradeText;
@@ -90,6 +90,25 @@ namespace Ui
                     .SetUpdate(true);
                 rect.DORotate(new Vector3(0,0,90), .3f)
                     .SetUpdate(true);
+                ResumeGame();
+                _audioController.PlayCloseInventory();
+            }
+        }
+        public void SetPauseMenuActive()
+        {
+            if (pauseMenu.alpha == 0)
+            {
+                pauseMenu.DOFade(1, .3f).SetUpdate(true);
+                pauseMenu.interactable = true;
+                pauseMenu.blocksRaycasts = true;
+                PauseGame();
+                _audioController.PlayOpenInventory();
+            }
+            else
+            {
+                pauseMenu.DOFade(0, .3f).SetUpdate(true);
+                pauseMenu.interactable = false;
+                pauseMenu.blocksRaycasts = false;
                 ResumeGame();
                 _audioController.PlayCloseInventory();
             }
