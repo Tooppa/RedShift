@@ -1,5 +1,181 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &154635427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 154635428}
+  - component: {fileID: 154635430}
+  - component: {fileID: 154635429}
+  m_Layer: 0
+  m_Name: FadeOutAndInSFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &154635428
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154635427}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.73, y: 8.75, z: 702.47156}
+  m_LocalScale: {x: 0.1, y: 15, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6916995024032217572}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &154635430
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154635427}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &154635429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154635427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65429390e67e9b4098c599c7f97028b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyableSoundSource: {fileID: 0}
+  audioOptions: 9
+  _music: {fileID: 0}
+  _sfx: {fileID: 0}
+  _musicToFadeOut: {fileID: 0}
+  _musicToFadeIn: {fileID: 0}
+  _sfxToFadeOut: {fileID: 0}
+  _sfxToFadeIn: {fileID: 0}
+  loop: 0
+  destroyOnTrigger: 0
+  musicFadeTime: 6
+  sfxFadeTime: 5
+  volume: 1
+  desiredIncreasedMusicVolume: 1
+  desiredIncreasedSFXVolume: 0
+  desiredFadedMusicVolume: 0
+  desiredFadedSFXVolume: 0
+  desiredPitch: 1
+--- !u!1 &1857067306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1857067307}
+  - component: {fileID: 1857067309}
+  - component: {fileID: 1857067308}
+  m_Layer: 0
+  m_Name: FadeOutAndInSFX (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1857067307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857067306}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.63, y: 10.86, z: 702.47156}
+  m_LocalScale: {x: 0.1, y: 15, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6916995024032217572}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1857067309
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857067306}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &1857067308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857067306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65429390e67e9b4098c599c7f97028b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyableSoundSource: {fileID: 0}
+  audioOptions: 9
+  _music: {fileID: 0}
+  _sfx: {fileID: 0}
+  _musicToFadeOut: {fileID: 0}
+  _musicToFadeIn: {fileID: 0}
+  _sfxToFadeOut: {fileID: 0}
+  _sfxToFadeIn: {fileID: 0}
+  loop: 0
+  destroyOnTrigger: 0
+  musicFadeTime: 6
+  sfxFadeTime: 5
+  volume: 1
+  desiredIncreasedMusicVolume: 1
+  desiredIncreasedSFXVolume: 0
+  desiredFadedMusicVolume: 0
+  desiredFadedSFXVolume: 0
+  desiredPitch: 1
 --- !u!1 &6916995023996797315
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,9 +254,6 @@ MonoBehaviour:
   _musicToFadeIn: {fileID: 0}
   _sfxToFadeOut: {fileID: 0}
   _sfxToFadeIn: {fileID: 0}
-  audioSnapshot: []
-  mixer: {fileID: 0}
-  weights: []
   loop: 0
   destroyOnTrigger: 0
   musicFadeTime: 6
@@ -120,8 +293,8 @@ Transform:
   m_Children:
   - {fileID: 6916995023996797324}
   - {fileID: 6916995025074941411}
-  - {fileID: 5556009586338089190}
-  - {fileID: 603589971802178918}
+  - {fileID: 154635428}
+  - {fileID: 1857067307}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -203,9 +376,6 @@ MonoBehaviour:
   _musicToFadeIn: {fileID: 0}
   _sfxToFadeOut: {fileID: 0}
   _sfxToFadeIn: {fileID: 0}
-  audioSnapshot: []
-  mixer: {fileID: 0}
-  weights: []
   loop: 0
   destroyOnTrigger: 0
   musicFadeTime: 6
@@ -216,195 +386,3 @@ MonoBehaviour:
   desiredFadedMusicVolume: 0
   desiredFadedSFXVolume: 0
   desiredPitch: 1
---- !u!1001 &1910813744552765383
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 6916995024032217572}
-    m_Modifications:
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: _sfx
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: sfxFadeTime
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: _sfxToFadeIn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: audioOptions
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: desiredPitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: _sfxToFadeOut
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: desiredIncreasedSFXVolume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: desiredIncreasedMusicVolume
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3533618743940598567, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_Name
-      value: FadeOutAndInSFX
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.61
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 10.69
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
---- !u!4 &5556009586338089190 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-  m_PrefabInstance: {fileID: 1910813744552765383}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &6916995023839521351
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 6916995024032217572}
-    m_Modifications:
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: _sfx
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: sfxFadeTime
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: _sfxToFadeIn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: audioOptions
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: desiredPitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: _sfxToFadeOut
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056710377701680942, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: desiredIncreasedSFXVolume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3533618743940598567, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_Name
-      value: FadeOutAndInSFX (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.73
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
---- !u!4 &603589971802178918 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6313619732831973153, guid: 30dae472624f56a429ac45f1cf8f8c8c, type: 3}
-  m_PrefabInstance: {fileID: 6916995023839521351}
-  m_PrefabAsset: {fileID: 0}
