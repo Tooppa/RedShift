@@ -68,6 +68,7 @@ namespace Player
             CameraEffects.Instance.ShakeCamera(1.5f, .1f);
             _powerShotEffect.Play();
             _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
+            _audioController.GetComponent<SFX>().playerPowerfulShotChargedUp.Stop();
             _audioController.GetComponent<SFX>().PlayPowerfulShot();
         }
 
@@ -90,6 +91,8 @@ namespace Player
                 {
                     _chargeEffect.Stop();
                     _chargeReadyEffect.Play();
+                    if(!_audioController.GetComponent<SFX>().playerPowerfulShotChargedUp.isPlaying)
+                        _audioController.GetComponent<SFX>().PlayPowerfulShotChargedUp();
                 }
                 if (HasPowerfulGun && !chargeSFXPlaying)
                 {

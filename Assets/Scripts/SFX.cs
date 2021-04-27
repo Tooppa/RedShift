@@ -10,6 +10,7 @@ public class SFX : MonoBehaviour
     public AudioSource playerGunShot;
     public AudioSource playerPowerfulShot;
     public AudioSource playerPowerfulCharge;
+    public AudioSource playerPowerfulShotChargedUp;
     public AudioSource[] playerSteps;
     public AudioSource playerJump;
     public AudioSource playerLanding;
@@ -112,6 +113,11 @@ public class SFX : MonoBehaviour
     public void PlayPowerfulCharge()
     {
         playerPowerfulCharge.Play();
+    }
+
+    public void PlayPowerfulShotChargedUp()
+    {
+        playerPowerfulShotChargedUp.Play();
     }
 
     public void PlayRandomPlayerStepSound()
