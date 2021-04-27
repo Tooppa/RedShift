@@ -90,6 +90,7 @@ namespace Player
                 {
                     _chargeEffect.Stop();
                     _chargeReadyEffect.Play();
+                    _audioController.GetComponent<SFX>().PlayPowerfulShotChargedUp();
                 }
                 if (HasPowerfulGun && !chargeSFXPlaying)
                 {
