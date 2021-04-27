@@ -102,9 +102,15 @@ namespace Player
                 return;
             }
 
-            CurrentlyPickedItems = levelStatus.pickedItems.ToList(); // Loading last save means that currently picked items will be replaced by the ones in the file
-        
             SceneManager.LoadScene(levelStatus.scene);
+            
+            CurrentlyPickedItems = levelStatus.pickedItems.ToList(); // Loading last save means that currently picked items will be replaced by the ones in the file
+            
+            foreach (var item in CurrentlyPickedItems)
+            {
+                // Load resources of ScriptableObjects based on currently picked items
+                //var scriptableObject = Resources.Load("");
+            }
             
         }
     }

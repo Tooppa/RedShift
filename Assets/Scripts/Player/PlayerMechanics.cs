@@ -47,8 +47,7 @@ namespace Player
             _playerControls.Surface.Dash.started += _ => _playerMovement.Dash();
             _playerControls.Surface.OpenHud.started += _ => _canvasManager.SetHudActive();
             _playerControls.Surface.Shoot.performed += ctx => _playerGun.Shoot(ctx.ReadValue<float>());
-            //_playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
-            _playerControls.Surface.Flashlight.started += _ => SaveAndLoad.Test();
+            _playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
             _playerControls.Surface.Interact.started += _ => PickItem();
             
             _health = gameObject.GetComponent<Health>();
