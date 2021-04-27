@@ -1,14 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
 public class Pickables : MonoBehaviour
 {
-    [SerializeField]
-    private PickableObjects data;
+    public PickableObjects data;
     private SpriteRenderer _spriteRenderer;
     public bool IsNote { private set; get; }
     public bool HasFuel { private set; get; }
