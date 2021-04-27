@@ -68,6 +68,27 @@ namespace Ui
             //Screen.SetResolution((int)_currentResolution.x, (int)_currentResolution.y, _fullScreen);
             AudioVolume.Instance.SetVolume(_volume);
         }
+        public void OpenOptions()
+        {
+            var volume = AudioVolume.Instance.GetVolume();
+            VolumeSlider(volume);
+            AdjustSlider(volume.ToString());
+            buttons
+                .DOFade(0, .3f)
+                .SetUpdate(true);
+            options
+                .DOAnchorPos(Vector2.zero, .3f)
+                .SetUpdate(true);
+        }
+        public void CloseOptions()
+        {
+            buttons
+                .DOFade(1, .3f)
+                .SetUpdate(true);
+            options
+                .DOAnchorPos(new Vector2(0, -500), .3f)
+                .SetUpdate(true);
+        }
 
         private IEnumerator FuelIconBlinker()
         {
@@ -160,24 +181,6 @@ namespace Ui
                 yield return new WaitForEndOfFrame();
             }
             ResumeGame();
-        }
-        public void OpenOptions()
-        {
-            buttons
-                .DOFade(0, .3f)
-                .SetUpdate(true);
-            options
-                .DOAnchorPos(Vector2.zero, .3f)
-                .SetUpdate(true);
-        }
-        public void CloseOptions()
-        {
-            buttons
-                .DOFade(1, .3f)
-                .SetUpdate(true);
-            options
-                .DOAnchorPos(new Vector2(0, -500), .3f)
-                .SetUpdate(true);
         }
         public void SetFuel(int fuel)
         {

@@ -52,4 +52,14 @@ public class ResolutionManager : MonoBehaviour
     {
         return _resSpot;
     }
+
+    public bool GetFullScreen()
+    {
+        return fullScreen;
+    }
+
+    public void ToggleFullScreen()
+    {
+        fullScreen = !fullScreen;
+    }
 }

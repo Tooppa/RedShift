@@ -18,13 +18,13 @@ public class AudioVolume : MonoBehaviour
 
     private void Start()
     {
-        AudioListener.volume = _volume;
+        SetVolume(100);
     }
 
     public void SetVolume(float volume)
     {
-        _volume = volume/100;
-        AudioListener.volume = _volume;
+        _volume = volume;
+        AudioListener.volume = _volume/100;
     }
 
     public float GetVolume()

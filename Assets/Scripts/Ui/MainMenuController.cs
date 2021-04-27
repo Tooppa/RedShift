@@ -21,25 +21,21 @@ namespace Ui
 
         private float _volume;
         private ResolutionManager res;
-        private bool _fullScreen;
 
         private void Start()
         {
             res = ResolutionManager.Instance;
-            _fullScreen = Screen.fullScreen;
             gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
-            ChangeResText();
             fader.alpha = 1;
             fader.DOFade(0, 1).SetUpdate(true);
-            toggle.isOn = Screen.fullScreen;
             _volume = AudioVolume.Instance.GetVolume();
             MenuMusic();
         }
 
         private void MenuMusic()
         {
-            AudioVolume.Instance.SetVolume(100);
-            _volume = 100;
+            _volume = AudioVolume.Instance.GetVolume();
+            AudioVolume.Instance.SetVolume(_volume);
             titleScreenMusic.volume = 0;
             titleScreenMusic.Play();
             titleScreenMusic.DOFade(1, 2).SetUpdate(true);
@@ -100,7 +96,7 @@ namespace Ui
         public void ApplySettings()
         {
             var currentResolution = res.GetResolution();
-            res.SetResolution(currentResolution, _fullScreen);
+            res.SetResolution(currentResolution, res.GetFullScreen());
             AudioVolume.Instance.SetVolume(_volume);
         }
 
@@ -115,11 +111,17 @@ namespace Ui
         
         public void ToggleFullscreen()
         {
-            _fullScreen = !Screen.fullScreen;
+            res.ToggleFullScreen();
+            toggle.isOn = res.GetFullScreen();
         }
 
         public void OpenOptions()
         {
+            toggle.isOn = res.GetFullScreen();
+            ChangeResText();
+            var volume = AudioVolume.Instance.GetVolume();
+            VolumeSlider(volume);
+            AdjustSlider(volume.ToString());
             buttons
                 .DOFade(0, .3f)
                 .SetUpdate(true);
