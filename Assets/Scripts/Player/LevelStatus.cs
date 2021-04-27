@@ -1,23 +1,25 @@
 using System;
+using System.Collections.Generic;
 
-[Serializable]
-public struct LevelStatus
+namespace Player
 {
-    /// <summary>
-    /// Describes the scene's name that can be loaded as a file.
-    /// </summary>
-    public readonly string Scene;
-    
-    /// <summary>
-    /// Describes a unique identifier that can be used to execute additional instructions to achieve the desired state
-    /// of the game. For example "rocketcene" could execute instructions to move the player's transform to the ship,
-    /// equip rocket boots and a gun.
-    /// </summary>
-    public readonly string Place;
-
-    public LevelStatus(string scene = "", string place = "")
+    [Serializable]
+    public struct LevelStatus
     {
-        Scene = scene;
-        Place = place;
+        /// <summary>
+        /// Describes the scene's name that can be loaded as a file.
+        /// </summary>
+        public readonly string Scene;
+
+        /// <summary>
+        /// A list of saved items. These will be forwarded to <see cref="PlayerMechanics"/> when loading a save.
+        /// </summary>
+        public readonly List<Pickables> PickedItems;
+    
+        public LevelStatus(string scene = "", List<Pickables> pickedItems = null)
+        {
+            Scene = scene;
+            PickedItems = pickedItems;
+        }
     }
 }

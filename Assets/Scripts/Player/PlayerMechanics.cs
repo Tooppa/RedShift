@@ -113,6 +113,10 @@ namespace Player
         private void SpecialPickups(GameObject go)
         {
             var pickables = go.GetComponent<Pickables>();
+            
+            // Serialize Pickables-component and save it to a file
+            
+            
             if (pickables.HasFuel)
             {
                 _fuel += pickables.fuel;
