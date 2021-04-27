@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &2790789209082128430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1599158437735059003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f42afe5167881744ca757fdcef1cc09d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Prefab: {fileID: 1979566479620573211, guid: c14bad1e4a66ac242984b1a658ae40f6, type: 3}
 --- !u!1 &3498067410139411019
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,34 +574,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5398604713114884179}
     m_Modifications:
-    - target: {fileID: 974964017379730769, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 153152b483d5409419f2521831495489, type: 2}
-    - target: {fileID: 3094150068562791948, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3094150068562791948, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3094150068562791948, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7056422179508110402, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7056422179508110402, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7056422179508110402, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8549304962318891440, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
       propertyPath: m_Name
       value: Gun
@@ -668,10 +627,5 @@ PrefabInstance:
 --- !u!4 &5398604714081536174 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8549304962318891447, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
-  m_PrefabInstance: {fileID: 4345562368337785113}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1599158437735059003 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3062399175343767330, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
   m_PrefabInstance: {fileID: 4345562368337785113}
   m_PrefabAsset: {fileID: 0}
