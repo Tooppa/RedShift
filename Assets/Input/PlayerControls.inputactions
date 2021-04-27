@@ -22,6 +22,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "PauseMenu",
+                    "type": "Button",
+                    "id": "17cd91ea-4067-43b6-9624-e78031efb797",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "b3fd68d1-9ee0-4221-bf90-86174348857c",
@@ -181,6 +189,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3c66fe8b-c71c-4532-9fcb-792cf23e20ec",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PauseMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
