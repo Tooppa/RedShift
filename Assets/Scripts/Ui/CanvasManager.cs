@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using DG.Tweening;
 using TMPro;
 using Unity.Mathematics;
@@ -14,6 +16,7 @@ namespace Ui
         public Transform storedNotesScreen, upgradeGrid;
         public TextMeshProUGUI upgradeText;
         public Slider fuelSlider;
+        public Image fuelIcon;
         private Transform _currentNoteScreen;
         private float _currentNoteScreenHeight;
         private string _currentLocation;
@@ -35,8 +38,38 @@ namespace Ui
             gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
             _currentNoteScreen = null;
             _currentInfoScreen = noteInventory;
-            hud.transform.DORotate(new Vector3(0,0,90), .3f)
-                .SetUpdate(true);
+            hud.transform
+                .DORotate(new Vector3(0,0,90), .3f)
+                .SetUpdate(true); 
+            StartCoroutine(FuelIconBlinker());
+        }
+
+        private IEnumerator FuelIconBlinker()
+        {
+            while (true)
+            {
+                if (fuelSlider.value == 0)
+                {
+                    fuelIcon.DOBlendableColor(Color.white, .2f).SetUpdate(true);
+                    yield return new WaitForSecondsRealtime(.2f);
+                    fuelIcon.DOBlendableColor(Color.red, .2f).SetUpdate(true);
+                    yield return new WaitForSecondsRealtime(.5f);
+                }
+                else if (fuelSlider.value > 0 && 3 > fuelSlider.value)
+                {
+                    fuelIcon.DOBlendableColor(Color.white, .2f).SetUpdate(true);
+                    yield return new WaitForSecondsRealtime(.2f);
+                    fuelIcon.DOBlendableColor(Color.yellow, .2f).SetUpdate(true);
+                    yield return new WaitForSecondsRealtime(1);
+                }
+                else
+                {
+                    fuelIcon.DOBlendableColor(Color.white, .2f).SetUpdate(true);
+                    yield return new WaitForSecondsRealtime(.2f);
+                    fuelIcon.DOBlendableColor(Color.green, .2f).SetUpdate(true);
+                    yield return new WaitForSecondsRealtime(5f);
+                }
+            }
         }
 
         public void SetHudActive()
