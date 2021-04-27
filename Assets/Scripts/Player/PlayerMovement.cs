@@ -120,6 +120,7 @@ namespace Player
         {
             if (HasRocketBoots && !_rocketBootsCooldown && Time.timeScale == 1)
             {
+                _animator.SetBool("Dashing", true);
                 _audioController.PlayPlayerRocketDash();
                 StartCoroutine(IEDash());
             }
@@ -144,6 +145,7 @@ namespace Player
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x * 0.5f, 0f);
             _rigidbody2D.gravityScale = 1;
             rocketBoots.Stop();
+            _animator.SetBool("Dashing", false);
         }
         private IEnumerator Cooldown(float cooldownTime)
         {
