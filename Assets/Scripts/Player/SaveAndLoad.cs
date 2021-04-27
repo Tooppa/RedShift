@@ -9,7 +9,7 @@ namespace Player
 {
     public static class SaveAndLoad
     {
-        private const string LevelStatusFilePath = "/levelStatus.dat";
+        private const string SerializedLevelStatusPath = "/levelStatus.dat";
 
         private const string FallBackScene = "scenes/FirstMap"; // If anything fails, this will be loaded
 
@@ -29,7 +29,7 @@ namespace Player
             try
             {
                 var binaryFormatter = new BinaryFormatter();
-                var fileStream = File.Create(Application.persistentDataPath + LevelStatusFilePath);
+                var fileStream = File.Create(Application.persistentDataPath + SerializedLevelStatusPath);
         
                 // Create a new LevelStatus based on given parameters and CurrentPickedItems
                 var newLevelStatus = new LevelStatus(scene, CurrentPickedItems);
@@ -52,10 +52,10 @@ namespace Player
         {
             try
             {
-                if (File.Exists(Application.persistentDataPath + LevelStatusFilePath))
+                if (File.Exists(Application.persistentDataPath + SerializedLevelStatusPath))
                 {
                     var binaryFormatter = new BinaryFormatter();
-                    var fileStream = File.Open(Application.persistentDataPath + LevelStatusFilePath, FileMode.Open);
+                    var fileStream = File.Open(Application.persistentDataPath + SerializedLevelStatusPath, FileMode.Open);
 
                     var levelStatus = (LevelStatus) binaryFormatter.Deserialize(fileStream);
 
@@ -75,37 +75,21 @@ namespace Player
     
         /// <summary>
         /// Loads the scene in <see cref="LevelStatus"/> and performs all the sub-operations that bring the game to the desired state.
-        /// Assumes that current levelstatus is valid.
         /// </summary>
         public static void LoadLastSave()
         {
             var levelStatus = LoadStatus();
-            //Debug.Log($"Scene: {levelStatus.Scene}");
 
             if (levelStatus.Scene == null)
             {
                 Debug.LogWarning("LevelStatus had null fields!");
                 return;
             }
+
+            CurrentPickedItems = levelStatus.PickedItems; // Loading last save means that currently picked items will be replaced by the ones in the file
         
             SceneManager.LoadScene(levelStatus.Scene);
-        
-            // Execute instructions based on the Place argument
-
-            /*
-        switch (levelStatus.Place)
-        {
-            case "Start":
-            {
-                break;
-            }
-            default:
-            {
-                Debug.LogWarning("Invalid Place-argument when trying to execute instructions!");
-                break;
-            }
-        }
-        */
+            
         }
     }
 }
