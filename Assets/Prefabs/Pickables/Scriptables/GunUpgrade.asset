@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce9efda84f9125546b937fb6ef27f07d, type: 3}
-  m_Name: PowerGun
+  m_Name: GunUpgrade
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: b23ae6b159908d14885679aa24a1a496, type: 3}
   note: 
   notePicture: {fileID: 0}
   fuel: 0
@@ -20,4 +20,4 @@ MonoBehaviour:
   gun: 0
   flashlight: 0
   breakObjectsWithGun: 1
-  statsForUpgrades: 
+  statsForUpgrades: Charge upgrade for the handgun

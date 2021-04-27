@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9efda84f9125546b937fb6ef27f07d, type: 3}
   m_Name: RocketBoots
   m_EditorClassIdentifier: 
-  name: RocketBoots
-  sprite: {fileID: 21300000, guid: 5c3f80a43e0bc1640a86c42b0af271fa, type: 3}
+  sprite: {fileID: 21300000, guid: cc12ed9c29f73b341aa2d76bd196a27b, type: 3}
   note: 
-  floatingText: {fileID: 5894124435458801362, guid: 8bbc9053982ed644f9a61c4fe10d3ae4, type: 3}
+  notePicture: {fileID: 0}
   fuel: 0
   rocketBoots: 1
   gun: 0
   flashlight: 0
+  breakObjectsWithGun: 0
   statsForUpgrades: Allows player to dash.
