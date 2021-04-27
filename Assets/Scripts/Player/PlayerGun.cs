@@ -1,14 +1,11 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
-using UnityEngine.Serialization;
 
 namespace Player
 {
     public class PlayerGun : MonoBehaviour
     {
-        public GameObject gun;
         public float powerShotTimer;
         public bool HasGun  { private set; get; }
         public bool HasPowerfulGun  { private set; get; }
@@ -19,16 +16,18 @@ namespace Player
         private float _intensity;
         private float _chargeTimer = 0;
         private bool _holdingShoot;
-        private bool chargeSFXPlaying = false;
 
         private Animator _animator;
-        private static readonly int Shooting = Animator.StringToHash("Shoot");
+        private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
 
         private void Start()
         {
-            gun = GameObject.Find("Gun");
             _audioController = GameObject.Find("AudioController");
-            _animator = transform.GetChild(1).GetComponent<Animator>();
+
+            // Unity is so bonkers that it returns the parent's component with this statement
+            // Skip the parent's animator. Player's prefab guarantees the Sprite-object to have an animator
+            _animator = transform.parent.GetComponentsInChildren<Animator>()[1];
+            
             _light2D = GetComponentInChildren<Light2D>();
             _intensity = _light2D.intensity;
             _light2D.intensity = 0;
@@ -37,8 +36,8 @@ namespace Player
         public void Shoot(float value)
         {
             _holdingShoot = value > 0;
-            if (_cooldown || !HasGun || !gun.gameObject.activeSelf) return;
-            var particleCollision = gun.GetComponentInChildren<ParticleCollision>();
+            if (_cooldown || !HasGun || !gameObject.activeSelf) return;
+            var particleCollision = GetComponentInChildren<ParticleCollision>();
             if (HasPowerfulGun)
             {
                 if (_holdingShoot) return;
@@ -52,44 +51,32 @@ namespace Player
 
         private void PowerfulShot(ParticleCollision particleCollision)
         {
-            _animator.SetTrigger(Shooting);
+            _animator.SetTrigger(ShootTrigger);
             StartCoroutine(Cooldown(1));
             particleCollision.DisableWeakShot();
             CameraEffects.Instance.ShakeCamera(1.5f, .1f);
-            gun.GetComponentInChildren<ParticleSystem>().Play();
-            _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
-            _audioController.GetComponent<SFX>().PlayPowerfulShot();
-            chargeSFXPlaying = false;
+            GetComponentInChildren<ParticleSystem>().Play();
+            _audioController.GetComponent<SFX>().PlayGunShot();
         }
 
         private void WeakShot(ParticleCollision particleCollision)
         {
-            _animator.SetTrigger(Shooting);
+            _animator.SetTrigger(ShootTrigger);
             StartCoroutine(Cooldown(1));
             particleCollision.EnableWeakShot();
             CameraEffects.Instance.ShakeCamera(.5f, .1f);
-            gun.GetComponentInChildren<ParticleSystem>().Play();
-            _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
-            _audioController.GetComponent<SFX>().PlayGunShot();
-            chargeSFXPlaying = false;
+            GetComponentInChildren<ParticleSystem>().Play();
+            _audioController.GetComponent<SFX>().PlayButtonBuzz();
         }
 
         private void FixedUpdate()
         {
             if (_holdingShoot)
             {
-                if(HasPowerfulGun && !chargeSFXPlaying)
-                {
-                    _audioController.GetComponent<SFX>().PlayPowerfulCharge();
-                    chargeSFXPlaying = true;
-                }
-                
                 _chargeTimer += Time.deltaTime;
             }
             else
             {
-                _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
-                chargeSFXPlaying = false;
                 _chargeTimer =   0;
             }
         }
