@@ -60,6 +60,9 @@ namespace Player
 
             // Prefab guarantees existence
             playerVitalSignLight = GameObject.FindWithTag("PlayerVitalSignLight").GetComponent<Light2D>();
+
+            if(SaveAndLoad.PendingSaveLoad)
+                SaveAndLoad.LoadItems();
         }
 
         private void Update()
@@ -164,7 +167,13 @@ namespace Player
             _pickableItem = other.gameObject;
         }
 
-        private void PickItem(GameObject constructedObject = null)
+        /// <summary>
+        /// Picks an item if found on range. If <see cref="constructedObject"/> is valid, that will be picked instead
+        /// and usually considered <see cref="_pickableRange"/> will be ignored.
+        /// </summary>
+        /// <param name="constructedObject">If valid, <see cref="_pickableRange"/> will be ignored and this will be set as
+        /// <see cref="_pickableItem"/> </param>
+        public void PickItem(GameObject constructedObject = null)
         {
             if (constructedObject == null)
             {
