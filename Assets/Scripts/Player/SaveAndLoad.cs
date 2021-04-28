@@ -29,12 +29,6 @@ namespace Player
             SaveStatus(FallBackScene);
 
             LoadLastSave();
-            
-            foreach (var item in CurrentlyPickedItems)
-            {
-                //Debug.Log(item);
-            }
-            
         }
         
         /// <summary>
@@ -64,7 +58,7 @@ namespace Player
         /// <summary>
         /// Load the serialized <see cref="LevelStatus"/> from a file and deserializes it.
         /// </summary>
-        /// <returns> <see cref="LevelStatus"/> </returns>
+        /// <returns> <see cref="LevelStatus"/>Deserialized save file</returns>
         public static LevelStatus LoadStatus()
         {
             try
@@ -92,6 +86,8 @@ namespace Player
     
         /// <summary>
         /// Loads the scene in <see cref="LevelStatus"/> and sets <see cref="PendingSaveLoad"/> to true.
+        /// Other executing functions will handle the rest like <see cref="LoadItems"/>
+        /// If loaded LevelStatus is not valid, nothing will happen.
         /// </summary>
         public static void LoadLastSave()
         {
