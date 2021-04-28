@@ -20,4 +20,4 @@ MonoBehaviour:
   gun: 1
   flashlight: 0
   breakObjectsWithGun: 0
-  statsForUpgrades: Charge upgrade to the handgun.
+  statsForUpgrades: Small laser gun.
