@@ -75,6 +75,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Push"",
+                    ""type"": ""Button"",
+                    ""id"": ""72b1a120-896e-4d36-9fa2-7569342a7680"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""529b5223-2885-41f1-a494-7759b7047426"",
@@ -197,7 +205,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""32415fc1-317c-4d8b-82f1-9af43f439866"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -215,6 +223,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""PauseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d051abaf-64c2-4bc7-be04-beee33e8016c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Push"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -230,6 +249,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Surface_Flashlight = m_Surface.FindAction("Flashlight", throwIfNotFound: true);
         m_Surface_Jump = m_Surface.FindAction("Jump", throwIfNotFound: true);
         m_Surface_Dash = m_Surface.FindAction("Dash", throwIfNotFound: true);
+        m_Surface_Push = m_Surface.FindAction("Push", throwIfNotFound: true);
         m_Surface_Shoot = m_Surface.FindAction("Shoot", throwIfNotFound: true);
     }
 
@@ -287,6 +307,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Surface_Flashlight;
     private readonly InputAction m_Surface_Jump;
     private readonly InputAction m_Surface_Dash;
+    private readonly InputAction m_Surface_Push;
     private readonly InputAction m_Surface_Shoot;
     public struct SurfaceActions
     {
@@ -299,6 +320,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Flashlight => m_Wrapper.m_Surface_Flashlight;
         public InputAction @Jump => m_Wrapper.m_Surface_Jump;
         public InputAction @Dash => m_Wrapper.m_Surface_Dash;
+        public InputAction @Push => m_Wrapper.m_Surface_Push;
         public InputAction @Shoot => m_Wrapper.m_Surface_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Surface; }
         public void Enable() { Get().Enable(); }
@@ -330,6 +352,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Dash.started -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnDash;
+                @Push.started -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnPush;
+                @Push.performed -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnPush;
+                @Push.canceled -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnPush;
                 @Shoot.started -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_SurfaceActionsCallbackInterface.OnShoot;
@@ -358,6 +383,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Push.started += instance.OnPush;
+                @Push.performed += instance.OnPush;
+                @Push.canceled += instance.OnPush;
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
@@ -374,6 +402,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnFlashlight(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnPush(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
     }
 }
