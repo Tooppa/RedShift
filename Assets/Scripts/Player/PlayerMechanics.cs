@@ -22,6 +22,7 @@ namespace Player
         private PlayerControls _playerControls;
         private Flashlight _flashlight;
         private Health _health;
+        private ForceGlove _forceGlove;
         private bool _inCooldown = false;
         private string _currentLocation;
 
@@ -41,6 +42,7 @@ namespace Player
             _playerMovement = gameObject.GetComponent<PlayerMovement>();
             _playerGun = gameObject.GetComponentInChildren<PlayerGun>();
             _flashlight = gameObject.GetComponentInChildren<Flashlight>();
+            _forceGlove = gameObject.GetComponentInChildren<ForceGlove>();
             PointEquipment(new Vector2(1, 0));
             
             _playerControls.Surface.Jump.performed += ctx => _playerMovement.Jump(ctx.ReadValue<float>());
@@ -48,6 +50,7 @@ namespace Player
             _playerControls.Surface.OpenHud.started += _ => _canvasManager.SetHudActive();
             _playerControls.Surface.PauseMenu.started += _ => _canvasManager.SetPauseMenuActive();
             _playerControls.Surface.Shoot.performed += ctx => _playerGun.Shoot(ctx.ReadValue<float>());
+            _playerControls.Surface.Push.started += _ => _forceGlove.Push();
             _playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
             _playerControls.Surface.Interact.started += _ => PickItem();
             
@@ -137,6 +140,10 @@ namespace Player
             {
                 _playerGun.EquipPowerfulGun();
                 _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
+            }
+            if (pickables.ForceGlove && !_forceGlove.HasGlove)
+            {
+                _forceGlove.EquipGlove();
             }
             if (pickables.Flashlight && !_flashlight.HasFlashlight)
             {
