@@ -51,44 +51,6 @@ namespace Ui
             StartCoroutine(FuelIconBlinker());
             ResumeGame();
         }
-        
-        public void VolumeSlider(float volume)
-        {
-            _volume = volume;
-            sliderText.text = _volume.ToString(); 
-        }
-
-        public void AdjustSlider(string volume)
-        {
-            _volume = int.Parse(volume);
-            slider.value = _volume;
-        }
-        public void ApplySettings()
-        {
-            //Screen.SetResolution((int)_currentResolution.x, (int)_currentResolution.y, _fullScreen);
-            AudioVolume.Instance.SetVolume(_volume);
-        }
-        public void OpenOptions()
-        {
-            var volume = AudioVolume.Instance.GetVolume();
-            VolumeSlider(volume);
-            AdjustSlider(volume.ToString());
-            buttons
-                .DOFade(0, .3f)
-                .SetUpdate(true);
-            options
-                .DOAnchorPos(Vector2.zero, .3f)
-                .SetUpdate(true);
-        }
-        public void CloseOptions()
-        {
-            buttons
-                .DOFade(1, .3f)
-                .SetUpdate(true);
-            options
-                .DOAnchorPos(new Vector2(0, -500), .3f)
-                .SetUpdate(true);
-        }
 
         private IEnumerator FuelIconBlinker()
         {

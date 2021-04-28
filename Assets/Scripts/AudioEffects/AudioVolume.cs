@@ -18,7 +18,7 @@ public class AudioVolume : MonoBehaviour
 
     private void Start()
     {
-        SetVolume(100);
+        SetVolume(70);
     }
 
     public void SetVolume(float volume)
