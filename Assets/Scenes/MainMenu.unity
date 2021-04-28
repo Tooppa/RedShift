@@ -3464,6 +3464,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 847987706}
     m_Modifications:
+    - target: {fileID: 626757883, guid: c28f050f6d8f4fa488ddf864327bf557, type: 3}
+      propertyPath: buttons
+      value: 
+      objectReference: {fileID: 1466834930}
     - target: {fileID: 2488643086984218028, guid: c28f050f6d8f4fa488ddf864327bf557, type: 3}
       propertyPath: m_Name
       value: OptionMenu
