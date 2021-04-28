@@ -20,4 +20,5 @@ MonoBehaviour:
   gun: 0
   flashlight: 1
   breakObjectsWithGun: 0
-  statsForUpgrades: Flashlight that can be used to illuminate dark caves.
+  forceGlove: 0
+  statsForUpgrades: Flashlight for the dark caves.

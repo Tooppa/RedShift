@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 342597255}
   - component: {fileID: 6562372677120436247}
   - component: {fileID: 7194179108941176387}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FlyingBat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 0
-  enemyGFX: {fileID: 0}
 --- !u!114 &342597255
 MonoBehaviour:
   m_ObjectHideFlags: 0
