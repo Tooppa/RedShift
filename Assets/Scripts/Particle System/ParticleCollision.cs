@@ -19,21 +19,11 @@ public class ParticleCollision : MonoBehaviour
         collisionEvents = new List<ParticleCollisionEvent>();
     }
 
-    public void DisableWeakShot()
-    {
-        _weakShot = false;
-    }
-    public void EnableWeakShot()
-    {
-        _weakShot = true;
-    }
-
     private void OnParticleCollision(GameObject other)
     {
         var breakable = other.TryGetComponent(out Breakable _);
         if (other.TryGetComponent(out Health health) && !(_weakShot && breakable))
             health.TakeDamage(20);
-        if (_weakShot) return;
         
         var numCollisionEvents = _ps.GetCollisionEvents(other, collisionEvents);
         var explosion = Instantiate(explosionPrefab, collisionEvents[0].intersection, Quaternion.identity);
