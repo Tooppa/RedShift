@@ -64,7 +64,6 @@ namespace Player
         {
             _animator.SetTrigger(ShootTrigger);
             StartCoroutine(Cooldown(1));
-            particleCollision.DisableWeakShot();
             CameraEffects.Instance.ShakeCamera(1.5f, .1f);
             _powerShotEffect.Play();
             _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
@@ -76,7 +75,6 @@ namespace Player
         {
             _animator.SetTrigger(ShootTrigger);
             StartCoroutine(Cooldown(1));
-            particleCollision.EnableWeakShot();
             CameraEffects.Instance.ShakeCamera(.5f, .1f);
             _weakShotEffect.Play();
             _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
