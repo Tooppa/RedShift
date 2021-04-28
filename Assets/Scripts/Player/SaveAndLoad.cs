@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Object = UnityEngine.Object;
 
 namespace Player
 {
@@ -15,7 +15,7 @@ namespace Player
         private const string FallBackScene = "scenes/FirstMap"; // If anything fails, this will be loaded
 
         /// <summary>
-        /// Holds currently picked items' ScriptableObject names.
+        /// Holds currently picked PickableObjects' names.
         /// This will be saved in a file at the next checkpoint.
         /// This will be replaced by the one in the file if the player dies.
         /// </summary>
@@ -104,14 +104,42 @@ namespace Player
 
             SceneManager.LoadScene(levelStatus.scene);
             
-            CurrentlyPickedItems = levelStatus.pickedItems.ToList(); // Loading last save means that currently picked items will be replaced by the ones in the file
+            //CurrentlyPickedItems = levelStatus.pickedItems.ToList(); // Loading last save means that currently picked items will be replaced by the ones in the file
+
+            var constructedPickedItems = new List<GameObject>();
             
-            foreach (var item in CurrentlyPickedItems)
+            foreach (var itemName in CurrentlyPickedItems)
             {
                 // Load resources of ScriptableObjects based on currently picked items
-                //var scriptableObject = Resources.Load("");
+                var pickableObjectPrefab = Resources.Load("Pickables/Scriptables/" + itemName);
+                var pickableObject = Object.Instantiate(pickableObjectPrefab) as PickableObjects;
+                
+                // Instantiate a new Pickable from prefab
+                var pickable = Object.Instantiate(Resources.Load("Pickables/Pickable")) as GameObject;
+                
+                // The just instantiated pickable doesn't have any valid data, assign the scriptable object to it
+                
+                if (pickable is null) continue;
+                
+                var pickableScript = pickable.GetComponent<Pickables>();
+                    
+                pickableScript.data = pickableObject;
+                    
+                // Rerun awake so data from PickableObject (ScriptableObject) will transfer to Pickable
+                pickableScript.Awake();
+                
+                constructedPickedItems.Add(pickable);
             }
             
+            // Forward the just constructed picked items to PlayerMechanics
+            // Every item is constructed in the order it was picked up so the order stays the same
+            var playerMechanics = GameObject.FindWithTag("Player").GetComponent<PlayerMechanics>();
+
+            foreach (var constructedPickedItem in constructedPickedItems)
+            {
+                //playerMechanics.SpecialPickups(constructedPickedItem);
+            }
+
         }
     }
 }
