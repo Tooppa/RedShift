@@ -27,6 +27,9 @@ namespace Player
 
         private Light2D playerVitalSignLight;
 
+        private Animator _animator;
+        private bool _movementDisabled;
+
         private void Awake()
         {
             _playerControls = new PlayerControls();
@@ -61,6 +64,14 @@ namespace Player
         private void Update()
         {
             if (Time.timeScale != 1) return;
+
+            var state = _animator.GetCurrentAnimatorStateInfo(0);
+            if (!_movementDisabled && state.IsName("GunCharge") || state.IsName("Shoot"))
+            {
+                // Disable player movement while shooting
+                DisableMovement();
+                // Movement is then enabled back in PlayerGun script Shoot-function
+            }
 
             var move = _playerControls.Surface.Move.ReadValue<Vector2>();
             
@@ -248,10 +259,12 @@ namespace Player
         public void DisableMovement()
         {
             _playerControls.Disable();
+            _movementDisabled = true;
         }
         public void EnableMovement()
         {
             _playerControls.Enable();
+            _movementDisabled = false;
         }
     }
 }

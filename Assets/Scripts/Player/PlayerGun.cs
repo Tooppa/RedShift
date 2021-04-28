@@ -26,6 +26,8 @@ namespace Player
         private ParticleSystem _chargeEffect;
         private ParticleSystem _chargeReadyEffect;
 
+        private PlayerMechanics _pMechanics;
+
         private void Start()
         {
             _audioController = GameObject.Find("AudioController");
@@ -58,6 +60,7 @@ namespace Player
             }
             else if (_holdingShoot)
                 WeakShot(particleCollision);
+            _pMechanics.EnableMovement();
         }
 
         private void PowerfulShot(ParticleCollision particleCollision)
