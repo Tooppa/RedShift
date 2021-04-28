@@ -51,7 +51,8 @@ namespace Player
             _playerControls.Surface.PauseMenu.started += _ => _canvasManager.SetPauseMenuActive();
             _playerControls.Surface.Shoot.performed += ctx => _playerGun.Shoot(ctx.ReadValue<float>());
             _playerControls.Surface.Push.started += _ => _forceGlove.Push();
-            _playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
+            //_playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
+            _playerControls.Surface.Flashlight.started += _ => SaveAndLoad.Test();
             _playerControls.Surface.Interact.started += _ => PickItem();
             
             _health = gameObject.GetComponent<Health>();
@@ -163,12 +164,23 @@ namespace Player
             _pickableItem = other.gameObject;
         }
 
-        private void PickItem()
+        private void PickItem(GameObject constructedObject = null)
         {
-            if (!_pickableRange) return;
+            if (constructedObject == null)
+            {
+                if (!_pickableRange) return;
+            }
+            else
+            {
+                _pickableItem = constructedObject;
+            }
+            
             SpecialPickups(_pickableItem);
+            
             _pickableItem.gameObject.SetActive(false);
+            
             if (!_pickableItem.TryGetComponent(out Pickables component) || !component.IsNote) return;
+            
             _canvasManager.ShowText(component.GetNote(), component.GetPicture());
             var sprite = _pickableItem.GetComponent<SpriteRenderer>().sprite;
             _canvasManager.AddNewNote(sprite, component.GetPicture(), component.GetNote(), _currentLocation);
