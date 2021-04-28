@@ -51,8 +51,7 @@ namespace Player
             _playerControls.Surface.PauseMenu.started += _ => _canvasManager.SetPauseMenuActive();
             _playerControls.Surface.Shoot.performed += ctx => _playerGun.Shoot(ctx.ReadValue<float>());
             _playerControls.Surface.Push.started += _ => _forceGlove.Push();
-            //_playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
-            _playerControls.Surface.Flashlight.started += _ => SaveAndLoad.Test();
+            _playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
             _playerControls.Surface.Interact.started += _ => PickItem();
             
             _health = gameObject.GetComponent<Health>();

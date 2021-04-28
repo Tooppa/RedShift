@@ -26,24 +26,24 @@ namespace Player
         {
             // Debug test saving and loading
             
-            SaveStatus(FallBackScene);
+            SaveStatus();
 
             LoadLastSave();
         }
         
         /// <summary>
-        /// Serializes and saves a <see cref="LevelStatus"/> to a file. Currently picked up items will also be saved.
+        /// Serializes and saves a <see cref="LevelStatus"/> to a file.
+        /// The savfe LevelStatus will include the current name of the scene and currently picked up items.
         /// </summary>
-        /// <param name="scene">String path to the scene</param>
-        public static void SaveStatus(string scene)
+        public static void SaveStatus()
         {
             try
             {
                 var binaryFormatter = new BinaryFormatter();
                 var fileStream = File.Create(Application.persistentDataPath + SerializedLevelStatusPath);
         
-                // Create a new LevelStatus based on given parameters and CurrentPickedItems
-                var newLevelStatus = new LevelStatus(scene, CurrentlyPickedItems);
+                // Saved scene will almost always be the current one
+                var newLevelStatus = new LevelStatus(SceneManager.GetActiveScene().name, CurrentlyPickedItems);
                 
                 binaryFormatter.Serialize(fileStream, newLevelStatus);
         
