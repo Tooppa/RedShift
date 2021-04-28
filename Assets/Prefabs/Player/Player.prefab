@@ -574,6 +574,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5398604713114884179}
     m_Modifications:
+    - target: {fileID: 8330293191739626051, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
+      propertyPath: explosionPrefab
+      value: 
+      objectReference: {fileID: 6505338092035888528, guid: b10a0989b42c64340a699d2567ec1942, type: 3}
     - target: {fileID: 8549304962318891440, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
       propertyPath: m_Name
       value: Gun
