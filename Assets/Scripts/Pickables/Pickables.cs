@@ -11,6 +11,8 @@ public class Pickables : MonoBehaviour
     public bool Gun { private set; get; }
     public bool Flashlight { private set; get; }
     public bool PowerfulGun { private set; get; }
+    
+    public bool ForceGlove { private set; get; }
     [HideInInspector]public int fuel;
 
     private void Awake()
@@ -24,6 +26,7 @@ public class Pickables : MonoBehaviour
         Flashlight = data.flashlight;
         fuel = data.fuel;
         PowerfulGun = data.breakObjectsWithGun;
+        ForceGlove = data.forceGlove;
         var light2D = transform.GetComponentInChildren<Light2D>();
         if (light2D)
             light2D.enabled = Flashlight;
