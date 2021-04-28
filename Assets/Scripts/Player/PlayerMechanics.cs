@@ -59,6 +59,9 @@ namespace Player
 
             // Prefab guarantees existence
             playerVitalSignLight = GameObject.FindWithTag("PlayerVitalSignLight").GetComponent<Light2D>();
+
+            if(SaveAndLoad.PendingSaveLoad)
+                SaveAndLoad.LoadItems();
         }
 
         private void Update()
@@ -163,12 +166,29 @@ namespace Player
             _pickableItem = other.gameObject;
         }
 
-        private void PickItem()
+        /// <summary>
+        /// Picks an item if found on range. If <see cref="constructedObject"/> is valid, that will be picked instead
+        /// and usually considered <see cref="_pickableRange"/> will be ignored.
+        /// </summary>
+        /// <param name="constructedObject">If valid, <see cref="_pickableRange"/> will be ignored and this will be set as
+        /// <see cref="_pickableItem"/> </param>
+        public void PickItem(GameObject constructedObject = null)
         {
-            if (!_pickableRange) return;
+            if (constructedObject == null)
+            {
+                if (!_pickableRange) return;
+            }
+            else
+            {
+                _pickableItem = constructedObject;
+            }
+            
             SpecialPickups(_pickableItem);
+            
             _pickableItem.gameObject.SetActive(false);
+            
             if (!_pickableItem.TryGetComponent(out Pickables component) || !component.IsNote) return;
+            
             _canvasManager.ShowText(component.GetNote(), component.GetPicture());
             var sprite = _pickableItem.GetComponent<SpriteRenderer>().sprite;
             _canvasManager.AddNewNote(sprite, component.GetPicture(), component.GetNote(), _currentLocation);
