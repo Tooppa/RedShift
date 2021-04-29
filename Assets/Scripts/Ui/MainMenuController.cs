@@ -22,14 +22,12 @@ namespace Ui
             gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
             fader.alpha = 1;
             fader.DOFade(0, 1).SetUpdate(true);
-            _volume = AudioVolume.Instance.GetVolume();
             MenuMusic();
         }
 
         private void MenuMusic()
         {
-            _volume = AudioVolume.Instance.GetVolume();
-            AudioVolume.Instance.SetVolume(_volume);
+            _volume = PlayerPrefs.GetInt("Vol");
             titleScreenMusic.Play();
             titleScreenMusic.DOFade(.7f, 2).SetUpdate(true);
         }

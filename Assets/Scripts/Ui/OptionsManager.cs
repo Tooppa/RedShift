@@ -13,50 +13,55 @@ public class OptionsManager : MonoBehaviour
     public CanvasGroup buttons;
     public TMP_InputField sliderText;
     public Slider slider;
+    public Vector2[] resolutions;
+    private bool _fullScreen;
+    private int _resSpot;
     private RectTransform _options;
     private float _volume;
-    private ResolutionManager _res;
 
     private void Start()
     {
-        _res = ResolutionManager.Instance;
-        _volume = AudioVolume.Instance.GetVolume();
-        _options = this.GetComponent<RectTransform>();
+        _options = GetComponent<RectTransform>();
     }
 
+    private void SetVolume(float volume)
+    {
+        _volume = volume;
+        AudioListener.volume = _volume/100;
+    }
     public void ResolutionUp()
     {
-        var resSpot = _res.GetResSpot();
-        if (resSpot < _res.GetResLength() - 1)
-            _res.SetResSpot(resSpot + 1);
+        if (_resSpot < resolutions.Length - 1)
+            _resSpot++;
         ChangeResText();
     }
 
     public void ResolutionDown()
     {
-        var resSpot = _res.GetResSpot();
-        if (resSpot > 0)
-            _res.SetResSpot(resSpot - 1);
+        if (_resSpot > 0)
+            _resSpot--;
         ChangeResText();
     }
 
     private void ChangeResText()
     {
-        var currentResolution = _res.GetResolution();
+        var currentResolution = resolutions[_resSpot];
         resolutionText.text = ((int) currentResolution.x + ", " + (int) currentResolution.y);
     }
 
     public void ApplySettings()
     {
-        var currentResolution = _res.GetResolution();
-        _res.SetResolution(currentResolution, _res.GetFullScreen());
-        AudioVolume.Instance.SetVolume(_volume);
+        var currentResolution = resolutions[_resSpot];
+        Screen.SetResolution((int)currentResolution.x, (int)currentResolution.y, _fullScreen);
+        SetVolume(_volume);
+        PlayerPrefs.SetInt("Res", _resSpot);
+        PlayerPrefs.SetFloat("Vol", _volume);
+        PlayerPrefs.SetInt("FullS", _fullScreen ? 1 : 0);
     }
 
     public void ToggleFullscreen()
     {
-        _res.ToggleFullScreen();
-        toggle.isOn = _res.GetFullScreen();
+        _fullScreen = !_fullScreen;
     }
     
     public void VolumeSlider(float volume)
@@ -73,14 +78,12 @@ public class OptionsManager : MonoBehaviour
 
     public void OpenOptions()
     {
-        toggle.isOn = _res.GetFullScreen();
+        _resSpot = PlayerPrefs.GetInt("Res");
+        _volume = PlayerPrefs.GetFloat("Vol");
+        toggle.isOn = PlayerPrefs.GetInt("FullS") == 1;
         ChangeResText();
-        if (AudioVolume.Instance is { })
-        {
-            var volume = AudioVolume.Instance.GetVolume();
-            VolumeSlider(volume);
-            AdjustSlider(volume.ToString());
-        }
+        VolumeSlider(_volume);
+        AdjustSlider(_volume.ToString());
 
         buttons
             .DOFade(0, .3f)

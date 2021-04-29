@@ -1134,6 +1134,12 @@ MonoBehaviour:
   buttons: {fileID: 0}
   sliderText: {fileID: 2488643087015505545}
   slider: {fileID: 2488643086350321076}
+  resolutions:
+  - {x: 1280, y: 720}
+  - {x: 1920, y: 1080}
+  - {x: 2560, y: 1440}
+  startResolution: 0
+  fullScreen: 0
 --- !u!1 &2488643086984946180
 GameObject:
   m_ObjectHideFlags: 0
