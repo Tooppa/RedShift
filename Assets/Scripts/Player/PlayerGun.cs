@@ -20,11 +20,14 @@ namespace Player
 
         private Animator _animator;
         private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
-
+        
         private ParticleSystem _weakShotEffect;
         private ParticleSystem _powerShotEffect;
         private ParticleSystem _chargeEffect;
         private ParticleSystem _chargeReadyEffect;
+
+        private PlayerControls _playerControls;
+        private PlayerMechanics _playerMechanics;
 
         private void Start()
         {
@@ -42,6 +45,9 @@ namespace Player
             _powerShotEffect = transform.GetChild(2).GetComponent<ParticleSystem>();
             _chargeEffect = transform.GetChild(3).GetComponent<ParticleSystem>();
             _chargeReadyEffect = transform.GetChild(4).GetComponent<ParticleSystem>();
+
+            _playerMechanics = transform.GetComponentInParent<PlayerMechanics>();
+            _playerControls = _playerMechanics.playerControls;
         }
 
         public void Shoot(float value)
@@ -69,6 +75,10 @@ namespace Player
             _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
             _audioController.GetComponent<SFX>().playerPowerfulShotChargedUp.Stop();
             _audioController.GetComponent<SFX>().PlayPowerfulShot();
+
+            _playerControls.Surface.Move.Enable();
+            _playerControls.Surface.Jump.Enable();
+            _playerMechanics.movementDisabled = false;
         }
 
         private void WeakShot(ParticleCollision particleCollision)
@@ -79,6 +89,10 @@ namespace Player
             _weakShotEffect.Play();
             _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
             _audioController.GetComponent<SFX>().PlayGunShot();
+
+            _playerControls.Surface.Move.Enable();
+            _playerControls.Surface.Jump.Enable();
+            _playerMechanics.movementDisabled = false;
         }
 
         private void FixedUpdate()
