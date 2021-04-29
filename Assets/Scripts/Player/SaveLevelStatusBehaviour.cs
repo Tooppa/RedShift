@@ -5,8 +5,6 @@ namespace Player
 {
     public class SaveLevelStatusBehaviour : MonoBehaviour
     {
-        private void Start() => DontDestroyOnLoad(this); // Can be used between levels
-
         /// <summary>
         /// This is just forward the call to <see cref="SaveAndLoad.SaveStatus"/> because in the editor it has to be an instance.
         /// </summary>
