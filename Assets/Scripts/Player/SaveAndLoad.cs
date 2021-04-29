@@ -181,12 +181,14 @@ namespace Player
                 // Right after mangling the ship and accidentally shooting half of the mountain off
                 case "AfterSpaceShip":
                 {
-                    // Disable opening cutscene and the rocket cutscene
+                    // Disable opening cutscene
                     var openingCutscene = GameObject.Find("OpeningCutscene");
                     openingCutscene.SetActive(false);
 
+                    // Disable the trigger to the SpaceShipCutscene
                     var spaceShipCutscene = GameObject.Find("SpaceShipCutscene");
-                    spaceShipCutscene.SetActive(false);
+                    var spaceShipTrigger = spaceShipCutscene.transform.Find("SpaceShipTrigger");
+                    spaceShipTrigger.gameObject.SetActive(false);
                     
                     break;
                 }
