@@ -27,7 +27,9 @@ namespace Ui
         private void MenuMusic()
         {
             titleScreenMusic.Play();
-            titleScreenMusic.DOFade(.7f, 2).SetUpdate(true);
+            var volume = titleScreenMusic.volume;
+            titleScreenMusic.volume = 0;
+            titleScreenMusic.DOFade(volume, 2).SetUpdate(true);
         }
 
         public void LoadGame()
