@@ -54,6 +54,7 @@ namespace Player
 
         public void Shoot(float value)
         {
+            if (Time.timeScale != 1) return;
             _holdingShoot = value > 0;
             if (_cooldown || !HasGun || !gameObject.activeSelf) return;
             var particleCollision = GetComponentInChildren<ParticleCollision>();
