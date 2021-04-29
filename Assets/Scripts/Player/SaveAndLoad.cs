@@ -193,6 +193,9 @@ namespace Player
                     var newRoute = GameObject.Find("NewRoute");
                     newRoute.SetActive(true);
                     
+                    // Move the player approximately to the location where it should be after the cutscene
+                    var player = GameObject.FindWithTag("Player").transform.position = new Vector3(268.5f, 72.4f, 0);
+                    
                     break;
                 }
                 default:
