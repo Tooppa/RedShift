@@ -10,7 +10,7 @@ public class ParticleCollision : MonoBehaviour
     public CinemachineVirtualCamera cam;
     public GameObject explosionPrefab;
 
-    private bool _weakShot;
+    public bool weakShot;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class ParticleCollision : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
         var breakable = other.TryGetComponent(out Breakable _);
-        if (other.TryGetComponent(out Health health) && !(_weakShot && breakable))
+        if (other.TryGetComponent(out Health health) && !(weakShot && breakable))
             health.TakeDamage(20);
         
         var numCollisionEvents = _ps.GetCollisionEvents(other, collisionEvents);
