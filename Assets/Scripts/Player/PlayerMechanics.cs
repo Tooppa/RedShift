@@ -19,7 +19,7 @@ namespace Player
         private CanvasManager _canvasManager;
         private PlayerMovement _playerMovement;
         private PlayerGun _playerGun;
-        private PlayerControls _playerControls;
+        public PlayerControls playerControls;
         private Flashlight _flashlight;
         private Health _health;
         private ForceGlove _forceGlove;
@@ -28,9 +28,12 @@ namespace Player
 
         private Light2D playerVitalSignLight;
 
+        private Animator _animator;
+        public bool movementDisabled = false;
+
         private void Awake()
         {
-            _playerControls = new PlayerControls();
+            playerControls = new PlayerControls();
             _currentLocation = startLocation;
             _pickableItem = new GameObject();
         }
@@ -45,27 +48,46 @@ namespace Player
             _forceGlove = gameObject.GetComponentInChildren<ForceGlove>();
             PointEquipment(new Vector2(1, 0));
             
-            _playerControls.Surface.Jump.performed += ctx => _playerMovement.Jump(ctx.ReadValue<float>());
-            _playerControls.Surface.Dash.started += _ => _playerMovement.Dash();
-            _playerControls.Surface.OpenHud.started += _ => _canvasManager.SetHudActive();
-            _playerControls.Surface.PauseMenu.started += _ => _canvasManager.SetPauseMenuActive();
-            _playerControls.Surface.Shoot.performed += ctx => _playerGun.Shoot(ctx.ReadValue<float>());
-            _playerControls.Surface.Push.started += _ => _forceGlove.Push();
-            _playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
-            _playerControls.Surface.Interact.started += _ => PickItem();
+            playerControls.Surface.Jump.performed += ctx => _playerMovement.Jump(ctx.ReadValue<float>());
+            playerControls.Surface.Dash.started += _ => _playerMovement.Dash();
+            playerControls.Surface.OpenHud.started += _ => _canvasManager.SetHudActive();
+            playerControls.Surface.PauseMenu.started += _ => _canvasManager.SetPauseMenuActive();
+            playerControls.Surface.Shoot.performed += ctx => _playerGun.Shoot(ctx.ReadValue<float>());
+            playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
+            playerControls.Surface.Interact.started += _ => PickItem();
             
             _health = gameObject.GetComponent<Health>();
             _health.TakingDamage += OnTakingDamage;
 
             // Prefab guarantees existence
             playerVitalSignLight = GameObject.FindWithTag("PlayerVitalSignLight").GetComponent<Light2D>();
+
+            if(SaveAndLoad.PendingSaveLoad)
+                SaveAndLoad.LoadItems();
+
+            _animator = transform.GetChild(1).GetComponent<Animator>();
         }
 
         private void Update()
         {
             if (Time.timeScale != 1) return;
 
-            var move = _playerControls.Surface.Move.ReadValue<Vector2>();
+            if (!movementDisabled && _animator.GetBool("GunCharging"))
+            {
+                // Disable player movement while shooting
+                playerControls.Surface.Move.Disable();
+                playerControls.Surface.Jump.Disable();
+                movementDisabled = true;
+            }
+            else
+            {
+                playerControls.Surface.Move.Enable();
+                playerControls.Surface.Jump.Enable();
+                movementDisabled = false;
+            }
+                
+
+            var move = playerControls.Surface.Move.ReadValue<Vector2>();
             
             _playerMovement.Movement(move);
             
@@ -163,12 +185,29 @@ namespace Player
             _pickableItem = other.gameObject;
         }
 
-        private void PickItem()
+        /// <summary>
+        /// Picks an item if found on range. If <see cref="constructedObject"/> is valid, that will be picked instead
+        /// and usually considered <see cref="_pickableRange"/> will be ignored.
+        /// </summary>
+        /// <param name="constructedObject">If valid, <see cref="_pickableRange"/> will be ignored and this will be set as
+        /// <see cref="_pickableItem"/> </param>
+        public void PickItem(GameObject constructedObject = null)
         {
-            if (!_pickableRange) return;
+            if (constructedObject == null)
+            {
+                if (!_pickableRange) return;
+            }
+            else
+            {
+                _pickableItem = constructedObject;
+            }
+            
             SpecialPickups(_pickableItem);
+            
             _pickableItem.gameObject.SetActive(false);
+            
             if (!_pickableItem.TryGetComponent(out Pickables component) || !component.IsNote) return;
+            
             _canvasManager.ShowText(component.GetNote(), component.GetPicture());
             var sprite = _pickableItem.GetComponent<SpriteRenderer>().sprite;
             _canvasManager.AddNewNote(sprite, component.GetPicture(), component.GetNote(), _currentLocation);
@@ -219,12 +258,12 @@ namespace Player
 
         private void OnEnable()
         {
-            _playerControls.Enable();
+            playerControls.Enable();
         }
 
         private void OnDisable()
         {
-            _playerControls.Disable();
+            playerControls.Disable();
         }
 
         /// <summary>
@@ -254,11 +293,13 @@ namespace Player
 
         public void DisableMovement()
         {
-            _playerControls.Disable();
+            playerControls.Disable();
+            movementDisabled = true;
         }
         public void EnableMovement()
         {
-            _playerControls.Enable();
+            playerControls.Enable();
+            movementDisabled = false;
         }
     }
 }
