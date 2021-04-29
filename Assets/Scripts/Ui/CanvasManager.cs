@@ -79,6 +79,7 @@ namespace Ui
 
         public void SetHudActive()
         {
+            if(pauseMenu.alpha > 0) return;
             var rect = hud.GetComponent<RectTransform>();
             if (rect.anchoredPosition.y != 0)
             {
