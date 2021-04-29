@@ -28,10 +28,12 @@ namespace Player
 
         private PlayerControls _playerControls;
         private PlayerMechanics _playerMechanics;
+        private SFX _sfx;
 
         private void Start()
         {
             _audioController = GameObject.Find("AudioController");
+            _sfx = _audioController.GetComponent<SFX>();
 
             // Unity is so bonkers that it returns the parent's component with this statement
             // Skip the parent's animator. Player's prefab guarantees the Sprite-object to have an animator
@@ -52,6 +54,7 @@ namespace Player
 
         public void Shoot(float value)
         {
+            if (Time.timeScale != 1) return;
             _holdingShoot = value > 0;
             if (_cooldown || !HasGun || !gameObject.activeSelf) return;
             var particleCollision = GetComponentInChildren<ParticleCollision>();
@@ -68,49 +71,52 @@ namespace Player
 
         private void PowerfulShot(ParticleCollision particleCollision)
         {
+            particleCollision.weakShot = false;
             _animator.SetTrigger(ShootTrigger);
             StartCoroutine(Cooldown(1));
             CameraEffects.Instance.ShakeCamera(1.5f, .1f);
             _powerShotEffect.Play();
-            _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
-            _audioController.GetComponent<SFX>().playerPowerfulShotChargedUp.Stop();
-            _audioController.GetComponent<SFX>().PlayPowerfulShot();
+            _sfx.playerPowerfulCharge.Stop();
+            _sfx.playerPowerfulShotChargedUp.Stop();
+            _sfx.PlayPowerfulShot();
 
             _playerControls.Surface.Move.Enable();
             _playerControls.Surface.Jump.Enable();
-            _playerMechanics.movementDisabled = false;
         }
 
         private void WeakShot(ParticleCollision particleCollision)
         {
+            particleCollision.weakShot = true;
             _animator.SetTrigger(ShootTrigger);
             StartCoroutine(Cooldown(1));
             CameraEffects.Instance.ShakeCamera(.5f, .1f);
             _weakShotEffect.Play();
-            _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
-            _audioController.GetComponent<SFX>().PlayGunShot();
+            _sfx.playerPowerfulCharge.Stop();
+            _sfx.PlayGunShot();
 
             _playerControls.Surface.Move.Enable();
             _playerControls.Surface.Jump.Enable();
-            _playerMechanics.movementDisabled = false;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (_holdingShoot)
             {
+                _playerControls.Surface.Move.Disable();
+                _playerControls.Surface.Jump.Disable();
+                
                 if (HasPowerfulGun && _chargeTimer >= powerShotTimer)
                 {
                     _chargeEffect.Stop();
                     _chargeReadyEffect.Play();
-                    if(!_audioController.GetComponent<SFX>().playerPowerfulShotChargedUp.isPlaying)
-                        _audioController.GetComponent<SFX>().PlayPowerfulShotChargedUp();
+                    if(!_sfx.playerPowerfulShotChargedUp.isPlaying)
+                        _sfx.PlayPowerfulShotChargedUp();
                 }
                 if (HasPowerfulGun && !chargeSFXPlaying)
                 {
                     _animator.SetBool("GunCharging", true);
                     _chargeEffect.Play();
-                    _audioController.GetComponent<SFX>().PlayPowerfulCharge();
+                    _sfx.PlayPowerfulCharge();
                     chargeSFXPlaying = true;
                 }
 
@@ -121,7 +127,7 @@ namespace Player
                 _animator.SetBool("GunCharging", false);
                 _chargeReadyEffect.Stop();
                 _chargeEffect.Stop();
-                _audioController.GetComponent<SFX>().playerPowerfulCharge.Stop();
+                _sfx.playerPowerfulCharge.Stop();
                 chargeSFXPlaying = false;
                 _chargeTimer = 0;
             }

@@ -13,16 +13,13 @@ namespace Ui
     {
         public static CanvasManager Instance { get; private set; }
         public CanvasGroup noteInventory, upgradeInventory, rocketInventory, 
-            logScreen, bluePrintScreen, pauseMenu, fader, buttons;
-        public RectTransform options;
+            logScreen, bluePrintScreen, pauseMenu, fader;
         public GameObject uiButton, notesByLocation, floatingText, hud, 
             noteScreen, rocketButton;
         public Transform storedNotesScreen, upgradeGrid;
         public TextMeshProUGUI upgradeText;
         public Slider fuelSlider;
         public Image fuelIcon;
-        public TMP_InputField sliderText;
-        public Slider slider;
         private Transform _currentNoteScreen;
         private float _currentNoteScreenHeight;
         private string _currentLocation;
@@ -50,44 +47,6 @@ namespace Ui
                 .SetUpdate(true);
             StartCoroutine(FuelIconBlinker());
             ResumeGame();
-        }
-        
-        public void VolumeSlider(float volume)
-        {
-            _volume = volume;
-            sliderText.text = _volume.ToString(); 
-        }
-
-        public void AdjustSlider(string volume)
-        {
-            _volume = int.Parse(volume);
-            slider.value = _volume;
-        }
-        public void ApplySettings()
-        {
-            //Screen.SetResolution((int)_currentResolution.x, (int)_currentResolution.y, _fullScreen);
-            AudioVolume.Instance.SetVolume(_volume);
-        }
-        public void OpenOptions()
-        {
-            var volume = AudioVolume.Instance.GetVolume();
-            VolumeSlider(volume);
-            AdjustSlider(volume.ToString());
-            buttons
-                .DOFade(0, .3f)
-                .SetUpdate(true);
-            options
-                .DOAnchorPos(Vector2.zero, .3f)
-                .SetUpdate(true);
-        }
-        public void CloseOptions()
-        {
-            buttons
-                .DOFade(1, .3f)
-                .SetUpdate(true);
-            options
-                .DOAnchorPos(new Vector2(0, -500), .3f)
-                .SetUpdate(true);
         }
 
         private IEnumerator FuelIconBlinker()
@@ -200,7 +159,8 @@ namespace Ui
         }
         public void ResumeGame()
         {
-            if (hud.GetComponent<RectTransform>().anchoredPosition.y < -500)return;
+            var rect = hud.GetComponent<RectTransform>();
+            if (rect.anchoredPosition.y > -500)return;
             Time.timeScale = 1;
         }
 

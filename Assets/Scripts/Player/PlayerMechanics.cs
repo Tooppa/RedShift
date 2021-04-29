@@ -29,7 +29,6 @@ namespace Player
         private Light2D playerVitalSignLight;
 
         private Animator _animator;
-        public bool movementDisabled = false;
 
         private void Awake()
         {
@@ -54,6 +53,7 @@ namespace Player
             playerControls.Surface.PauseMenu.started += _ => _canvasManager.SetPauseMenuActive();
             playerControls.Surface.Shoot.performed += ctx => _playerGun.Shoot(ctx.ReadValue<float>());
             playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
+            playerControls.Surface.Push.started += _ => _forceGlove.Push();
             playerControls.Surface.Interact.started += _ => PickItem();
             
             _health = gameObject.GetComponent<Health>();
@@ -71,21 +71,6 @@ namespace Player
         private void Update()
         {
             if (Time.timeScale != 1) return;
-
-            if (!movementDisabled && _animator.GetBool("GunCharging"))
-            {
-                // Disable player movement while shooting
-                playerControls.Surface.Move.Disable();
-                playerControls.Surface.Jump.Disable();
-                movementDisabled = true;
-            }
-            else
-            {
-                playerControls.Surface.Move.Enable();
-                playerControls.Surface.Jump.Enable();
-                movementDisabled = false;
-            }
-                
 
             var move = playerControls.Surface.Move.ReadValue<Vector2>();
             
@@ -166,6 +151,7 @@ namespace Player
             if (pickables.ForceGlove && !_forceGlove.HasGlove)
             {
                 _forceGlove.EquipGlove();
+                _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
             if (pickables.Flashlight && !_flashlight.HasFlashlight)
             {
@@ -294,12 +280,10 @@ namespace Player
         public void DisableMovement()
         {
             playerControls.Disable();
-            movementDisabled = true;
         }
         public void EnableMovement()
         {
             playerControls.Enable();
-            movementDisabled = false;
         }
     }
 }
