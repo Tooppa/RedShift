@@ -13,16 +13,13 @@ namespace Ui
     {
         public static CanvasManager Instance { get; private set; }
         public CanvasGroup noteInventory, upgradeInventory, rocketInventory, 
-            logScreen, bluePrintScreen, pauseMenu, fader, buttons;
-        public RectTransform options;
+            logScreen, bluePrintScreen, pauseMenu, fader;
         public GameObject uiButton, notesByLocation, floatingText, hud, 
             noteScreen, rocketButton;
         public Transform storedNotesScreen, upgradeGrid;
         public TextMeshProUGUI upgradeText;
         public Slider fuelSlider;
         public Image fuelIcon;
-        public TMP_InputField sliderText;
-        public Slider slider;
         private Transform _currentNoteScreen;
         private float _currentNoteScreenHeight;
         private string _currentLocation;
@@ -162,7 +159,8 @@ namespace Ui
         }
         public void ResumeGame()
         {
-            if (hud.GetComponent<RectTransform>().anchoredPosition.y < -500)return;
+            var rect = hud.GetComponent<RectTransform>();
+            if (rect.anchoredPosition.y > -500)return;
             Time.timeScale = 1;
         }
 

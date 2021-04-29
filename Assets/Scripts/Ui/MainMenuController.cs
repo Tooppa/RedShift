@@ -11,11 +11,10 @@ namespace Ui
 {
     public class MainMenuController : MonoBehaviour
     {
-        public RectTransform options, credits;
+        public RectTransform credits;
         public CanvasGroup fader, buttons;
         public AudioSource titleScreenMusic;
 
-        private float _volume;
 
         private void Start()
         {
@@ -27,7 +26,6 @@ namespace Ui
 
         private void MenuMusic()
         {
-            _volume = PlayerPrefs.GetInt("Vol");
             titleScreenMusic.Play();
             titleScreenMusic.DOFade(.7f, 2).SetUpdate(true);
         }
