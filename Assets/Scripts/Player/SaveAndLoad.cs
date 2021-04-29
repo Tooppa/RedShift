@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,40 +14,36 @@ namespace Player
         private const string FallBackScene = "scenes/FirstMap"; // If anything fails, this will be loaded
 
         /// <summary>
-        /// Holds currently picked items' ScriptableObject names.
+        /// Holds currently picked PickableObjects' names.
         /// This will be saved in a file at the next checkpoint.
         /// This will be replaced by the one in the file if the player dies.
         /// </summary>
         public static List<string> CurrentlyPickedItems = new List<string>();
 
+        public static bool PendingSaveLoad { get; set; } = false;
+
         public static void Test()
         {
             // Debug test saving and loading
             
-            SaveStatus(FallBackScene);
+            SaveStatus();
 
             LoadLastSave();
-            
-            foreach (var item in CurrentlyPickedItems)
-            {
-                Debug.Log(item);
-            }
-            
         }
         
         /// <summary>
-        /// Serializes and saves a <see cref="LevelStatus"/> to a file. Currently picked up items will also be saved.
+        /// Serializes and saves a <see cref="LevelStatus"/> to a file.
+        /// The savfe LevelStatus will include the current name of the scene and currently picked up items.
         /// </summary>
-        /// <param name="scene">String path to the scene</param>
-        public static void SaveStatus(string scene)
+        public static void SaveStatus()
         {
             try
             {
                 var binaryFormatter = new BinaryFormatter();
                 var fileStream = File.Create(Application.persistentDataPath + SerializedLevelStatusPath);
         
-                // Create a new LevelStatus based on given parameters and CurrentPickedItems
-                var newLevelStatus = new LevelStatus(scene, CurrentlyPickedItems);
+                // Saved scene will almost always be the current one
+                var newLevelStatus = new LevelStatus(SceneManager.GetActiveScene().name, CurrentlyPickedItems);
                 
                 binaryFormatter.Serialize(fileStream, newLevelStatus);
         
@@ -63,7 +58,7 @@ namespace Player
         /// <summary>
         /// Load the serialized <see cref="LevelStatus"/> from a file and deserializes it.
         /// </summary>
-        /// <returns> <see cref="LevelStatus"/> </returns>
+        /// <returns> <see cref="LevelStatus"/>Deserialized save file</returns>
         public static LevelStatus LoadStatus()
         {
             try
@@ -90,7 +85,9 @@ namespace Player
         }
     
         /// <summary>
-        /// Loads the scene in <see cref="LevelStatus"/> and performs all the sub-operations that bring the game to the desired state.
+        /// Loads the scene in <see cref="LevelStatus"/> and sets <see cref="PendingSaveLoad"/> to true.
+        /// Other executing functions will handle the rest like <see cref="LoadItems"/>
+        /// If loaded LevelStatus is not valid, nothing will happen.
         /// </summary>
         public static void LoadLastSave()
         {
@@ -102,16 +99,62 @@ namespace Player
                 return;
             }
 
-            SceneManager.LoadScene(levelStatus.scene);
+            PendingSaveLoad = true; // PlayerMechanics will execute LoadItems() based on this
             
-            CurrentlyPickedItems = levelStatus.pickedItems.ToList(); // Loading last save means that currently picked items will be replaced by the ones in the file
+            // LoadScene executes at the next frame, use OnSceneLoaded to do actions after that
+            SceneManager.LoadScene(levelStatus.scene); 
+        }
+
+        /// <summary>
+        /// Loads items in <see cref="LevelStatus"/>, instantiates them and gives them for the player.
+        /// </summary>
+        public static void LoadItems()
+        {
+            CurrentlyPickedItems.Clear(); // These will be replace by the ones in the saved LevelStatus
             
-            foreach (var item in CurrentlyPickedItems)
+            var levelStatus = LoadStatus();
+            
+            var constructedPickedItems = new List<GameObject>();
+            
+            foreach (var itemName in levelStatus.pickedItems)
             {
                 // Load resources of ScriptableObjects based on currently picked items
-                //var scriptableObject = Resources.Load("");
+                var pickableObjectPrefab = Resources.Load("Pickables/Scriptables/" + itemName);
+                var pickableObject = UnityEngine.Object.Instantiate(pickableObjectPrefab) as PickableObjects;
+                
+                pickableObject.name = itemName; // Name must be the same as the original. Otherwise next resource load will fail
+
+                Debug.Log("PickableObject: " + pickableObject.name);
+                
+                // Instantiate a new Pickable from prefab
+                var pickable = UnityEngine.Object.Instantiate(Resources.Load("Pickables/Pickable")) as GameObject;
+                pickable.name = "Pickable"; // Name must be the same as the original. Otherwise next resource load will fail
+                
+                // The just instantiated pickable doesn't have any valid data, assign the scriptable object to it
+                
+                var pickableScript = pickable.GetComponent<Pickables>();
+                    
+                pickableScript.data = pickableObject;
+                    
+                // Rerun awake so data from PickableObject (ScriptableObject) will transfer to Pickable
+                pickableScript.Awake();
+                
+                constructedPickedItems.Add(pickable);
             }
             
+            // Forward the just constructed picked items to PlayerMechanics
+            // Every item is constructed in the order it was picked up so the order stays the same
+
+            var player = GameObject.FindWithTag("Player");
+            
+            var playerMechanics = player.GetComponent<PlayerMechanics>();
+            
+            Debug.Log($"List size {constructedPickedItems.Count}");
+
+            foreach (var constructedPickedItem in constructedPickedItems)
+            {
+                playerMechanics.PickItem(constructedPickedItem);
+            }
         }
     }
 }
