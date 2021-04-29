@@ -104,7 +104,7 @@ namespace Player
                 return;
             }
 
-            SaveLoadingWaitsInstructions = true; // PlayerMechanics will execute LoadItems() based on this
+            SaveLoadingWaitsInstructions = true; // PlayerMechanics will execute FinishLoadingSave() based on this
             
             // LoadScene executes at the next frame, use OnSceneLoaded to do actions after that
             SceneManager.LoadScene(levelStatus.Scene); 
@@ -174,6 +174,18 @@ namespace Player
             {
                 case "Start":
                 {
+                    break;
+                }
+                // Right after mangling the ship and accidentally shooting half of the mountain off
+                case "AfterSpaceShip":
+                {
+                    // Disable opening cutscene and the rocket cutscene
+                    var openingCutscene = GameObject.Find("OpeningCutscene");
+                    openingCutscene.SetActive(false);
+
+                    var spaceShipCutscene = GameObject.Find("SpaceShipCutscene");
+                    spaceShipCutscene.SetActive(false);
+                    
                     break;
                 }
                 default:
