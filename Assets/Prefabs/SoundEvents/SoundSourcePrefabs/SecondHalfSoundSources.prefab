@@ -11,7 +11,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f1cf4dbe85da0b842817cc4d65c3e77b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -19,7 +19,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 11.367859
   Pan2D: 0
@@ -71,7 +71,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -107,7 +107,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f1cf4dbe85da0b842817cc4d65c3e77b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -115,7 +115,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 12.006447
   Pan2D: 0
@@ -167,7 +167,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -587,7 +587,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f1cf4dbe85da0b842817cc4d65c3e77b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -595,7 +595,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 9.783661
   Pan2D: 0
@@ -647,7 +647,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -683,7 +683,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f1cf4dbe85da0b842817cc4d65c3e77b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -691,7 +691,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 16.630405
   Pan2D: 0
@@ -743,7 +743,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -779,7 +779,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f1cf4dbe85da0b842817cc4d65c3e77b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -787,7 +787,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 11.348633
   Pan2D: 0
@@ -839,7 +839,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -883,7 +883,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 15.531212
   Pan2D: 0
@@ -935,7 +935,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1023,7 +1023,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f1cf4dbe85da0b842817cc4d65c3e77b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1031,7 +1031,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 15.531212
   Pan2D: 0
@@ -1083,7 +1083,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1196,6 +1196,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: adc9e8e1a705c1841a32340982420558, type: 3}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
@@ -1244,11 +1252,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3776977173073433573, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.4
+      value: -45.9
       objectReference: {fileID: 0}
     - target: {fileID: 3776977173073433573, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 67.3
+      value: 89.8
       objectReference: {fileID: 0}
     - target: {fileID: 3776977173073433573, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1287,9 +1295,21 @@ PrefabInstance:
       value: FallingRocksC
       objectReference: {fileID: 0}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: MinDistance
+      value: 1.8140259
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: adc9e8e1a705c1841a32340982420558, type: 3}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
@@ -1393,6 +1413,14 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: adc9e8e1a705c1841a32340982420558, type: 3}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
@@ -1609,6 +1637,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: adc9e8e1a705c1841a32340982420558, type: 3}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
@@ -1820,6 +1856,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: adc9e8e1a705c1841a32340982420558, type: 3}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
@@ -1915,6 +1959,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: adc9e8e1a705c1841a32340982420558, type: 3}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
@@ -2009,6 +2061,14 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: adc9e8e1a705c1841a32340982420558, type: 3}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
@@ -2429,6 +2489,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 21e4c5d45f43f564d8bce21aa157d002, type: 3}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
@@ -2625,6 +2693,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: f1cf4dbe85da0b842817cc4d65c3e77b, type: 3}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
@@ -2816,6 +2892,14 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 21e4c5d45f43f564d8bce21aa157d002, type: 3}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
@@ -3009,6 +3093,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 21e4c5d45f43f564d8bce21aa157d002, type: 3}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
@@ -3201,6 +3293,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 21e4c5d45f43f564d8bce21aa157d002, type: 3}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
@@ -3300,6 +3400,14 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: adc9e8e1a705c1841a32340982420558, type: 3}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
@@ -3506,6 +3614,14 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: adc9e8e1a705c1841a32340982420558, type: 3}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
@@ -3797,6 +3913,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 21e4c5d45f43f564d8bce21aa157d002, type: 3}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
@@ -3988,6 +4112,14 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 21e4c5d45f43f564d8bce21aa157d002, type: 3}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3776977173073433575, guid: ac233a40ebc134248a776aff7d3b95ae, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
