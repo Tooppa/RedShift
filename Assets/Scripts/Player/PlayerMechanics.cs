@@ -62,8 +62,8 @@ namespace Player
             // Prefab guarantees existence
             playerVitalSignLight = GameObject.FindWithTag("PlayerVitalSignLight").GetComponent<Light2D>();
 
-            if(SaveAndLoad.PendingSaveLoad)
-                SaveAndLoad.LoadItems();
+            if(SaveAndLoad.SaveLoadingWaitsInstructions)
+                SaveAndLoad.FinishLoadingSave();
 
             _animator = transform.GetChild(1).GetComponent<Animator>();
         }
@@ -273,7 +273,7 @@ namespace Player
 
             if (healthPercent <= 0)
             {
-                SaveAndLoad.LoadLastSave();
+                SaveAndLoad.StartLoadingSave();
             }
         }
 
