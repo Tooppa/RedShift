@@ -645,11 +645,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7620177760196055836, guid: b47586c0bfa661e4fb5f83ca59c5949f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.8
+      value: 16.6
       objectReference: {fileID: 0}
     - target: {fileID: 7620177760196055836, guid: b47586c0bfa661e4fb5f83ca59c5949f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.8
+      value: -16.2
       objectReference: {fileID: 0}
     - target: {fileID: 7620177760196055836, guid: b47586c0bfa661e4fb5f83ca59c5949f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -697,7 +697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7620177760196055839, guid: b47586c0bfa661e4fb5f83ca59c5949f, type: 3}
       propertyPath: MaxDistance
-      value: 77.37839
+      value: 62.93391
       objectReference: {fileID: 0}
     - target: {fileID: 7620177760196055839, guid: b47586c0bfa661e4fb5f83ca59c5949f, type: 3}
       propertyPath: MinDistance

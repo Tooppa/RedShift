@@ -22,6 +22,7 @@ namespace Player
         public PlayerControls playerControls;
         private Flashlight _flashlight;
         private Health _health;
+        private ForceGlove _forceGlove;
         private bool _inCooldown = false;
         private string _currentLocation;
 
@@ -44,6 +45,7 @@ namespace Player
             _playerMovement = gameObject.GetComponent<PlayerMovement>();
             _playerGun = gameObject.GetComponentInChildren<PlayerGun>();
             _flashlight = gameObject.GetComponentInChildren<Flashlight>();
+            _forceGlove = gameObject.GetComponentInChildren<ForceGlove>();
             PointEquipment(new Vector2(1, 0));
             
             playerControls.Surface.Jump.performed += ctx => _playerMovement.Jump(ctx.ReadValue<float>());
@@ -59,6 +61,9 @@ namespace Player
 
             // Prefab guarantees existence
             playerVitalSignLight = GameObject.FindWithTag("PlayerVitalSignLight").GetComponent<Light2D>();
+
+            if(SaveAndLoad.PendingSaveLoad)
+                SaveAndLoad.LoadItems();
 
             _animator = transform.GetChild(1).GetComponent<Animator>();
         }
@@ -158,6 +163,10 @@ namespace Player
                 _playerGun.EquipPowerfulGun();
                 _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
+            if (pickables.ForceGlove && !_forceGlove.HasGlove)
+            {
+                _forceGlove.EquipGlove();
+            }
             if (pickables.Flashlight && !_flashlight.HasFlashlight)
             {
                 _flashlight.EquipFlashlight();
@@ -176,12 +185,29 @@ namespace Player
             _pickableItem = other.gameObject;
         }
 
-        private void PickItem()
+        /// <summary>
+        /// Picks an item if found on range. If <see cref="constructedObject"/> is valid, that will be picked instead
+        /// and usually considered <see cref="_pickableRange"/> will be ignored.
+        /// </summary>
+        /// <param name="constructedObject">If valid, <see cref="_pickableRange"/> will be ignored and this will be set as
+        /// <see cref="_pickableItem"/> </param>
+        public void PickItem(GameObject constructedObject = null)
         {
-            if (!_pickableRange) return;
+            if (constructedObject == null)
+            {
+                if (!_pickableRange) return;
+            }
+            else
+            {
+                _pickableItem = constructedObject;
+            }
+            
             SpecialPickups(_pickableItem);
+            
             _pickableItem.gameObject.SetActive(false);
+            
             if (!_pickableItem.TryGetComponent(out Pickables component) || !component.IsNote) return;
+            
             _canvasManager.ShowText(component.GetNote(), component.GetPicture());
             var sprite = _pickableItem.GetComponent<SpriteRenderer>().sprite;
             _canvasManager.AddNewNote(sprite, component.GetPicture(), component.GetNote(), _currentLocation);
