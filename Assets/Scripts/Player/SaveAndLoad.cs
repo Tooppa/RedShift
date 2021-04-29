@@ -52,6 +52,8 @@ namespace Player
                 binaryFormatter.Serialize(fileStream, newLevelStatus);
         
                 fileStream.Close();
+
+                Debug.Log($"Succesfully saved status in place {place}");
             }
             catch (Exception e)
             {
