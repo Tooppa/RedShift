@@ -82,20 +82,20 @@ namespace Ui
             var rect = hud.GetComponent<RectTransform>();
             if (rect.anchoredPosition.y != 0)
             {
+                PauseGame();
                 rect.DOAnchorPos(new Vector2(30, 0), .3f)
                     .SetUpdate(true);
                 rect.DORotate(Vector3.zero, .3f)
                     .SetUpdate(true);
-                PauseGame();
                 _audioController.PlayOpenInventory();
             }
             else
             {
                 rect.DOAnchorPos(new Vector2(30, -500), .3f)
                     .SetUpdate(true);
-                rect.DORotate(new Vector3(0,0,90), .3f)
-                    .SetUpdate(true);
-                ResumeGame();
+                rect.DORotate(new Vector3(0, 0, 90), .3f)
+                    .SetUpdate(true)
+                    .OnComplete(ResumeGame);
                 _audioController.PlayCloseInventory();
             }
         }
@@ -103,18 +103,22 @@ namespace Ui
         {
             if (pauseMenu.alpha == 0)
             {
-                pauseMenu.DOFade(1, .3f).SetUpdate(true);
+                PauseGame();
+                pauseMenu
+                    .DOFade(1, .3f)
+                    .SetUpdate(true);
                 pauseMenu.interactable = true;
                 pauseMenu.blocksRaycasts = true;
-                PauseGame();
                 _audioController.PlayOpenInventory();
             }
             else
             {
-                pauseMenu.DOFade(0, .3f).SetUpdate(true);
+                pauseMenu
+                    .DOFade(0, .3f)
+                    .SetUpdate(true)
+                    .OnComplete(ResumeGame);
                 pauseMenu.interactable = false;
                 pauseMenu.blocksRaycasts = false;
-                ResumeGame();
                 _audioController.PlayCloseInventory();
             }
         }
