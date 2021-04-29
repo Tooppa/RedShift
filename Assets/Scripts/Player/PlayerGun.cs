@@ -56,7 +56,12 @@ namespace Player
         {
             if (Time.timeScale != 1) return;
             _holdingShoot = value > 0;
-            if (_cooldown || !HasGun || !gameObject.activeSelf) return;
+            if (_cooldown || !HasGun || !gameObject.activeSelf)
+            {
+                _playerControls.Surface.Move.Enable();
+                _playerControls.Surface.Jump.Enable();
+                return;
+            }
             var particleCollision = GetComponentInChildren<ParticleCollision>();
             if (HasPowerfulGun)
             {
