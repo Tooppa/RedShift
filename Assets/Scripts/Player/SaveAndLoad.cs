@@ -12,6 +12,7 @@ namespace Player
         private const string SerializedLevelStatusPath = "/levelStatus.dat";
 
         private const string FallBackScene = "scenes/FirstMap"; // If anything fails, this will be loaded
+        private const string FallBackPlace = "start";
 
         /// <summary>
         /// Holds currently picked PickableObjects' names.
@@ -20,30 +21,33 @@ namespace Player
         /// </summary>
         public static List<string> CurrentlyPickedItems = new List<string>();
 
-        public static bool PendingSaveLoad { get; set; } = false;
+        /// <summary>
+        /// If true, <see cref="PlayerMechanics"/> will finish loading the save at its Start().
+        /// </summary>
+        public static bool SaveLoadingWaitsInstructions { get; private set; } = false;
 
         public static void Test()
         {
             // Debug test saving and loading
             
-            SaveStatus();
+            SaveStatus(FallBackPlace);
 
-            LoadLastSave();
+            StartLoadingSave();
         }
         
         /// <summary>
         /// Serializes and saves a <see cref="LevelStatus"/> to a file.
         /// The savfe LevelStatus will include the current name of the scene and currently picked up items.
         /// </summary>
-        public static void SaveStatus()
+        public static void SaveStatus(string place)
         {
             try
             {
                 var binaryFormatter = new BinaryFormatter();
                 var fileStream = File.Create(Application.persistentDataPath + SerializedLevelStatusPath);
         
-                // Saved scene will almost always be the current one
-                var newLevelStatus = new LevelStatus(SceneManager.GetActiveScene().name, CurrentlyPickedItems);
+                // Saved scene and items will always be the current one
+                var newLevelStatus = new LevelStatus(SceneManager.GetActiveScene().name, CurrentlyPickedItems, place);
                 
                 binaryFormatter.Serialize(fileStream, newLevelStatus);
         
@@ -81,42 +85,49 @@ namespace Player
                 Console.WriteLine("Couldn't load level status!\n" + e);
             }
 
-            return new LevelStatus(FallBackScene, null); // If file didn't exist, return an empty one
+            return new LevelStatus(FallBackScene, null, FallBackPlace); // If file didn't exist, return an empty one
         }
     
         /// <summary>
-        /// Loads the scene in <see cref="LevelStatus"/> and sets <see cref="PendingSaveLoad"/> to true.
-        /// Other executing functions will handle the rest like <see cref="LoadItems"/>
+        /// Loads the scene in <see cref="LevelStatus"/> and sets <see cref="SaveLoadingWaitsInstructions"/> to true.
+        /// After the scene has been loaded, <see cref="PlayerMechanics"/>'s Start() will fire the rest of the loading
+        /// mechanisms like <see cref="LoadItems"/>
         /// If loaded LevelStatus is not valid, nothing will happen.
         /// </summary>
-        public static void LoadLastSave()
+        public static void StartLoadingSave()
         {
             var levelStatus = LoadStatus();
 
-            if (levelStatus.scene == null || levelStatus.pickedItems == null)
+            if (levelStatus.Scene == null || levelStatus.PickedItems == null)
             {
-                Debug.LogWarning($"Level Status had null fields! Scene: {levelStatus.scene}, PickedItems: {levelStatus.pickedItems}");
+                Debug.LogWarning($"Level Status had null fields! Scene: {levelStatus.Scene}, PickedItems: {levelStatus.PickedItems}");
                 return;
             }
 
-            PendingSaveLoad = true; // PlayerMechanics will execute LoadItems() based on this
+            SaveLoadingWaitsInstructions = true; // PlayerMechanics will execute LoadItems() based on this
             
             // LoadScene executes at the next frame, use OnSceneLoaded to do actions after that
-            SceneManager.LoadScene(levelStatus.scene); 
+            SceneManager.LoadScene(levelStatus.Scene); 
         }
 
+        public static void FinishLoadingSave()
+        {
+            var levelStatus = LoadStatus();
+
+            ExecuteAdditionalInstructions(levelStatus);
+            LoadItems(levelStatus);
+        }
+        
         /// <summary>
         /// Loads items in <see cref="LevelStatus"/>, instantiates them and gives them for the player.
         /// </summary>
-        public static void LoadItems()
+        private static void LoadItems(LevelStatus levelStatus)
         {
             CurrentlyPickedItems.Clear(); // These will be replace by the ones in the saved LevelStatus
             
-            var levelStatus = LoadStatus();
-            
             var constructedPickedItems = new List<GameObject>();
             
-            foreach (var itemName in levelStatus.pickedItems)
+            foreach (var itemName in levelStatus.PickedItems)
             {
                 // Load resources of ScriptableObjects based on currently picked items
                 var pickableObjectPrefab = Resources.Load("Pickables/Scriptables/" + itemName);
@@ -154,6 +165,22 @@ namespace Player
             foreach (var constructedPickedItem in constructedPickedItems)
             {
                 playerMechanics.PickItem(constructedPickedItem);
+            }
+        }
+
+        private static void ExecuteAdditionalInstructions(LevelStatus levelStatus)
+        {
+            switch (levelStatus.Place)
+            {
+                case "Start":
+                {
+                    break;
+                }
+                default:
+                {
+                    Debug.LogWarning("Place not found! Cannot execute additional instructions.");
+                    break;
+                }
             }
         }
     }
