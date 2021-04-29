@@ -186,9 +186,12 @@ namespace Player
                     openingCutscene.SetActive(false);
 
                     // Disable the trigger to the SpaceShipCutscene
-                    var spaceShipCutscene = GameObject.Find("SpaceShipCutscene");
-                    var spaceShipTrigger = spaceShipCutscene.transform.Find("SpaceShipTrigger");
-                    spaceShipTrigger.gameObject.SetActive(false);
+                    var spaceShipTrigger = GameObject.Find("SpaceShipTrigger");
+                    spaceShipTrigger.SetActive(false);
+                    
+                    // Enable the new route which the spaceship blasted
+                    var newRoute = GameObject.Find("NewRoute");
+                    newRoute.SetActive(true);
                     
                     break;
                 }
