@@ -20,4 +20,5 @@ MonoBehaviour:
   gun: 1
   flashlight: 0
   breakObjectsWithGun: 0
-  statsForUpgrades: Small laser gun.
+  forceGlove: 0
+  statsForUpgrades: Small laser gun

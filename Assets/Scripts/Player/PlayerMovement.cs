@@ -127,7 +127,6 @@ namespace Player
 
         public void EquipRocketBoots()
         {
-            _audioController.PlayPowerUp();
             HasRocketBoots = true;
         }
 

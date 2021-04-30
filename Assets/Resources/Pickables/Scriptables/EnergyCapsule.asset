@@ -20,4 +20,5 @@ MonoBehaviour:
   gun: 0
   flashlight: 0
   breakObjectsWithGun: 0
-  statsForUpgrades: Energy core for a spaceship.
+  forceGlove: 0
+  statsForUpgrades: Energy core for a spaceship
