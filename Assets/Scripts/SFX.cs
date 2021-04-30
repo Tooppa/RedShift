@@ -35,6 +35,10 @@ public class SFX : MonoBehaviour
     public AudioSource run;
     public AudioSource titleScreen;
 
+    public AudioSource startButton;
+    public AudioSource selectButton;
+    public AudioSource hoverOverButton;
+
     public string CurrentMusicPlaying()
     {
         for(int i = 0;i < transform.GetChild(1).childCount; i++)
@@ -240,5 +244,20 @@ public class SFX : MonoBehaviour
     public void PlayRun()
     {
         run.Play();
+    }
+
+    public void PlayStartButton()
+    {
+        startButton.Play();
+    }
+
+    public void PlaySelectButton()
+    {
+        selectButton.Play();
+    }
+
+    public void PlayHoverOverButton()
+    {
+        hoverOverButton.Play();
     }
 }
