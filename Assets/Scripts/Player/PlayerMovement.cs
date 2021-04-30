@@ -39,6 +39,7 @@ namespace Player
         private static readonly int Walking = Animator.StringToHash("Walking");
         private static readonly int TakeOff = Animator.StringToHash("TakeOff");
         private static readonly int Landing = Animator.StringToHash("Landing");
+        private static readonly int Dashing = Animator.StringToHash("Dashing");
 
         private void Awake()
         {
@@ -57,6 +58,9 @@ namespace Player
         private void Update()
         {
             CheckIsGrounded();
+            if (!_holdingJump || !(holdingJumpTime < holdingJumpTimeMax) || _animator.GetBool(Dashing) || _rigidbody2D.velocity.y < .5f) return;
+            _rigidbody2D.AddForce(Vector2.up * (2 * (Mathf.Pow((holdingJumpTime + 1) * 5, 2))), ForceMode2D.Impulse);
+            holdingJumpTime += Time.deltaTime;
         }
 
         private void CheckIsGrounded()
@@ -108,22 +112,12 @@ namespace Player
             }
             holdingJumpTime = 0;
         }
-        private void FixedUpdate()
-        {
-            if (_holdingJump && holdingJumpTime < holdingJumpTimeMax)
-            {
-                _rigidbody2D.AddForce(Vector2.up * (2 * (Mathf.Pow((holdingJumpTime + 1) * 5, 2))), ForceMode2D.Impulse);
-                holdingJumpTime += Time.deltaTime;
-            }
-        }
         public void Dash()
         {
-            if (HasRocketBoots && !_rocketBootsCooldown && Time.timeScale == 1)
-            {
-                _animator.SetBool("Dashing", true);
-                _audioController.PlayPlayerRocketDash();
-                StartCoroutine(IEDash());
-            }
+            if (!HasRocketBoots || _rocketBootsCooldown || Time.timeScale != 1) return;
+            _animator.SetBool(Dashing, true);
+            _audioController.PlayPlayerRocketDash();
+            StartCoroutine(IEDash());
 
         }
 
@@ -145,7 +139,7 @@ namespace Player
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x * 0.5f, 0f);
             _rigidbody2D.gravityScale = 1;
             rocketBoots.Stop();
-            _animator.SetBool("Dashing", false);
+            _animator.SetBool(Dashing, false);
         }
         private IEnumerator Cooldown(float cooldownTime)
         {
