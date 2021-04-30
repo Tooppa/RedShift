@@ -1558,6 +1558,7 @@ GameObject:
   - component: {fileID: 3598345469916057987}
   - component: {fileID: 3598345469916057985}
   - component: {fileID: 3598345469916057986}
+  - component: {fileID: 1339111550}
   m_Layer: 0
   m_Name: DestroyAudioSourceMorkoLair
   m_TagString: Untagged
@@ -1635,6 +1636,36 @@ MonoBehaviour:
   desiredFadedMusicVolume: 0
   desiredFadedSFXVolume: 0
   desiredPitch: 0.9
+--- !u!114 &1339111550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3598345469916057988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65429390e67e9b4098c599c7f97028b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyableSoundSource: {fileID: 0}
+  audioOptions: 12
+  _music: {fileID: 0}
+  _sfx: {fileID: 0}
+  _musicToFadeOut: {fileID: 0}
+  _musicToFadeIn: {fileID: 0}
+  _sfxToFadeOut: {fileID: 0}
+  _sfxToFadeIn: {fileID: 0}
+  loop: 0
+  destroyOnTrigger: 0
+  musicFadeTime: 4
+  sfxFadeTime: 4
+  volume: 1
+  desiredIncreasedMusicVolume: 0
+  desiredIncreasedSFXVolume: 0
+  desiredFadedMusicVolume: 0
+  desiredFadedSFXVolume: 0
+  desiredPitch: 1
 --- !u!1 &3598345469948177962
 GameObject:
   m_ObjectHideFlags: 0
