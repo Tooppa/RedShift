@@ -58,6 +58,10 @@ namespace Player
         private void Update()
         {
             CheckIsGrounded();
+        }
+
+        private void FixedUpdate()
+        {
             if (!_holdingJump || !(holdingJumpTime < holdingJumpTimeMax) || _animator.GetBool(Dashing) || _rigidbody2D.velocity.y < .5f) return;
             _rigidbody2D.AddForce(Vector2.up * (2 * (Mathf.Pow((holdingJumpTime + 1) * 5, 2))), ForceMode2D.Impulse);
             holdingJumpTime += Time.deltaTime;
