@@ -14,6 +14,8 @@ namespace Player
         public string startLocation;
         private int _fuel;
         private bool _pickableRange;
+
+        private SFX _audioController;
         
         private GameObject _pickableItem;
         private CanvasManager _canvasManager;
@@ -35,6 +37,7 @@ namespace Player
 
         private void Awake()
         {
+            _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
             playerControls = new PlayerControls();
             _currentLocation = startLocation;
             _pickableItem = new GameObject();
@@ -135,11 +138,13 @@ namespace Player
                 _fuel += pickables.fuel;
                 pickables.fuel = 0;
                 _canvasManager.SetFuel(_fuel);
+                _audioController.PlayEnergyCapsulePickUp();
             }
             if (pickables.RocketBoots && !_playerMovement.HasRocketBoots)
             {
                 _playerMovement.EquipRocketBoots();
                 _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
+                _audioController.PlayPowerUp();
             }
             if (pickables.Gun && !_playerGun.HasGun)
             {
@@ -150,11 +155,13 @@ namespace Player
             {
                 _playerGun.EquipPowerfulGun();
                 _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
+                _audioController.PlayPowerUp();
             }
             if (pickables.ForceGlove && !_forceGlove.HasGlove)
             {
                 _forceGlove.EquipGlove();
                 _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
+                _audioController.PlayPowerUp();
             }
             if (pickables.Flashlight && !_flashlight.HasFlashlight)
             {
