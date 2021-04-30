@@ -224,7 +224,7 @@ MonoBehaviour:
   jumpHeight: 720
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 136
   maxSpeed: 12.5
   rocketBootsSpeed: 1000
   rocketBoots: {fileID: 2059804918}

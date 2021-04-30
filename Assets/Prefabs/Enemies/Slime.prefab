@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 635053513}
   - component: {fileID: 8837139715774794218}
   - component: {fileID: 6797654194319861495}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,7 +105,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  enemyGFX: {fileID: 0}
 --- !u!61 &225876460759272592
 BoxCollider2D:
   m_ObjectHideFlags: 0
