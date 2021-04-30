@@ -29,6 +29,9 @@ namespace Player
         private Light2D playerVitalSignLight;
 
         private Animator _animator;
+        private static readonly int Death = Animator.StringToHash("Death");
+
+        private const float TimeBeforeRespawn = 2f;
 
         private void Awake()
         {
@@ -273,10 +276,24 @@ namespace Player
 
             if (healthPercent <= 0)
             {
-                SaveAndLoad.StartLoadingSave();
+                StartCoroutine(PlayerDie());
             }
         }
-
+        
+        private IEnumerator PlayerDie()
+        {
+            DisableMovement();
+            
+            _animator.SetTrigger(Death);
+            
+            // Knock player back a little. Get direction from the players facing direction
+            GetComponent<Rigidbody2D>().AddForce(new Vector2((transform.localScale.x), 0f) * 15, ForceMode2D.Impulse);
+            
+            yield return new WaitForSeconds(TimeBeforeRespawn);
+            
+            SaveAndLoad.StartLoadingSave();
+        }
+        
         public void DisableMovement()
         {
             playerControls.Disable();
