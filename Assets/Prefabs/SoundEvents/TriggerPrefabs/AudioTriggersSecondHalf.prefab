@@ -980,7 +980,7 @@ GameObject:
   - component: {fileID: 4856219887465106489}
   - component: {fileID: 4302189288127742585}
   m_Layer: 0
-  m_Name: WingsFlappingHub
+  m_Name: WingsFlappingA
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -994,8 +994,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6070321219546965474}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 127.4, y: 53.6, z: 702.47156}
-  m_LocalScale: {x: 0.1, y: 15, z: 1}
+  m_LocalPosition: {x: 103.42, y: -48.28, z: 702.47156}
+  m_LocalScale: {x: 10, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 6916995024032217572}
   m_RootOrder: 14
