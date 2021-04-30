@@ -632,6 +632,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5398604713114884179}
     m_Modifications:
+    - target: {fileID: 818714060, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 191
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079537407, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 191
+      objectReference: {fileID: 0}
     - target: {fileID: 8330293191739626051, guid: 7ed2bb4175f255e40b0713b8b4f6d3ab, type: 3}
       propertyPath: explosionPrefab
       value: 
