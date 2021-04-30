@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9efda84f9125546b937fb6ef27f07d, type: 3}
+  m_Name: CongratulationNote
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 2f5483cd0ad751841812e3e74c216862, type: 3}
+  note: "Congratulations!\r\n\r\nYour continuous efforts to improve the society has
+    been noted. Because of your work you have been promoted to citizen-C (class c
+    citizen).\r\n\r\nYour identification on your chip will have to be updated. The
+    process will take approximately 40-70 atus (astronomical time unit) to complete
+    depending on local environmental conditions and traffic. Make sure that you are
+    in the functional range of a pylon at all times before the process has been completed.
+    A non up to date identification cannot be used to access any kind of service
+    of your upcoming status.\r\n\r\nYou have been assigned to be exported from P>V>Q3
+    to S>1. Your shuttle\u2019s tracking code will be available when the promotion
+    has been completed. Failing to board your designated shuttle will result in relocation
+    procedures and you will be assigned to a temporary role.\r\n\r\nIf you have any
+    questions, please contact your local supervisor."
+  notePicture: {fileID: 0}
+  fuel: 0
+  rocketBoots: 0
+  gun: 0
+  flashlight: 0
+  breakObjectsWithGun: 0
+  forceGlove: 0
+  statsForUpgrades: 
