@@ -146,6 +146,13 @@ namespace Ui
             }
             ResumeGame();
         }
+
+        public void FadeToBlack()
+        {
+            fader
+                .DOFade(1, 1)
+                .SetUpdate(true);
+        }
         public void SetFuel(int fuel)
         {
             fuelSlider.value = fuel;
