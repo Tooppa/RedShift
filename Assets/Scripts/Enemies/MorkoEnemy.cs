@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 public class MorkoEnemy : MonoBehaviour
@@ -143,7 +144,8 @@ public class MorkoEnemy : MonoBehaviour
         PushBack();
 
         _playerHealth.TakeDamage(data.attack);
-
+        StopMorko();
+        morkoScream.DOFade(0, 1);
         StartCoroutine(AttackCooldown());
     } 
 
