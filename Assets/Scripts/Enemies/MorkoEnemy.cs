@@ -24,6 +24,8 @@ public class MorkoEnemy : MonoBehaviour
     private readonly float attackCooldown = 1f;
     private bool _canAttack = true;
 
+    private bool _isMorkoStopped;
+
     private bool isMorkoAwake = false;
 
     public AudioSource[] morkoSteps;
@@ -84,6 +86,14 @@ public class MorkoEnemy : MonoBehaviour
         
         if(distanceToPlayer > data.enemyRange)
             return;
+
+        if (_isMorkoStopped) // Stop Mörkö when he arrives at the edge of the collapsed cliff
+        {
+            _canAttack = true; // If the player tries to jump towards the Mörkö, it has to be able to attack
+            return; 
+        }
+            
+            
         
         _animator.SetTrigger(Walk);
         
@@ -118,6 +128,8 @@ public class MorkoEnemy : MonoBehaviour
         }
 
     }
+
+    public void StopMorko() => _isMorkoStopped = true;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
