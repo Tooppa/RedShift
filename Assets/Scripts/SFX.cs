@@ -37,6 +37,7 @@ public class SFX : MonoBehaviour
 
     public AudioSource startButton;
     public AudioSource selectButton;
+    public AudioClip impact;
     public AudioSource hoverOverButton;
 
     public string CurrentMusicPlaying()
@@ -258,6 +259,6 @@ public class SFX : MonoBehaviour
 
     public void PlayHoverOverButton()
     {
-        hoverOverButton.Play();
+        hoverOverButton.PlayOneShot(impact, 0.7f);
     }
 }
