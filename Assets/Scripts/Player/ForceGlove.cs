@@ -23,6 +23,7 @@ public class ForceGlove : MonoBehaviour
         var foundColliders2D = Physics2D.OverlapCircleAll((Vector2) transform.position, pushRadius, whatToPush);
         foreach (var var in foundColliders2D)
         {
+            StartCoroutine(ResetMovement(var.attachedRigidbody));
             var forceApplier = var.gameObject.AddComponent<ForceApplier>();
             forceApplier.affectedRigidBody2D = var.GetComponent<Rigidbody2D>();
             var forceVector = var.transform.position - transform.position;
@@ -32,5 +33,19 @@ public class ForceGlove : MonoBehaviour
             forceApplier.forceMode2D = ForceMode2D.Impulse;
             forceApplier.Affect();
         }
+    }
+
+    private IEnumerator ResetMovement(Rigidbody2D rigid)
+    {
+        rigid.isKinematic = false;
+
+        yield return new WaitForSeconds(.2f);
+        while (rigid.velocity.x > .01f || rigid.velocity.y > .01f)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        rigid.velocity = Vector2.zero;
+        rigid.rotation = 0;
+        rigid.isKinematic = true;
     }
 }
