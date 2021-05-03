@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582145356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 286.85, y: -22.83, z: 0}
+  m_LocalPosition: {x: 287.2, y: -22.87, z: 0}
   m_LocalScale: {x: 0.1, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 2844684736883143559}
@@ -80,7 +80,7 @@ MonoBehaviour:
   _sfxToFadeIn: {fileID: 0}
   loop: 0
   destroyOnTrigger: 0
-  musicFadeTime: 6
+  musicFadeTime: 4
   sfxFadeTime: 4
   volume: 0
   desiredIncreasedMusicVolume: 1
@@ -1869,7 +1869,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6400495104440406748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 270.23, y: -12.75, z: 0}
+  m_LocalPosition: {x: 268.23, y: -10.23, z: 0}
   m_LocalScale: {x: 0.1, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 2844684736883143559}
@@ -1914,7 +1914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyableSoundSource: {fileID: 0}
-  audioOptions: 4
+  audioOptions: 5
   _music: {fileID: 0}
   _sfx: {fileID: 0}
   _musicToFadeOut: {fileID: 0}
