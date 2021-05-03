@@ -13,6 +13,7 @@ public class ForceGlove : MonoBehaviour
     private static readonly int PushTrigger = Animator.StringToHash("Force Glove Push");
 
     private ParticleSystem _forcePushEffect;
+    private bool _cooldown;
 
     private void Start()
     {
@@ -30,7 +31,9 @@ public class ForceGlove : MonoBehaviour
     public void Push()
     {
         if(!HasGlove) return;
+        if (_cooldown) return;
 
+        StartCoroutine(Cooldown(1));
         _animator.SetTrigger(PushTrigger);
         _forcePushEffect.Play();
 
@@ -61,5 +64,13 @@ public class ForceGlove : MonoBehaviour
         rigid.velocity = Vector2.zero;
         rigid.rotation = 0;
         rigid.isKinematic = true;
+    }
+
+    private IEnumerator Cooldown(float cooldownTime)
+    {
+        //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
+        _cooldown = true;
+        yield return new WaitForSeconds(cooldownTime);
+        _cooldown = false;
     }
 }
