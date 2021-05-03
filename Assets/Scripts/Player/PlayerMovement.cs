@@ -36,6 +36,9 @@ namespace Player
         private GameObject _gun;
         private SFX _audioController;
 
+        private GameObject _forceGlove;
+        private GameObject _pushEffectPos;
+
         private static readonly int Walking = Animator.StringToHash("Walking");
         private static readonly int TakeOff = Animator.StringToHash("TakeOff");
         private static readonly int Landing = Animator.StringToHash("Landing");
@@ -46,13 +49,10 @@ namespace Player
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _animator = transform.GetChild(1).GetComponent<Animator>();
             _gun = GameObject.Find("Gun");
+            _forceGlove = GameObject.Find("ForceGlove");
+            _pushEffectPos = _forceGlove.transform.GetChild(0).gameObject;
             _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
             HasRocketBoots = false;
-        }
-
-        private void Start()
-        {
-            rocketBoots.Stop();
         }
 
         private void Update()
@@ -91,12 +91,24 @@ namespace Player
             {
                 transform.localScale = new Vector3(inputDirection, 1, 1);
                 _gun.transform.localScale = new Vector3(inputDirection, 1, 1);
+                _forceGlove.transform.localScale = new Vector3(inputDirection, 1, 1);
+                
                 CameraEffects.Instance.ChangeOffset(.3f, inputDirection * 2);
                 _animator.SetBool(Walking, true);
                 rocketBoots.gameObject.transform.localScale = new Vector3(inputDirection, 1, 1);
             }
             else
                 _animator.SetBool(Walking, false);
+
+            switch(inputDirection)
+            {
+                case -1:
+                    _pushEffectPos.transform.localPosition = new Vector3(1, 1, 1);
+                    break;
+                case 1:
+                    _pushEffectPos.transform.localPosition = new Vector3(-1, 1, 1);
+                    break;
+            }
 
             if (Mathf.Abs(_rigidbody2D.velocity.x) < maxSpeed)
                 _rigidbody2D.AddForce(Vector2.right * (inputDirection * speed * Time.deltaTime), ForceMode2D.Impulse);

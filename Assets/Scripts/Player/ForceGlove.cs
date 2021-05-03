@@ -9,7 +9,18 @@ public class ForceGlove : MonoBehaviour
     [SerializeField] private float forceMultiplier;
     [SerializeField] private LayerMask whatToPush;
 
-    
+    private Animator _animator;
+    private static readonly int PushTrigger = Animator.StringToHash("Force Glove Push");
+
+    private ParticleSystem _forcePushEffect;
+    private bool _cooldown;
+
+    private void Start()
+    {
+        _animator = transform.parent.GetChild(1).GetComponent<Animator>();
+        _forcePushEffect = transform.GetComponentInChildren<ParticleSystem>();
+    }
+
     public bool HasGlove  { private set; get; }
 
     public void EquipGlove()
@@ -20,6 +31,12 @@ public class ForceGlove : MonoBehaviour
     public void Push()
     {
         if(!HasGlove) return;
+        if (_cooldown) return;
+
+        StartCoroutine(Cooldown(1));
+        _animator.SetTrigger(PushTrigger);
+        _forcePushEffect.Play();
+
         var foundColliders2D = Physics2D.OverlapCircleAll((Vector2) transform.position, pushRadius, whatToPush);
         foreach (var var in foundColliders2D)
         {
@@ -47,5 +64,13 @@ public class ForceGlove : MonoBehaviour
         rigid.velocity = Vector2.zero;
         rigid.rotation = 0;
         rigid.isKinematic = true;
+    }
+
+    private IEnumerator Cooldown(float cooldownTime)
+    {
+        //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
+        _cooldown = true;
+        yield return new WaitForSeconds(cooldownTime);
+        _cooldown = false;
     }
 }
