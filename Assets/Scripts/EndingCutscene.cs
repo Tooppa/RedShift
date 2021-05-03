@@ -30,7 +30,8 @@ public class EndingCutscene : MonoBehaviour
     {
         if (!_interact || !_interact.activeSelf)
         {
-            _interact = Instantiate(floatingText, transform.position + Vector3.up, quaternion.identity);
+            var transform1 = transform;
+            _interact = Instantiate(floatingText, transform1.position + Vector3.up, quaternion.identity, transform1);
             return;
         }
 
