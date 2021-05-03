@@ -1,5 +1,93 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &77061177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 77061178}
+  - component: {fileID: 77061180}
+  - component: {fileID: 77061179}
+  m_Layer: 0
+  m_Name: FadeOutMusicA
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &77061178
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77061177}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 164.1, y: -23.42, z: 702.47156}
+  m_LocalScale: {x: 0.1, y: 6, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6916995024032217572}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &77061180
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77061177}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &77061179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77061177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65429390e67e9b4098c599c7f97028b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyableSoundSource: {fileID: 0}
+  audioOptions: 4
+  _music: {fileID: 0}
+  _sfx: {fileID: 0}
+  _musicToFadeOut: {fileID: 0}
+  _musicToFadeIn: {fileID: 0}
+  _sfxToFadeOut: {fileID: 0}
+  _sfxToFadeIn: {fileID: 0}
+  loop: 0
+  destroyOnTrigger: 0
+  musicFadeTime: 4
+  sfxFadeTime: 5
+  volume: 1
+  desiredIncreasedMusicVolume: 1
+  desiredIncreasedSFXVolume: 0
+  desiredFadedMusicVolume: 0
+  desiredFadedSFXVolume: 0
+  desiredPitch: 1
 --- !u!1 &154635427
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,6 +704,182 @@ MonoBehaviour:
   desiredFadedMusicVolume: 0
   desiredFadedSFXVolume: 0
   desiredPitch: 1
+--- !u!1 &1626819877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1626819878}
+  - component: {fileID: 1626819880}
+  - component: {fileID: 1626819879}
+  m_Layer: 0
+  m_Name: FadeOutMusicA
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1626819878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626819877}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 152.06, y: -14.7, z: 702.47156}
+  m_LocalScale: {x: 0.1, y: 13, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6916995024032217572}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1626819880
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626819877}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &1626819879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626819877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65429390e67e9b4098c599c7f97028b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyableSoundSource: {fileID: 0}
+  audioOptions: 4
+  _music: {fileID: 0}
+  _sfx: {fileID: 0}
+  _musicToFadeOut: {fileID: 0}
+  _musicToFadeIn: {fileID: 0}
+  _sfxToFadeOut: {fileID: 0}
+  _sfxToFadeIn: {fileID: 0}
+  loop: 0
+  destroyOnTrigger: 0
+  musicFadeTime: 4
+  sfxFadeTime: 5
+  volume: 1
+  desiredIncreasedMusicVolume: 1
+  desiredIncreasedSFXVolume: 0
+  desiredFadedMusicVolume: 0
+  desiredFadedSFXVolume: 0
+  desiredPitch: 1
+--- !u!1 &1726334721
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1726334722}
+  - component: {fileID: 1726334724}
+  - component: {fileID: 1726334723}
+  m_Layer: 0
+  m_Name: FadeInMusicA
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1726334722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726334721}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 148.97, y: -12.56, z: 702.47156}
+  m_LocalScale: {x: 0.1, y: 10, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6916995024032217572}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1726334724
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726334721}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &1726334723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726334721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65429390e67e9b4098c599c7f97028b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyableSoundSource: {fileID: 0}
+  audioOptions: 5
+  _music: {fileID: 0}
+  _sfx: {fileID: 0}
+  _musicToFadeOut: {fileID: 0}
+  _musicToFadeIn: {fileID: 0}
+  _sfxToFadeOut: {fileID: 0}
+  _sfxToFadeIn: {fileID: 0}
+  loop: 0
+  destroyOnTrigger: 0
+  musicFadeTime: 4
+  sfxFadeTime: 5
+  volume: 1
+  desiredIncreasedMusicVolume: 1
+  desiredIncreasedSFXVolume: 0
+  desiredFadedMusicVolume: 0
+  desiredFadedSFXVolume: 0
+  desiredPitch: 1
 --- !u!1 &1806414697
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,6 +1232,94 @@ MonoBehaviour:
   desiredFadedMusicVolume: 0
   desiredFadedSFXVolume: 0
   desiredPitch: 1
+--- !u!1 &4897022475394766624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3693230324064669527}
+  - component: {fileID: 7869849706244977485}
+  - component: {fileID: 2661275122616153506}
+  m_Layer: 0
+  m_Name: FadeOutMusicA
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3693230324064669527
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897022475394766624}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 113.05, y: -17.64, z: 702.47156}
+  m_LocalScale: {x: 10, y: 0.1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6916995024032217572}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &7869849706244977485
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897022475394766624}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &2661275122616153506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897022475394766624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65429390e67e9b4098c599c7f97028b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyableSoundSource: {fileID: 0}
+  audioOptions: 4
+  _music: {fileID: 0}
+  _sfx: {fileID: 0}
+  _musicToFadeOut: {fileID: 0}
+  _musicToFadeIn: {fileID: 0}
+  _sfxToFadeOut: {fileID: 0}
+  _sfxToFadeIn: {fileID: 0}
+  loop: 0
+  destroyOnTrigger: 0
+  musicFadeTime: 4
+  sfxFadeTime: 5
+  volume: 1
+  desiredIncreasedMusicVolume: 1
+  desiredIncreasedSFXVolume: 0
+  desiredFadedMusicVolume: 0
+  desiredFadedSFXVolume: 0
+  desiredPitch: 1
 --- !u!1 &6070321219546965474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,7 +1407,7 @@ MonoBehaviour:
   desiredIncreasedSFXVolume: 1
   desiredFadedMusicVolume: 0
   desiredFadedSFXVolume: 0
-  desiredPitch: 0.6
+  desiredPitch: 1
 --- !u!1 &6916995023996797315
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,6 +1538,11 @@ Transform:
   - {fileID: 2780433304149794150}
   - {fileID: 4603530701845716542}
   - {fileID: 7487373416767028129}
+  - {fileID: 3693230324064669527}
+  - {fileID: 2765163853986977555}
+  - {fileID: 1626819878}
+  - {fileID: 77061178}
+  - {fileID: 1726334722}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1270,6 +1627,94 @@ MonoBehaviour:
   loop: 0
   destroyOnTrigger: 0
   musicFadeTime: 6
+  sfxFadeTime: 5
+  volume: 1
+  desiredIncreasedMusicVolume: 1
+  desiredIncreasedSFXVolume: 0
+  desiredFadedMusicVolume: 0
+  desiredFadedSFXVolume: 0
+  desiredPitch: 1
+--- !u!1 &7668138332003274484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2765163853986977555}
+  - component: {fileID: 5866204747896204756}
+  - component: {fileID: 1925844527100045679}
+  m_Layer: 0
+  m_Name: FadeInMusicA
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2765163853986977555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668138332003274484}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 103.36, y: -56.11, z: 702.47156}
+  m_LocalScale: {x: 10, y: 0.1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6916995024032217572}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &5866204747896204756
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668138332003274484}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &1925844527100045679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668138332003274484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65429390e67e9b4098c599c7f97028b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyableSoundSource: {fileID: 0}
+  audioOptions: 5
+  _music: {fileID: 0}
+  _sfx: {fileID: 0}
+  _musicToFadeOut: {fileID: 0}
+  _musicToFadeIn: {fileID: 0}
+  _sfxToFadeOut: {fileID: 0}
+  _sfxToFadeIn: {fileID: 0}
+  loop: 0
+  destroyOnTrigger: 0
+  musicFadeTime: 4
   sfxFadeTime: 5
   volume: 1
   desiredIncreasedMusicVolume: 1
@@ -1364,4 +1809,4 @@ MonoBehaviour:
   desiredIncreasedSFXVolume: 1
   desiredFadedMusicVolume: 0
   desiredFadedSFXVolume: 0
-  desiredPitch: 0.8
+  desiredPitch: 0.9
