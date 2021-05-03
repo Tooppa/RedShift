@@ -37,12 +37,7 @@ public class EndingCutscene : MonoBehaviour
 
         _interact.SetActive(true);
     }
-    
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        
-    }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
@@ -55,6 +50,7 @@ public class EndingCutscene : MonoBehaviour
     private void Play()
     {
         if(!_onTrigger || _player.GetFuel() < 3) return;
+        _player.DisablePlayerLightsForSeconds(20);
         _playable.Play();
     }
 
