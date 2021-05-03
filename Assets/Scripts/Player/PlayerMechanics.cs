@@ -318,5 +318,10 @@ namespace Player
         {
             playerControls.Enable();
         }
+
+        public int GetFuel()
+        {
+            return _fuel;
+        }
     }
 }

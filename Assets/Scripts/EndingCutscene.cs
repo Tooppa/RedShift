@@ -14,6 +14,7 @@ public class EndingCutscene : MonoBehaviour
     private PlayerControls _playerControls;
     private PlayableDirector _playable;
     private bool _onTrigger;
+    private PlayerMechanics _player;
 
     private void Start()
     {
@@ -44,14 +45,15 @@ public class EndingCutscene : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
-        other.GetComponent<PlayerMechanics>().ChangeInteract().started += _ => Play();
+        _player = other.GetComponent<PlayerMechanics>();
+        _player.ChangeInteract().started += _ => Play();
         _onTrigger = true;
         ShowInteract();
     }
 
     private void Play()
     {
-        if(!_onTrigger) return;
+        if(!_onTrigger || _player.GetFuel() < 3) return;
         _playable.Play();
     }
 
