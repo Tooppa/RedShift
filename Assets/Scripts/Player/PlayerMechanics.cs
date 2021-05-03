@@ -119,6 +119,7 @@ namespace Player
             
             _flashlight.transform.eulerAngles = new Vector3(0, 0, newAngle);
             _playerGun.gameObject.transform.eulerAngles = new Vector3(0, 0, newAngle);
+            _forceGlove.transform.eulerAngles = new Vector3(0, 0, newAngle);
         }
         
         private void OnTriggerEnter2D(Collider2D other)

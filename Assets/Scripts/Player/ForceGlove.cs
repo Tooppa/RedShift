@@ -9,7 +9,17 @@ public class ForceGlove : MonoBehaviour
     [SerializeField] private float forceMultiplier;
     [SerializeField] private LayerMask whatToPush;
 
-    
+    private Animator _animator;
+    private static readonly int PushTrigger = Animator.StringToHash("Force Glove Push");
+
+    private ParticleSystem _forcePushEffect;
+
+    private void Start()
+    {
+        _animator = transform.parent.GetChild(1).GetComponent<Animator>();
+        _forcePushEffect = transform.GetComponentInChildren<ParticleSystem>();
+    }
+
     public bool HasGlove  { private set; get; }
 
     public void EquipGlove()
@@ -20,6 +30,10 @@ public class ForceGlove : MonoBehaviour
     public void Push()
     {
         if(!HasGlove) return;
+
+        _animator.SetTrigger(PushTrigger);
+        _forcePushEffect.Play();
+
         var foundColliders2D = Physics2D.OverlapCircleAll((Vector2) transform.position, pushRadius, whatToPush);
         foreach (var var in foundColliders2D)
         {

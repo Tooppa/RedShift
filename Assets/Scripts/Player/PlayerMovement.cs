@@ -34,6 +34,7 @@ namespace Player
         [SerializeField] private float holdingJumpTimeMax = 0.2f;
 
         private GameObject _gun;
+        private GameObject _forceGlove;
         private SFX _audioController;
 
         private static readonly int Walking = Animator.StringToHash("Walking");
@@ -46,6 +47,7 @@ namespace Player
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _animator = transform.GetChild(1).GetComponent<Animator>();
             _gun = GameObject.Find("Gun");
+            _forceGlove = GameObject.Find("ForceGlove");
             _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
             HasRocketBoots = false;
         }
@@ -91,6 +93,13 @@ namespace Player
             {
                 transform.localScale = new Vector3(inputDirection, 1, 1);
                 _gun.transform.localScale = new Vector3(inputDirection, 1, 1);
+                _forceGlove.transform.localScale = new Vector3(inputDirection, 1, 1);
+
+                ParticleSystem _forcePushEffect = GetComponent<ParticleSystem>();
+                ParticleSystem.ShapeModule editableShape = _forcePushEffect.shape;
+                Vector3 forceEffectShape = new Vector3(inputDirection, 1, 1);
+                editableShape.scale = forceEffectShape;
+                
                 CameraEffects.Instance.ChangeOffset(.3f, inputDirection * 2);
                 _animator.SetBool(Walking, true);
                 rocketBoots.gameObject.transform.localScale = new Vector3(inputDirection, 1, 1);
