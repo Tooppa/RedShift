@@ -171,6 +171,11 @@ namespace Player
             }
         }
 
+        /// <summary>
+        /// Necessary instructions to bring the game to the desired state. Messes with the player, items, UI, cutscenes etc.
+        /// Does really nasty operations that could break after one wrong change in the scene.
+        /// </summary>
+        /// <param name="levelStatus"></param>
         private static void ExecuteAdditionalInstructions(LevelStatus levelStatus)
         {
             switch (levelStatus.Place)
@@ -190,11 +195,13 @@ namespace Player
                     var spaceShipTrigger = GameObject.Find("SpaceShipTrigger");
                     spaceShipTrigger.SetActive(false);
                     
-                    // Enable the new route which the spaceship blasted
+                    // Set the new route after blasting the mountain
                     var newRoute = GameObject.Find("NewRoute");
-                    newRoute.SetActive(true);
+                    newRoute.transform.GetChild(0).gameObject.SetActive(false); // Disable Wall
+                    newRoute.transform.GetChild(1).gameObject.SetActive(true); // Enable NewGround
+                    newRoute.transform.GetChild(2).gameObject.SetActive(true); // Enable NewForeGround
                     
-                    // Enable rocket tab on UI
+                    // Enable ship tab on UI
                     var ui = GameObject.Find("UI");
                     ui.GetComponent<CanvasManager>().ShowRocketButton();
                     
