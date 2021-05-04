@@ -55,7 +55,6 @@ public class ForceGlove : MonoBehaviour
 
     private IEnumerator ResetMovement(Rigidbody2D rigid)
     {
-        rigid.isKinematic = false;
         if (rigid.mass > 40)
             rigid.mass /= 1000;
 
