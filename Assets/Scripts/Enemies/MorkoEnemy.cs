@@ -30,7 +30,7 @@ public class MorkoEnemy : MonoBehaviour
     private bool isMorkoAwake = false;
 
     public AudioSource[] morkoSteps;
-    public AudioSource morkoScream;
+    public AudioSource morkoLaugh;
 
     private IEnumerator AttackCooldown()
     {
@@ -90,6 +90,7 @@ public class MorkoEnemy : MonoBehaviour
 
         if (_isMorkoStopped) // Stop Mörkö when he arrives at the edge of the collapsed cliff
         {
+            morkoSFX.morkoGrowl.Stop();
             _canAttack = true; // If the player tries to jump towards the Mörkö, it has to be able to attack
             return; 
         }
@@ -145,7 +146,11 @@ public class MorkoEnemy : MonoBehaviour
 
         _playerHealth.TakeDamage(data.attack);
         StopMorko();
-        morkoScream.DOFade(0, 1);
+        morkoSFX.morkoScream.Stop();
+        morkoSFX.morkoGrowl.Stop();
+        morkoSFX.PlayMorkoLaugh();
+        morkoLaugh.DOFade(0, 3);
+
         StartCoroutine(AttackCooldown());
     } 
 
