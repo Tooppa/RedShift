@@ -21,5 +21,4 @@ MonoBehaviour:
   flashlight: 0
   breakObjectsWithGun: 0
   forceGlove: 1
-  statsForUpgrades: A powerful glove that emits a force field when used. Can be used
-    to push back objects like boxes and light creatures.
+  statsForUpgrades: Force field glove that can be used to push objects
