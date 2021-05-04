@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9efda84f9125546b937fb6ef27f07d, type: 3}
   m_Name: ForceGlove
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: f94f16e152ed64d9f8b44387e11ca3bb, type: 3}
+  sprite: {fileID: 21300000, guid: 79babf89c1a7f7e478ea2394d7a91de4, type: 3}
   note: 
   notePicture: {fileID: 0}
   fuel: 0
@@ -21,4 +21,5 @@ MonoBehaviour:
   flashlight: 0
   breakObjectsWithGun: 0
   forceGlove: 1
-  statsForUpgrades: Push stuff
+  statsForUpgrades: A powerful glove that emits a force field when used. Can be used
+    to push back objects like boxes and light creatures.
