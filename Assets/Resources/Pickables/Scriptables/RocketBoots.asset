@@ -21,4 +21,4 @@ MonoBehaviour:
   flashlight: 0
   breakObjectsWithGun: 0
   forceGlove: 0
-  statsForUpgrades: Allows player to dash
+  statsForUpgrades: Rocket boots that give a horizontal boost
