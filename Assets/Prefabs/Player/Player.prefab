@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b7fc734d8e02d4b94e48dc106cb53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushRadius: 1
+  pushRadius: 1.2
   forceMultiplier: 450
   whatToPush:
     serializedVersion: 2

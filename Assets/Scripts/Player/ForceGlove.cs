@@ -56,15 +56,15 @@ public class ForceGlove : MonoBehaviour
     private IEnumerator ResetMovement(Rigidbody2D rigid)
     {
         if (rigid.mass > 40)
-            rigid.mass /= 1000;
+            rigid.mass /= 10;
 
         yield return new WaitForSeconds(.2f);
         while (rigid.velocity.x > .01f || rigid.velocity.y > .01f)
         {
             yield return new WaitForEndOfFrame();
         }
-
-        rigid.mass *= 1000;
+        yield return new WaitForSeconds(.2f);
+        rigid.mass *= 10;
     }
 
     private IEnumerator Cooldown(float cooldownTime)
