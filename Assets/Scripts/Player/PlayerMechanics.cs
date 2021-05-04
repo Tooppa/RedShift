@@ -136,6 +136,10 @@ namespace Player
             playerControls.Surface.Interact.started -= _interactHandler;
             return playerControls.Surface.Interact;
         }
+        public void ReEnableInteract()
+        {
+            playerControls.Surface.Interact.started += _interactHandler;
+        }
 
         private void SpecialPickups(GameObject go)
         {
