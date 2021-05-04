@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Ui;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -192,6 +193,10 @@ namespace Player
                     // Enable the new route which the spaceship blasted
                     var newRoute = GameObject.Find("NewRoute");
                     newRoute.SetActive(true);
+                    
+                    // Enable rocket tab on UI
+                    var ui = GameObject.Find("UI");
+                    ui.GetComponent<CanvasManager>().ShowRocketButton();
                     
                     // Move the player approximately to the location where it should be after the cutscene
                     var player = GameObject.FindWithTag("Player").transform.position = new Vector3(268.5f, 72.4f, 0);
