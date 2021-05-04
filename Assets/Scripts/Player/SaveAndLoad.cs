@@ -88,29 +88,31 @@ namespace Player
                 Console.WriteLine("Couldn't load level status!\n" + e);
             }
 
-            return new LevelStatus(FallBackScene, null, FallBackPlace); // If file didn't exist, return an empty one
+            return new LevelStatus(null, null, null); // If file didn't exist, return an empty one
         }
     
+
         /// <summary>
         /// Loads the scene in <see cref="LevelStatus"/> and sets <see cref="SaveLoadingWaitsInstructions"/> to true.
         /// After the scene has been loaded, <see cref="PlayerMechanics"/>'s Start() will fire the rest of the loading
         /// mechanisms like <see cref="LoadItems"/>
         /// If loaded LevelStatus is not valid, nothing will happen.
         /// </summary>
-        public static void StartLoadingSave()
+        /// <returns>AsyncOperation</returns>
+        public static AsyncOperation StartLoadingSave()
         {
             var levelStatus = LoadStatus();
 
             if (levelStatus.Scene == null || levelStatus.PickedItems == null)
             {
                 Debug.LogWarning($"Level Status had null fields! Scene: {levelStatus.Scene}, PickedItems: {levelStatus.PickedItems}");
-                return;
+                return null;
             }
 
             SaveLoadingWaitsInstructions = true; // PlayerMechanics will execute FinishLoadingSave() based on this
             
             // LoadScene executes at the next frame, use OnSceneLoaded to do actions after that
-            SceneManager.LoadScene(levelStatus.Scene); 
+            return SceneManager.LoadSceneAsync(levelStatus.Scene); 
         }
 
         public static void FinishLoadingSave()
