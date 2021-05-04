@@ -40,7 +40,8 @@ public class ForceGlove : MonoBehaviour
         var foundColliders2D = Physics2D.OverlapCircleAll((Vector2) transform.position, pushRadius, whatToPush);
         foreach (var var in foundColliders2D)
         {
-            StartCoroutine(ResetMovement(var.attachedRigidbody));
+            if (!var.CompareTag("Enemy"))
+                StartCoroutine(ResetMovement(var.attachedRigidbody));
             var forceApplier = var.gameObject.AddComponent<ForceApplier>();
             forceApplier.affectedRigidBody2D = var.GetComponent<Rigidbody2D>();
             var forceVector = var.transform.position - transform.position;
@@ -54,16 +55,16 @@ public class ForceGlove : MonoBehaviour
 
     private IEnumerator ResetMovement(Rigidbody2D rigid)
     {
-        rigid.isKinematic = false;
+        if (rigid.mass > 40)
+            rigid.mass /= 10;
 
         yield return new WaitForSeconds(.2f);
         while (rigid.velocity.x > .01f || rigid.velocity.y > .01f)
         {
             yield return new WaitForEndOfFrame();
         }
-        rigid.velocity = Vector2.zero;
-        rigid.rotation = 0;
-        rigid.isKinematic = true;
+        yield return new WaitForSeconds(.2f);
+        rigid.mass *= 10;
     }
 
     private IEnumerator Cooldown(float cooldownTime)
