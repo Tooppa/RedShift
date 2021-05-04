@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
+using DG.Tweening;
 
 public class EndingCutscene : MonoBehaviour
 {
@@ -16,9 +17,12 @@ public class EndingCutscene : MonoBehaviour
     private bool _onTrigger;
     private PlayerMechanics _player;
 
+    private SFX _audioController;
+
     private void Start()
     {
         _playable = GetComponentInParent<PlayableDirector>();
+        _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
     }
 
     private void HideInteract()
@@ -50,6 +54,7 @@ public class EndingCutscene : MonoBehaviour
     private void Play()
     {
         if(!_onTrigger || _player.GetFuel() < 3) return;
+        _audioController.wind.DOFade(0, 5);
         _player.DisablePlayerLightsForSeconds(20);
         _playable.Play();
     }

@@ -7,6 +7,7 @@ public class SFX : MonoBehaviour
     public AudioSource playerFlashlight;
     public AudioSource industrialLightKillSound;
     public AudioSource buttonBuzz;
+
     public AudioSource playerGunShot;
     public AudioSource playerPowerfulShot;
     public AudioSource playerPowerfulCharge;
@@ -20,16 +21,24 @@ public class SFX : MonoBehaviour
     public AudioSource openInventory;
     public AudioSource closeInventory;
     public AudioSource inventoryClick;
+
     public AudioSource wind;
     public AudioSource calmAmbience;
     public AudioSource intenseMusic;
+
     public AudioSource morkoGrowling;
     public AudioSource morkoGrowlOne;
+    public AudioSource morkoScream;
     public AudioSource morkoBreathing;
     public AudioSource morkoNeckCrunch;
     public AudioSource morkoSteps;
+
     public AudioSource spaceshipLaser;
     public AudioSource spaceshipLaserExplosion;
+    public AudioSource spaceshipCannonLowerAndRise;
+    public AudioSource spaceshipStartUp;
+    public AudioSource spaceshipTakeOff;
+
     public AudioSource rockSlide;
     public AudioSource spaceshipRumbling;
     public AudioSource run;
@@ -37,8 +46,10 @@ public class SFX : MonoBehaviour
 
     public AudioSource startButton;
     public AudioSource selectButton;
-    public AudioClip impact;
     public AudioSource hoverOverButton;
+    public AudioSource logoWoosh;
+
+    public AudioClip impact;
 
     public string CurrentMusicPlaying()
     {
@@ -208,6 +219,11 @@ public class SFX : MonoBehaviour
         morkoBreathing.Play();
     }
 
+    public void PlayMorkoScream()
+    {
+        morkoScream.Play();
+    }
+
     public void PlayMorkoNeckCrunch()
     {
         morkoNeckCrunch.Play();
@@ -228,9 +244,24 @@ public class SFX : MonoBehaviour
         spaceshipLaser.Play();
     }
 
+    public void PlaySpaceshipCannonLowerAndRise()
+    {
+        spaceshipCannonLowerAndRise.Play();
+    }
+
     public void PlaySpaceshipLaserExplosion()
     {
         spaceshipLaserExplosion.Play();
+    }
+
+    public void PlaySpaceShipStartUp()
+    {
+        spaceshipStartUp.Play();
+    }
+
+    public void PlaySpaceshipTakeOff()
+    {
+        spaceshipTakeOff.Play();
     }
 
     public void PlayRockSlide()
@@ -260,5 +291,10 @@ public class SFX : MonoBehaviour
     public void PlayHoverOverButton()
     {
         hoverOverButton.PlayOneShot(impact, 0.7f);
+    }
+
+    public void PlayLogoWoosh()
+    {
+        logoWoosh.Play();
     }
 }
