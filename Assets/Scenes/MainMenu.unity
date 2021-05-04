@@ -2458,7 +2458,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: " - Code\n\n - Sound Design\n\n - Map Design"
+  m_text: " - Code\n\n - Sound \n   Design\n\n - Map Design"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84688b3a8c5cc07409eda07817b5202a, type: 2}
   m_sharedMaterial: {fileID: 7737955212190415337, guid: 84688b3a8c5cc07409eda07817b5202a, type: 2}
