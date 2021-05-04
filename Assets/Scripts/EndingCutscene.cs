@@ -49,7 +49,7 @@ public class EndingCutscene : MonoBehaviour
 
     private void Play()
     {
-        if(!_onTrigger || _player.GetFuel() < 1) return;
+        if(!_onTrigger || _player.GetFuel() < 3) return;
         _player.DisablePlayerLightsForSeconds(20);
         _playable.Play();
     }
