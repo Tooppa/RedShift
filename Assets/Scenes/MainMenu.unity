@@ -3063,7 +3063,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 991319227}
           m_TargetAssemblyTypeName: SFX, Assembly-CSharp
-          m_MethodName: 
+          m_MethodName: PlayHoverOverButton
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3135,7 +3135,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 991319227}
         m_TargetAssemblyTypeName: SFX, Assembly-CSharp
-        m_MethodName: PlayStartButton
+        m_MethodName: PlaySelectButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

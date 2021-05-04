@@ -1987,7 +1987,7 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 26.15
+    m_Start: 23.683333333333326
     m_ClipIn: 0
     m_Asset: {fileID: -2514385239490970988}
     m_Duration: 1.750000000000007
@@ -2183,7 +2183,7 @@ MonoBehaviour:
     m_Start: 22.766666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 1534034062036227568}
-    m_Duration: 5.13333333333334
+    m_Duration: 2.666666666666668
     m_TimeScale: 1
     m_ParentTrack: {fileID: -3044078423793727646}
     m_EaseInDuration: 0
@@ -2192,25 +2192,7 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -2637,7 +2619,7 @@ MonoBehaviour:
     m_Start: 9.283333333333333
     m_ClipIn: 1.5333333333333306
     m_Asset: {fileID: -1488869465454429144}
-    m_Duration: 18.616666666666752
+    m_Duration: 16.15
     m_TimeScale: 1
     m_ParentTrack: {fileID: -2432200577507334303}
     m_EaseInDuration: 0
@@ -2768,7 +2750,7 @@ MonoBehaviour:
     m_Start: 7
     m_ClipIn: 0
     m_Asset: {fileID: 8416254298697216437}
-    m_Duration: 20.900000000000006
+    m_Duration: 18.433333333333334
     m_TimeScale: 1
     m_ParentTrack: {fileID: -1822948346999222496}
     m_EaseInDuration: 0
@@ -2921,7 +2903,7 @@ MonoBehaviour:
     m_Start: 7
     m_ClipIn: 0
     m_Asset: {fileID: -7942947610010039758}
-    m_Duration: 20.900000000000006
+    m_Duration: 18.433333333333334
     m_TimeScale: 1
     m_ParentTrack: {fileID: -899433288991936787}
     m_EaseInDuration: 0
@@ -4466,7 +4448,7 @@ MonoBehaviour:
     m_Start: 9.166666666666666
     m_ClipIn: 0
     m_Asset: {fileID: -5747192604294662048}
-    m_Duration: 18.73333333333342
+    m_Duration: 16.266666666666666
     m_TimeScale: 1
     m_ParentTrack: {fileID: 3293711064349778126}
     m_EaseInDuration: 0
