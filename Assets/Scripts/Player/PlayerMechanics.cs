@@ -5,6 +5,7 @@ using Ui;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace Player
@@ -34,6 +35,7 @@ namespace Player
         private static readonly int Death = Animator.StringToHash("Death");
 
         private const float TimeBeforeRespawn = 2f;
+        private Action<InputAction.CallbackContext> _interactHandler;
 
         private void Awake()
         {
@@ -60,7 +62,8 @@ namespace Player
             playerControls.Surface.Shoot.performed += ctx => _playerGun.Shoot(ctx.ReadValue<float>());
             playerControls.Surface.Flashlight.started += _ => SwitchEquipment();
             playerControls.Surface.Push.started += _ => _forceGlove.Push();
-            playerControls.Surface.Interact.started += _ => PickItem();
+            _interactHandler = _ => PickItem();
+            playerControls.Surface.Interact.started += _interactHandler;
             
             _health = gameObject.GetComponent<Health>();
             _health.TakingDamage += OnTakingDamage;
@@ -126,6 +129,12 @@ namespace Player
         {
             if (!other.CompareTag("Pickable")) return;
             _canvasManager.ShowInteract(other.transform);
+        }
+
+        public InputAction ChangeInteract()
+        {
+            playerControls.Surface.Interact.started -= _interactHandler;
+            return playerControls.Surface.Interact;
         }
 
         private void SpecialPickups(GameObject go)
@@ -309,6 +318,11 @@ namespace Player
         public void EnableMovement()
         {
             playerControls.Enable();
+        }
+
+        public int GetFuel()
+        {
+            return _fuel;
         }
     }
 }

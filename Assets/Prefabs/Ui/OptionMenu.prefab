@@ -1138,8 +1138,6 @@ MonoBehaviour:
   - {x: 1280, y: 720}
   - {x: 1920, y: 1080}
   - {x: 2560, y: 1440}
-  startResolution: 0
-  fullScreen: 0
 --- !u!1 &2488643086984946180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1947,8 +1945,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 629933d8b55dadc48b29851f37fe1a1f, type: 2}
-  m_sharedMaterial: {fileID: -5624390762941515196, guid: 629933d8b55dadc48b29851f37fe1a1f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 84688b3a8c5cc07409eda07817b5202a, type: 2}
+  m_sharedMaterial: {fileID: 7737955212190415337, guid: 84688b3a8c5cc07409eda07817b5202a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
