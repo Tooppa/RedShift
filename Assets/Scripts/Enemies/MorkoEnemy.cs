@@ -90,6 +90,7 @@ public class MorkoEnemy : MonoBehaviour
 
         if (_isMorkoStopped) // Stop Mörkö when he arrives at the edge of the collapsed cliff
         {
+            morkoSFX.morkoGrowl.Stop();
             _canAttack = true; // If the player tries to jump towards the Mörkö, it has to be able to attack
             return; 
         }
