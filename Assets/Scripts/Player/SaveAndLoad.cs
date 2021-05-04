@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Ui;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -170,6 +171,11 @@ namespace Player
             }
         }
 
+        /// <summary>
+        /// Necessary instructions to bring the game to the desired state. Messes with the player, items, UI, cutscenes etc.
+        /// Does really nasty operations that could break after one wrong change in the scene.
+        /// </summary>
+        /// <param name="levelStatus"></param>
         private static void ExecuteAdditionalInstructions(LevelStatus levelStatus)
         {
             switch (levelStatus.Place)
@@ -189,9 +195,15 @@ namespace Player
                     var spaceShipTrigger = GameObject.Find("SpaceShipTrigger");
                     spaceShipTrigger.SetActive(false);
                     
-                    // Enable the new route which the spaceship blasted
+                    // Set the new route after blasting the mountain
                     var newRoute = GameObject.Find("NewRoute");
-                    newRoute.SetActive(true);
+                    newRoute.transform.GetChild(0).gameObject.SetActive(false); // Disable Wall
+                    newRoute.transform.GetChild(1).gameObject.SetActive(true); // Enable NewGround
+                    newRoute.transform.GetChild(2).gameObject.SetActive(true); // Enable NewForeGround
+                    
+                    // Enable ship tab on UI
+                    var ui = GameObject.Find("UI");
+                    ui.GetComponent<CanvasManager>().ShowRocketButton();
                     
                     // Move the player approximately to the location where it should be after the cutscene
                     var player = GameObject.FindWithTag("Player").transform.position = new Vector3(268.5f, 72.4f, 0);

@@ -7,6 +7,7 @@ public class MorkoSFXController : MonoBehaviour
     public AudioSource[] morkoSteps;
     public AudioSource morkoScream;
     public AudioSource morkoGrowl;
+    public AudioSource morkoLaugh;
 
     public void PlayRandomMorkoStep()
     {
@@ -22,5 +23,10 @@ public class MorkoSFXController : MonoBehaviour
     public void PlayMorkoGrowl()
     {
         morkoGrowl.Play();
+    }
+
+    public void PlayMorkoLaugh()
+    {
+        morkoLaugh.Play();
     }
 }

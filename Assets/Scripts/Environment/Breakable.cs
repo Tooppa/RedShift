@@ -32,6 +32,7 @@ public class Breakable : MonoBehaviour
         {
             piece.GetComponent<Piece>().Enable();
         }
+        _pieces[0].GetComponent<AudioSource>().Play();
         
         if(destroyOriginalObject)
             Destroy(gameObject);
