@@ -21,4 +21,4 @@ MonoBehaviour:
   flashlight: 0
   breakObjectsWithGun: 1
   forceGlove: 0
-  statsForUpgrades: Charge upgrade for the laser gun
+  statsForUpgrades: Gun module that can be charged to destroy walls
