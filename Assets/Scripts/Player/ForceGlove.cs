@@ -15,10 +15,13 @@ public class ForceGlove : MonoBehaviour
     private ParticleSystem _forcePushEffect;
     private bool _cooldown;
 
+    private SFX _audioController;
+
     private void Start()
     {
         _animator = transform.parent.GetChild(1).GetComponent<Animator>();
         _forcePushEffect = transform.GetComponentInChildren<ParticleSystem>();
+        _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
     }
 
     public bool HasGlove  { private set; get; }
@@ -36,6 +39,7 @@ public class ForceGlove : MonoBehaviour
         StartCoroutine(Cooldown(1));
         _animator.SetTrigger(PushTrigger);
         _forcePushEffect.Play();
+        _audioController.PlayForceGlove();
 
         var foundColliders2D = Physics2D.OverlapCircleAll((Vector2) transform.position, pushRadius, whatToPush);
         foreach (var var in foundColliders2D)
@@ -50,6 +54,7 @@ public class ForceGlove : MonoBehaviour
             forceApplier.affectVector = forceVector;
             forceApplier.forceMode2D = ForceMode2D.Impulse;
             forceApplier.Affect();
+            _audioController.PlayRandomForceGloveSFX();
         }
     }
 
