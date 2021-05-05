@@ -144,7 +144,6 @@ public class FlyingEnemy : MonoBehaviour
             !(distanceY > -knockbackForce) || _cooldown) return;
         
         _health.TakeDamage(33);
-        Debug.Log("VAR");
         StartCoroutine(DamageCooldown());
     }
 
