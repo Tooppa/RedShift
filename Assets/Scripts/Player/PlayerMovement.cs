@@ -90,7 +90,6 @@ namespace Player
             if (inputDirection != 0)
             {
                 transform.localScale = new Vector3(inputDirection, 1, 1);
-                _gun.transform.localScale = new Vector3(inputDirection, 1, 1);
                 _forceGlove.transform.localScale = new Vector3(inputDirection, 1, 1);
                 
                 CameraEffects.Instance.ChangeOffset(.3f, inputDirection * 2);

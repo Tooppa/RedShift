@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLocation: Unknown crater
+  cursor: {fileID: 2800000, guid: f0fba5e6a39888942b16f58472eda6eb, type: 3}
 --- !u!114 &5493519118035510905
 MonoBehaviour:
   m_ObjectHideFlags: 0

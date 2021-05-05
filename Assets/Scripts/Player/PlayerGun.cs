@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -29,9 +30,12 @@ namespace Player
         private PlayerControls _playerControls;
         private PlayerMechanics _playerMechanics;
         private SFX _sfx;
+        private Camera _main;
+        private float _angle;
 
         private void Start()
         {
+            _main = Camera.main;
             _audioController = GameObject.Find("AudioController");
             _sfx = _audioController.GetComponent<SFX>();
 
@@ -136,7 +140,27 @@ namespace Player
                 chargeSFXPlaying = false;
                 _chargeTimer = 0;
             }
+            PointGun();
         }
+
+        private void PointGun()
+        {
+            if (!HasGun) return;
+            var mousePos = Mouse.current.position.ReadValue();
+            var objectPos = _main.WorldToScreenPoint(transform.position);
+            mousePos.x -= objectPos.x;
+            mousePos.y -= objectPos.y;
+
+            _angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg - 90;
+            // rounds to nearest 45 degree interval
+            _angle = Mathf.RoundToInt(_angle / 45) * 45;
+            // takes the top point off
+            _angle = _angle > -45 && _angle <= 0 ? -45 : _angle < 45 && _angle >= 0 ? 45 : _angle;
+            // takes the bottom point off
+            _angle = _angle > -225 && _angle <= -180 ? -225 : _angle < -135 && _angle >= -180 ? -135 : _angle;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle));
+        }
+
         private IEnumerator Cooldown(float cooldownTime)
         {
             //Set the cooldown flag to true, wait for the cooldown time to pass, then turn the flag to false
