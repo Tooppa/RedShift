@@ -21,6 +21,8 @@ public class SFX : MonoBehaviour
     public AudioSource openInventory;
     public AudioSource closeInventory;
     public AudioSource inventoryClick;
+    public AudioSource forceGlove;
+    public AudioSource[] forceGloveHits;
 
     public AudioSource wind;
     public AudioSource calmAmbience;
@@ -187,6 +189,17 @@ public class SFX : MonoBehaviour
     public void PlayInventoryClick()
     {
         inventoryClick.Play();
+    }
+
+    public void PlayForceGlove()
+    {
+        forceGlove.Play();
+    }
+
+    public void PlayRandomForceGloveSFX()
+    {
+        int random = Random.Range(0, 3);
+        forceGloveHits[random].Play();
     }
 
     public void PlayWind()
