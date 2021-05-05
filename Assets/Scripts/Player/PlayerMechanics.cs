@@ -300,7 +300,12 @@ namespace Player
 
             if (healthPercent <= 0)
             {
+                _audioController.PlayPlayerDeath();
                 StartCoroutine(PlayerDie());
+            }
+            else
+            {
+                _audioController.PlayPlayerTakeDamage();
             }
         }
         
@@ -309,7 +314,6 @@ namespace Player
             DisableMovement();
             
             _animator.SetTrigger(Death);
-            _audioController.PlayPlayerDeath();
 
             // Knock player back a little. Get direction from the players facing direction
             GetComponent<Rigidbody2D>().AddForce(new Vector2((transform.localScale.x), 0f) * 15, ForceMode2D.Impulse);
