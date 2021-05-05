@@ -205,7 +205,7 @@ namespace Player
         {
             if (constructedObject == null)
             {
-                if (!_pickableRange) return;
+                if (!_pickableRange) return; 
             }
             else
             {
@@ -218,7 +218,10 @@ namespace Player
             
             if (!_pickableItem.TryGetComponent(out Pickables component) || !component.IsNote) return;
             
-            _canvasManager.ShowText(component.GetNote(), component.GetPicture());
+            // Don't open the note when loading a save
+            if(constructedObject == null)
+                _canvasManager.ShowText(component.GetNote(), component.GetPicture());
+            
             var sprite = _pickableItem.GetComponent<SpriteRenderer>().sprite;
             _canvasManager.AddNewNote(sprite, component.GetPicture(), component.GetNote(), _currentLocation);
         }
