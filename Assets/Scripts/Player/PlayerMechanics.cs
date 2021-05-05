@@ -13,6 +13,7 @@ namespace Player
     public class PlayerMechanics : MonoBehaviour
     {
         public string startLocation;
+        public Texture2D cursor;
         private int _fuel;
         private bool _pickableRange;
 
@@ -39,6 +40,7 @@ namespace Player
 
         private void Awake()
         {
+            Cursor.SetCursor(cursor, new Vector2(16,16), CursorMode.Auto);
             _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
             playerControls = new PlayerControls();
             _currentLocation = startLocation;
