@@ -186,6 +186,23 @@ namespace Player
                 {
                     break;
                 }
+                // Mörkö's first arrival where his head turns and he walks off
+                // The save point is after the last long pillar that blocks the way
+                case "AfterMonster":
+                {
+                    // Disable opening cutscene
+                    var openingCutscene = GameObject.Find("OpeningCutscene");
+                    openingCutscene.SetActive(false);
+                    
+                    // Disable Monster cutscene because it has Mörkö sitting around, lights on and the trigger to save again
+                    var monsterCutscene = GameObject.Find("MonsterCutscene");
+                    monsterCutscene.SetActive(false);
+                    
+                    // Move the player approximately to the location where it should be
+                    var player = GameObject.FindWithTag("Player").transform.position = new Vector3(225f, -14.5f, 0);
+                    
+                    break;
+                }
                 // Right after mangling the ship and accidentally shooting half of the mountain off
                 case "AfterSpaceShip":
                 {
