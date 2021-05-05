@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9efda84f9125546b937fb6ef27f07d, type: 3}
+  m_Name: ThisWeeksShipment
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 2f5483cd0ad751841812e3e74c216862, type: 3}
+  note: "Guys, come to the lobby. This week\u2019s shipment was BIG. They sent a
+    heavy-duty drone. Imagine! We could carry some of our metals with it and we wouldn\u2019t
+    have to rely so much on the crazy ass elevator. Let\u2019s have a talk with Morgan.
+    He will surely agree.\r\n\r\nThey also sent a heat radiator with beaming capabilites.
+    The range should be enough. With this, we could use those lighter suits at night
+    which are much more comfortable.\r\n\r\nOliver, Worker"
+  notePicture: {fileID: 0}
+  fuel: 0
+  rocketBoots: 0
+  gun: 0
+  flashlight: 0
+  breakObjectsWithGun: 0
+  forceGlove: 0
+  statsForUpgrades: 
