@@ -16,6 +16,8 @@ public class CameraEffects : MonoBehaviour
     public ParticleSystem particle;
     private CinemachineVirtualCamera _cam;
     private CinemachineFramingTransposer _transposer;
+    private const float YOffset = -.5f;
+
     private void Awake()
     {
         Instance = this;
@@ -25,7 +27,7 @@ public class CameraEffects : MonoBehaviour
 
     private void Start()
     {
-        _transposer.m_TrackedObjectOffset = Vector3.zero;
+        _transposer.m_TrackedObjectOffset = new Vector3(0,YOffset,0);
     }
 
     public void ShakeCamera(float intensity, float time)
@@ -70,7 +72,7 @@ public class CameraEffects : MonoBehaviour
         {
             counter += Time.deltaTime;
             var newX = Mathf.Lerp(start, stop, counter / timer);
-            _transposer.m_TrackedObjectOffset = new Vector3(newX, 0, 0);
+            _transposer.m_TrackedObjectOffset = new Vector3(newX, YOffset, 0);
             yield return new WaitForEndOfFrame();
         }
     }
