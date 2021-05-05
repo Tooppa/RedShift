@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dadb3d51a7ec78242b731ba8a133a2e9, type: 3}
   m_Name: MorkoEnemy
   m_EditorClassIdentifier: 
-  speed: 9500
+  speed: 9700
   jumpHeight: 540
   enemyRange: 55
   attack: 100

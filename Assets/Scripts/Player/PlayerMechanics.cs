@@ -13,6 +13,7 @@ namespace Player
     public class PlayerMechanics : MonoBehaviour
     {
         public string startLocation;
+        public Texture2D cursor;
         private int _fuel;
         private bool _pickableRange;
 
@@ -39,6 +40,7 @@ namespace Player
 
         private void Awake()
         {
+            Cursor.SetCursor(cursor, new Vector2(16,16), CursorMode.Auto);
             _audioController = GameObject.Find("AudioController").GetComponent<SFX>();
             playerControls = new PlayerControls();
             _currentLocation = startLocation;
@@ -116,12 +118,10 @@ namespace Player
             // if horizontal and vertical are both pressed or vertical is below 0
             // and if vertical is below 0 down else up
             // else if horizontal is pressed left or right
-            var newAngle = horizontalMove != 0 && verticalMove != 0 || verticalMove < 0 ? verticalMove < 0 ? 180 :
-                0 :
-                horizontalMove != 0 ? -90 * horizontalMove : 0;
+            var newAngle = horizontalMove != 0 && verticalMove != 0 || verticalMove < 0 ? 
+                verticalMove < 0 ? 180 : 0 : horizontalMove != 0 ? -90 * horizontalMove : 0;
             
             _flashlight.transform.eulerAngles = new Vector3(0, 0, newAngle);
-            _playerGun.gameObject.transform.eulerAngles = new Vector3(0, 0, newAngle);
             _forceGlove.transform.eulerAngles = new Vector3(0, 0, newAngle);
         }
         
@@ -205,7 +205,7 @@ namespace Player
         {
             if (constructedObject == null)
             {
-                if (!_pickableRange) return;
+                if (!_pickableRange) return; 
             }
             else
             {
@@ -218,7 +218,10 @@ namespace Player
             
             if (!_pickableItem.TryGetComponent(out Pickables component) || !component.IsNote) return;
             
-            _canvasManager.ShowText(component.GetNote(), component.GetPicture());
+            // Don't open the note when loading a save
+            if(constructedObject == null)
+                _canvasManager.ShowText(component.GetNote(), component.GetPicture());
+            
             var sprite = _pickableItem.GetComponent<SpriteRenderer>().sprite;
             _canvasManager.AddNewNote(sprite, component.GetPicture(), component.GetNote(), _currentLocation);
         }

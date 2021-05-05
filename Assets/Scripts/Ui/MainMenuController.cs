@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,12 +33,18 @@ namespace Ui
             titleScreenMusic.DOFade(volume, 2).SetUpdate(true);
         }
 
-        public void LoadGame()
+        public void LoadGame(bool loadingLastSave)
         {
-            StartCoroutine(LoadYourAsyncScene());
+            if (loadingLastSave && SaveAndLoad.LoadStatus().Scene == null)
+            {
+                Debug.Log("No valid save");
+                return;
+            }
+            
+            StartCoroutine(LoadYourAsyncScene(loadingLastSave));
         }
 
-        private IEnumerator LoadYourAsyncScene()
+        private IEnumerator LoadYourAsyncScene(bool loadingLastSave)
         {
             var sceneActivation = false;
             fader
@@ -48,7 +55,9 @@ namespace Ui
                     sceneActivation = true;
                 });
             titleScreenMusic.DOFade(0, 1).SetUpdate(true);
-            var asyncLoad = SceneManager.LoadSceneAsync(1);
+            
+            var asyncLoad = loadingLastSave ? SaveAndLoad.StartLoadingSave() : SceneManager.LoadSceneAsync(1);
+            
             asyncLoad.allowSceneActivation = sceneActivation;
             while (!asyncLoad.isDone)
             {
