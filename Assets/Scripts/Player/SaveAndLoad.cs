@@ -194,6 +194,10 @@ namespace Player
                     var openingCutscene = GameObject.Find("OpeningCutscene");
                     openingCutscene.SetActive(false);
                     
+                    // Disable Monster cutscene because it has Mörkö sitting around, lights on and the trigger to save again
+                    var monsterCutscene = GameObject.Find("MonsterCutscene");
+                    monsterCutscene.SetActive(false);
+                    
                     // Move the player approximately to the location where it should be
                     var player = GameObject.FindWithTag("Player").transform.position = new Vector3(225f, -14.5f, 0);
                     
