@@ -49,9 +49,11 @@ public class SFX : MonoBehaviour
     public AudioSource startButton;
     public AudioSource selectButton;
     public AudioSource hoverOverButton;
+    public AudioSource pauseMenuOpenClose;
     public AudioSource logoWoosh;
 
-    public AudioClip impact;
+    public AudioClip hoverOverButtonClip;
+    public AudioClip pauseMenuOpenCloseClip;
 
     public string CurrentMusicPlaying()
     {
@@ -303,7 +305,12 @@ public class SFX : MonoBehaviour
 
     public void PlayHoverOverButton()
     {
-        hoverOverButton.PlayOneShot(impact, 0.7f);
+        hoverOverButton.PlayOneShot(hoverOverButtonClip, 0.7f);
+    }
+
+    public void PlayPauseMenuOpenClose()
+    {
+        pauseMenuOpenClose.PlayOneShot(pauseMenuOpenCloseClip, 0.7f);
     }
 
     public void PlayLogoWoosh()

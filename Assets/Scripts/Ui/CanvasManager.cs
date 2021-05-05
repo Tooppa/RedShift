@@ -110,7 +110,7 @@ namespace Ui
                     .SetUpdate(true);
                 pauseMenu.interactable = true;
                 pauseMenu.blocksRaycasts = true;
-                _audioController.PlayOpenInventory();
+                _audioController.PlayPauseMenuOpenClose();
             }
             else
             {
@@ -120,7 +120,7 @@ namespace Ui
                     .OnComplete(ResumeGame);
                 pauseMenu.interactable = false;
                 pauseMenu.blocksRaycasts = false;
-                _audioController.PlayCloseInventory();
+                _audioController.PlayPauseMenuOpenClose();
             }
         }
         public void OpenMainMenu()
@@ -162,7 +162,11 @@ namespace Ui
             var upgrade = Instantiate(uiButton, upgradeGrid);
             upgrade.GetComponent<Image>().sprite = sprite;
             var btn = upgrade.GetComponent<Button>();
-            btn.onClick.AddListener(() => { upgradeText.text = stats; });
+            btn.onClick.AddListener(() => 
+            {
+                upgradeText.text = stats;
+                _audioController.PlayClick();
+            });
         }
 
         private void PauseGame()
@@ -182,6 +186,7 @@ namespace Ui
             if (rect.anchoredPosition.y != 0)
                 SetHudActive();
             noteScreen.SetActive(true);
+            _audioController.PlayOpenInventory();
             noteScreen.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>().text = note;
             if (!_noteImage)
                 _noteImage = noteScreen.transform.GetChild(0).GetComponentInChildren<Image>();
