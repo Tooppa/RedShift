@@ -35,6 +35,8 @@ public class FlyingEnemy : MonoBehaviour
 
     Seeker seeker;
     Rigidbody2D rb;
+    private Health _health;
+    private bool _cooldown;
 
     private void Awake()
     {
@@ -48,6 +50,7 @@ public class FlyingEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _health = target.GetComponentInParent<Health>();
         origin = transform.position;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
@@ -132,13 +135,25 @@ public class FlyingEnemy : MonoBehaviour
 
     private void PlayerHit()
     {
-        float distanceX = target.transform.position.x - transform.position.x;
-        float distanceY = target.transform.position.y - transform.position.y;
-        if (distanceX <= knockbackForce && distanceX > -knockbackForce && distanceY <= knockbackForce && distanceY > -knockbackForce)
-        {
-            Debug.Log("Hit!");
-        }
+        var targetPos = target.transform.position;
+        var position = transform.position;
+        var distanceX = targetPos.x - position.x;
+        var distanceY = targetPos.y - position.y;
+        
+        if (!(distanceX <= knockbackForce) || !(distanceX > -knockbackForce) || !(distanceY <= knockbackForce) ||
+            !(distanceY > -knockbackForce) || _cooldown) return;
+        
+        _health.TakeDamage(33);
+        StartCoroutine(DamageCooldown());
     }
+
+    private IEnumerator DamageCooldown()
+    {
+        _cooldown = true;
+        yield return new WaitForSeconds(1);
+        _cooldown = false;
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
