@@ -116,12 +116,10 @@ namespace Player
             // if horizontal and vertical are both pressed or vertical is below 0
             // and if vertical is below 0 down else up
             // else if horizontal is pressed left or right
-            var newAngle = horizontalMove != 0 && verticalMove != 0 || verticalMove < 0 ? verticalMove < 0 ? 180 :
-                0 :
-                horizontalMove != 0 ? -90 * horizontalMove : 0;
+            var newAngle = horizontalMove != 0 && verticalMove != 0 || verticalMove < 0 ? 
+                verticalMove < 0 ? 180 : 0 : horizontalMove != 0 ? -90 * horizontalMove : 0;
             
             _flashlight.transform.eulerAngles = new Vector3(0, 0, newAngle);
-            _playerGun.gameObject.transform.eulerAngles = new Vector3(0, 0, newAngle);
             _forceGlove.transform.eulerAngles = new Vector3(0, 0, newAngle);
         }
         
