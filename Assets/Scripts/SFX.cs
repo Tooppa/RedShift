@@ -23,6 +23,7 @@ public class SFX : MonoBehaviour
     public AudioSource inventoryClick;
     public AudioSource forceGlove;
     public AudioSource[] forceGloveHits;
+    public AudioSource playerDeath;
 
     public AudioSource wind;
     public AudioSource calmAmbience;
@@ -316,5 +317,10 @@ public class SFX : MonoBehaviour
     public void PlayLogoWoosh()
     {
         logoWoosh.Play();
+    }
+
+    public void PlayPlayerDeath()
+    {
+        playerDeath.Play();
     }
 }

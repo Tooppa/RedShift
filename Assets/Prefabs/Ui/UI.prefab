@@ -774,7 +774,6 @@ GameObject:
   - component: {fileID: 4255721872223054244}
   - component: {fileID: 1095280543812437478}
   - component: {fileID: 1250777550}
-  - component: {fileID: 3485261132018987959}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -871,35 +870,6 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1250777550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2172198270391029423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: SFX, Assembly-CSharp
-          m_MethodName: PlayHoverOverButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &3485261132018987959
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2727,7 +2697,6 @@ GameObject:
   - component: {fileID: 1390584988621789315}
   - component: {fileID: 6741214472201268494}
   - component: {fileID: 1707666255}
-  - component: {fileID: 7344991304385515888}
   m_Layer: 5
   m_Name: Load
   m_TagString: Untagged
@@ -2832,35 +2801,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1707666255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6402299026715495077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: SFX, Assembly-CSharp
-          m_MethodName: PlayHoverOverButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &7344991304385515888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3649,7 +3589,6 @@ GameObject:
   - component: {fileID: 5719618300302068057}
   - component: {fileID: 7507788662349470591}
   - component: {fileID: 95534300}
-  - component: {fileID: 4304512957080847724}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -3746,35 +3685,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &95534300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8383891099727091333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: SFX, Assembly-CSharp
-          m_MethodName: PlayHoverOverButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &4304512957080847724
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5324,11 +5234,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c28f050f6d8f4fa488ddf864327bf557, type: 3}
---- !u!224 &1110517777522600043 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2488643086984218031, guid: c28f050f6d8f4fa488ddf864327bf557, type: 3}
-  m_PrefabInstance: {fileID: 3305701204462448068}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3305701203979746623 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 626757883, guid: c28f050f6d8f4fa488ddf864327bf557, type: 3}
@@ -5340,6 +5245,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebcf73fcefe0a854088afc37e37287a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1110517777522600043 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2488643086984218031, guid: c28f050f6d8f4fa488ddf864327bf557, type: 3}
+  m_PrefabInstance: {fileID: 3305701204462448068}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3366079379096785598
 PrefabInstance:
   m_ObjectHideFlags: 0
