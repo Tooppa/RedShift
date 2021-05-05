@@ -65,9 +65,9 @@ namespace Player
 
         public void Shoot(float value)
         {
-            if (Time.timeScale != 1 || !_equipped) return;
+            if (Time.timeScale != 1) return;
             _holdingShoot = value > 0;
-            if (_cooldown || !HasGun || !gameObject.activeSelf)
+            if (_cooldown || !HasGun || !gameObject.activeSelf || !_equipped)
             {
                 _playerControls.Surface.Move.Enable();
                 _playerControls.Surface.Jump.Enable();
