@@ -104,6 +104,7 @@ namespace Player
             _sfx.playerPowerfulShotChargedUp.Stop();
             _sfx.PlayPowerfulShot();
 
+            _holdingShoot = false;
             _playerControls.Surface.Move.Enable();
             _playerControls.Surface.Jump.Enable();
         }
@@ -118,6 +119,7 @@ namespace Player
             _sfx.playerPowerfulCharge.Stop();
             _sfx.PlayGunShot();
 
+            _holdingShoot = false;
             _playerControls.Surface.Move.Enable();
             _playerControls.Surface.Jump.Enable();
         }
