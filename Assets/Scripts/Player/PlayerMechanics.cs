@@ -106,7 +106,7 @@ namespace Player
         {
             if (!_flashlight.HasFlashlight || !_playerGun.HasGun || _inCooldown) return;
             _flashlight.SwitchLight();
-            _playerGun.gameObject.SetActive(!_playerGun.gameObject.activeInHierarchy);
+            _playerGun.SwitchGun();
             StartCoroutine(Cooldown());
         }
         
@@ -163,6 +163,7 @@ namespace Player
             if (pickables.Gun && !_playerGun.HasGun)
             {
                 _playerGun.EquipGun();
+                _flashlight.SwitchLight();
                 _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
             if (pickables.PowerfulGun && !_playerGun.HasPowerfulGun)
@@ -181,7 +182,7 @@ namespace Player
             {
                 _flashlight.EquipFlashlight();
                 _flashlight.SwitchLight();
-                _playerGun.gameObject.SetActive(!_playerGun.gameObject.activeInHierarchy);
+                _playerGun.SwitchGun();
                 _canvasManager.AddNewUpgrade(pickables.GetSprite(), pickables.GetStats());
             }
             if (go.TryGetComponent(out Trigger trigger))
