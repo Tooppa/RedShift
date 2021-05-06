@@ -29,11 +29,14 @@ namespace Player
         private ParticleSystem _chargeEffect;
         private ParticleSystem _chargeReadyEffect;
 
+        public Transform _player;
         private PlayerControls _playerControls;
         private PlayerMechanics _playerMechanics;
+
         private SFX _sfx;
         private Camera _main;
         private float _angle;
+        private Vector2 _mousePos;
 
         private void Awake()
         {
@@ -58,6 +61,7 @@ namespace Player
             _chargeEffect = transform.GetChild(3).GetComponent<ParticleSystem>();
             _chargeReadyEffect = transform.GetChild(4).GetComponent<ParticleSystem>();
 
+            _player = transform.parent.GetComponent<Transform>();
             _playerMechanics = transform.GetComponentInParent<PlayerMechanics>();
             _playerControls = _playerMechanics.playerControls;
         }
@@ -74,6 +78,8 @@ namespace Player
         public void Shoot(float value)
         {
             if (Time.timeScale != 1 || !HasGun || !_equipped || _cooldown) return;
+            if (Time.timeScale != 1 || !HasGun || !_equipped) return;
+            _player.localScale = new Vector3(_mousePos.normalized.x > 0 ? 1 : -1, 1, 1); // Flip player to face towards the shooting direction
             _holdingShoot = value > 0;
 
             var particleCollision = GetComponentInChildren<ParticleCollision>();
@@ -164,12 +170,12 @@ namespace Player
         private void PointGun()
         {
             if (!HasGun) return;
-            var mousePos = Mouse.current.position.ReadValue();
-            var objectPos = _main.WorldToScreenPoint(transform.position);
-            mousePos.x -= objectPos.x;
-            mousePos.y -= objectPos.y;
+            _mousePos = Mouse.current.position.ReadValue();
+            var objectPos = _main.WorldToScreenPoint(_player.position + Vector3.up*1.5f);
+            _mousePos.x -= objectPos.x;
+            _mousePos.y -= objectPos.y;
 
-            _angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg - 90;
+            _angle = Mathf.Atan2(_mousePos.y, _mousePos.x) * Mathf.Rad2Deg - 90;
             // rounds to nearest 45 degree interval
             _angle = Mathf.RoundToInt(_angle / 45) * 45;
             // takes the top point off
