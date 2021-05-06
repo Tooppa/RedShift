@@ -73,14 +73,9 @@ namespace Player
 
         public void Shoot(float value)
         {
-            if (Time.timeScale != 1 || !HasGun || !_equipped) return;
+            if (Time.timeScale != 1 || !HasGun || !_equipped || _cooldown) return;
             _holdingShoot = value > 0;
-            if (_cooldown)
-            {
-                _playerControls.Surface.Move.Enable();
-                _playerControls.Surface.Jump.Enable();
-                return;
-            }
+
             var particleCollision = GetComponentInChildren<ParticleCollision>();
             if (HasPowerfulGun)
             {
@@ -91,6 +86,12 @@ namespace Player
             }
             else if (_holdingShoot)
                 WeakShot(particleCollision);
+
+            if (!_holdingShoot)
+            {
+                _playerControls.Surface.Move.Enable();
+                _playerControls.Surface.Jump.Enable();
+            }
         }
 
         private void PowerfulShot(ParticleCollision particleCollision)
@@ -111,6 +112,7 @@ namespace Player
 
         private void WeakShot(ParticleCollision particleCollision)
         {
+            if (HasPowerfulGun && _playerControls.Surface.Move.enabled) return;
             particleCollision.weakShot = true;
             _animator.SetTrigger(ShootTrigger);
             StartCoroutine(Cooldown(1));
@@ -145,7 +147,6 @@ namespace Player
                     _sfx.PlayPowerfulCharge();
                     chargeSFXPlaying = true;
                 }
-
                 _chargeTimer += Time.deltaTime;
             }
             else
