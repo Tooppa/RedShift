@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dadb3d51a7ec78242b731ba8a133a2e9, type: 3}
   m_Name: SlimeEnemy
   m_EditorClassIdentifier: 
-  speed: 10000
+  speed: 110000
   jumpHeight: 150
   enemyRange: 14
   attack: 2
   health: 3
-  knockbackForce: 6000
-  knockbackRadius: 1
+  knockbackForce: 30000
+  knockbackRadius: 2
   spawnRadius: 20
   flyingEnemyBounciness: 0

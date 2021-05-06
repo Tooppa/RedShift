@@ -13,21 +13,26 @@ public class JumpingSlimeAI : MonoBehaviour
 
     public Rigidbody2D playerRB;
 
+    private Animator _animator;
+    private Health _playerHealth;
+    private Health _health;
+
+    private CaterpillarSFX _caterpillarSFX;
+
     public float nextWaypointDistance = 1f;
 
     private Vector2 origin;
 
     private float speed;
-    private float jumpHeight;
     private float enemyRange;
     private float knockbackForce;
     private float knockbackRadius;
     private float spawnRadius;
 
+    private bool deadPillar = false;
+    private bool _cooldown;
+    private bool canMove = true;
     private bool isTargetInRange = false;
-    private bool isGrounded = false;
-    private readonly Vector2 _groundCheckOffset = new Vector2(0, -0.5f);
-    private const float GroundedRadius = 0.45f;
     [SerializeField] private LayerMask whatIsGround;
 
     Path path;
@@ -40,7 +45,6 @@ public class JumpingSlimeAI : MonoBehaviour
     private void Awake()
     {
         speed = data.speed;
-        jumpHeight = data.jumpHeight;
         enemyRange = data.enemyRange;
         knockbackForce = data.knockbackForce;
         knockbackRadius = data.knockbackRadius;
@@ -53,22 +57,20 @@ public class JumpingSlimeAI : MonoBehaviour
         origin = transform.position;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _animator.SetBool("Crawling", true);
+        _playerHealth = target.GetComponentInParent<Health>();
+        _health = GetComponent<Health>();
+        _caterpillarSFX = GetComponentInChildren<CaterpillarSFX>();
+        _caterpillarSFX.PlayIdle();
 
         InvokeRepeating("UpdatePath", 0f, 0.5f);
-        InvokeRepeating("SlimeHop", 0f, 2f);
-
     }
+
     void UpdatePath()
     {
         if (seeker.IsDone())
             seeker.StartPath(rb.position, target.position, OnPathComplete);
-    }
-
-    //Function invoked every 2 seconds. Adds upwards force to the enemy.
-    void SlimeHop()
-    {
-        if(isTargetInRange && isGrounded)
-            rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
     }
 
     void OnPathComplete(Path p)
@@ -103,12 +105,13 @@ public class JumpingSlimeAI : MonoBehaviour
         }
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
+        Vector2 force = direction * (speed * Time.deltaTime);
 
-        //Adds forward force to the enemy's jump
-        if (!isGrounded)
+        //Adds forward force to the enemy with a cooldown
+        if (canMove)
         {
             rb.AddForce(force);
+            StartCoroutine(MoveCoolDown());
         }
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
@@ -120,11 +123,11 @@ public class JumpingSlimeAI : MonoBehaviour
 
         if (force.x >= 0.01f)
         {
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            transform.localScale = new Vector3(-1f, 1f, 1f);
         }
         else if (force.x <= -0.01f)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
         //Checks if player is out of enemyObject's range. If out of range, enemy stops moving.
@@ -138,29 +141,66 @@ public class JumpingSlimeAI : MonoBehaviour
 
     private void Update()
     {
-        CheckIsGrounded();
-        PlayerHit();
-    }
 
-    private void CheckIsGrounded()
-    {
-        isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, GroundedRadius, whatIsGround);
+        if(!deadPillar)
+            PlayerHit();
+
+        if(_health.CurrentHealth <= 0 && !deadPillar)
+        {
+            deadPillar = true;
+            StartCoroutine(DeathAnimation());
+        }
     }
 
     private void PlayerHit()
     {
         float distanceX = target.transform.position.x - transform.position.x;
-        float distanceY = target.transform.position.y - transform.position.y;
-        if (distanceX <= knockbackRadius && distanceX > -knockbackRadius && distanceY <= knockbackRadius && distanceY > -knockbackRadius)
+        float distanceY = target.transform.position.y - (transform.position.y - 1);
+        if (distanceX <= knockbackRadius && distanceX > -knockbackRadius && distanceY <= knockbackRadius && distanceY > -knockbackRadius && !_cooldown)
         {
             Debug.Log("Hit!");
-            playerPushback();
+            _animator.SetTrigger("Attack");
+            _caterpillarSFX.PlayAttack();
+            PlayerPushback();
+            _playerHealth.TakeDamage(33);
+            StartCoroutine(DamageCooldown());
         }
     }
 
-    void playerPushback()
+    void PlayerPushback()
     {
         Vector2 knockbackDirection = (target.transform.position - transform.position).normalized;
         playerRB.AddForce(knockbackDirection * knockbackForce);
+    }
+
+    private IEnumerator MoveCoolDown()
+    {
+        canMove = false;
+        yield return new WaitForSeconds(0.4f);
+        canMove = true;
+    }
+
+    private IEnumerator DamageCooldown()
+    {
+        _cooldown = true;
+        yield return new WaitForSeconds(1);
+        _cooldown = false;
+    }
+
+    private IEnumerator DeathAnimation()
+    {
+        _animator.SetBool("Crawling", false);
+        _animator.SetTrigger("Death");
+        _caterpillarSFX.PlayDeath();
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && !deadPillar)
+        {
+            PlayerPushback();
+        }
     }
 }
