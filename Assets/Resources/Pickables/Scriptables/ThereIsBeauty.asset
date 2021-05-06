@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9efda84f9125546b937fb6ef27f07d, type: 3}
+  m_Name: ThereIsBeauty
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 2f5483cd0ad751841812e3e74c216862, type: 3}
+  note: 'There is really nothing here. Dry desert, unforgiving temperatures, toxic
+    athmosphere. You would surely call me crazy but I actually like it here. One
+    day Morgan let me accompany him outside the barrier. Rode an old kind of vehicle,
+    those with wheels, you know.
+
+    
+
+    It was magnificent. I was free. The
+    endless flow of sand and the radiance of the two suns. I saw the look in his
+    eyes. He thought so too. This planet was his home.
+
+    
+
+    Ronald, Worker'
+  notePicture: {fileID: 0}
+  fuel: 0
+  rocketBoots: 0
+  gun: 0
+  flashlight: 0
+  breakObjectsWithGun: 0
+  forceGlove: 0
+  statsForUpgrades: 
