@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9efda84f9125546b937fb6ef27f07d, type: 3}
   m_Name: EnergyCapsule
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 004c3b1d847ea4a158f88728776cea83, type: 3}
+  sprite: {fileID: 21300000, guid: dd0712ba8970db5428686f40f2bda264, type: 3}
   note: 
   notePicture: {fileID: 0}
   fuel: 1
