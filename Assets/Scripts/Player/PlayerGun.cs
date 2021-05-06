@@ -78,7 +78,6 @@ namespace Player
         public void Shoot(float value)
         {
             if (Time.timeScale != 1 || !HasGun || !_equipped || _cooldown) return;
-            if (Time.timeScale != 1 || !HasGun || !_equipped) return;
             _player.localScale = new Vector3(_mousePos.normalized.x > 0 ? 1 : -1, 1, 1); // Flip player to face towards the shooting direction
             _holdingShoot = value > 0;
 
