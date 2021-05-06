@@ -135,7 +135,7 @@ namespace Ui
             {
                 _pauseMenuIsOpen = false;
                 pauseMenu
-                    .DOFade(0, 0)
+                    .DOFade(0, .3f)
                     .SetUpdate(true)
                     .OnComplete(ResumeGame);
                 pauseMenu.interactable = false;
@@ -146,9 +146,9 @@ namespace Ui
             {
                 _hudIsOpen = false;
                 var rect = hud.GetComponent<RectTransform>();
-                rect.DOAnchorPos(new Vector2(30, -500), 0)
+                rect.DOAnchorPos(new Vector2(30, -500), .3f)
                     .SetUpdate(true);
-                rect.DORotate(new Vector3(0, 0, 90), 0)
+                rect.DORotate(new Vector3(0, 0, 90), .3f)
                     .SetUpdate(true)
                     .OnComplete(ResumeGame);
                 _audioController.PlayCloseInventory();
