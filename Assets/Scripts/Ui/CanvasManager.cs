@@ -28,6 +28,8 @@ namespace Ui
         private SFX _audioController;
         private Image _noteImage;
         private float _volume;
+        private bool _hudIsOpen;
+        private bool _pauseMenuIsOpen;
 
         private void Awake()
         {
@@ -79,18 +81,9 @@ namespace Ui
 
         public void SetHudActive()
         {
-            if(pauseMenu.alpha > 0) return;
+            if(_pauseMenuIsOpen) return;
             var rect = hud.GetComponent<RectTransform>();
-            if (rect.anchoredPosition.y != 0)
-            {
-                PauseGame();
-                rect.DOAnchorPos(new Vector2(30, 0), .3f)
-                    .SetUpdate(true);
-                rect.DORotate(Vector3.zero, .3f)
-                    .SetUpdate(true);
-                _audioController.PlayOpenInventory();
-            }
-            else
+            if (_hudIsOpen)
             {
                 rect.DOAnchorPos(new Vector2(30, -500), .3f)
                     .SetUpdate(true);
@@ -99,10 +92,31 @@ namespace Ui
                     .OnComplete(ResumeGame);
                 _audioController.PlayCloseInventory();
             }
+            else
+            {
+                PauseGame();
+                rect.DOAnchorPos(new Vector2(30, 0), .3f)
+                    .SetUpdate(true);
+                rect.DORotate(Vector3.zero, .3f)
+                    .SetUpdate(true);
+                _audioController.PlayOpenInventory();
+            }
+            _hudIsOpen = !_hudIsOpen;
         }
         public void SetPauseMenuActive()
         {
-            if (pauseMenu.alpha == 0)
+            if(_hudIsOpen) return;
+            if (_pauseMenuIsOpen)
+            {
+                pauseMenu
+                    .DOFade(0, .3f)
+                    .SetUpdate(true)
+                    .OnComplete(ResumeGame);
+                pauseMenu.interactable = false;
+                pauseMenu.blocksRaycasts = false;
+                _audioController.PlayPauseMenuOpenClose();
+            }
+            else
             {
                 PauseGame();
                 pauseMenu
@@ -112,8 +126,14 @@ namespace Ui
                 pauseMenu.blocksRaycasts = true;
                 _audioController.PlayPauseMenuOpenClose();
             }
-            else
+            _pauseMenuIsOpen = !_pauseMenuIsOpen;
+        }
+
+        public void ForceCloseUi()
+        {
+            if (_pauseMenuIsOpen)
             {
+                _pauseMenuIsOpen = false;
                 pauseMenu
                     .DOFade(0, .3f)
                     .SetUpdate(true)
@@ -121,6 +141,17 @@ namespace Ui
                 pauseMenu.interactable = false;
                 pauseMenu.blocksRaycasts = false;
                 _audioController.PlayPauseMenuOpenClose();
+            }
+            if (_hudIsOpen)
+            {
+                _hudIsOpen = false;
+                var rect = hud.GetComponent<RectTransform>();
+                rect.DOAnchorPos(new Vector2(30, -500), .3f)
+                    .SetUpdate(true);
+                rect.DORotate(new Vector3(0, 0, 90), .3f)
+                    .SetUpdate(true)
+                    .OnComplete(ResumeGame);
+                _audioController.PlayCloseInventory();
             }
         }
         public void OpenMainMenu()
@@ -188,8 +219,7 @@ namespace Ui
         }
         public void ResumeGame()
         {
-            var rect = hud.GetComponent<RectTransform>();
-            if (rect.anchoredPosition.y > -500)return;
+            if (_hudIsOpen || _pauseMenuIsOpen)return;
             Time.timeScale = 1;
         }
 

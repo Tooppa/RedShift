@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9efda84f9125546b937fb6ef27f07d, type: 3}
+  m_Name: ISawHim
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 2f5483cd0ad751841812e3e74c216862, type: 3}
+  note: "You heard the bang right? It\u2019s never a good sign. I was at the surface
+    taking a look at the stars because you can only see them rarely. Then I saw him.
+    Morgan was outside the barrier carrying something on a drone. Looked like a body.\r\n\r\nIt
+    must have been Jane. I haven\u2019t found her anywhere. I tried to look where
+    he was going but he disappeared after the dunes. It won\u2019t stop here. He
+    must be planning something.\r\n\r\nOliver, Worker"
+  notePicture: {fileID: 0}
+  fuel: 0
+  rocketBoots: 0
+  gun: 0
+  flashlight: 0
+  breakObjectsWithGun: 0
+  forceGlove: 0
+  statsForUpgrades: 

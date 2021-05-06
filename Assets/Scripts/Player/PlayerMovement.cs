@@ -89,7 +89,7 @@ namespace Player
             var inputDirection = Mathf.Round(move.x);
             if (inputDirection != 0)
             {
-                transform.localScale = new Vector3(inputDirection, 1, 1);
+                transform.localScale = new Vector3(inputDirection, 1, 1); // Same is also done in PlayerGun when Shoot is triggered
                 _forceGlove.transform.localScale = new Vector3(inputDirection, 1, 1);
                 
                 CameraEffects.Instance.ChangeOffset(.3f, inputDirection * 2);
