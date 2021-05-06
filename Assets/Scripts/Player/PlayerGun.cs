@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -34,6 +35,11 @@ namespace Player
         private Camera _main;
         private float _angle;
 
+        private void Awake()
+        {
+            _light2D = GetComponentInChildren<Light2D>();
+        }
+
         private void Start()
         {
             _main = Camera.main;
@@ -44,7 +50,6 @@ namespace Player
             // Skip the parent's animator. Player's prefab guarantees the Sprite-object to have an animator
             _animator = transform.parent.GetComponentsInChildren<Animator>()[1];
             
-            _light2D = GetComponentInChildren<Light2D>();
             _intensity = _light2D.intensity;
             _light2D.intensity = 0;
 
@@ -61,19 +66,21 @@ namespace Player
         {
             _equipped = !_equipped;
             _light2D.enabled = !_light2D.enabled;
+            _holdingShoot = false;
+            _playerControls.Surface.Move.Enable();
+            _playerControls.Surface.Jump.Enable();
         }
 
         public void Shoot(float value)
         {
-            if (Time.timeScale != 1) return;
+            if (Time.timeScale != 1 || !HasGun || !_equipped) return;
             _holdingShoot = value > 0;
-            if (_cooldown || !HasGun || !gameObject.activeSelf || !_equipped)
+            if (_cooldown)
             {
                 _playerControls.Surface.Move.Enable();
                 _playerControls.Surface.Jump.Enable();
                 return;
             }
-            _holdingShoot = value > 0;
             var particleCollision = GetComponentInChildren<ParticleCollision>();
             if (HasPowerfulGun)
             {
