@@ -24,6 +24,7 @@ public class SFX : MonoBehaviour
     public AudioSource forceGlove;
     public AudioSource[] forceGloveHits;
     public AudioSource playerDeath;
+    public AudioSource playerTakeDamage;
 
     public AudioSource wind;
     public AudioSource calmAmbience;
@@ -203,6 +204,11 @@ public class SFX : MonoBehaviour
     {
         int random = Random.Range(0, 3);
         forceGloveHits[random].Play();
+    }
+
+    public void PlayPlayerTakeDamage()
+    {
+        playerTakeDamage.Play();
     }
 
     public void PlayWind()
