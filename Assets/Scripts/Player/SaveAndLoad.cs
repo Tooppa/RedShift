@@ -131,6 +131,20 @@ namespace Player
             CurrentlyPickedItems.Clear(); // These will be replace by the ones in the saved LevelStatus
             
             var constructedPickedItems = new List<GameObject>();
+
+            var pickablesTransform = GameObject.Find("Pickables").transform;
+
+            var pickableItemsInScene = new List<GameObject>();
+            
+            // Find every pickable item under pickablesTransform
+
+            for (int i = 0; i < pickablesTransform.childCount; i++)
+            {
+                for (int j = 0; j < pickablesTransform.GetChild(i).childCount; j++)
+                {
+                    pickableItemsInScene.Add(pickablesTransform.GetChild(i).GetChild(j).gameObject);
+                }
+            }
             
             foreach (var itemName in levelStatus.PickedItems)
             {
@@ -156,6 +170,16 @@ namespace Player
                 pickableScript.Awake();
                 
                 constructedPickedItems.Add(pickable);
+                
+                // Remove the items from scene so they cannot be picked up again
+
+                foreach (var pickableItemInScene in pickableItemsInScene)
+                {
+                    if (pickableItemInScene.name == itemName)
+                    {
+                        pickableItemInScene.gameObject.SetActive(false);
+                    }
+                }
             }
             
             // Forward the just constructed picked items to PlayerMechanics
@@ -223,6 +247,10 @@ namespace Player
                     // Enable ship tab on UI
                     var ui = GameObject.Find("UI");
                     ui.GetComponent<CanvasManager>().ShowRocketButton();
+                    
+                    // Enable fueling trigger so the player can end the game
+                    var endingCutscene = GameObject.Find("EndingCutscene");
+                    endingCutscene.transform.GetChild(0).gameObject.SetActive(true);
                     
                     // Move the player approximately to the location where it should be after the cutscene
                     var player = GameObject.FindWithTag("Player").transform.position = new Vector3(268.5f, 72.4f, 0);

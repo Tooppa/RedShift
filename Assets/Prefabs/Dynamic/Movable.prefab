@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5635864441954111546}
   - component: {fileID: 2899518881579202664}
   - component: {fileID: 448798000818801754}
+  - component: {fileID: 1247231265171505470}
   m_Layer: 7
   m_Name: Movable
   m_TagString: Untagged
@@ -131,3 +132,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1247231265171505470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9154544666305868710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d8e0a0b63cc28daba0d2a3a17a721e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - Enemy
+  damageMultiplier: 2
+  minimumSpeedTreshold: 0
