@@ -127,6 +127,19 @@ namespace Ui
         {
             StartCoroutine(LoadYourAsyncScene());
         }
+        public void ExitGame()
+        {
+            StartCoroutine(QuitApplication());
+        }
+
+        private IEnumerator QuitApplication()
+        {
+            yield return new WaitForEndOfFrame();
+            fader
+                .DOFade(1, .5f)
+                .SetUpdate(true)
+                .OnComplete(Application.Quit);
+        }
         private IEnumerator LoadYourAsyncScene()
         {
             var sceneActivation = false;

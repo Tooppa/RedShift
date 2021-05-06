@@ -3298,7 +3298,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8389815745173538501}
         m_TargetAssemblyTypeName: Ui.CanvasManager, Assembly-CSharp
-        m_MethodName: OpenMainMenu
+        m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
