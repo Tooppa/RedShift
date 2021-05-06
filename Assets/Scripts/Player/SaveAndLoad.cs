@@ -156,6 +156,15 @@ namespace Player
                 pickableScript.Awake();
                 
                 constructedPickedItems.Add(pickable);
+                
+                // Remove the items from scene so they cannot be picked up again
+                
+                var pickedItemInScene = GameObject.Find(itemName);
+                
+                if (pickedItemInScene != null)
+                {
+                    pickedItemInScene.gameObject.SetActive(false);
+                }
             }
             
             // Forward the just constructed picked items to PlayerMechanics
