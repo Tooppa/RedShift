@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce9efda84f9125546b937fb6ef27f07d, type: 3}
-  m_Name: CongratulationNote
+  m_Name: Congratulation
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 2f5483cd0ad751841812e3e74c216862, type: 3}
   note: 'Your continuous efforts to improve the society has been noted. Because of
     your work you have been promoted to citizen-C (class c citizen).
 
-    
+
 
     Your
     identification on your chip will have to be updated. The process will take approximately
