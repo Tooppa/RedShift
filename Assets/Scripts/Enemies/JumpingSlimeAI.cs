@@ -123,11 +123,11 @@ public class JumpingSlimeAI : MonoBehaviour
 
         if (rb.velocity.x >= 0.5f)
         {
-            transform.localScale = new Vector3(-1.3f, 1.3f, 1f);
+            transform.localScale = new Vector3(-1.4f, 1.4f, 1f);
         }
         else if (rb.velocity.x <= -0.5f)
         {
-            transform.localScale = new Vector3(1.3f, 1.3f, 1f);
+            transform.localScale = new Vector3(1.4f, 1.4f, 1f);
         }
 
         //Checks if player is out of enemyObject's range. If out of range, enemy stops moving.
