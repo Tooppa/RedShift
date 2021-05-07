@@ -551,7 +551,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 11bed61161d1e1c4da16dd3b2fb9b358, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1907,6 +1907,10 @@ PrefabInstance:
       propertyPath: playerTakeDamage
       value: 
       objectReference: {fileID: 6725713623533530905}
+    - target: {fileID: 2851482262960956463, guid: 378255854ca398a4d99680e2d990bc2e, type: 3}
+      propertyPath: selectButtonClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2c06dadd54bde7745b2e0eeb7255d970, type: 3}
     - target: {fileID: 2851482262960956463, guid: 378255854ca398a4d99680e2d990bc2e, type: 3}
       propertyPath: spaceshipStartUp
       value: 
