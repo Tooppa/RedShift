@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dadb3d51a7ec78242b731ba8a133a2e9, type: 3}
   m_Name: SlimeEnemy
   m_EditorClassIdentifier: 
-  speed: 110000
+  speed: 2500
   jumpHeight: 150
   enemyRange: 14
   attack: 2

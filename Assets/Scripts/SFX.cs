@@ -54,6 +54,8 @@ public class SFX : MonoBehaviour
     public AudioSource pauseMenuOpenClose;
     public AudioSource logoWoosh;
 
+    public AudioSource wScream;
+
     public AudioClip hoverOverButtonClip;
     public AudioClip pauseMenuOpenCloseClip;
 
@@ -328,5 +330,10 @@ public class SFX : MonoBehaviour
     public void PlayPlayerDeath()
     {
         playerDeath.Play();
+    }
+
+    public void PlayWSream()
+    {
+        wScream.Play();
     }
 }
