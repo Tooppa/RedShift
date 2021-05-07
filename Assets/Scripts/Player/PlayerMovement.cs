@@ -79,6 +79,7 @@ namespace Player
                     break;
                 case false when _isGrounded:
                     _pressedJump = false;
+                    holdingJumpTime = 0;
                     break;
             }
             _timer += Time.deltaTime;
