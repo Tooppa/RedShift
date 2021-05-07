@@ -170,9 +170,16 @@ namespace Player
         {
             if (!HasGun) return;
             _mousePos = Mouse.current.position.ReadValue();
-            var objectPos = _main.WorldToScreenPoint(_player.position + Vector3.up*1.5f);
+            var objectPos = _main.WorldToScreenPoint(_player.position 
+                + new Vector3(transform.parent.localScale.normalized.x < 0 ? 1 : -1, 1, 0)); // Object pos as player pos
+
             _mousePos.x -= objectPos.x;
             _mousePos.y -= objectPos.y;
+
+            // We now have the mouse position and can alter the direction the player is aiming
+            // Animator floats are used to determine the correct blend tree animation (Up, Down, Left, Right)
+            _animator.SetFloat("MouseX", _mousePos.x);
+            _animator.SetFloat("MouseY", _mousePos.y);
 
             _angle = Mathf.Atan2(_mousePos.y, _mousePos.x) * Mathf.Rad2Deg - 90;
             // rounds to nearest 45 degree interval
