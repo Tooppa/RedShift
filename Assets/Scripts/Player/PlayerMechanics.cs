@@ -145,7 +145,18 @@ namespace Player
         {
             var pickables = go.GetComponent<Pickables>();
             
-            SaveAndLoad.CurrentlyPickedItems.Add(pickables.data.name);
+            // Find out if the list holds an entry to the location
+            var entryIndex = SaveAndLoad.CurrentlyPickedItemsInLocations.FindIndex(tuple => tuple.Item1.Equals(_currentLocation));
+
+            if (entryIndex == -1)
+            {
+                // Entry didn't exist, add a new one
+                SaveAndLoad.CurrentlyPickedItemsInLocations.Add((_currentLocation, new List<string> {pickables.data.name}));
+            }
+            else
+            {
+                SaveAndLoad.CurrentlyPickedItemsInLocations[entryIndex].Item2.Add(pickables.data.name);
+            }
             
             if (pickables.HasFuel)
             {
