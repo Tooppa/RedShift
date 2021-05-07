@@ -147,4 +147,4 @@ MonoBehaviour:
   tags:
   - Enemy
   damageMultiplier: 2
-  minimumSpeedTreshold: 0
+  minimumSpeedTreshold: 0.5
