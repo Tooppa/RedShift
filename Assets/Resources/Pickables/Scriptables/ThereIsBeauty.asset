@@ -13,20 +13,12 @@ MonoBehaviour:
   m_Name: ThereIsBeauty
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 2f5483cd0ad751841812e3e74c216862, type: 3}
-  note: 'There is really nothing here. Dry desert, unforgiving temperatures, toxic
+  note: "There is really nothing here. Dry desert, unforgiving temperatures, toxic
     athmosphere. You would surely call me crazy but I actually like it here. One
     day Morgan let me accompany him outside the barrier. Rode an old kind of vehicle,
-    those with wheels, you know.
-
-    
-
-    It was magnificent. I was free. The
-    endless flow of sand and the radiance of the two suns. I saw the look in his
-    eyes. He thought so too. This planet was his home.
-
-    
-
-    Ronald, Worker'
+    those with wheels, you know.\r\n\r\nIt was beautiful. I was free. The endless
+    flow of sand and the radiance of the two suns. I saw the look in his eyes. It
+    isn\u2019t much but this planet is our home.\r\n\r\nRonald, Worker"
   notePicture: {fileID: 0}
   fuel: 0
   rocketBoots: 0
