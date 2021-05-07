@@ -15,6 +15,10 @@ public class FlyingEnemy : MonoBehaviour
 
     private Vector2 origin;
 
+    private Animator _animator;
+    private WaspSFX _waspSFX;
+    private CircleCollider2D _collider;
+
     private float spawnRadius;
 
     private float speed;
@@ -23,6 +27,7 @@ public class FlyingEnemy : MonoBehaviour
     private float knockbackForce;
     private float flyingEnemyBounciness;
 
+    private bool deadWasp = false;
     private bool isTargetInRange = false;
     private bool isGrounded = false;
     private readonly Vector2 _groundCheckOffset = new Vector2(0, -0.5f);
@@ -35,6 +40,7 @@ public class FlyingEnemy : MonoBehaviour
 
     Seeker seeker;
     Rigidbody2D rb;
+    private Health _playerHealth;
     private Health _health;
     private bool _cooldown;
 
@@ -50,10 +56,15 @@ public class FlyingEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _health = target.GetComponentInParent<Health>();
+        _playerHealth = target.GetComponentInParent<Health>();
+        _health = GetComponent<Health>();
         origin = transform.position;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _animator.SetBool("Move", true);
+        _waspSFX = GetComponentInChildren<WaspSFX>();
+        _collider = GetComponent<CircleCollider2D>();
 
         InvokeRepeating("UpdatePath", 0f, 0.5f);
     }
@@ -106,11 +117,11 @@ public class FlyingEnemy : MonoBehaviour
 
         if (force.x >= 0.01f)
         {
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            transform.localScale = new Vector3(-1f, 1f, 1f);
         }
         else if (force.x <= -0.01f)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
         float distanceToPlayer = Vector2.Distance(transform.position, target.transform.position);
@@ -130,7 +141,15 @@ public class FlyingEnemy : MonoBehaviour
 
     private void Update()
     {
-        PlayerHit();
+        if (!deadWasp)
+            PlayerHit();
+
+        if (_health.CurrentHealth <= 0 && !deadWasp)
+        {
+            deadWasp = true;
+            _collider.enabled = false;
+            StartCoroutine(DeathAnimation());
+        }
     }
 
     private void PlayerHit()
@@ -143,8 +162,9 @@ public class FlyingEnemy : MonoBehaviour
         if (!(distanceX <= knockbackForce) || !(distanceX > -knockbackForce) || !(distanceY <= knockbackForce) ||
             !(distanceY > -knockbackForce) || _cooldown) return;
         
-        _health.TakeDamage(33);
-        StartCoroutine(DamageCooldown());
+        //_playerHealth.TakeDamage(33);
+        //_waspSFX.PlayWaspAttack();
+        //StartCoroutine(DamageCooldown());
     }
 
     private IEnumerator DamageCooldown()
@@ -154,6 +174,15 @@ public class FlyingEnemy : MonoBehaviour
         _cooldown = false;
     }
 
+    private IEnumerator DeathAnimation()
+    {
+        //_animator.SetBool("Move", false);
+        _animator.SetTrigger("Death");
+        _waspSFX.PlayWaspDeath();
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -161,6 +190,9 @@ public class FlyingEnemy : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             bounciness = flyingEnemyBounciness;
+            _playerHealth.TakeDamage(33);
+            _waspSFX.PlayWaspAttack();
+            StartCoroutine(DamageCooldown());
         }
         rb.velocity += collision.relativeVelocity * bounciness;
     }
