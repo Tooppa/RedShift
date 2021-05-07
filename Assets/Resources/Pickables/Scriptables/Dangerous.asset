@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce9efda84f9125546b937fb6ef27f07d, type: 3}
-  m_Name: ThereIsBeauty
+  m_Name: Dangerous
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 2f5483cd0ad751841812e3e74c216862, type: 3}
-  note: "There is really nothing here. Dry desert, unforgiving temperatures, toxic
-    athmosphere. You would surely call me crazy but I actually like it here. One
-    day Morgan let me accompany him outside the barrier. Rode an old kind of vehicle,
-    those with wheels, you know.\r\n\r\nIt was beautiful. I was free. The endless
-    flow of sand and the radiance of the two suns. I saw the look in his eyes. It
-    isn\u2019t much but this planet is our home.\r\n\r\nRonald, Worker"
+  note: "Environmental conditions like temperature will force us to use appropriate
+    equipment. It\u2019s the same with roads, structures and nature. Just pick what\u2019s
+    safe to use.\r\n\r\nBut this place is worse. You are forced to do fatal mistakes
+    by climbing these ridiculous man made cliffs. You are supposed to make the same
+    jump over and over again. But what if you won\u2019t make it next time? What
+    if you slip or you are tired? It\u2019s just it, a goodbye.\r\n\r\nJane, Worker"
   notePicture: {fileID: 0}
   fuel: 0
   rocketBoots: 0
