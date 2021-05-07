@@ -105,12 +105,12 @@ public class JumpingSlimeAI : MonoBehaviour
         }
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * (speed * Time.deltaTime);
+        Vector2 forceX = new Vector2(direction.x * speed, 0);
 
         //Adds forward force to the enemy with a cooldown
         if (canMove)
         {
-            rb.AddForce(force);
+            rb.AddForce(forceX);
             StartCoroutine(MoveCoolDown());
         }
 
@@ -121,11 +121,11 @@ public class JumpingSlimeAI : MonoBehaviour
             currentWaypoint++;
         }
 
-        if (force.x >= 0.01f)
+        if (rb.velocity.x >= 0.5f)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
-        else if (force.x <= -0.01f)
+        else if (rb.velocity.x <= -0.5f)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
         }
@@ -155,10 +155,9 @@ public class JumpingSlimeAI : MonoBehaviour
     private void PlayerHit()
     {
         float distanceX = target.transform.position.x - transform.position.x;
-        float distanceY = target.transform.position.y - (transform.position.y - 1);
+        float distanceY = target.transform.position.y - (transform.position.y - 1.5f);
         if (distanceX <= knockbackRadius && distanceX > -knockbackRadius && distanceY <= knockbackRadius && distanceY > -knockbackRadius && !_cooldown)
         {
-            Debug.Log("Hit!");
             _animator.SetTrigger("Attack");
             _caterpillarSFX.PlayAttack();
             PlayerPushback();

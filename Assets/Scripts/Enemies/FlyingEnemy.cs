@@ -100,7 +100,7 @@ public class FlyingEnemy : MonoBehaviour
         }
         
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * (speed * Time.deltaTime);
+        Vector2 force = direction * speed;
 
         //Adds forward force to the enemy's jump
         if (!isGrounded)
@@ -115,11 +115,11 @@ public class FlyingEnemy : MonoBehaviour
             currentWaypoint++;
         }
 
-        if (force.x >= 0.01f)
+        if (rb.velocity.x >= 0.5f)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
-        else if (force.x <= -0.01f)
+        else if (rb.velocity.x <= -0.5f)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
         }
@@ -187,7 +187,7 @@ public class FlyingEnemy : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         float bounciness = 0f;
-        if (collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player") && !_cooldown)
         {
             bounciness = flyingEnemyBounciness;
             _playerHealth.TakeDamage(33);
