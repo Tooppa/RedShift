@@ -104,7 +104,7 @@ namespace Player
             particleCollision.weakShot = false;
             _animator.SetTrigger(ShootTrigger);
             StartCoroutine(Cooldown(1));
-            CameraEffects.Instance.ShakeCamera(1.5f, .1f);
+            CameraEffects.Instance.ShakeCamera(2.5f, .3f);
             _powerShotEffect.Play();
             _sfx.playerPowerfulCharge.Stop();
             _sfx.playerPowerfulShotChargedUp.Stop();
@@ -121,7 +121,7 @@ namespace Player
             particleCollision.weakShot = true;
             _animator.SetTrigger(ShootTrigger);
             StartCoroutine(Cooldown(1));
-            CameraEffects.Instance.ShakeCamera(.5f, .1f);
+            CameraEffects.Instance.ShakeCamera(.9f, .2f);
             _weakShotEffect.Play();
             _sfx.playerPowerfulCharge.Stop();
             _sfx.PlayGunShot();
