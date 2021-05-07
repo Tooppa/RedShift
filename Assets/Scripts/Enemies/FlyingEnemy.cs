@@ -141,8 +141,8 @@ public class FlyingEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (!deadWasp)
-            PlayerHit();
+        //if (!deadWasp)
+        //    PlayerHit();
 
         if (_health.CurrentHealth <= 0 && !deadWasp)
         {
@@ -152,20 +152,20 @@ public class FlyingEnemy : MonoBehaviour
         }
     }
 
-    private void PlayerHit()
-    {
-        var targetPos = target.transform.position;
-        var position = transform.position;
-        var distanceX = targetPos.x - position.x;
-        var distanceY = targetPos.y - position.y;
+    //private void PlayerHit()
+    //{
+    //    var targetPos = target.transform.position;
+    //    var position = transform.position;
+    //    var distanceX = targetPos.x - position.x;
+    //    var distanceY = targetPos.y - position.y;
         
-        if (!(distanceX <= knockbackForce) || !(distanceX > -knockbackForce) || !(distanceY <= knockbackForce) ||
-            !(distanceY > -knockbackForce) || _cooldown) return;
+    //    if (!(distanceX <= knockbackForce) || !(distanceX > -knockbackForce) || !(distanceY <= knockbackForce) ||
+    //        !(distanceY > -knockbackForce) || _cooldown) return;
         
-        //_playerHealth.TakeDamage(33);
-        //_waspSFX.PlayWaspAttack();
-        //StartCoroutine(DamageCooldown());
-    }
+    //    //_playerHealth.TakeDamage(33);
+    //    //_waspSFX.PlayWaspAttack();
+    //    //StartCoroutine(DamageCooldown());
+    //}
 
     private IEnumerator DamageCooldown()
     {
@@ -186,6 +186,19 @@ public class FlyingEnemy : MonoBehaviour
 
 
     private void OnCollisionEnter2D(Collision2D collision)
+    {
+        float bounciness = 0f;
+        if (collision.collider.CompareTag("Player") && !_cooldown)
+        {
+            bounciness = flyingEnemyBounciness;
+            _playerHealth.TakeDamage(33);
+            _waspSFX.PlayWaspAttack();
+            StartCoroutine(DamageCooldown());
+        }
+        rb.velocity += collision.relativeVelocity * bounciness;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
     {
         float bounciness = 0f;
         if (collision.collider.CompareTag("Player") && !_cooldown)

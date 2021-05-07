@@ -300,7 +300,7 @@ namespace Player
         private void OnTakingDamage(object sender, EventArgs eventArgs)
         {
             var healthPercent = _health.CurrentHealth / _health.MaxHealth;
-            
+            _audioController.PlayPlayerTakeDamage();
             var ledColor = healthPercent switch
             {
                 var n when (n > 0.66) => Color.green,
