@@ -178,6 +178,7 @@ public class FlyingEnemy : MonoBehaviour
     {
         //_animator.SetBool("Move", false);
         _animator.SetTrigger("Death");
+        _waspSFX.waspBuzz.Stop();
         _waspSFX.PlayWaspDeath();
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
