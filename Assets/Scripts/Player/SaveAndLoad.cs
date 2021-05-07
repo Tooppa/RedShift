@@ -14,13 +14,11 @@ namespace Player
 
         private const string FallBackScene = "scenes/FirstMap"; // If anything fails, this will be loaded
         private const string FallBackPlace = "start";
-
+        
         /// <summary>
-        /// Holds currently picked PickableObjects' names.
-        /// This will be saved in a file at the next checkpoint.
-        /// This will be replaced by the one in the file if the player dies.
+        /// Refer <see cref="LevelStatus.ItemsInLocations"/> This is basically that but the live version.
         /// </summary>
-        public static List<string> CurrentlyPickedItems = new List<string>();
+        public static readonly List<(string, List<string>)> CurrentlyPickedItemsInLocations = new List<(string, List<string>)>();
 
         /// <summary>
         /// If true, <see cref="PlayerMechanics"/> will finish loading the save at its Start().
@@ -48,7 +46,7 @@ namespace Player
                 var fileStream = File.Create(Application.persistentDataPath + SerializedLevelStatusPath);
         
                 // Saved scene and items will always be the current one
-                var newLevelStatus = new LevelStatus(SceneManager.GetActiveScene().name, CurrentlyPickedItems, place);
+                var newLevelStatus = new LevelStatus(SceneManager.GetActiveScene().name, place, CurrentlyPickedItemsInLocations);
                 
                 binaryFormatter.Serialize(fileStream, newLevelStatus);
         
@@ -103,9 +101,9 @@ namespace Player
         {
             var levelStatus = LoadStatus();
 
-            if (levelStatus.Scene == null || levelStatus.PickedItems == null)
+            if (levelStatus.Scene == null || levelStatus.ItemsInLocations == null)
             {
-                Debug.LogWarning($"Level Status had null fields! Scene: {levelStatus.Scene}, PickedItems: {levelStatus.PickedItems}");
+                Debug.LogWarning($"Level Status had null fields! Scene: {levelStatus.Scene}, Picked items: {levelStatus.ItemsInLocations}");
                 return null;
             }
 
@@ -128,13 +126,16 @@ namespace Player
         /// </summary>
         private static void LoadItems(LevelStatus levelStatus)
         {
-            CurrentlyPickedItems.Clear(); // These will be replace by the ones in the saved LevelStatus
+            CurrentlyPickedItemsInLocations.Clear(); // These will be replace by the ones in the saved LevelStatus
             
-            var constructedPickedItems = new List<GameObject>();
-
             var pickablesTransform = GameObject.Find("Pickables").transform;
 
             var pickableItemsInScene = new List<GameObject>();
+            
+            var player = GameObject.FindWithTag("Player");
+            
+            var playerMechanics = player.GetComponent<PlayerMechanics>();
+
             
             // Find every pickable item under pickablesTransform
 
@@ -146,38 +147,42 @@ namespace Player
                 }
             }
             
-            foreach (var itemName in levelStatus.PickedItems)
+            foreach (var itemsInLocation in levelStatus.ItemsInLocations)
             {
-                // Load resources of ScriptableObjects based on currently picked items
-                var pickableObjectPrefab = Resources.Load("Pickables/Scriptables/" + itemName);
-                var pickableObject = UnityEngine.Object.Instantiate(pickableObjectPrefab) as PickableObjects;
-                
-                pickableObject.name = itemName; // Name must be the same as the original. Otherwise next resource load will fail
-
-                Debug.Log("PickableObject: " + pickableObject.name);
-                
-                // Instantiate a new Pickable from prefab
-                var pickable = UnityEngine.Object.Instantiate(Resources.Load("Pickables/Pickable")) as GameObject;
-                pickable.name = "Pickable"; // Name must be the same as the original. Otherwise next resource load will fail
-                
-                // The just instantiated pickable doesn't have any valid data, assign the scriptable object to it
-                
-                var pickableScript = pickable.GetComponent<Pickables>();
-                    
-                pickableScript.data = pickableObject;
-                    
-                // Rerun awake so data from PickableObject (ScriptableObject) will transfer to Pickable
-                pickableScript.Awake();
-                
-                constructedPickedItems.Add(pickable);
-                
-                // Remove the items from scene so they cannot be picked up again
-
-                foreach (var pickableItemInScene in pickableItemsInScene)
+                foreach (var itemName in itemsInLocation.Item2) // Underlying list of items
                 {
-                    if (pickableItemInScene.name == itemName)
+                    // Load resources of ScriptableObjects based on currently picked items
+                    var pickableObjectPrefab = Resources.Load("Pickables/Scriptables/" + itemName);
+                    var pickableObject = UnityEngine.Object.Instantiate(pickableObjectPrefab) as PickableObjects;
+                
+                    pickableObject.name = itemName; // Name must be the same as the original. Otherwise next resource load will fail
+
+                    Debug.Log("PickableObject: " + pickableObject.name);
+                
+                    // Instantiate a new Pickable from prefab
+                    var instantiatedItem = UnityEngine.Object.Instantiate(Resources.Load("Pickables/Pickable")) as GameObject;
+                    instantiatedItem.name = "Pickable"; // Name must be the same as the original. Otherwise next resource load will fail
+                
+                    // The just instantiated pickable doesn't have any valid data, assign the scriptable object to it
+                
+                    var pickableScript = instantiatedItem.GetComponent<Pickables>();
+                    
+                    pickableScript.data = pickableObject;
+                    
+                    // Rerun awake so data from PickableObject (ScriptableObject) will transfer to Pickable
+                    pickableScript.Awake();
+                
+                    playerMechanics.ChangeLocation(itemsInLocation.Item1); // Notes need a location
+                    playerMechanics.PickItem(instantiatedItem);
+                
+                    // Remove the items from scene so they cannot be picked up again
+
+                    foreach (var pickableItemInScene in pickableItemsInScene)
                     {
-                        pickableItemInScene.gameObject.SetActive(false);
+                        if (pickableItemInScene.name == itemName)
+                        {
+                            pickableItemInScene.gameObject.SetActive(false);
+                        }
                     }
                 }
             }
@@ -185,16 +190,16 @@ namespace Player
             // Forward the just constructed picked items to PlayerMechanics
             // Every item is constructed in the order it was picked up so the order stays the same
 
-            var player = GameObject.FindWithTag("Player");
-            
-            var playerMechanics = player.GetComponent<PlayerMechanics>();
-            
-            Debug.Log($"List size {constructedPickedItems.Count}");
-
-            foreach (var constructedPickedItem in constructedPickedItems)
-            {
-                playerMechanics.PickItem(constructedPickedItem);
-            }
+            //var player = GameObject.FindWithTag("Player");
+            //
+            //var playerMechanics = player.GetComponent<PlayerMechanics>();
+            //
+            ////Debug.Log($"List size {constructedPickedItems.Count}");
+            //
+            //foreach (var constructedPickedItem in constructedPickedItems)
+            //{
+            //    playerMechanics.PickItem(constructedPickedItem);
+            //}
         }
 
         /// <summary>
