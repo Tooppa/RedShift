@@ -16,6 +16,7 @@ public class JumpingSlimeAI : MonoBehaviour
     private Animator _animator;
     private Health _playerHealth;
     private Health _health;
+    private BoxCollider2D _collider;
 
     private CaterpillarSFX _caterpillarSFX;
 
@@ -148,6 +149,7 @@ public class JumpingSlimeAI : MonoBehaviour
         if(_health.CurrentHealth <= 0 && !deadPillar)
         {
             deadPillar = true;
+            _collider.enabled = false;
             StartCoroutine(DeathAnimation());
         }
     }
