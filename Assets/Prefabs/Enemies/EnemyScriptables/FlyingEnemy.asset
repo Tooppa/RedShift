@@ -20,4 +20,4 @@ MonoBehaviour:
   knockbackForce: 1.7
   knockbackRadius: 0
   spawnRadius: 20
-  flyingEnemyBounciness: 3
+  flyingEnemyBounciness: 5
