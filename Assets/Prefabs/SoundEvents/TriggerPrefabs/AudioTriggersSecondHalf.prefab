@@ -80,7 +80,7 @@ MonoBehaviour:
   _sfxToFadeIn: {fileID: 0}
   loop: 0
   destroyOnTrigger: 0
-  musicFadeTime: 4
+  musicFadeTime: 2
   sfxFadeTime: 5
   volume: 1
   desiredIncreasedMusicVolume: 1
@@ -784,7 +784,7 @@ MonoBehaviour:
   _sfxToFadeIn: {fileID: 0}
   loop: 0
   destroyOnTrigger: 0
-  musicFadeTime: 4
+  musicFadeTime: 2
   sfxFadeTime: 5
   volume: 1
   desiredIncreasedMusicVolume: 1
@@ -960,7 +960,7 @@ MonoBehaviour:
   _sfxToFadeIn: {fileID: 0}
   loop: 0
   destroyOnTrigger: 0
-  musicFadeTime: 4
+  musicFadeTime: 3
   sfxFadeTime: 5
   volume: 1
   desiredIncreasedMusicVolume: 1
@@ -1312,7 +1312,7 @@ MonoBehaviour:
   _sfxToFadeIn: {fileID: 0}
   loop: 0
   destroyOnTrigger: 0
-  musicFadeTime: 4
+  musicFadeTime: 2
   sfxFadeTime: 5
   volume: 1
   desiredIncreasedMusicVolume: 1
@@ -1735,7 +1735,7 @@ GameObject:
   - component: {fileID: 3296237282622740786}
   - component: {fileID: 7036432574639109946}
   m_Layer: 0
-  m_Name: FadeInMusicA (1)
+  m_Name: FadeInMusicA
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
