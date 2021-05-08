@@ -121,7 +121,6 @@ namespace Player
             var newAngle = horizontalMove != 0 && verticalMove != 0 || verticalMove < 0 ? 
                 verticalMove < 0 ? 180 : 0 : horizontalMove != 0 ? -90 * horizontalMove : 0;
             
-            _flashlight.transform.eulerAngles = new Vector3(0, 0, newAngle);
             _forceGlove.transform.eulerAngles = new Vector3(0, 0, newAngle);
         }
         
