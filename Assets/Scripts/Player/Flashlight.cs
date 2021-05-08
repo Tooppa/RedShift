@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -16,6 +17,10 @@ namespace Player
         private float _intensity;
         private float _flickerTimer;
         private float _flickerTime;
+        private Vector2 _mousePos;
+        private Camera _main;
+        private Transform _player;
+        private float _angle;
 
         private IEnumerator Flicker()
         {
@@ -38,6 +43,8 @@ namespace Player
             _intensity = _light2D.intensity;
             HasFlashlight = false;
             _light2D.intensity = 0;
+            _main = Camera.main;
+            _player = transform.parent.GetComponent<Transform>();
         }
 
         // Update is called once per frame
@@ -48,6 +55,27 @@ namespace Player
             if (_flickerTimer >= _flickerTime)
                 StartCoroutine(Flicker());
             _flickerTimer += Time.deltaTime;
+            PointGun();
+        }
+
+        private void PointGun()
+        {
+            if (!HasFlashlight) return;
+            _mousePos = Mouse.current.position.ReadValue();
+            var objectPos = _main.WorldToScreenPoint(
+                _player.position + new Vector3(transform.parent.localScale.normalized.x < 0 ? 1 : -1, 1, 0)); // Object pos as player pos
+
+            _mousePos.x -= objectPos.x;
+            _mousePos.y -= objectPos.y;
+
+            _angle = Mathf.Atan2(_mousePos.y, _mousePos.x) * Mathf.Rad2Deg - 90;
+            // rounds to nearest 45 degree interval
+            _angle = Mathf.RoundToInt(_angle / 45) * 45;
+            // takes the top point off
+            _angle = _angle > -45 && _angle <= 0 ? -45 : _angle < 45 && _angle >= 0 ? 45 : _angle;
+            // takes the bottom point off
+            _angle = _angle > -225 && _angle <= -180 ? -225 : _angle < -135 && _angle >= -180 ? -135 : _angle;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, _angle));
         }
         
         public void SwitchLight()
