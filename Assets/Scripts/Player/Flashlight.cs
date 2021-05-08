@@ -55,10 +55,10 @@ namespace Player
             if (_flickerTimer >= _flickerTime)
                 StartCoroutine(Flicker());
             _flickerTimer += Time.deltaTime;
-            PointGun();
+            PointFlashlight();
         }
 
-        private void PointGun()
+        private void PointFlashlight()
         {
             if (!HasFlashlight) return;
             _mousePos = Mouse.current.position.ReadValue();
