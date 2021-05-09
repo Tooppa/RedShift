@@ -43,7 +43,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: be9861c8b72c0d44ba1d72bd7da92351, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.15
   m_Pitch: 0.8
   Loop: 0
   Mute: 0
@@ -297,7 +297,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8a6c1df492bf2f34a9533a48ed4aed4d, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -678,7 +678,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2b5797688fe06a847969d4e6a1258daf, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.15
   m_Pitch: 0.7
   Loop: 0
   Mute: 0
@@ -805,7 +805,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6447a5e82aaf4e441a32a2d1c2ced3e9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.15
   m_Pitch: 0.8
   Loop: 0
   Mute: 0
@@ -930,7 +930,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: baeb221588e539c4a9d70fa47a09c9a9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0097c507b1fd63e47894d26b91a550d8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -938,7 +938,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 19
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1359,7 +1359,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 501a1231296480747ad6cd30603ef0d8, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1740,7 +1740,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: bbed4a3aa692c78429d29fc28a1ae724, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1955,14 +1955,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioController
       objectReference: {fileID: 0}
+    - target: {fileID: 3006461702788256561, guid: 378255854ca398a4d99680e2d990bc2e, type: 3}
+      propertyPath: m_Volume
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 3629796578286062727, guid: 378255854ca398a4d99680e2d990bc2e, type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 07ca0cdd8640df347b82debf2610941e, type: 3}
+    - target: {fileID: 4906708379440499248, guid: 378255854ca398a4d99680e2d990bc2e, type: 3}
+      propertyPath: m_Volume
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 5394268163578180832, guid: 378255854ca398a4d99680e2d990bc2e, type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 2c06dadd54bde7745b2e0eeb7255d970, type: 3}
+    - target: {fileID: 6552850902780505187, guid: 378255854ca398a4d99680e2d990bc2e, type: 3}
+      propertyPath: m_Volume
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6833585410520566833, guid: 378255854ca398a4d99680e2d990bc2e, type: 3}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7120777331935050387, guid: 378255854ca398a4d99680e2d990bc2e, type: 3}
+      propertyPath: m_Volume
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7120777332154559910, guid: 378255854ca398a4d99680e2d990bc2e, type: 3}
+      propertyPath: m_Volume
+      value: 0.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 378255854ca398a4d99680e2d990bc2e, type: 3}
 --- !u!4 &2033516965830808756 stripped

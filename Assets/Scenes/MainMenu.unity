@@ -2225,6 +2225,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 07ca0cdd8640df347b82debf2610941e, type: 3}
     - target: {fileID: 2851482262960956463, guid: 378255854ca398a4d99680e2d990bc2e, type: 3}
+      propertyPath: selectButtonClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2c06dadd54bde7745b2e0eeb7255d970, type: 3}
+    - target: {fileID: 2851482262960956463, guid: 378255854ca398a4d99680e2d990bc2e, type: 3}
       propertyPath: hoverOverButtonClip
       value: 
       objectReference: {fileID: 8300000, guid: 07ca0cdd8640df347b82debf2610941e, type: 3}
