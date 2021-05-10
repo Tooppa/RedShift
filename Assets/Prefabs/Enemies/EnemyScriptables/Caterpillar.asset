@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dadb3d51a7ec78242b731ba8a133a2e9, type: 3}
-  m_Name: SlimeEnemy
+  m_Name: Caterpillar
   m_EditorClassIdentifier: 
   speed: 2500
   jumpHeight: 150
